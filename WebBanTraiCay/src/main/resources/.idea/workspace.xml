@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="08ef0324-fe9b-4ecb-a5f3-9f66abf69a8e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../.idea/webContexts.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../java/nhom55/hcmuaf/beans/LoginBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../java/nhom55/hcmuaf/cart/Cart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../java/nhom55/hcmuaf/cart/CartProducts.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../java/nhom55/hcmuaf/controller/CartController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../java/nhom55/hcmuaf/controller/ProductForward.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../java/nhom55/hcmuaf/dao/LoginDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../java/nhom55/hcmuaf/services/ProductService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp/WEB-INF/product-single.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/nhom55/hcmuaf/beans/Products.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java/nhom55/hcmuaf/beans/Products.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/nhom55/hcmuaf/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java/nhom55/hcmuaf/controller/HomeForward.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/nhom55/hcmuaf/controller/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java/nhom55/hcmuaf/controller/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/nhom55/hcmuaf/dao/ProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java/nhom55/hcmuaf/dao/ProductDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/nhom55/hcmuaf/dao/UsersDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java/nhom55/hcmuaf/dao/UsersDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/nhom55/hcmuaf/dao/UsersDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java/nhom55/hcmuaf/dao/UsersDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/nhom55/hcmuaf/util/MyUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java/nhom55/hcmuaf/util/MyUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webapp/WEB-INF/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/../webapp/WEB-INF/about.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webapp/WEB-INF/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/../webapp/WEB-INF/cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webapp/WEB-INF/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/../webapp/WEB-INF/checkout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webapp/WEB-INF/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/../webapp/WEB-INF/contact.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webapp/WEB-INF/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../webapp/WEB-INF/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webapp/WEB-INF/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../webapp/WEB-INF/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webapp/WEB-INF/login/forget-password.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../webapp/WEB-INF/login/forget-password.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webapp/WEB-INF/login/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../webapp/WEB-INF/login/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webapp/WEB-INF/login/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../webapp/WEB-INF/login/register.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webapp/WEB-INF/login/verify.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../webapp/WEB-INF/login/verify.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webapp/WEB-INF/product-single.html" beforeDir="false" afterPath="$PROJECT_DIR$/../webapp/WEB-INF/product-single.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webapp/WEB-INF/searchProductResult.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../webapp/WEB-INF/searchProductResult.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webapp/WEB-INF/shop.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../webapp/WEB-INF/shop.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webapp/WEB-INF/wishlist.html" beforeDir="false" afterPath="$PROJECT_DIR$/../webapp/WEB-INF/wishlist.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webapp/static/css/login-css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../webapp/static/css/login-css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webapp/static/css/web-css/fix.css" beforeDir="false" afterPath="$PROJECT_DIR$/../webapp/static/css/web-css/fix.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webapp/static/css/web-css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../webapp/static/css/web-css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WebTraiCay/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../WebTraiCay/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WebTraiCay/css/fix.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../WebTraiCay/css/fix.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WebTraiCay/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../WebTraiCay/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WebTraiCay/product-single.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../WebTraiCay/product-single.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WebTraiCay/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../WebTraiCay/shop.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2YpU1y6yc3GbXCUXQOwCgFCF54O" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Tuan-branch",
+    "last_opened_file_path": "D:/IdeaProjects/LTW_NHOM55/LTWeb_Nhom55/Nhom55_WebBanTraiCay/src/main/resources",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="08ef0324-fe9b-4ecb-a5f3-9f66abf69a8e" name="Changes" comment="" />
+      <created>1701221803820</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1701221803820</updated>
+      <workItem from="1701221804970" duration="4000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

@@ -1,0 +1,74 @@
+
+.flex {
+    color: #000000;
+    font-size: 14px;
+    padding-bottom: 15px;
+
+}
+
+.search-text {
+    margin: auto;
+    width: 250px;
+
+}
+
+.search {
+    background-color: limegreen;
+}
+
+.option-col {
+    height: 30px;
+
+}
+.find-product {
+    float: right;
+}
+.find-product form {
+    margin: 20px 30px;
+}
+.find-product form button {
+    padding: 10px 15px;
+}
+.find-product form input {
+    width: 300px;
+}
+.find-product form button {
+    cursor: pointer;
+    background-color: #11101d;
+    fill: #FFFFFF;
+    border: none;
+}
+/*Làm filter cho trang shop*/
+.filter-dropdown {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 350px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px;
+    z-index: 1;
+}
+
+/* CSS để ẩn dropdown ban đầu */
+.filter-dropdown {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px;
+    z-index: 1;
+}
+
+/* CSS để làm đẹp dropdown */
+.filter-dropdown a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* CSS cho icon filter */
+.filter-icon {
+    cursor: pointer;
+}

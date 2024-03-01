@@ -1,0 +1,62 @@
+.billing-heading {
+    color: limegreen;
+}
+svg {
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.select__payment .payment__choices-cd, .payment__choices-pp {
+    border: #EBEBEB solid 1px;
+    height: 50px;
+    width: 270px;
+    box-sizing: border-box;
+    text-align: center;
+    align-items: center;
+    padding: 15px;
+
+    background-color: #F9F9F9;
+}
+
+.select__payment {
+    display: flex;
+    padding-bottom: 20px;
+}
+
+.select__payment .payment__choices-pp label,
+.select__payment .payment__choices-cd label{
+    align-items: center;
+    text-align: center;
+    padding-bottom: 25px;
+}
+
+.payment__choices-cd.selected ,
+.payment__choices-pp.selected{
+    background-color: #7ED321 !important;
+    color: #ffffff!important;
+    fill: #ffffff!important;
+}
+
+.radio {
+    display: flex;
+}
+
+.check {
+    width: 15px;
+}
+
+span {
+    padding-left: 10px;
+}
+
+
+
+
+
+

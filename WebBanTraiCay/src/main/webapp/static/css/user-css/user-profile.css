@@ -1,0 +1,76 @@
+.main-user-content .container {
+    display: flex;
+    gap: 50px;
+}
+.main-user-content .container .container-child-right, .container-child-left {
+    background-color: #FFFFFF;
+    margin: 50px 0;
+}
+.main-user-content .container .container-child-left {
+    width: 280px;
+    height: 360px;
+}
+.main-user-content .container .container-child-right {
+    width: 800px;
+}
+.main-user-content .container {
+    height: 100vh;
+}
+.container-child-left {
+    float: left;
+    text-align: left;
+}
+.container-child-left ul{
+    list-style-type: none;
+    padding: 20px;
+}
+.container-child-left ul li a {
+    color: #000000;
+    fill: #000000;
+}
+.container-child-left ul li a:hover {
+    color: #82ae46;
+    fill: #82ae46;
+}
+.container-child-left li {
+    padding:10px 20px;
+}
+/*Của Tú*/
+.container-child-right{
+    padding: 20px;
+    width: 2000px;
+    height: auto;
+}
+.line_of_account{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 740px;
+    height: 2px;
+    background-color: rgba(128, 128, 128, 0.5);
+}
+
+.anhCuaNguoiDung{
+  width: 200px;
+    height: 200px;
+    border-radius: 100%;
+}
+
+.quan-ly-user {
+    padding: 10px 20px;
+    background-color: #82ae46;
+    fill: #eeeeee;
+    color: #eeeeee;
+}
+.main-user-content .container .container-child-left .active {
+    border-left: solid 1px #82ae46;
+}
+.main-user-content .container .active a {
+    fill: #82ae46;
+    color: #82ae46;
+}
+
+.user-profile {
+    display: flex;
+    justify-content: space-between;
+}
+

@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+.container.navbar-container {
+    display: flex;
+    justify-content: space-around;
+}
+.account {
+    font-weight: bold;
+}
+.nav-bar-link {
+
+}
+.navbar-brand{
+    padding: 0;
+}
+
+.account svg {
+    color: #82ae46;
+    fill: #82ae46;
+}
+
+
+/* CSS */
+.logged-user a.account,
+.login-user a.account,
+.logout-user a.account {
+    transition: background-color 0.3s, color 0.3s; /* Áp dụng hiệu ứng transition cho màu nền và màu chữ trong 0.3 giây */
+    text-decoration: none; /* Loại bỏ gạch chân mặc định cho liên kết */
+}
+
+.logged-user a.account:hover,
+.login-user a.account:hover,
+.logout-user a.account:hover {
+    color: #000000; /* Màu chữ khi di chuột vào */
+    fill: black;
+}
+.btn-plus-indre {
+    display: inline-block;
+    background: transparent;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    padding: 6px 15px;
+    border-radius: 0.25rem;
+}

@@ -1,0 +1,47 @@
+.invalid{
+    border: 1px red solid;
+}
+.ThongBao{
+    position: absolute;
+    font-size: 14px;
+    color: red;
+    top: 720px;
+}
+
+.user-info {
+    display: flex;
+    justify-content: space-between;
+}
+.user-img {
+    width: 200px;
+}
+.user-img img{
+    width: 200px;
+    height: 200px;
+}
+table tr td:last-child {
+    border-radius: 3px;
+    padding: 2px;
+    margin-left: 10px;
+}
+
+.update-user {
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 5px 20px;
+    margin-right: 10px;
+    background-color: #FFFFFF;
+}
+.update-user:hover {
+    color:  #82ae46;
+    fill:  #82ae46;
+    border: 1px solid  #82ae46;
+}
+.not-empty {
+    color: red;
+}
+table tr td:first-child label {
+    cursor: pointer;
+    font-weight: bold;
+}
+

@@ -1,0 +1,60 @@
+
+.table-sanpham {
+    border: 1px solid #82ae46;
+}
+.table-sanpham th, td {
+    border: 1px solid #646363;
+}
+.table-sanpham {
+    overflow-x: auto;
+}
+.table-sanpham  {
+    width: 100%;
+    border-collapse: collapse;
+}
+.table-sanpham th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #000;
+    color: #000000;
+}
+.table-sanpham  th {
+    background-color: #82ae46;
+    color: #fff;
+}
+
+.table-sanpham table tr:hover {
+     background-color:lightgray;
+}
+
+.th-function-sanpham {
+    width: 120px;
+    padding: 5px;
+}
+.function-product {
+    display: flex;
+}
+.function-product a {
+    padding: 5px;
+}
+.function-product a:hover svg {
+    fill: #1c7430;
+}
+.find-product {
+    float: right;
+}
+.find-product form {
+    margin: 20px 30px;
+}
+.find-product form input, button {
+    padding: 5px 10px;
+}
+.find-product form input {
+    width: 300px;
+}
+.find-product form button {
+    cursor: pointer;
+    background-color: #11101d;
+    fill: #FFFFFF;
+    border: none;
+}

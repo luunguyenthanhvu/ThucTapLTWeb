@@ -1,0 +1,113 @@
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.popup-add-quantity {
+  display: none;
+  z-index: 10000;
+  position: fixed;
+  bottom: 0;
+  left: 38%;
+  transform: translateX(-50%);
+  max-width: 450px;
+  min-width: 400px;
+  border: 1px solid #11101d;
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0px 24px 36px -11px rgba(0, 0, 0, 0.09);
+  animation-duration: 0.5s;
+  max-height: 180px;
+}
+
+
+
+.popup-add-quantity.show {
+  animation-name: slideIn;
+  animation-fill-mode: forwards;
+}
+
+.popup-add-quantity.hide {
+  animation-name: slideOut;
+  animation-fill-mode: forwards;
+}
+
+
+.popup-add-quantity .close-popup {
+  float: right;
+  position: absolute;
+  padding: 10px;
+  left: calc(90%);
+}
+
+#form-popup-quantity {
+  display: flex;
+  justify-content: center;
+}
+
+#form-popup-quantity .input-quantity, .btn__submit-add-quantity {
+  width: 200px;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 1%;
+  display: block;
+  margin: 0 auto;
+}
+
+.btn__submit-add-quantity {
+  background: #11101d;
+  border: 1px solid #11101d;
+  color: #fff;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0px 24px 36px -11px rgba(0, 0, 0, 0.09);
+}
+
+.btn__submit-add-quantity:hover {
+  background: #fff;
+  color: #11101d;
+}
+
+.close-popup a svg{
+  fill: #11101d;
+  color: #fff;
+}
+
+.popup-add-quantity.slide-down {
+  transform: translate(-50%, -100%);
+}
+
+.popup-add-quantity.slide-up {
+  transform: translate(-50%, 100%);
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  background: rgba(240, 240, 240, 0.5);
+  z-index: 9999;
+}
+
+.hide {
+  display: none;
+}

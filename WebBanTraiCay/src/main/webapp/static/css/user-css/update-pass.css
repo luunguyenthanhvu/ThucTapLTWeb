@@ -1,0 +1,44 @@
+.change-password {
+    margin-top: 30px;
+}
+
+.not-empty{
+    color: red;
+}
+
+.change-password {
+    padding: 20px;
+}
+ .change-password table tr td {
+    padding: 10px 40px;
+}
+.change-password table tr td:first-child label {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-group {
+    display: flex;
+    margin: 20px 40px;
+    gap: 20px;
+}
+.btn-group button {
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 5px 20px;
+    margin-right: 10px;
+    background-color: #FFFFFF;
+}
+.btn-group button:hover {
+    color:  #82ae46;
+    fill:  #82ae46;
+    border: 1px solid  #82ae46;
+}
+
+.required {
+    color: red;
+}
+
+.change-password #old-password #new-password #retype-password{
+    max-width: 200px;
+}

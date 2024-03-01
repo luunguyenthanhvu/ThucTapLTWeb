@@ -1,0 +1,75 @@
+
+.main-user-content .container {
+    height: 100%;
+}
+.main-user-content .container .main-container {
+    background-color: #FFFFFF;
+    margin: 20px;
+    width: 100%;
+}
+.main-container .header-tag {
+    text-align: center;
+}
+
+.main-container .header-tag h1 {
+    color: #82ae46;
+}
+.ds-sp table {
+    width: 100%;
+}
+.ds-sp table tr:first-child {
+    background-color: #82ae46;
+    color: #FFFFFF;
+
+}
+.ds-sp table tr th, td{
+    padding: 20px;
+    text-align: inherit;
+}
+
+.ds-sp table tr:not(:last-child) {
+    border-bottom: 1px solid #000; /* Đường viền dưới đối với tất cả các dòng trừ dòng cuối cùng */
+}
+.product-single a {
+    border: solid 1px #000;
+    padding: 10px;
+}
+.product-single svg:hover {
+    fill: #FFFFFF;
+}
+.product-single a:hover {
+    background-color: #82ae46;
+    border: solid 1px #82ae46;
+}
+.product-single a:hover svg {
+    fill: #FFFFFF;
+}
+.img-product {
+    width: 100px;
+    height: 100px;
+    background-color: #FFFFFF;
+}
+.product-name {
+    text-align: center;
+}
+.product-describe {
+    text-align: center;
+}
+.quantity {
+    border: 1px solid black;
+    text-align: center;
+}
+.ds-hoa-don-link {
+    padding: 10px;
+    background-color: #FFFFFF;
+    width: 230px;
+}
+.ds-hoa-don-link a svg {
+    fill: #1c7430;
+}
+.ds-hoa-don-link a:hover {
+    color: black;
+}
+.ds-hoa-don-link a:hover svg {
+    fill: black;
+}

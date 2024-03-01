@@ -1,0 +1,64 @@
+.form-sp{
+
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    background-color: #11101d;
+    width:605px;
+    margin-left: auto;
+    margin-right: auto;
+    /*border: 3px #11101d inset;*/
+}
+#FormThemSanPham{
+    padding:20px;
+    border-top-left-radius: 5%;
+    background-color: rgb(255 255 255);
+}
+
+td:nth-child(n) input {
+    border-radius: 5px ;
+    border: 1px solid #eeeeee;
+    transition: 0.5s ease;
+}
+td:nth-child(n) input:focus{
+    border-color: rgb(105 165 135);
+}
+td:nth-child(n) textarea {
+    border-radius: 5px;
+    border: 1px solid #eeeeee;
+    transition: 0.5s ease;
+}
+td:nth-child(n) textarea:focus{
+    border-color: rgb(105 165 135);
+}
+
+.form-sp button {
+    position: relative;
+    left: 100px;
+    padding: 10px;
+    margin-left: 10px;
+    margin-top: 30px;
+    border-radius: 20px;
+    transition: background-color 0.5s ease-in;
+    background-color:#1d1b31;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+.form-sp button svg {
+    fill:#FFFFFF;
+}
+
+.form-sp button:hover {
+    background-color: #FFFFFF;
+    color: #1d1b31;
+}
+.form-sp button:hover svg {
+    fill: #1d1b31;
+}
+.product-img {
+    margin-top: 20px;
+}
+.product-img img{
+    width: 100px;
+    height: 100px;
+}

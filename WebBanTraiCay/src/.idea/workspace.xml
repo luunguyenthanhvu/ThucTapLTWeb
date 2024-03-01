@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1cf33133-fb13-42d6-815a-f5f6e572a6e3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/beans/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/beans/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/controller/admin/product/expired/ManageExpiredProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/controller/admin/product/expired/ManageExpiredProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/controller/admin/product/expired/ManageExpiredProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/controller/admin/product/expired/ManageExpiredProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/controller/page/login/AccountActive.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/controller/page/login/AccountActive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/controller/page/login/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/controller/page/login/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/controller/page/login/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/controller/page/login/Register.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/controller/page/login/google/LoginGoogleHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/controller/page/login/google/LoginGoogleHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/controller/page/shop/FilterForSearchProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/controller/page/shop/FilterForSearchProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/dao/LoginDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/dao/LoginDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/dao/ProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/dao/ProductDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/dao/ProductDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/dao/UsersDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/dao/UsersDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/dao/UsersDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/dao/UsersDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/security/SecurityFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/security/SecurityFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/security/SecurityHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/security/SecurityHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/services/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/services/RegisterService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/services/ShopService.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/services/ShopService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/nhom55/hcmuaf/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/about.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/about.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/add-product.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/add-product.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/add-provider.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/add-provider.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/add-user.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/add-user.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/admin-profile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/admin-profile.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/contact-from-user.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/contact-from-user.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/edit-admin-profile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/edit-admin-profile.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/monthly-revenue.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/monthly-revenue.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/order-list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/order-list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/product-list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/product-list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/provider-list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/provider-list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/search-of-order-list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/search-of-order-list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/search-of-product-list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/search-of-product-list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/search-of-provider-list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/search-of-provider-list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/search-of-time-expired-product.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/search-of-time-expired-product.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/search-user-result.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/search-user-result.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/time-expired-product.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/time-expired-product.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/update-admin-password.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/update-admin-password.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/update-order.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/update-order.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/update-product.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/update-product.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/update-provider.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/update-provider.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/update-user.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/update-user.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/user-list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/admin/user-list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/cart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/cart.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/checkout.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/checkout.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/contact.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/contact.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/product-single.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/product-single.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/searchProductResult.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/searchProductResult.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/user/chi-tiet-hoa-don.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/user/chi-tiet-hoa-don.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/user/danh-sach-hoa-don.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/user/danh-sach-hoa-don.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/main/webapp/WEB-INF/web.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../.." value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2YyZKOMaQhXTnUO8eVexolES9rS" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Tu-branch&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Yukihira Souma/Desktop/Nhom55_LTWeb/LTWeb_Nhom55/Nhom55_WebBanTraiCay&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1cf33133-fb13-42d6-815a-f5f6e572a6e3" name="Changes" comment="" />
+      <created>1701499715368</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1701499715368</updated>
+      <workItem from="1701499716432" duration="78000" />
+      <workItem from="1708070955585" duration="22000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
