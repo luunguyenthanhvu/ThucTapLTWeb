@@ -5,7 +5,6 @@
   Time: 9:34 PM
   To change this template use File | Settings | File Templates.
 --%>
-<!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -171,7 +170,7 @@
                                        placeholder="Tên" value="${firstName}">
                                 <p style="color: red; display: none" id="firstname_error"></p>
                                 <c:if test="${not empty firstNameError}" >
-                                   <p style="color: red">${firstNameError}</p>
+                                    <p style="color: red">${firstNameError}</p>
                                 </c:if>
                             </div>
                         </div>
@@ -512,14 +511,14 @@
 
   function validateAddress() {
     var text = diaChi.value;
-      var error = document.getElementById("address_error");
+    var error = document.getElementById("address_error");
     if (text.length == 0 || text == null) {
       error.textContent = "Vui lòng nhập dữ liệu";
       error.style.display = "block";
       return false;
     } else {
-        error.style.display = "none";
-        return true;
+      error.style.display = "none";
+      return true;
     }
   }
 
@@ -543,8 +542,8 @@
 
   function validateSDT() {
     var text = sdt.value;
-      var kyTuHopLe = /^(?:\+|0)[0-9]{6,14}[0-9]$/;
-      var error = document.getElementById("phone_error");
+    var kyTuHopLe = /^(?:\+|0)[0-9]{6,14}[0-9]$/;
+    var error = document.getElementById("phone_error");
     if (text.length == 0 || text == null) {
       error.textContent = "Vui lòng nhập dữ liệu";
       error.style.display = "block";

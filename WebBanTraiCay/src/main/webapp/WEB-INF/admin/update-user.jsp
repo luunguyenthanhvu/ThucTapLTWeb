@@ -1,5 +1,11 @@
-<!DOCTYPE html>
-<!-- Coding by CodingNepal | www.codingnepalweb.com -->
+<%--
+  Created by IntelliJ IDEA.
+  User: PC
+  Date: 26/03/2024
+  Time: 5:19 PM
+  To change this template use File | Settings | File Templates.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/html">
@@ -331,191 +337,191 @@
 </div>
 
 <script>
-    let arrow = document.querySelectorAll(".arrow");
-    for (var i = 0; i < arrow.length; i++) {
-        arrow[i].addEventListener("click", (e) => {
-            let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-            arrowParent.classList.toggle("showMenu");
-        });
-    }
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".bx-menu");
-
-    console.log(sidebarBtn);
-    sidebarBtn.addEventListener("click", () => {
-        sidebar.classList.toggle("close");
+  let arrow = document.querySelectorAll(".arrow");
+  for (var i = 0; i < arrow.length; i++) {
+    arrow[i].addEventListener("click", (e) => {
+      let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+      arrowParent.classList.toggle("showMenu");
     });
+  }
+  let sidebar = document.querySelector(".sidebar");
+  let sidebarBtn = document.querySelector(".bx-menu");
 
-    $(document).ready(function () {
-        $('#fileInput').change(function (e) {
-            var file = e.target.files[0];
-            var reader = new FileReader();
-            reader.onload = function (event) {
-                $('#previewImage').attr('src', event.target.result);
-            };
-            reader.readAsDataURL(file);
-        });
+  console.log(sidebarBtn);
+  sidebarBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("close");
+  });
+
+  $(document).ready(function () {
+    $('#fileInput').change(function (e) {
+      var file = e.target.files[0];
+      var reader = new FileReader();
+      reader.onload = function (event) {
+        $('#previewImage').attr('src', event.target.result);
+      };
+      reader.readAsDataURL(file);
     });
+  });
 
-    var myVar;
+  var myVar;
 
-    function myFunction() {
-        myVar = setTimeout(showPage, 800);
-    }
+  function myFunction() {
+    myVar = setTimeout(showPage, 800);
+  }
 
-    function showPage() {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("myDiv").style.display = "block";
-    }
+  function showPage() {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
+  }
 
 
 </script>
 
 <script>
-    document.addEventListener("click", function () {
-        document.querySelector(".main-content").addEventListener("submit", function (event) {
-            if (!validateForm()) {
-                event.preventDefault();
-            }
-        });
-
-        $(document).ready(function () {
-            $('#fileInput').change(function (e) {
-                var file = e.target.files[0];
-                var reader = new FileReader();
-                reader.onload = function (event) {
-                    $('#previewImage').attr('src', event.target.result);
-                };
-                reader.readAsDataURL(file);
-            });
-        });
+  document.addEventListener("click", function () {
+    document.querySelector(".main-content").addEventListener("submit", function (event) {
+      if (!validateForm()) {
+        event.preventDefault();
+      }
     });
 
-    var tenUser = document.getElementById("ten_nd");
-    var emailUser = document.getElementById("email_nd");
-    var genderUser = document.getElementById("gioi_tinh_nd");
-    var addressUser = document.getElementById("dc_nd");
-    var phoneNumberUser = document.getElementById("sdt_nd");
-    var dateOfBirthUser = document.getElementById("dob");
+    $(document).ready(function () {
+      $('#fileInput').change(function (e) {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function (event) {
+          $('#previewImage').attr('src', event.target.result);
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+  });
 
-    function validateTenUser() {
-        var text = tenUser.value;
-        var kyTuHopLe = /^[a-zA-ZÀ-ỹ ]+$/;
-        var error = document.getElementById("username-error");
-        if (text.length == 0 || text == null) {
-            error.textContent = "Vui lòng nhập tên";
-            error.style.display = "block";
-            return false;
-        } else if (!kyTuHopLe.test(text)) {
-            error.textContent = "Tên chỉ chứa ký tự chữ cái, khoảng trắng.";
-            error.style.display = "block";
-            return false;
-        } else {
-            error.style.display = "none";
-            return true;
-        }
+  var tenUser = document.getElementById("ten_nd");
+  var emailUser = document.getElementById("email_nd");
+  var genderUser = document.getElementById("gioi_tinh_nd");
+  var addressUser = document.getElementById("dc_nd");
+  var phoneNumberUser = document.getElementById("sdt_nd");
+  var dateOfBirthUser = document.getElementById("dob");
+
+  function validateTenUser() {
+    var text = tenUser.value;
+    var kyTuHopLe = /^[a-zA-ZÀ-ỹ ]+$/;
+    var error = document.getElementById("username-error");
+    if (text.length == 0 || text == null) {
+      error.textContent = "Vui lòng nhập tên";
+      error.style.display = "block";
+      return false;
+    } else if (!kyTuHopLe.test(text)) {
+      error.textContent = "Tên chỉ chứa ký tự chữ cái, khoảng trắng.";
+      error.style.display = "block";
+      return false;
+    } else {
+      error.style.display = "none";
+      return true;
     }
-    function validateEmailUser() {
-        var text = emailUser.value;
-        var kyTuHopLe = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-        var error = document.getElementById("email-error");
-        if (text.length == 0 || text == null) {
-            error.textContent = "Vui lòng nhập dữ liệu";
-            error.style.display = "block";
-            return false;
-        } else if (!kyTuHopLe.test(text)) {
-            error.textContent = "Địa chỉ email không hợp lệ.";
-            error.style.display = "block";
-            return false;
-        } else {
-            error.style.display = "none";
-            return true;
-        }
+  }
+  function validateEmailUser() {
+    var text = emailUser.value;
+    var kyTuHopLe = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    var error = document.getElementById("email-error");
+    if (text.length == 0 || text == null) {
+      error.textContent = "Vui lòng nhập dữ liệu";
+      error.style.display = "block";
+      return false;
+    } else if (!kyTuHopLe.test(text)) {
+      error.textContent = "Địa chỉ email không hợp lệ.";
+      error.style.display = "block";
+      return false;
+    } else {
+      error.style.display = "none";
+      return true;
     }
+  }
 
-    function validateAddressUser() {
-        var text = addressUser.value;
-        var kyTuHopLe = /^[\p{L}0-9\s.,\/;:_-]*$/u;
-        var error = document.getElementById("address-error");
-        if (text.trim() === "") {
-            error.textContent = "Vui lòng nhập địa chỉ.";
-            error.style.display = "block";
-            return false;
-        } else if (!kyTuHopLe.test(text)) {
-            error.textContent = "Địa chỉ chỉ chứa chữ cái, chữ số và một số kí tự đặc biệt.";
-            error.style.display = "block";
-            return false;
-        } else {
-            error.style.display = "none";
-            return true;
-        }
+  function validateAddressUser() {
+    var text = addressUser.value;
+    var kyTuHopLe = /^[\p{L}0-9\s.,\/;:_-]*$/u;
+    var error = document.getElementById("address-error");
+    if (text.trim() === "") {
+      error.textContent = "Vui lòng nhập địa chỉ.";
+      error.style.display = "block";
+      return false;
+    } else if (!kyTuHopLe.test(text)) {
+      error.textContent = "Địa chỉ chỉ chứa chữ cái, chữ số và một số kí tự đặc biệt.";
+      error.style.display = "block";
+      return false;
+    } else {
+      error.style.display = "none";
+      return true;
     }
+  }
 
-    function validatePhoneNumberUser() {
-        var text = phoneNumberUser.value;
-        var error = document.getElementById("phoneNumber-error");
+  function validatePhoneNumberUser() {
+    var text = phoneNumberUser.value;
+    var error = document.getElementById("phoneNumber-error");
 
-        if (text.length === 0 || text === null) {
-            error.textContent = "Vui lòng nhập số điện thoại";
-            error.style.display = "block";
-            return false;
-        } else if (isNaN(text)) {
-            error.textContent = "Số điện thoại chỉ được chứa ký tự số.";
-            error.style.display = "block";
-            return false;
-        } else {
-            error.style.display = "none";
-            return true;
-        }
+    if (text.length === 0 || text === null) {
+      error.textContent = "Vui lòng nhập số điện thoại";
+      error.style.display = "block";
+      return false;
+    } else if (isNaN(text)) {
+      error.textContent = "Số điện thoại chỉ được chứa ký tự số.";
+      error.style.display = "block";
+      return false;
+    } else {
+      error.style.display = "none";
+      return true;
     }
+  }
 
-    function validateDateOfBirth() {
-        var dateOfBirthInput = document.getElementById("dob");
-        var dateOfBirthValue = dateOfBirthInput.value;
-        var error = document.getElementById("dob-error");
+  function validateDateOfBirth() {
+    var dateOfBirthInput = document.getElementById("dob");
+    var dateOfBirthValue = dateOfBirthInput.value;
+    var error = document.getElementById("dob-error");
 
-        // Kiểm tra xem ngày tháng năm có được nhập hay không
-        if (dateOfBirthValue.length === 0 || dateOfBirthValue == null) {
-            error.textContent = "Vui lòng nhập ngày tháng năm sinh.";
-            error.style.display = "block";
-            return false;
-        }
-
-        // Kiểm tra xem ngày tháng năm có hợp lệ trong quy tắc lịch hay không (ví dụ: không nhập ngày từ tương lai)
-        var currentDate = new Date();
-        var inputDate = new Date(dateOfBirthValue);
-        if (inputDate > currentDate) {
-            error.textContent = "Ngày tháng năm sinh không được là ngày ở tương lai.";
-            error.style.display = "block";
-            return false;
-        }
-
-        // Nếu thông tin hợp lệ, ẩn thông báo lỗi và trả về true
-        error.style.display = "none";
-        return true;
+    // Kiểm tra xem ngày tháng năm có được nhập hay không
+    if (dateOfBirthValue.length === 0 || dateOfBirthValue == null) {
+      error.textContent = "Vui lòng nhập ngày tháng năm sinh.";
+      error.style.display = "block";
+      return false;
     }
 
-    tenUser.addEventListener("blur", validateTenUser);
-    emailUser.addEventListener("blur", validateEmailUser);
-    addressUser.addEventListener("blur", validateAddressUser);
-    phoneNumberUser.addEventListener("blur", validatePhoneNumberUser);
-    dateOfBirthUser.addEventListener("blur", validateDateOfBirth);
+    // Kiểm tra xem ngày tháng năm có hợp lệ trong quy tắc lịch hay không (ví dụ: không nhập ngày từ tương lai)
+    var currentDate = new Date();
+    var inputDate = new Date(dateOfBirthValue);
+    if (inputDate > currentDate) {
+      error.textContent = "Ngày tháng năm sinh không được là ngày ở tương lai.";
+      error.style.display = "block";
+      return false;
+    }
 
-    // stop user send post to server
-    var submit = document.getElementById("saveUserInfo");
-    submit.addEventListener("click", function (event) {
-        var isTenUser = validateTenUser();
-        var isEmail = validateEmailUser();
-        var isAddressUser = validateAddressUser();
-        var isPhoneNumberUser = validatePhoneNumberUser();
-        var isDateOfBirth = validateDateOfBirth();
+    // Nếu thông tin hợp lệ, ẩn thông báo lỗi và trả về true
+    error.style.display = "none";
+    return true;
+  }
+
+  tenUser.addEventListener("blur", validateTenUser);
+  emailUser.addEventListener("blur", validateEmailUser);
+  addressUser.addEventListener("blur", validateAddressUser);
+  phoneNumberUser.addEventListener("blur", validatePhoneNumberUser);
+  dateOfBirthUser.addEventListener("blur", validateDateOfBirth);
+
+  // stop user send post to server
+  var submit = document.getElementById("saveUserInfo");
+  submit.addEventListener("click", function (event) {
+    var isTenUser = validateTenUser();
+    var isEmail = validateEmailUser();
+    var isAddressUser = validateAddressUser();
+    var isPhoneNumberUser = validatePhoneNumberUser();
+    var isDateOfBirth = validateDateOfBirth();
 
 
-        if (!isTenUser || !isEmail  || !isAddressUser
-            || !isPhoneNumberUser || !isDateOfBirth) {
-            event.preventDefault();
-        }
-    })
+    if (!isTenUser || !isEmail  || !isAddressUser
+        || !isPhoneNumberUser || !isDateOfBirth) {
+      event.preventDefault();
+    }
+  })
 </script>
 
 </body>

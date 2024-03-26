@@ -1,5 +1,11 @@
-<!DOCTYPE html>
-<!-- Coding by CodingNepal | www.codingnepalweb.com -->
+<%--
+  Created by IntelliJ IDEA.
+  User: PC
+  Date: 26/03/2024
+  Time: 5:16 PM
+  To change this template use File | Settings | File Templates.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en" dir="ltr">
@@ -256,30 +262,30 @@
     </section>
 </div>
 <script>
-    let arrow = document.querySelectorAll(".arrow");
-    for (var i = 0; i < arrow.length; i++) {
-        arrow[i].addEventListener("click", (e)=>{
-            let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-            arrowParent.classList.toggle("showMenu");
-        });
-    }
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".bx-menu");
-    console.log(sidebarBtn);
-    sidebarBtn.addEventListener("click", ()=>{
-        sidebar.classList.toggle("close");
+  let arrow = document.querySelectorAll(".arrow");
+  for (var i = 0; i < arrow.length; i++) {
+    arrow[i].addEventListener("click", (e)=>{
+      let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+      arrowParent.classList.toggle("showMenu");
     });
+  }
+  let sidebar = document.querySelector(".sidebar");
+  let sidebarBtn = document.querySelector(".bx-menu");
+  console.log(sidebarBtn);
+  sidebarBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("close");
+  });
 
-    var myVar;
-    function myFunction() {
-        myVar = setTimeout(showPage, 800);
-    }
-    function showPage() {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("myDiv").style.display = "block";
-    }
-    //   Highlight cho nút đang được chọn ở phân trang
-    document.getElementById('${pageId}').classList.add("active")
+  var myVar;
+  function myFunction() {
+    myVar = setTimeout(showPage, 800);
+  }
+  function showPage() {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
+  }
+  //   Highlight cho nút đang được chọn ở phân trang
+  document.getElementById('${pageId}').classList.add("active")
 </script>
 </body>
 <script src="https://kit.fontawesome.com/4c38acb8c6.js" crossorigin="anonymous"></script>

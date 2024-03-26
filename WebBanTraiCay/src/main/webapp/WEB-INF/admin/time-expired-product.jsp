@@ -1,5 +1,11 @@
-<!DOCTYPE html>
-<!-- Coding by CodingNepal | www.codingnepalweb.com -->
+<%--
+  Created by IntelliJ IDEA.
+  User: PC
+  Date: 26/03/2024
+  Time: 5:17 PM
+  To change this template use File | Settings | File Templates.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en" dir="ltr">
@@ -180,114 +186,114 @@
         <div class="home-content">
             <svg class='bx-menu' xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
                 <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
-        <span class="text">Danh sách sản phẩm hết hạn sử dụng</span>
-    </div>
-    <div class="find-product">
-        <form action="${pageContext.request.contextPath}/admin/product/expired-manage-controller?index=1" method="post">
-            <div class="fill-product">
-                <input id="find-product" type="text" placeholder="Tìm kiếm tên sản phẩm" name="txtSearch">
-
-                <button type="submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
-                </button>
-            </div>
-        </form>
-    </div>
-    <div class="container" style="margin: 30px 30px 0 30px">
-        <div class="table-sanpham">
-            <table class="table-sanpham">
-                <tr>
-                    <th style="width: 80px;">ID</th>
-                    <th>Tên sản phẩm</th>
-                    <th style="width: 100px;">Hình ảnh</th>
-                    <th style="width: 100px;">Giá tiền</th>
-                    <th style="width: 150px;">Ngày nhập</th>
-                    <th style="width: 150px;">Hạn sử dụng</th>
-                    <th style="width: 50px;"></th>
-                </tr>
-                <c:forEach items="${listProduct}" var="product">
-                    <tr>
-                        <td>${product.getId()}</td>
-                        <td>${product.getNameOfProduct()}</td>
-                        <td class="img-product">
-                            <img src="${product.getImg()}">
-                        </td>
-                        <td>${product.getPrice()}</td>
-                        <td>${product.getDateOfImporting()}</td>
-                        <td>${product.getExpriredDay()}</td>
-                        <td class="function-product">
-                            <a href="${pageContext.request.contextPath}/admin/product/delete-expired?id=${product.getId()}"><svg class="fill-black" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg></a>
-                        </td>
-                    </tr>
-                </c:forEach>
-
-            </table>
+            <span class="text">Danh sách sản phẩm hết hạn sử dụng</span>
         </div>
-        <div class="pagination">
-            <%--    Trường hợp tìm ra số sản phẩm chỉ có trong 1 trang thì 2 nút <,> ko được xài--%>
-            <c:if test="${pageId== 1 && haveMaxPage ==1}">
-                <a >&laquo;</a>
-                <c:forEach begin="1" end="${haveMaxPage}" var= "i">
-                    <a id="${i}" href="${pageContext.request.contextPath}/admin/product/manage-expired?pageId=${i}">${i}</a>
-                </c:forEach>
-                <a >&raquo;</a>
-            </c:if>
-            <c:if test="${ haveMaxPage !=1}">
-                <%-- Trường hợp đang ở trang 1 thì chỉ ko được xài nút <--%>
-                <c:if test="${pageId ==1}" >
-                    <a >&laquo;</a>
-                    <c:forEach begin="1" end="${haveMaxPage}" var= "i">
-                        <a id="${i}" href="${pageContext.request.contextPath}/admin/product/manage-expired?pageId=${i}">${i}</a>
-                    </c:forEach>
-                    <a href="${pageContext.request.contextPath}/admin/product/manage-expired?pageId=${pageId+1}">&raquo;</a>
-                </c:if>
-                <%--  Còn trường hợp này nút nào cũng xài được--%>
-                <c:if test="${pageId >1 && pageId<haveMaxPage}" >
-                    <a href="${pageContext.request.contextPath}/admin/product/manage-expired?pageId=${pageId-1}">&laquo;</a>
-                    <c:forEach begin="1" end="${haveMaxPage}" var= "i">
-                        <a id="${i}" href="${pageContext.request.contextPath}/admin/product/manage-expired?pageId=${i}">${i}</a>
-                    </c:forEach>
-                    <a href="${pageContext.request.contextPath}/admin/product/manage-expired?pageId=${pageId+1}">&raquo;</a>
-                </c:if>
+        <div class="find-product">
+            <form action="${pageContext.request.contextPath}/admin/product/expired-manage-controller?index=1" method="post">
+                <div class="fill-product">
+                    <input id="find-product" type="text" placeholder="Tìm kiếm tên sản phẩm" name="txtSearch">
 
-                <%-- Trường hợp đang ở trang cuối thì chỉ ko được xài nút >--%>
-                <c:if test="${pageId ==haveMaxPage}" >
-                    <a href="${pageContext.request.contextPath}/admin/product/manage-expired?pageId=${pageId-1}">&laquo;</a>
+                    <button type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="container" style="margin: 30px 30px 0 30px">
+            <div class="table-sanpham">
+                <table class="table-sanpham">
+                    <tr>
+                        <th style="width: 80px;">ID</th>
+                        <th>Tên sản phẩm</th>
+                        <th style="width: 100px;">Hình ảnh</th>
+                        <th style="width: 100px;">Giá tiền</th>
+                        <th style="width: 150px;">Ngày nhập</th>
+                        <th style="width: 150px;">Hạn sử dụng</th>
+                        <th style="width: 50px;"></th>
+                    </tr>
+                    <c:forEach items="${listProduct}" var="product">
+                        <tr>
+                            <td>${product.getId()}</td>
+                            <td>${product.getNameOfProduct()}</td>
+                            <td class="img-product">
+                                <img src="${product.getImg()}">
+                            </td>
+                            <td>${product.getPrice()}</td>
+                            <td>${product.getDateOfImporting()}</td>
+                            <td>${product.getExpriredDay()}</td>
+                            <td class="function-product">
+                                <a href="${pageContext.request.contextPath}/admin/product/delete-expired?id=${product.getId()}"><svg class="fill-black" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg></a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+
+                </table>
+            </div>
+            <div class="pagination">
+                <%--    Trường hợp tìm ra số sản phẩm chỉ có trong 1 trang thì 2 nút <,> ko được xài--%>
+                <c:if test="${pageId== 1 && haveMaxPage ==1}">
+                    <a >&laquo;</a>
                     <c:forEach begin="1" end="${haveMaxPage}" var= "i">
                         <a id="${i}" href="${pageContext.request.contextPath}/admin/product/manage-expired?pageId=${i}">${i}</a>
                     </c:forEach>
                     <a >&raquo;</a>
                 </c:if>
-            </c:if>
+                <c:if test="${ haveMaxPage !=1}">
+                    <%-- Trường hợp đang ở trang 1 thì chỉ ko được xài nút <--%>
+                    <c:if test="${pageId ==1}" >
+                        <a >&laquo;</a>
+                        <c:forEach begin="1" end="${haveMaxPage}" var= "i">
+                            <a id="${i}" href="${pageContext.request.contextPath}/admin/product/manage-expired?pageId=${i}">${i}</a>
+                        </c:forEach>
+                        <a href="${pageContext.request.contextPath}/admin/product/manage-expired?pageId=${pageId+1}">&raquo;</a>
+                    </c:if>
+                    <%--  Còn trường hợp này nút nào cũng xài được--%>
+                    <c:if test="${pageId >1 && pageId<haveMaxPage}" >
+                        <a href="${pageContext.request.contextPath}/admin/product/manage-expired?pageId=${pageId-1}">&laquo;</a>
+                        <c:forEach begin="1" end="${haveMaxPage}" var= "i">
+                            <a id="${i}" href="${pageContext.request.contextPath}/admin/product/manage-expired?pageId=${i}">${i}</a>
+                        </c:forEach>
+                        <a href="${pageContext.request.contextPath}/admin/product/manage-expired?pageId=${pageId+1}">&raquo;</a>
+                    </c:if>
+
+                    <%-- Trường hợp đang ở trang cuối thì chỉ ko được xài nút >--%>
+                    <c:if test="${pageId ==haveMaxPage}" >
+                        <a href="${pageContext.request.contextPath}/admin/product/manage-expired?pageId=${pageId-1}">&laquo;</a>
+                        <c:forEach begin="1" end="${haveMaxPage}" var= "i">
+                            <a id="${i}" href="${pageContext.request.contextPath}/admin/product/manage-expired?pageId=${i}">${i}</a>
+                        </c:forEach>
+                        <a >&raquo;</a>
+                    </c:if>
+                </c:if>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 </div>
 <script>
-    let arrow = document.querySelectorAll(".arrow");
-    for (var i = 0; i < arrow.length; i++) {
-        arrow[i].addEventListener("click", (e)=>{
-            let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-            arrowParent.classList.toggle("showMenu");
-        });
-    }
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".bx-menu");
-    console.log(sidebarBtn);
-    sidebarBtn.addEventListener("click", ()=>{
-        sidebar.classList.toggle("close");
+  let arrow = document.querySelectorAll(".arrow");
+  for (var i = 0; i < arrow.length; i++) {
+    arrow[i].addEventListener("click", (e)=>{
+      let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+      arrowParent.classList.toggle("showMenu");
     });
+  }
+  let sidebar = document.querySelector(".sidebar");
+  let sidebarBtn = document.querySelector(".bx-menu");
+  console.log(sidebarBtn);
+  sidebarBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("close");
+  });
 
-    var myVar;
-    function myFunction() {
-        myVar = setTimeout(showPage, 800);
-    }
-    function showPage() {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("myDiv").style.display = "block";
-    }
-    //   Highlight cho nút đang được chọn ở phân trang
-    document.getElementById('${pageId}').classList.add("active")
+  var myVar;
+  function myFunction() {
+    myVar = setTimeout(showPage, 800);
+  }
+  function showPage() {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
+  }
+  //   Highlight cho nút đang được chọn ở phân trang
+  document.getElementById('${pageId}').classList.add("active")
 </script>
 </body>
 <script src="https://kit.fontawesome.com/4c38acb8c6.js" crossorigin="anonymous"></script>

@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: PC
+  Date: 26/03/2024
+  Time: 4:51 PM
+  To change this template use File | Settings | File Templates.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
@@ -227,17 +234,17 @@
                 <div class="col text-center">
                     <div style="width: 305px" class="block-27">
                         <ul>
-<%--                            Trường hợp tìm ra số sản phẩm chỉ có trong 1 trang thì 2 nút <,> ko được xài--%>
-                             <c:if test="${pageId== 1 && indexEnd ==1}">
-                                 <li><a >&lt;</a></li>
-                                 <c:forEach begin="1" end="${indexEnd}" var= "i">
-                                     <li id="${i}" ><a  href="${pageContext.request.contextPath}/page/shop/shop-controller?index=${i}&txtSearch=${txtSearch}&sortBy=${sortBy}&order=${order}">${i}</a></li>
-                                 </c:forEach>
-                                 <li><a >></a></li>
+                            <%--                            Trường hợp tìm ra số sản phẩm chỉ có trong 1 trang thì 2 nút <,> ko được xài--%>
+                            <c:if test="${pageId== 1 && indexEnd ==1}">
+                                <li><a >&lt;</a></li>
+                                <c:forEach begin="1" end="${indexEnd}" var= "i">
+                                    <li id="${i}" ><a  href="${pageContext.request.contextPath}/page/shop/shop-controller?index=${i}&txtSearch=${txtSearch}&sortBy=${sortBy}&order=${order}">${i}</a></li>
+                                </c:forEach>
+                                <li><a >></a></li>
                             </c:if>
 
                             <c:if test="${ indexEnd !=1}">
-<%--                                Trường hợp đang ở trang 1 thì chỉ ko được xài nút <--%>
+                                <%--                                Trường hợp đang ở trang 1 thì chỉ ko được xài nút <--%>
                                 <c:if test="${pageId ==1}" >
                                     <li><a >&lt;</a></li>
                                     <c:forEach begin="1" end="${indexEnd}" var= "i">
@@ -245,7 +252,7 @@
                                     </c:forEach>
                                     <li><a href="${pageContext.request.contextPath}/page/shop/shop-controller?index=${pageId+1}&txtSearch=${txtSearch}&sortBy=${sortBy}&order=${order}">&gt;</a></li>
                                 </c:if>
-<%--                                 Còn trường hợp này nút nào cũng xài được--%>
+                                <%--                                 Còn trường hợp này nút nào cũng xài được--%>
                                 <c:if test="${pageId >1 && pageId<indexEnd}" >
                                     <li><a href="${pageContext.request.contextPath}/page/shop/shop-controller?index=${pageId-1}&txtSearch=${txtSearch}&sortBy=${sortBy}&order=${order}">&lt;</a></li>
                                     <c:forEach begin="1" end="${indexEnd}" var= "i">
@@ -253,7 +260,7 @@
                                     </c:forEach>
                                     <li><a href="${pageContext.request.contextPath}/page/shop/shop-controller?index=${pageId+1}&txtSearch=${txtSearch}&sortBy=${sortBy}&order=${order}">&gt;</a></li>
                                 </c:if>
-<%--                                Trường hợp đang ở trang cuối thì chỉ ko được xài nút >--%>
+                                <%--                                Trường hợp đang ở trang cuối thì chỉ ko được xài nút >--%>
                                 <c:if test="${pageId ==indexEnd}" >
                                     <li><a href="${pageContext.request.contextPath}/page/shop/shop-controller?index=${pageId-1}&txtSearch=${txtSearch}&sortBy=${sortBy}&order=${order}">&lt;</a></li>
                                     <c:forEach begin="1" end="${indexEnd}" var= "i">

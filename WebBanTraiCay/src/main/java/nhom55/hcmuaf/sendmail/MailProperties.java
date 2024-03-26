@@ -41,4 +41,5 @@ public class MailProperties {
     public static String getPassword() {
         return prop.get ("mail.password").toString ();
     }
+
 }

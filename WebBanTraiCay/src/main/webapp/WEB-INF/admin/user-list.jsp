@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Coding by CodingNepal | www.codingnepalweb.com -->
@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin-css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin-css/dssp.css">
 
-  <!-- Boxiocns CDN Link -->
-  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Boxiocns CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body onload="myFunction()" style="margin:0;">
 <div id="loader"></div>
@@ -317,51 +317,51 @@
     </section>
 </div>
 <script>
-    let arrow = document.querySelectorAll(".arrow");
-    for (var i = 0; i < arrow.length; i++) {
-        arrow[i].addEventListener("click", (e) => {
-            let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-            arrowParent.classList.toggle("showMenu");
-        });
-    }
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".bx-menu");
-    console.log(sidebarBtn);
-    sidebarBtn.addEventListener("click", () => {
-        sidebar.classList.toggle("close");
+  let arrow = document.querySelectorAll(".arrow");
+  for (var i = 0; i < arrow.length; i++) {
+    arrow[i].addEventListener("click", (e) => {
+      let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+      arrowParent.classList.toggle("showMenu");
     });
+  }
+  let sidebar = document.querySelector(".sidebar");
+  let sidebarBtn = document.querySelector(".bx-menu");
+  console.log(sidebarBtn);
+  sidebarBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("close");
+  });
 
-    var myVar;
+  var myVar;
 
-    function myFunction() {
-        myVar = setTimeout(showPage, 1);
-    }
+  function myFunction() {
+    myVar = setTimeout(showPage, 1);
+  }
 
-    function showPage() {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("myDiv").style.display = "block";
-    }
+  function showPage() {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
+  }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        let active = document.querySelectorAll(".account");
-        active.forEach(function (all) {
-            if (all.innerHTML.toLowerCase() === "hoạt động") {
-                all.classList.add('active-account');
-            } else {
-                all.classList.add('block-account');
-            }
-        });
+  document.addEventListener('DOMContentLoaded', function () {
+    let active = document.querySelectorAll(".account");
+    active.forEach(function (all) {
+      if (all.innerHTML.toLowerCase() === "hoạt động") {
+        all.classList.add('active-account');
+      } else {
+        all.classList.add('block-account');
+      }
     });
+  });
 </script>
 
 <%--Script xuất hiện bảng cho filter--%>
 <script>
-    document.getElementById('${pageId}').classList.add("active")
+  document.getElementById('${pageId}').classList.add("active")
 
-    function toggleFilter() {
-        var dropdown = document.getElementById("filterDropdown");
-        dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
-    }
+  function toggleFilter() {
+    var dropdown = document.getElementById("filterDropdown");
+    dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+  }
 </script>
 
 </body>
