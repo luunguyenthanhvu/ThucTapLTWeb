@@ -136,19 +136,35 @@
 </nav>
 <div>
     <form id="upload-img">
-        <input type="file">
+        <input type="file" id="file-field">
         <button>Upload</button>
     </form>
 </div>
 </body>
+
 <script>
-  // get signature to upload img to cloudinary
   $('#upload-img').submit(async function (e) {
     e.preventDefault();
-    var currentUrl = '<%= request.getRequestURL()%>'
-    console.log(currentUrl);
-    // const signatureResponse = await axios.get();
-  })
+    const api_key = "899244476586798"
+    const cloud_name = "dter3mlpl"
+    // get signature
+    const signatureResponse = await axios.get(`${pageContext.request.contextPath}/cloudinary/get-signature`); // Use backticks for template literals
+    const data = new FormData();
+    data.append("file", $('#file-field')[0].files[0]);
+    data.append("api_key", api_key);
+    data.append("signature", signatureResponse.data.signature);
+    data.append("timestamp", signatureResponse.data.timestamp);
+
+    const cloudinaryResponse = await axios.post(`https://api.cloudinary.com/v1_1/dter3mlpl/auto/upload`, data, {
+      headers: { "Content-Type": "multipart/form-data" },
+      onUploadProgress: function (e) {
+        console.log(e.loaded / e.total)
+      }
+    })
+    console.log(cloudinaryResponse.data)
+
+  });
+
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
