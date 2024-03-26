@@ -5,7 +5,6 @@
   Time: 5:20 PM
   To change this template use File | Settings | File Templates.
 --%>
-<!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en" dir="ltr">
@@ -504,7 +503,7 @@
 
   function validateMoTaSP() {
     var text = moTaSP.value;
-      var kyTuHopLe = /^(?=.*[^\s]).*$/;
+    var kyTuHopLe = /^(?=.*[^\s]).*$/;
     var error = document.getElementById("mota_sp_error");
     if (text.length == 0 || text == null) {
       error.textContent = "Vui lòng nhập vào mô tả sản phầm.";

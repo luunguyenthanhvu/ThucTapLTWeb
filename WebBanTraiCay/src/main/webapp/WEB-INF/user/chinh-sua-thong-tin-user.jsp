@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: PC
+  Date: 26/03/2024
+  Time: 5:00 PM
+  To change this template use File | Settings | File Templates.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
@@ -75,13 +82,13 @@
     </div>
 </nav>
 <style>
-    .navbar-brand {
-        margin-right: 250px;
-    }
+  .navbar-brand {
+    margin-right: 250px;
+  }
 
-    .nav-item dropdown {
-        margin-left: 250px;
-    }
+  .nav-item dropdown {
+    margin-left: 250px;
+  }
 </style>
 <!-- END nav -->
 <div class="main-user-content" style="background-color: #e7e6e6; width: 100%">
@@ -328,180 +335,180 @@
 <script src="${pageContext.request.contextPath}/static/js/main.js"></script>
 
 <script>
-    $(document).ready(function () {
-        $('#fileInput').change(function (e) {
-            var file = e.target.files[0];
-            var reader = new FileReader();
-            reader.onload = function (event) {
-                $('#previewImage').attr('src', event.target.result);
-            };
-            reader.readAsDataURL(file);
-        });
+  $(document).ready(function () {
+    $('#fileInput').change(function (e) {
+      var file = e.target.files[0];
+      var reader = new FileReader();
+      reader.onload = function (event) {
+        $('#previewImage').attr('src', event.target.result);
+      };
+      reader.readAsDataURL(file);
     });
+  });
 
-    // validate for input
-    var tenUser = document.getElementById("ten_nd");
-    var emailUser = document.getElementById("email_nd");
-    var genderUser = document.getElementById("gioi_tinh_nd");
-    var addressUser = document.getElementById("dc_nd");
-    var phoneNumberUser = document.getElementById("sdt_nd");
-    var dateOfBirthUser = document.getElementById("dob");
-    var upFileAnh = document.getElementById("fileInput");
+  // validate for input
+  var tenUser = document.getElementById("ten_nd");
+  var emailUser = document.getElementById("email_nd");
+  var genderUser = document.getElementById("gioi_tinh_nd");
+  var addressUser = document.getElementById("dc_nd");
+  var phoneNumberUser = document.getElementById("sdt_nd");
+  var dateOfBirthUser = document.getElementById("dob");
+  var upFileAnh = document.getElementById("fileInput");
 
-    function validateTenUser() {
-        var text = tenUser.value;
-        var kyTuHopLe = /^[\p{L}\s']+$/u;
-        var error = document.getElementById("username-error");
-        if (text.length == 0 || text == null) {
-            error.textContent = "Vui lòng nhập tên";
-            error.style.display = "block";
-            return false;
-        } else if (!kyTuHopLe.test(text)) {
-            error.textContent = "Tên chỉ chứa ký tự chữ cái, khoảng trắng.";
-            error.style.display = "block";
-            return false;
-        } else {
-            error.style.display = "none";
-            return true;
-        }
+  function validateTenUser() {
+    var text = tenUser.value;
+    var kyTuHopLe = /^[\p{L}\s']+$/u;
+    var error = document.getElementById("username-error");
+    if (text.length == 0 || text == null) {
+      error.textContent = "Vui lòng nhập tên";
+      error.style.display = "block";
+      return false;
+    } else if (!kyTuHopLe.test(text)) {
+      error.textContent = "Tên chỉ chứa ký tự chữ cái, khoảng trắng.";
+      error.style.display = "block";
+      return false;
+    } else {
+      error.style.display = "none";
+      return true;
+    }
+  }
+
+  function validateEmailUser() {
+    var text = emailUser.value;
+    var kyTuHopLe = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    var error = document.getElementById("email-error");
+    if (text.length == 0 || text == null) {
+      error.textContent = "Vui lòng nhập dữ liệu";
+      error.style.display = "block";
+      return false;
+    } else if (!kyTuHopLe.test(text)) {
+      error.textContent = "Địa chỉ email không hợp lệ.";
+      error.style.display = "block";
+      return false;
+    } else {
+      error.style.display = "none";
+      return true;
+    }
+  }
+
+  function validateGenderUser() {
+    var maleCheckbox = document.getElementById("male");
+    var femaleCheckbox = document.getElementById("female");
+    var error = document.getElementById("gender-error");
+
+    // Kiểm tra xem người dùng đã chọn một trong hai giới tính hay không
+    if (!maleCheckbox.checked && !femaleCheckbox.checked) {
+      error.textContent = "Vui lòng chọn giới tính";
+      error.style.display = "block";
+      return false;
+    } else {
+      error.style.display = "none";
+      return true;
+    }
+  }
+
+  function validateAddressUser() {
+    var text = addressUser.value;
+    var kyTuHopLe = /^[\p{L}0-9\s.,\/;:_-]*$/u;
+    var error = document.getElementById("address-error");
+    if (text.trim() === "") {
+      error.textContent = "Vui lòng nhập địa chỉ.";
+      error.style.display = "block";
+      return false;
+    } else if (!kyTuHopLe.test(text)) {
+      error.textContent = "Địa chỉ chỉ chứa chữ cái, chữ số và một số kí tự đặc biệt.";
+      error.style.display = "block";
+      return false;
+    } else {
+      error.style.display = "none";
+      return true;
+    }
+  }
+
+
+  function validatePhoneNumberUser() {
+    var text = phoneNumberUser.value;
+    var error = document.getElementById("phoneNumber-error");
+
+    if (text.length === 0 || text === null) {
+      error.textContent = "Vui lòng nhập số điện thoại";
+      error.style.display = "block";
+      return false;
+    } else if (isNaN(text)) {
+      error.textContent = "Số điện thoại chỉ được chứa ký tự số.";
+      error.style.display = "block";
+      return false;
+    } else {
+      error.style.display = "none";
+      return true;
+    }
+  }
+
+  function validateDateOfBirth() {
+    var dateOfBirthInput = document.getElementById("dob");
+    var dateOfBirthValue = new Date(dateOfBirthInput.value);
+    var error = document.getElementById("dob-error");
+
+    // Kiểm tra xem ngày tháng năm có được nhập hay không
+    if (isNaN(dateOfBirthValue.getTime())) {
+      error.textContent = "Vui lòng nhập ngày tháng năm sinh.";
+      error.style.display = "block";
+      return false;
     }
 
-    function validateEmailUser() {
-        var text = emailUser.value;
-        var kyTuHopLe = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-        var error = document.getElementById("email-error");
-        if (text.length == 0 || text == null) {
-            error.textContent = "Vui lòng nhập dữ liệu";
-            error.style.display = "block";
-            return false;
-        } else if (!kyTuHopLe.test(text)) {
-            error.textContent = "Địa chỉ email không hợp lệ.";
-            error.style.display = "block";
-            return false;
-        } else {
-            error.style.display = "none";
-            return true;
-        }
+    // Kiểm tra xem ngày tháng năm có hợp lệ trong quy tắc lịch hay không (ví dụ: không nhập ngày từ tương lai)
+    var currentDate = new Date();
+    var inputDate = new Date(dateOfBirthValue);
+    if (inputDate > currentDate) {
+      error.textContent = "Ngày tháng năm sinh không được là ngày ở tương lai.";
+      error.style.display = "block";
+      return false;
+    } else {
+      // Nếu thông tin hợp lệ, ẩn thông báo lỗi và trả về true
+      error.style.display = "none";
+      return true;
     }
+  }
 
-    function validateGenderUser() {
-        var maleCheckbox = document.getElementById("male");
-        var femaleCheckbox = document.getElementById("female");
-        var error = document.getElementById("gender-error");
+  function validateFileUpload() {
+    var inputUploadFile = document.getElementById("fileInput");
+    var error = document.getElementById("fileUpload-error");
 
-        // Kiểm tra xem người dùng đã chọn một trong hai giới tính hay không
-        if (!maleCheckbox.checked && !femaleCheckbox.checked) {
-            error.textContent = "Vui lòng chọn giới tính";
-            error.style.display = "block";
-            return false;
-        } else {
-            error.style.display = "none";
-            return true;
-        }
+    // Kiểm tra xem người dùng đã chọn file ảnh hay chưa
+    if (inputUploadFile.files.length === 0) {
+      error.textContent = "Vui lòng chọn file ảnh.";
+      error.style.display = "block";
+      return false;
+    } else {
+      error.style.display = "none";
+      return true;
     }
+  }
 
-    function validateAddressUser() {
-        var text = addressUser.value;
-        var kyTuHopLe = /^[\p{L}0-9\s.,\/;:_-]*$/u;
-        var error = document.getElementById("address-error");
-        if (text.trim() === "") {
-            error.textContent = "Vui lòng nhập địa chỉ.";
-            error.style.display = "block";
-            return false;
-        } else if (!kyTuHopLe.test(text)) {
-            error.textContent = "Địa chỉ chỉ chứa chữ cái, chữ số và một số kí tự đặc biệt.";
-            error.style.display = "block";
-            return false;
-        } else {
-            error.style.display = "none";
-            return true;
-        }
+  // add event to check input
+  tenUser.addEventListener("blur", validateTenUser);
+  emailUser.addEventListener("blur", validateEmailUser);
+  genderUser.addEventListener("blur", validateGenderUser);
+  addressUser.addEventListener("blur", validateAddressUser);
+  phoneNumberUser.addEventListener("blur", validatePhoneNumberUser);
+  dateOfBirthUser.addEventListener("blur", validateDateOfBirth);
+  upFileAnh.addEventListener("blur", validateFileUpload);
+
+  // stop user send post to server
+  var submit = document.getElementById("saveUserInfo");
+  submit.addEventListener("click", function (event) {
+    var isTenUser = validateTenUser();
+    var isEmail = validateEmail();
+    var isGenderUser = validateGenderUser();
+    var isAddressUser = validateAddressUser();
+    var isPhoneNumberUser = validatePhoneNumberUser();
+    var isDateOfBirth = validateDateOfBirth();
+    var isFileUpLoad = validateFileUpload();
+    if (!isTenUser || !isEmail || !isGenderUser || !isAddressUser
+        || !isPhoneNumberUser || !isDateOfBirth || !isFileUpLoad) {
+      event.preventDefault();
     }
-
-
-    function validatePhoneNumberUser() {
-        var text = phoneNumberUser.value;
-        var error = document.getElementById("phoneNumber-error");
-
-        if (text.length === 0 || text === null) {
-            error.textContent = "Vui lòng nhập số điện thoại";
-            error.style.display = "block";
-            return false;
-        } else if (isNaN(text)) {
-            error.textContent = "Số điện thoại chỉ được chứa ký tự số.";
-            error.style.display = "block";
-            return false;
-        } else {
-            error.style.display = "none";
-            return true;
-        }
-    }
-
-    function validateDateOfBirth() {
-        var dateOfBirthInput = document.getElementById("dob");
-        var dateOfBirthValue = new Date(dateOfBirthInput.value);
-        var error = document.getElementById("dob-error");
-
-        // Kiểm tra xem ngày tháng năm có được nhập hay không
-        if (isNaN(dateOfBirthValue.getTime())) {
-            error.textContent = "Vui lòng nhập ngày tháng năm sinh.";
-            error.style.display = "block";
-            return false;
-        }
-
-        // Kiểm tra xem ngày tháng năm có hợp lệ trong quy tắc lịch hay không (ví dụ: không nhập ngày từ tương lai)
-        var currentDate = new Date();
-        var inputDate = new Date(dateOfBirthValue);
-        if (inputDate > currentDate) {
-            error.textContent = "Ngày tháng năm sinh không được là ngày ở tương lai.";
-            error.style.display = "block";
-            return false;
-        } else {
-            // Nếu thông tin hợp lệ, ẩn thông báo lỗi và trả về true
-            error.style.display = "none";
-            return true;
-        }
-    }
-
-    function validateFileUpload() {
-        var inputUploadFile = document.getElementById("fileInput");
-        var error = document.getElementById("fileUpload-error");
-
-        // Kiểm tra xem người dùng đã chọn file ảnh hay chưa
-        if (inputUploadFile.files.length === 0) {
-            error.textContent = "Vui lòng chọn file ảnh.";
-            error.style.display = "block";
-            return false;
-        } else {
-            error.style.display = "none";
-            return true;
-        }
-    }
-
-    // add event to check input
-    tenUser.addEventListener("blur", validateTenUser);
-    emailUser.addEventListener("blur", validateEmailUser);
-    genderUser.addEventListener("blur", validateGenderUser);
-    addressUser.addEventListener("blur", validateAddressUser);
-    phoneNumberUser.addEventListener("blur", validatePhoneNumberUser);
-    dateOfBirthUser.addEventListener("blur", validateDateOfBirth);
-    upFileAnh.addEventListener("blur", validateFileUpload);
-
-    // stop user send post to server
-    var submit = document.getElementById("saveUserInfo");
-    submit.addEventListener("click", function (event) {
-        var isTenUser = validateTenUser();
-        var isEmail = validateEmail();
-        var isGenderUser = validateGenderUser();
-        var isAddressUser = validateAddressUser();
-        var isPhoneNumberUser = validatePhoneNumberUser();
-        var isDateOfBirth = validateDateOfBirth();
-        var isFileUpLoad = validateFileUpload();
-        if (!isTenUser || !isEmail || !isGenderUser || !isAddressUser
-            || !isPhoneNumberUser || !isDateOfBirth || !isFileUpLoad) {
-            event.preventDefault();
-        }
-    })
+  })
 </script>
 
 </body>

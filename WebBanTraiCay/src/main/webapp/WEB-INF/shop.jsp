@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: PC
+  Date: 26/03/2024
+  Time: 4:52 PM
+  To change this template use File | Settings | File Templates.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
@@ -403,14 +410,14 @@
 </script>
 <%--Thông báo nếu khách hàng đặt hàng thành công--%>
 <script>
-    // Kiểm tra biến isOrderPlacedSuccessfully từ server
-    var isOrderPlacedSuccessfully = <%= request.getAttribute("isOrderSuccessfully") %>;
+  // Kiểm tra biến isOrderPlacedSuccessfully từ server
+  var isOrderPlacedSuccessfully = <%= request.getAttribute("isOrderSuccessfully") %>;
 
-    // Nếu đặt hàng thành công, hiển thị thông báo và chuyển hướng trang
-    if (isOrderPlacedSuccessfully) {
-        alert("Bạn đã đặt hàng thành công. Vui lòng kiểm tra email.");
-        window.location.href = "http://localhost:8080/page/shop/shop-forward";
-    }
+  // Nếu đặt hàng thành công, hiển thị thông báo và chuyển hướng trang
+  if (isOrderPlacedSuccessfully) {
+    alert("Bạn đã đặt hàng thành công. Vui lòng kiểm tra email.");
+    window.location.href = "http://localhost:8080/page/shop/shop-forward";
+  }
 </script>
 
 <script src="${pageContext.request.contextPath}/static/js/web-js/index-page.js"></script>
@@ -437,3 +444,4 @@
 
 </body>
 </html>
+
