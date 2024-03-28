@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: PC
+  Date: 26/03/2024
+  Time: 4:51 PM
+  To change this template use File | Settings | File Templates.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -329,36 +336,36 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var form = document.querySelector("form");
+  document.addEventListener('DOMContentLoaded', function () {
+    var form = document.querySelector("form");
 
-        form.addEventListener('submit', function (event) {
-            var selectedProductIds = [];
+    form.addEventListener('submit', function (event) {
+      var selectedProductIds = [];
 
-            // Lặp qua tất cả các checkbox được chọn
-            var checkboxes = document.querySelectorAll('input[name="selectedProducts"]:checked');
-            checkboxes.forEach(function (checkbox) {
-                selectedProductIds.push(checkbox.value);
-            });
-            const isLogin = document.getElementById("isUserLogined").value;
-            if (isLogin === null || isLogin.length <= 0){
-                confirm("Để đặt đơn hàng vui lòng đăng nhập.");
-            }
-            // Kiểm tra nếu có sản phẩm được chọn
-            else if (selectedProductIds.length > 0) {
-                // Thêm danh sách sản phẩm đã chọn vào form
-                var hiddenProduct = document.createElement('input');
-                hiddenProduct.type = 'hidden';
-                hiddenProduct.name = 'selectedProductIds';
-                hiddenProduct.value = JSON.stringify(selectedProductIds);
-                form.appendChild(hiddenProduct);
-            } else {
-                // Nếu không có sản phẩm nào được chọn, có thể thực hiện các hành động khác hoặc hiển thị thông báo
-                alert('Vui lòng chọn ít nhất một sản phẩm.');
-                event.preventDefault();
-            }
-        });
+      // Lặp qua tất cả các checkbox được chọn
+      var checkboxes = document.querySelectorAll('input[name="selectedProducts"]:checked');
+      checkboxes.forEach(function (checkbox) {
+        selectedProductIds.push(checkbox.value);
+      });
+      const isLogin = document.getElementById("isUserLogined").value;
+      if (isLogin === null || isLogin.length <= 0){
+        confirm("Để đặt đơn hàng vui lòng đăng nhập.");
+      }
+      // Kiểm tra nếu có sản phẩm được chọn
+      else if (selectedProductIds.length > 0) {
+        // Thêm danh sách sản phẩm đã chọn vào form
+        var hiddenProduct = document.createElement('input');
+        hiddenProduct.type = 'hidden';
+        hiddenProduct.name = 'selectedProductIds';
+        hiddenProduct.value = JSON.stringify(selectedProductIds);
+        form.appendChild(hiddenProduct);
+      } else {
+        // Nếu không có sản phẩm nào được chọn, có thể thực hiện các hành động khác hoặc hiển thị thông báo
+        alert('Vui lòng chọn ít nhất một sản phẩm.');
+        event.preventDefault();
+      }
     });
+  });
 
 </script>
 <script src="${pageContext.request.contextPath}/static/js/web-js/page-cart.js"></script>

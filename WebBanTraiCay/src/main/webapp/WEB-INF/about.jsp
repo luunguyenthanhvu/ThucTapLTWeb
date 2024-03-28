@@ -1,6 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: PC
+  Date: 26/03/2024
+  Time: 4:51 PM
+  To change this template use File | Settings | File Templates.
+--%>
 
-
-<!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -117,7 +122,7 @@
 </nav>
 <div id="toast">
 </div>
-    <!-- END nav -->
+<!-- END nav -->
 
 <div class="hero-wrap hero-bread" style="background-image: url(/static/images/bg1.jpg);filter: brightness(0.8);">
     <div class="container">
@@ -150,7 +155,7 @@
                     <p>Dù Việt Nam có một nền kinh tế nông nghiệp phát triển, nhưng việc tiếp cận và mua,
                         sắm trái cây tươi sạch và chất lượng không phải lúc nào cũng dễ dàng đối với người tiêu dùng.
                         Để đáp ứng nhu cầu ngày càng cao của khách hàng về sự thuận tiện và đảm bảo chất lượng,
-                       trang web của chúng tôi xuất hiện để phục vụ nhu cầu cho bạn.
+                        trang web của chúng tôi xuất hiện để phục vụ nhu cầu cho bạn.
                     </p>
                     <p>Bạn có thể dễ dàng chọn lựa sản phẩm mà họ muốn, đặt hàng trực tuyến và
                         nhận được những quả trái cây tươi sức sống được giao hàng tận nơi. Ngoài ra, chúng tôi
@@ -184,7 +189,7 @@
                             <div class="text text-center">
                                 <p class="mb-5 pl-4 line">Tôi đã có trải nghiệm mua trái cây qua một trang web ở Việt Nam và rất hài lòng với
                                     chất lượng sản phẩm. Trang web cung cấp thông tin chi tiết về nguồn gốc và quy trình chăm sóc trái cây,
-                                     giúp tôi chọn lựa được những sản phẩm tươi ngon và an toàn. Quá trình đặt hàng và thanh toán đơn giản, và tôi nhận được giao hàng đúng
+                                    giúp tôi chọn lựa được những sản phẩm tươi ngon và an toàn. Quá trình đặt hàng và thanh toán đơn giản, và tôi nhận được giao hàng đúng
                                     hẹn. Sự chuyên nghiệp và chất lượng của dịch vụ này khiến tôi muốn quay lại mua sắm nhiều hơn.</p>
                                 <p class="name">Garreth Smith</p>
                                 <span class="position">Giám đốc tiếp thị</span>

@@ -1,5 +1,11 @@
-<!DOCTYPE html>
-<!-- Coding by CodingNepal | www.codingnepalweb.com -->
+<%--
+  Created by IntelliJ IDEA.
+  User: PC
+  Date: 26/03/2024
+  Time: 5:18 PM
+  To change this template use File | Settings | File Templates.
+--%>
+
 <html lang="en" dir="ltr">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -226,16 +232,16 @@
                     <form action="" method="post">
                         <div class="update-status">
                             <form action="${pageContext.request.contextPath}/admin/provider/updateOrder" method="post">
-                            <h3>Cập nhập trạng thái</h3>
+                                <h3>Cập nhập trạng thái</h3>
                                 <input type="hidden" name="idBill" value="${idBill}">
-                            <select class="option-status"  name="selectedStatus">
-                                <option>Đang xử lý</option>
-                                <option>Đang giao</option>
-                                <option>Đã giao</option>
-                                <option>Đã hủy</option>
-                            </select>
+                                <select class="option-status"  name="selectedStatus">
+                                    <option>Đang xử lý</option>
+                                    <option>Đang giao</option>
+                                    <option>Đã giao</option>
+                                    <option>Đã hủy</option>
+                                </select>
 
-                            <button type="submit">Cập nhập trạng thái</button>
+                                <button type="submit">Cập nhập trạng thái</button>
                             </form>
                         </div>
                         <table class="table-sanpham">
@@ -285,54 +291,54 @@
     </section>
 </div>
 <script>
-    let arrow = document.querySelectorAll(".arrow");
-    for (var i = 0; i < arrow.length; i++) {
-        arrow[i].addEventListener("click", (e)=>{
-            let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-            arrowParent.classList.toggle("showMenu");
-        });
-    }
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".bx-menu");
-    console.log(sidebarBtn);
-    sidebarBtn.addEventListener("click", ()=>{
-        sidebar.classList.toggle("close");
+  let arrow = document.querySelectorAll(".arrow");
+  for (var i = 0; i < arrow.length; i++) {
+    arrow[i].addEventListener("click", (e)=>{
+      let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+      arrowParent.classList.toggle("showMenu");
+    });
+  }
+  let sidebar = document.querySelector(".sidebar");
+  let sidebarBtn = document.querySelector(".bx-menu");
+  console.log(sidebarBtn);
+  sidebarBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("close");
+  });
+
+  var myVar;
+  function myFunction() {
+    myVar = setTimeout(showPage, 600);
+  }
+  function showPage() {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
+  }
+
+  let totalAmountHTMl = document.querySelector(".total-amount");
+  let totalSub = document.querySelector(".total-sup");
+  let finalPriceHTML = document.querySelector(".total-money");
+  let shipPriceHTML = document.querySelector(".ship-price");
+  let totalAmount = 0;
+  let totalPrice = 0;
+  let finalPrice = 0;
+  let shipPrice = 30000;
+
+  document.addEventListener('DOMContentLoaded', function () {
+    let getAllSL = document.querySelectorAll(".so-luong");
+    getAllSL.forEach(function (getAll) {
+      totalAmount +=   Number(getAll.innerHTML);
+    });
+    totalAmountHTMl.innerHTML = totalAmount;
+    shipPriceHTML.innerHTML = shipPrice +" VNĐ";
+    let getAllGT = document.querySelectorAll(".tong-tien");
+    getAllGT.forEach(function (getAll){
+      totalPrice += Number(getAll.value);
     });
 
-    var myVar;
-    function myFunction() {
-        myVar = setTimeout(showPage, 600);
-    }
-    function showPage() {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("myDiv").style.display = "block";
-    }
-
-    let totalAmountHTMl = document.querySelector(".total-amount");
-    let totalSub = document.querySelector(".total-sup");
-    let finalPriceHTML = document.querySelector(".total-money");
-    let shipPriceHTML = document.querySelector(".ship-price");
-    let totalAmount = 0;
-    let totalPrice = 0;
-    let finalPrice = 0;
-    let shipPrice = 30000;
-
-    document.addEventListener('DOMContentLoaded', function () {
-        let getAllSL = document.querySelectorAll(".so-luong");
-        getAllSL.forEach(function (getAll) {
-            totalAmount +=   Number(getAll.innerHTML);
-        });
-        totalAmountHTMl.innerHTML = totalAmount;
-        shipPriceHTML.innerHTML = shipPrice +" VNĐ";
-        let getAllGT = document.querySelectorAll(".tong-tien");
-        getAllGT.forEach(function (getAll){
-            totalPrice += Number(getAll.value);
-        });
-
-        totalSub.innerHTML = totalPrice +" VNĐ";
-        finalPrice =  totalPrice + shipPrice
-        finalPriceHTML.innerHTML = finalPrice +" VNĐ";
-    });
+    totalSub.innerHTML = totalPrice +" VNĐ";
+    finalPrice =  totalPrice + shipPrice
+    finalPriceHTML.innerHTML = finalPrice +" VNĐ";
+  });
 
 
 
