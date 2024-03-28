@@ -41,11 +41,11 @@ public interface ProductDao {
 
 //   Phần phục vụ cho quản lý sản phẩm của admin
 
-  public void editProductNoImage(int idProduct, String name, String des, double giaTien,
+  public void editProductNoImage(int idProduct, String name, String des,String mua, String nguonNhap, String driedFruit, double giaTien,
       double khoiLuong, double soKgMacDinh, Date ngayNhapKho, Date ngayHetHan, int idAdmin,
       int idnhaCungCap);
 
-  public void editProductHaveImage(int idProduct, String name, String des, double giaTien,
+  public void editProductHaveImage(int idProduct, String name, String des,String mua, String nguonNhap, String driedFruit, double giaTien,
       double khoiLuong, double soKgMacDinh, Date ngayNhapKho, Date ngayHetHan, String tenAnh,
       int idAdmin, int idnhaCungCap);
 

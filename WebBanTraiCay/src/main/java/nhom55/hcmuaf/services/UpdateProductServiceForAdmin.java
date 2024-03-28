@@ -17,13 +17,13 @@ public class UpdateProductServiceForAdmin {
         }
         return instance;
     }
-    public void editProductNoImage(int idProduct, String name, String des, double giaTien, double khoiLuong, double soKgMacDinh, Date ngayNhapKho, Date ngayHetHan, int idAdmin, int idnhaCungCap) {
+    public void editProductNoImage(int idProduct, String name, String des,String mua, String nguonNhap,String driedFruit, double giaTien, double khoiLuong, double soKgMacDinh, Date ngayNhapKho, Date ngayHetHan, int idAdmin, int idnhaCungCap) {
         ProductDao dao = new ProductDaoImpl();
-        dao.editProductNoImage(idProduct,name,des,giaTien,khoiLuong,soKgMacDinh,ngayNhapKho,ngayHetHan,idAdmin,idnhaCungCap);
+        dao.editProductNoImage(idProduct,name,des,mua,nguonNhap,driedFruit,giaTien,khoiLuong,soKgMacDinh,ngayNhapKho,ngayHetHan,idAdmin,idnhaCungCap);
     }
-    public void editProductHaveImage(int idProduct, String name, String des, double giaTien, double khoiLuong, double soKgMacDinh,Date ngayNhapKho, Date ngayHetHan,String tenAnh, int idAdmin, int idnhaCungCap) {
+    public void editProductHaveImage(int idProduct, String name, String des,String mua, String nguonNhap,String driedFruit, double giaTien, double khoiLuong, double soKgMacDinh,Date ngayNhapKho, Date ngayHetHan,String tenAnh, int idAdmin, int idnhaCungCap) {
         ProductDao dao = new ProductDaoImpl();
-        dao.editProductHaveImage( idProduct,  name, des,  giaTien,  khoiLuong,  soKgMacDinh, ngayNhapKho,  ngayHetHan, tenAnh,  idAdmin, idnhaCungCap);
+        dao.editProductHaveImage( idProduct,  name, des, mua,nguonNhap,driedFruit, giaTien,  khoiLuong,  soKgMacDinh, ngayNhapKho,  ngayHetHan, tenAnh,  idAdmin, idnhaCungCap);
     }
 
 }

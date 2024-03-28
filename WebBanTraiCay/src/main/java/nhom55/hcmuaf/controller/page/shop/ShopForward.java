@@ -46,9 +46,6 @@ public class ShopForward extends HttpServlet {
 //        Đây là trường hợp người dùng đã chọn Filter sẽ đưa FilterForAllProduct xử lý
         else {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/page/shop/filter-for-all-product");
-            request.setAttribute("pageId",pageStr);
-            request.setAttribute("sortBy",sortBy);
-            request.setAttribute("order",order);
             dispatcher.forward(request,response);
         }
 

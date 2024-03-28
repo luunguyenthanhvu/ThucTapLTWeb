@@ -36,6 +36,9 @@ public class UpdateProductController extends HttpServlet {
         String tenSanPham = request.getParameter("ten_san_pham");
         String moTa = request.getParameter("mo_ta_san_pham");
         String price = request.getParameter("gia_tien_san_pham");
+        String seasonalFruit = request.getParameter("selectedSeasonalFruit");
+        String sourceImport = request.getParameter("selectedSourceImport");
+        String driedFruit = request.getParameter("selectedDriedFruit");
         String khoiLuong = request.getParameter("khoi_luong_san_pham");
         String soKGMacDinh = request.getParameter("so_kg_mac_dinh");
         String ngayNhapHang = request.getParameter("ngay_nhap_hang");
@@ -55,7 +58,7 @@ public class UpdateProductController extends HttpServlet {
             if (filePart == null || filePart.getSize() == 0) {
                 // Người dùng không chọn file, xử lý tại đây
 
-                UpdateProductServiceForAdmin.getInstance().editProductNoImage(idSanPham, tenSanPham, moTa, priceValue, khoiluongValue, soKGMacDinhValue, Date.valueOf(ngayNhapHang), Date.valueOf(ngayHetHan), user.getId(), idNhaCungCap);
+                UpdateProductServiceForAdmin.getInstance().editProductNoImage(idSanPham, tenSanPham, moTa,seasonalFruit, sourceImport,driedFruit, priceValue, khoiluongValue, soKGMacDinhValue, Date.valueOf(ngayNhapHang), Date.valueOf(ngayHetHan), user.getId(), idNhaCungCap);
                 doGet(request,response);
             } else {
                 String linkAnhSanPham ="";
@@ -67,7 +70,7 @@ public class UpdateProductController extends HttpServlet {
                     part.write(root.getAbsolutePath() + "/" + fileName);
                     linkAnhSanPham ="/data/" + fileName;
                 }
-                UpdateProductServiceForAdmin.getInstance().editProductHaveImage(idSanPham, tenSanPham, moTa,priceValue, khoiluongValue, soKGMacDinhValue, Date.valueOf(ngayNhapHang), Date.valueOf(ngayHetHan),linkAnhSanPham, user.getId(), idNhaCungCap);
+                UpdateProductServiceForAdmin.getInstance().editProductHaveImage(idSanPham, tenSanPham, moTa,seasonalFruit, sourceImport,driedFruit,priceValue, khoiluongValue, soKGMacDinhValue, Date.valueOf(ngayNhapHang), Date.valueOf(ngayHetHan),linkAnhSanPham, user.getId(), idNhaCungCap);
                 doGet(request,response);
             }
         } else {
