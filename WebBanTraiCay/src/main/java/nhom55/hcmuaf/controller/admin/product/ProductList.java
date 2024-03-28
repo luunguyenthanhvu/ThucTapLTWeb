@@ -22,25 +22,31 @@ public class ProductList extends HttpServlet {
         HttpSession session = request.getSession();
         Users admin = MyUtils.getLoginedUser(session);
         String pageStr = request.getParameter("pageId");
-        int pageNumber = 0;
-        if(pageStr == null) {
-            pageNumber =1;
+        String order = request.getParameter("order");
+        String whereClause = request.getParameter("whereClause");
+        if((order==null ||  "".equals(order)) &&  (whereClause == null || "".equals(whereClause))) {
+            int pageNumber = 0;
+            if(pageStr == null) {
+                pageNumber =1;
+            } else {
+                pageNumber = Integer.valueOf(pageStr);
+            }
+
+            int quantityDefault =20;
+            int totalRow = ShopService.getInstance().countTotalRowProductInDatabase();
+            int haveMaxPage = (totalRow/quantityDefault) +1;
+            List<Products> listProduct = ShopService.getInstance().get20ProductsForEachPage(pageNumber,quantityDefault);
+            RequestDispatcher dispatcher = this.getServletContext()
+                    .getRequestDispatcher("/WEB-INF/admin/product-list.jsp");
+            request.setAttribute("admin", admin);
+            request.setAttribute("listProduct",listProduct);
+            request.setAttribute("haveMaxPage",haveMaxPage);
+            request.setAttribute("pageId",pageNumber);
+            dispatcher.forward(request, response);
         } else {
-            pageNumber = Integer.valueOf(pageStr);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/product/filter-product");
+            dispatcher.forward(request,response);
         }
-
-        int quantityDefault =20;
-        int totalRow = ShopService.getInstance().countTotalRowProductInDatabase();
-        int haveMaxPage = (totalRow/quantityDefault) +1;
-        List<Products> listProduct = ShopService.getInstance().get20ProductsForEachPage(pageNumber,quantityDefault);
-        RequestDispatcher dispatcher = this.getServletContext()
-                .getRequestDispatcher("/WEB-INF/admin/product-list.jsp");
-        request.setAttribute("admin", admin);
-        request.setAttribute("listProduct",listProduct);
-        request.setAttribute("haveMaxPage",haveMaxPage);
-        request.setAttribute("pageId",pageNumber);
-        dispatcher.forward(request, response);
-
 
   }
 

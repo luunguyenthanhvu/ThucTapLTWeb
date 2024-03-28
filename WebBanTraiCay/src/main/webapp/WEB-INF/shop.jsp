@@ -151,32 +151,46 @@
                                placeholder="Tìm trái cây mà bạn cần" name="txtSearch">
                         <input style="width: 100px" type="submit" value="Tìm kiếm">
                     </form>
-                    <form action="">
-                        <!-- Icon Filter -->
-                        <div style="position: absolute; top: -45px;left: 570px" class="filter-icon"
-                             onclick="toggleFilter()">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
-                                 viewBox="0 0 512 512">
-                                <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-                                <path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/>
-                            </svg>
-                        </div>
+<%--                    html của filter --%>
+                    <div style="margin-left: 110%">
+                        <svg  onclick="toggleFilter()" class="filter-icon" style="display: block;  cursor: pointer;"  xmlns="http://www.w3.org/2000/svg" height="16" width="16"
+                              viewBox="0 0 512 512">
+                            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                            <path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/>
+                        </svg></div>
 
-                        <!-- Dropdown Filter -->
-                        <div style="top: -30px;left: 250px" id="filterDropdown"
-                             class="filter-dropdown">
-                            <a href="${pageContext.request.contextPath}/page/shop/filter-for-all-product?sortBy=price&order=asc&pageId=1">Sắp xếp
-                                giá tăng dần</a>
-                            <a href="${pageContext.request.contextPath}/page/shop/filter-for-all-product?sortBy=price&order=desc&pageId=1">Sắp xếp
-                                giá giảm dần</a>
-                            <a href="${pageContext.request.contextPath}/page/shop/filter-for-all-product?sortBy=nameOfProduct&order=asc&pageId=1">Sắp
-                                xếp theo tên từ A-Z</a>
-                            <a href="${pageContext.request.contextPath}/page/shop/filter-for-all-product?sortBy=nameOfProduct&order=desc&pageId=1">Sắp
-                                xếp theo tên từ Z-A</a>
-                            <a href="${pageContext.request.contextPath}/page/shop/filter-for-all-product?sortBy=dateOfImporting&order=desc&pageId=1">Sắp
-                                xếp theo ngày nhập kho mới nhất</a>
-                        </div>
-                    </form>
+                    <div  id="filter" class="filter-container" style="  display: none;position: absolute; background-color: #f9f9f9;padding: 20px;border: 1px solid black;z-index: 1;width: 300px;left: 110%">
+                        <form action="${pageContext.request.contextPath}/page/shop/filter-for-all-product" method="Post" onsubmit="prepareFormData()">
+                            <fieldset style=" border: 2px solid #82ae46;">
+                                <legend style="width: 150px;font-size: 18px;">Lọc theo giá</legend>
+                                <label style=" display: block;margin-bottom: 10px;"><input type="checkbox" class="price_sortAscFilter" name="price_sortAsc" value=""> Giá tăng dần</label>
+                                <label style=" display: block;margin-bottom: 10px;"><input type="checkbox" class="price_sortDescFilter" name="price_sortDesc" value=""> Giá giảm dần</label>
+                            </fieldset>
+                            <fieldset style=" border: 2px solid #82ae46;">
+                                <legend style="width: 150px;font-size: 18px;">Lọc theo tên</legend>
+                                <label style=" display: block;margin-bottom: 10px;"><input type="checkbox" class="name_sortAscFilter" name="name_sortAsc" value=""> Tên A-Z</label>
+                                <label style=" display: block;margin-bottom: 10px;"><input type="checkbox" class="name_sortDescFilter" name="name_sortDesc" value=""> Tên Z-A</label>
+                            </fieldset>
+                            <fieldset style=" border: 2px solid #82ae46;">
+                                <legend style="width: 150px;font-size: 18px;">Lọc theo ngày</legend>
+                                <label style=" display: block;margin-bottom: 10px;"><input type="checkbox" class="date_sortFilter" name="date_sort" value=""> Ngày nhập kho mới nhất</label>
+                            </fieldset>
+                            <fieldset style=" border: 2px solid #82ae46;">
+                                <legend style="width: 150px;font-size: 18px;">Lọc theo mùa</legend>
+                                <label style=" display: block;margin-bottom: 10px;"><input type="checkbox" class="springFilter" name="spring" value=""> Trái cây mùa xuân</label>
+                                <label style=" display: block;margin-bottom: 10px;"><input type="checkbox" class="summerFilter" name="summer" value=""> Trái cây mùa hạ</label>
+                                <label style=" display: block;margin-bottom: 10px;"><input type="checkbox" class="autumnFilter" name="autumn" value=""> Trái cây mùa thu</label>
+                                <label style=" display: block;margin-bottom: 10px;"><input type="checkbox" class="winterFilter" name="winter" value=""> Trái cây mùa đông</label>
+                            </fieldset>
+                            <fieldset style=" border: 2px solid #82ae46;">
+                                <legend style="width: 150px;font-size: 18px;">Lựa chọn khác</legend>
+                                <label style=" display: block;margin-bottom: 10px;"><input type="checkbox" class="localFilter" name="local" value=""> Trái cây trong nước</label>
+                                <label style=" display: block;margin-bottom: 10px;"><input type="checkbox" class="importedFilter" name="imported" value=""> Trái cây nhập khẩu</label>
+                                <label style=" display: block;margin-bottom: 10px;"><input type="checkbox" class="driedFilter" name="dried" value=""> Trái cây khô</label>
+                            </fieldset>
+                            <input style="margin-top: 5px" type="submit" value="Lọc">
+                        </form>
+                    </div>
 
 
                     <div class="tab-pane fade active show" id="pills-profile" role="tabpanel"
@@ -235,7 +249,7 @@
                                 <li><a>&lt;</a></li>
                                 <c:forEach begin="1" end="${haveMaxPage}" var="i">
                                     <li id="${i}"><a
-                                            href="${pageContext.request.contextPath}/page/shop/shop-forward?pageId=${i}&sortBy=${sortBy}&order=${order}">${i}</a>
+                                            href="${pageContext.request.contextPath}/page/shop/shop-forward?pageId=${i}&order=${order}&whereClause=${whereClause}&price_sortAsc=${price_sortAsc}&price_sortDesc=${price_sortDesc}&name_sortAsc=${name_sortAsc}&name_sortDesc=${name_sortDesc}&date_sort=${date_sort}&spring=${spring}&summer=${summer}&fall=${fall}&winter=${winter}&local=${local}&imported=${imported}&dried=${dried}">${i}</a>
                                     </li>
                                 </c:forEach>
                                 <li><a>></a></li>
@@ -247,37 +261,37 @@
                                     <li><a>&lt;</a></li>
                                     <c:forEach begin="1" end="${haveMaxPage}" var="i">
                                         <li id="${i}"><a
-                                                href="${pageContext.request.contextPath}/page/shop/shop-forward?pageId=${i}&sortBy=${sortBy}&order=${order}">${i}</a>
+                                                href="${pageContext.request.contextPath}/page/shop/shop-forward?pageId=${i}&order=${order}&whereClause=${whereClause}&price_sortAsc=${price_sortAsc}&price_sortDesc=${price_sortDesc}&name_sortAsc=${name_sortAsc}&name_sortDesc=${name_sortDesc}&date_sort=${date_sort}&spring=${spring}&summer=${summer}&fall=${fall}&winter=${winter}&local=${local}&imported=${imported}&dried=${dried}">${i}</a>
                                         </li>
                                     </c:forEach>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/page/shop/shop-forward?pageId=${pageId+1}&sortBy=${sortBy}&order=${order}">&gt;</a>
+                                        <a href="${pageContext.request.contextPath}/page/shop/shop-forward?pageId=${pageId+1}&order=${order}&whereClause=${whereClause}&price_sortAsc=${price_sortAsc}&price_sortDesc=${price_sortDesc}&name_sortAsc=${name_sortAsc}&name_sortDesc=${name_sortDesc}&date_sort=${date_sort}&spring=${spring}&summer=${summer}&fall=${fall}&winter=${winter}&local=${local}&imported=${imported}&dried=${dried}">&gt;</a>
                                     </li>
                                 </c:if>
 
                                 <%--  Còn trường hợp này nút nào cũng xài được--%>
                                 <c:if test="${pageId >1 && pageId<haveMaxPage}">
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/page/shop/shop-forward?pageId=${pageId-1}&sortBy=${sortBy}&order=${order}">&lt;</a>
+                                        <a href="${pageContext.request.contextPath}/page/shop/shop-forward?pageId=${pageId-1}&order=${order}&whereClause=${whereClause}&price_sortAsc=${price_sortAsc}&price_sortDesc=${price_sortDesc}&name_sortAsc=${name_sortAsc}&name_sortDesc=${name_sortDesc}&date_sort=${date_sort}&spring=${spring}&summer=${summer}&fall=${fall}&winter=${winter}&local=${local}&imported=${imported}&dried=${dried}">&lt;</a>
                                     </li>
                                     <c:forEach begin="1" end="${haveMaxPage}" var="i">
                                         <li id="${i}"><a
-                                                href="${pageContext.request.contextPath}/page/shop/shop-forward?pageId=${i}&sortBy=${sortBy}&order=${order}">${i}</a>
+                                                href="${pageContext.request.contextPath}/page/shop/shop-forward?pageId=${i}&order=${order}&whereClause=${whereClause}&price_sortAsc=${price_sortAsc}&price_sortDesc=${price_sortDesc}&name_sortAsc=${name_sortAsc}&name_sortDesc=${name_sortDesc}&date_sort=${date_sort}&spring=${spring}&summer=${summer}&fall=${fall}&winter=${winter}&local=${local}&imported=${imported}&dried=${dried}">${i}</a>
                                         </li>
                                     </c:forEach>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/page/shop/shop-forward?pageId=${pageId+1}&sortBy=${sortBy}&order=${order}">&gt;</a>
+                                        <a href="${pageContext.request.contextPath}/page/shop/shop-forward?pageId=${pageId+1}&order=${order}&whereClause=${whereClause}&price_sortAsc=${price_sortAsc}&price_sortDesc=${price_sortDesc}&name_sortAsc=${name_sortAsc}&name_sortDesc=${name_sortDesc}&date_sort=${date_sort}&spring=${spring}&summer=${summer}&fall=${fall}&winter=${winter}&local=${local}&imported=${imported}&dried=${dried}">&gt;</a>
                                     </li>
                                 </c:if>
                                 <%-- Trường hợp đang ở trang cuối thì chỉ ko được xài nút >--%>
 
                                 <c:if test="${pageId ==haveMaxPage}">
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/page/shop/shop-forward?pageId=${pageId-1}&sortBy=${sortBy}&order=${order}">&lt;</a>
+                                        <a href="${pageContext.request.contextPath}/page/shop/shop-forward?pageId=${pageId-1}&order=${order}&whereClause=${whereClause}&price_sortAsc=${price_sortAsc}&price_sortDesc=${price_sortDesc}&name_sortAsc=${name_sortAsc}&name_sortDesc=${name_sortDesc}&date_sort=${date_sort}&spring=${spring}&summer=${summer}&fall=${fall}&winter=${winter}&local=${local}&imported=${imported}&dried=${dried}">&lt;</a>
                                     </li>
                                     <c:forEach begin="1" end="${haveMaxPage}" var="i">
                                         <li id="${i}"><a
-                                                href="${pageContext.request.contextPath}/page/shop/shop-forward?pageId=${i}&sortBy=${sortBy}&order=${order}">${i}</a>
+                                                href="${pageContext.request.contextPath}/page/shop/shop-forward?pageId=${i}&order=${order}&whereClause=${whereClause}&price_sortAsc=${price_sortAsc}&price_sortDesc=${price_sortDesc}&name_sortAsc=${name_sortAsc}&name_sortDesc=${name_sortDesc}&date_sort=${date_sort}&spring=${spring}&summer=${summer}&fall=${fall}&winter=${winter}&local=${local}&imported=${imported}&dried=${dried}">${i}</a>
                                         </li>
                                     </c:forEach>
                                     <li><a>></a></li>
@@ -394,12 +408,54 @@
 </div>
 <%--Script xuất hiện bảng cho filter--%>
 <script>
-  document.getElementById('${pageId}').classList.add("active")
+    document.getElementById('${pageId}').classList.add("active")
 
-  function toggleFilter() {
-    var dropdown = document.getElementById("filterDropdown");
-    dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
-  }
+    function toggleFilter() {
+        var filter = document.getElementById("filter");
+        if (filter.style.display === "block") {
+            filter.style.display = "none";
+        } else {
+            filter.style.display = "block";
+        }
+    }
+
+
+
+
+
+    function prepareFormData() {
+
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        // Lặp qua từng checkbox
+        checkboxes.forEach(function(checkbox) {
+            // Nếu checkbox được chọn, thiết lập lại giá trị của nó là 'on'
+            if (checkbox.checked) {
+                switch (checkbox.name) {
+                    case 'price_sortAsc': document.querySelector('.price_sortAscFilter').value = 'price-Asc'; break;
+                    case 'price_sortDesc': document.querySelector('.price_sortDescFilter').value = 'price-Desc'; break;
+                    case 'name_sortAsc': document.querySelector('.name_sortAscFilter').value = 'nameOfProduct-Asc'; break;
+                    case 'name_sortDesc':document.querySelector('.name_sortDescFilter').value = 'nameOfProduct-Desc'; break;
+                    case 'date_sort': document.querySelector('.date_sortFilter').value = 'dateOfImporting-Desc'; break;
+                    case 'spring':document.querySelector('.springFilter').value = 'spring'; break;
+                    case 'summer': document.querySelector('.summerFilter').value = 'summer'; break;
+                    case 'autumn': document.querySelector('.autumnFilter').value = 'autumn'; break;
+                    case 'winter': document.querySelector('.winterFilter').value = 'winter'; break;
+                    case 'local': document.querySelector('.localFilter').value = 'local'; break;
+                    case 'imported': document.querySelector('.importedFilter').value = 'imported'; break;
+                    case 'dried': document.querySelector('.driedFilter').value = 'dried'; break;
+
+                }
+            } else {
+                // Nếu không được chọn, thiết lập lại giá trị của nó là ''
+                checkbox.value = '';
+            }
+
+        });
+    }
+
+
+
+
 </script>
 <%--Thông báo nếu khách hàng đặt hàng thành công--%>
 <script>

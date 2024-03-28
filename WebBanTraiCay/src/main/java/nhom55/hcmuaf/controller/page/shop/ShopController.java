@@ -25,8 +25,7 @@ public class ShopController extends HttpServlet {
       throws ServletException, IOException {
 
     String txtSearch = request.getParameter("txtSearch");
-    String sortBy = request.getParameter("sortBy");
-    String order = request.getParameter("order");
+
 
     int quantity = ShopService.getInstance().countResultSearchingProduct(txtSearch);
 //        số lượng mặc định 1 trang
@@ -34,10 +33,6 @@ public class ShopController extends HttpServlet {
 //        index user bấm vào phân trang
     String indexPage = request.getParameter("index");
 
-//    int indexInitial  = 1;
-//    if(indexPage != null) {
-//      indexInitial = Integer.parseInt(indexPage);
-//    }
     int indexInitial = Integer.parseInt(indexPage);
 
     int indexEnd = quantity / defaultQuantityProductOnAPage;
@@ -46,26 +41,15 @@ public class ShopController extends HttpServlet {
       indexEnd++;
     }
     List<Products> listSearch = null;
-    if(sortBy == null && order==null || ("".equals(sortBy) && "".equals(order))) {
+
        listSearch = ShopService.getInstance().search(txtSearch, indexInitial,
               defaultQuantityProductOnAPage);
-      request.setAttribute("sortBy","");
-      request.setAttribute("order","");
-      request.setAttribute("pageId",indexInitial);
+       request.setAttribute("pageId",indexInitial);
       request.setAttribute("listSearch", listSearch);
       request.setAttribute("indexEnd", indexEnd);
       request.setAttribute("txtSearch", txtSearch);
       request.getRequestDispatcher("/WEB-INF/searchProductResult.jsp").forward(request, response);
-    } else {
-       listSearch = ShopService.getInstance().searchFilter(sortBy,order,txtSearch, indexInitial,
-              defaultQuantityProductOnAPage);
-      request.setAttribute("sortBy",sortBy);
-      request.setAttribute("order",order);
-      request.setAttribute("pageId",indexInitial);
-      request.setAttribute("listSearch", listSearch);
-      request.setAttribute("indexEnd", indexEnd);
-      request.setAttribute("txtSearch", txtSearch);
-      request.getRequestDispatcher("/WEB-INF/searchProductResult.jsp").forward(request, response);
-    }
+
+
   }
 }

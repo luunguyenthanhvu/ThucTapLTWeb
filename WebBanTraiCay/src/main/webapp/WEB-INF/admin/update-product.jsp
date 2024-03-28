@@ -220,6 +220,38 @@
             <td><p style="color: red">${mo_ta_error}</p></td>
           </c:if>
           <tr>
+            <td><label for="upfileAnh">Trái cây theo mùa <span style="color: red">*</span></label></td>
+            <td>
+              <select style="width: 300px" id="seasonalFruitSelect" name="selectedSeasonalFruit">
+                <option value="spring">Mùa xuân</option>
+                <option value="summer">Mùa hạ</option>
+                <option value="fall">Mùa thu</option>
+                <option value="winter">Mùa đông</option>
+              </select>
+            </td>
+          </tr>
+          <td><br></td>
+          <tr>
+            <td><label for="upfileAnh">Nguồn nhập<span style="color: red">*</span></label></td>
+            <td>
+              <select style="width: 300px" id="sourceImport" name="selectedSourceImport">
+                <option value="local">Trong nước</option>
+                <option value="imported">Ở nước ngoài</option>
+              </select>
+            </td>
+          </tr>
+          <td><br></td>
+          <tr>
+            <td><label for="upfileAnh">Trái cây khô<span style="color: red">*</span></label></td>
+            <td>
+              <select style="width: 300px" id="driedFruit" name="selectedDriedFruit">
+                <option value="dried">Có</option>
+                <option value="">Không</option>
+              </select>
+            </td>
+          </tr>
+          <td><br></td>
+          <tr>
             <td><label for="giatien_sp">Giá tiền <span style="color: red">*</span></label></td>
             <td><input style="width: 300px" name="gia_tien_san_pham" id="giatien_sp" type="text" value="${product.getPrice()}"></td>
 
