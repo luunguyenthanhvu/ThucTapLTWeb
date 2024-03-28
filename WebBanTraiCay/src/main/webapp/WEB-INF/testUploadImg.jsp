@@ -12,9 +12,7 @@
     <%@ page isELIgnored="false" %>
     <title>Cửa hàng trái cây</title>
     <meta charset="utf-8">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
-            integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
@@ -23,7 +21,12 @@
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
           rel="stylesheet">
-
+    <link href="https://unpkg.com/filepond/dist/filepond.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css" rel="stylesheet" />
+    <link
+            href="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css"
+            rel="stylesheet"
+    />
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/css/web-css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/animate.css">
@@ -55,6 +58,17 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/shop.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/toast.css">
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
 <body class="goto-here">
 <nav class="navbar-container navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
      id="ftco-navbar">
@@ -139,32 +153,110 @@
         <input type="file" id="file-field">
         <button>Upload</button>
     </form>
+
+    <input
+            id="file-field2" type="file"
+           class="filepond"
+           name="filepond"
+           multiple
+           data-allow-reorder="true"
+           data-max-file-size="3MB"
+           data-max-files="3">
 </div>
 </body>
-
 <script>
-  $('#upload-img').submit(async function (e) {
-    e.preventDefault();
-    const api_key = "899244476586798"
-    const cloud_name = "dter3mlpl"
-    // get signature
-    const signatureResponse = await axios.get(`${pageContext.request.contextPath}/cloudinary/get-signature`); // Use backticks for template literals
-    const data = new FormData();
-    data.append("file", $('#file-field')[0].files[0]);
-    data.append("api_key", api_key);
-    data.append("signature", signatureResponse.data.signature);
-    data.append("timestamp", signatureResponse.data.timestamp);
+  // api key of cloudinary
+  const api_key = "899244476586798";
+  FilePond.registerPlugin(
+      FilePondPluginImagePreview,
+      FilePondPluginImageExifOrientation,
+      FilePondPluginFileValidateSize,
+      FilePondPluginImageEdit,
+      FilePondPluginImageEdit
+  );
 
-    const cloudinaryResponse = await axios.post(`https://api.cloudinary.com/v1_1/dter3mlpl/auto/upload`, data, {
-      headers: { "Content-Type": "multipart/form-data" },
-      onUploadProgress: function (e) {
-        console.log(e.loaded / e.total)
+  // Select the file input and use
+  // create() to turn it into a pond
+  FilePond.create(
+      document.querySelector('#file-field2')
+  );
+
+  FilePond.setOptions({
+    server: {
+      process: async (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
+        try {
+          const signatureResponse = await axios.get(`${pageContext.request.contextPath}/cloudinary/get-signature`);
+
+          const formData = new FormData();
+          formData.append("file", file); // Use the 'file' parameter directly
+          formData.append("api_key", api_key);
+          formData.append("signature", signatureResponse.data.signature);
+          formData.append("timestamp", signatureResponse.data.timestamp);
+
+          const xhr = new XMLHttpRequest();
+          xhr.open('POST', 'https://api.cloudinary.com/v1_1/dter3mlpl/image/upload');
+          xhr.upload.onprogress = (event) => {
+            console.log(event.loaded / event.total); // Log the progress
+            const progressPercentage = Math.round((event.loaded / event.total) * 100);
+            progress(progressPercentage);
+          };
+          xhr.onload = () => {
+            if (xhr.status >= 200 && xhr.status < 300) {
+              load(xhr.responseText);
+              const response = JSON.parse(xhr.responseText);
+              const fileId = response.public_id;
+              FilePond.setOptions({
+                fileMetadata: {
+                  [file.id]: {
+                    fileId: fileId
+                  }
+                }
+              });
+            } else {
+              error('Upload error');
+            }
+          };
+          xhr.onerror = () => {
+            error('Upload error');
+          };
+          xhr.send(formData);
+
+          // Return a function to handle cancellation
+          return {
+            abort: () => {
+              xhr.abort();
+              abort();
+            }
+          };
+        } catch (err) {
+          console.error(err);
+          error('Error occurred during upload');
+        }
+      },
+      revert: async (fieldName, file, load, error) => {
+        console.log("click x")
+        // try {
+        //   // Retrieve fileId from file metadata
+        //   const fileId = FilePond.getFileMetadata(file.id).fileId;
+        //   // Make API request to delete file from Cloudinary
+        //   const response = await axios.post(`https://api.cloudinary.com/v1_1/dter3mlpl/delete_by_token`, {
+        //     public_id: fileId,
+        //     api_key: api_key,
+        //     timestamp: Date.now(), // Include timestamp for signature calculation
+        //     signature: 'your_signature' // Calculate signature for deletion request
+        //   });
+        //   // Handle response from Cloudinary
+        //   console.log('File deleted from Cloudinary:', response);
+        //   // Proceed with removing file from FilePond
+        //   load();
+        // } catch (err) {
+        //   console.error('Error deleting file from Cloudinary:', error);
+        //   // Return error to FilePond
+        //   error('Error deleting file from Cloudinary');
+        // }
       }
-    })
-    console.log(cloudinaryResponse.data)
-
+    }
   });
-
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
