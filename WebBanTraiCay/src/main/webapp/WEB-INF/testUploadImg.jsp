@@ -21,8 +21,9 @@
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
           rel="stylesheet">
-    <link href="https://unpkg.com/filepond/dist/filepond.min.css" rel="stylesheet" />
-    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/filepond/dist/filepond.min.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"
+          rel="stylesheet"/>
     <link
             href="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css"
             rel="stylesheet"
@@ -58,7 +59,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/shop.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/toast.css">
 </head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
+        integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
 <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
 <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"></script>
@@ -69,6 +72,11 @@
 <script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
 <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
 <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
+<style>
+  .upload-img {
+    width: 200px;
+  }
+</style>
 <body class="goto-here">
 <nav class="navbar-container navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
      id="ftco-navbar">
@@ -154,9 +162,8 @@
         <button>Upload</button>
     </form>
 
-    <input
-            id="file-field2" type="file"
-           class="filepond"
+    <input id="file-field2" type="file"
+           class="filepond upload-img"
            name="filepond"
            multiple
            data-allow-reorder="true"
@@ -166,6 +173,7 @@
 </body>
 <script>
   // api key of cloudinary
+
   const api_key = "899244476586798";
   FilePond.registerPlugin(
       FilePondPluginImagePreview,
@@ -183,12 +191,15 @@
 
   FilePond.setOptions({
     server: {
-      process: async (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
+      process: async (fieldName, file, metadata, load, error, progress, abort, transfer,
+          options) => {
         try {
-          const signatureResponse = await axios.get(`${pageContext.request.contextPath}/cloudinary/get-signature`);
+          let public_id;
+          const signatureResponse = await axios.get(
+              `${pageContext.request.contextPath}/cloudinary/get-signature`);
 
           const formData = new FormData();
-          formData.append("file", file); // Use the 'file' parameter directly
+          formData.append("file", file);
           formData.append("api_key", api_key);
           formData.append("signature", signatureResponse.data.signature);
           formData.append("timestamp", signatureResponse.data.timestamp);
@@ -204,11 +215,12 @@
             if (xhr.status >= 200 && xhr.status < 300) {
               load(xhr.responseText);
               const response = JSON.parse(xhr.responseText);
-              const fileId = response.public_id;
+              console.log(response);
+              public_id = response.public_id;
               FilePond.setOptions({
                 fileMetadata: {
                   [file.id]: {
-                    fileId: fileId
+                    fileId: public_id
                   }
                 }
               });
@@ -219,6 +231,7 @@
           xhr.onerror = () => {
             error('Upload error');
           };
+
           xhr.send(formData);
 
           // Return a function to handle cancellation
@@ -234,26 +247,22 @@
         }
       },
       revert: async (fieldName, file, load, error) => {
-        console.log("click x")
-        // try {
-        //   // Retrieve fileId from file metadata
-        //   const fileId = FilePond.getFileMetadata(file.id).fileId;
-        //   // Make API request to delete file from Cloudinary
-        //   const response = await axios.post(`https://api.cloudinary.com/v1_1/dter3mlpl/delete_by_token`, {
-        //     public_id: fileId,
-        //     api_key: api_key,
-        //     timestamp: Date.now(), // Include timestamp for signature calculation
-        //     signature: 'your_signature' // Calculate signature for deletion request
-        //   });
-        //   // Handle response from Cloudinary
-        //   console.log('File deleted from Cloudinary:', response);
-        //   // Proceed with removing file from FilePond
-        //   load();
-        // } catch (err) {
-        //   console.error('Error deleting file from Cloudinary:', error);
-        //   // Return error to FilePond
-        //   error('Error deleting file from Cloudinary');
-        // }
+        console.log("testing revert");
+        console.log(this.public_id)
+        try {
+          // Gửi yêu cầu xóa đến servlet với public_id của tệp
+          const response = await axios.get(
+              `${pageContext.request.contextPath}/cloudinary/revert`, {
+                public_id: this.public_id
+              });
+          console.log(response);
+        } catch (error) {
+
+        }
+        // Log và xử lý phản hồi từ máy ch
+
+        // Tiếp tục với việc xóa tệp từ FilePond nếu thành công
+        load();
       }
     }
   });
