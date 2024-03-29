@@ -224,6 +224,7 @@
                   }
                 }
               });
+              load(public_id);
             } else {
               error('Upload error');
             }
@@ -246,24 +247,18 @@
           error('Error occurred during upload');
         }
       },
-      revert: async (fieldName, file, load, error) => {
-        console.log("testing revert");
-        console.log(this.public_id)
-        try {
-          // Gửi yêu cầu xóa đến servlet với public_id của tệp
-          const response = await axios.get(
-              `${pageContext.request.contextPath}/cloudinary/revert`, {
-                public_id: this.public_id
-              });
-          console.log(response);
-        } catch (error) {
-
+      revert: (source, load, error) => {
+        console.log('remove', source)
+        const doDelete = async function() {
+          axios.get(`${pageContext.request.contextPath}/cloudinary/remove-image`, {
+            params: {id: source},
+          }).then((response) => {
+            console.log(response)
+            load('')
+          });
         }
-        // Log và xử lý phản hồi từ máy ch
-
-        // Tiếp tục với việc xóa tệp từ FilePond nếu thành công
-        load();
-      }
+        doDelete();
+      },
     }
   });
 </script>

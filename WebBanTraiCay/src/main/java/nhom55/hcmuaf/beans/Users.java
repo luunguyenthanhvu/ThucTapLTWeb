@@ -1,10 +1,16 @@
 package nhom55.hcmuaf.beans;
 
+import com.cloudinary.utils.ObjectUtils;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import nhom55.hcmuaf.Log.IModel;
+import nhom55.hcmuaf.dao.UsersDao;
+import nhom55.hcmuaf.dao.UsersDaoImpl;
 
-public class Users implements Serializable {
+public class Users implements Serializable, IModel {
 
   private int id;
   private String username;
@@ -152,6 +158,22 @@ public class Users implements Serializable {
     this.creationTime = creationTime;
   }
 
+  public Users(String username, String password, String hash, String email, String address, String phoneNumber, String address1, int i, LocalDateTime now) {
+    this.id = id;
+    this.username = username;
+    this.password = password;
+    this.hash = hash;
+    this.email = email;
+    this.address = address;
+    this.phoneNumber = phoneNumber;
+    this.status = status;
+    this.img = img;
+    this.dateOfBirth = dateOfBirth;
+    this.sexual = sexual;
+    this.role = role;
+    this.creationTime = creationTime;
+  }
+
   public LocalDateTime getCreationTime() {
     return creationTime;
   }
@@ -273,4 +295,36 @@ public class Users implements Serializable {
             ", role=" + role +
             '}';
   }
+
+  @Override
+  public String getTable() {
+    return "User";
+  }
+
+  @Override
+  public String beforeData(Object model) {
+    if (model != null) {
+      Users user = (Users) model;
+      JsonObject json = new JsonObject();
+      json.addProperty("id", user.getId());
+      json.addProperty("username", user.getUsername());
+      System.out.println(json.toString());
+      return json.toString();
+    }
+    return null;
+  }
+
+  @Override
+  public String afterData(Object model) {
+    if (model != null) {
+      Users user = (Users) model;
+      JsonObject json = new JsonObject();
+      json.addProperty("id", user.getId());
+      json.addProperty("username", user.getUsername());
+      System.out.println(json.toString());
+      return json.toString();
+    }
+    return null;
+  }
+
 }

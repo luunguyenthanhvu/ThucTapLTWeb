@@ -48,9 +48,9 @@ public class CloudinaryServlet extends HttpServlet {
       }
       break;
 
-      case "/revert":
+      case "/remove-image":
         System.out.println("Đang test delete");
-        String public_id = request.getParameter("public_id");
+        String public_id = request.getParameter("id");
         System.out.println(public_id);
         if (public_id == null || public_id.isEmpty()) {
           // Nếu public_id không được truyền vào, trả về lỗi
@@ -101,7 +101,7 @@ public class CloudinaryServlet extends HttpServlet {
         response.sendRedirect(request.getServletPath() + "/error");
         return;
       case "/revert":
-        String public_id = request.getParameter("public_id");
+        String public_id = request.getParameter("id");
         System.out.println(public_id);
         if (public_id == null || public_id.isEmpty()) {
           // Nếu public_id không được truyền vào, trả về lỗi

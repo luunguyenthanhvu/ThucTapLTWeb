@@ -1,6 +1,7 @@
 package nhom55.hcmuaf.dao;
 
 import java.time.LocalDateTime;
+import nhom55.hcmuaf.Log.AbsDAO;
 import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.database.JDBIConnector;
 
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import nhom55.hcmuaf.util.MyUtils;
 
-public class UsersDaoImpl implements UsersDao {
+public class UsersDaoImpl extends AbsDAO<Users> implements UsersDao {
 
     /**
      * @param email
@@ -60,6 +61,7 @@ public class UsersDaoImpl implements UsersDao {
             return "FAIL";
         }
 
+        super.insert(new Users(username,password,hash,email,address,phoneNumber,address,0,LocalDateTime.now()));
         // add new user
         return JDBIConnector.get().withHandle(handle -> {
             handle.createUpdate(

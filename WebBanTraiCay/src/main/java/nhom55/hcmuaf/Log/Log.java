@@ -1,4 +1,4 @@
-package nhom55.hcmuaf.model;
+package nhom55.hcmuaf.Log;
 
 import java.time.LocalDateTime;
 import nhom55.hcmuaf.enums.LogLevels;
