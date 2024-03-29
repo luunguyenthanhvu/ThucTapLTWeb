@@ -30,9 +30,9 @@ public class ShopService {
         ProductDaoImpl productDaoImpl = new ProductDaoImpl();
         return  productDaoImpl.searchFilter(sortBy,order,search,index,sizePage);
     }
-    public List<Products> sortByFilter(int index, int quantityDefault, String sortBy, String order) {
+    public List<Products> sortByFilter(int index, int quantityDefault, String order, String whereClause) {
         ProductDaoImpl productDaoImpl = new ProductDaoImpl();
-        return  productDaoImpl.sortByFilter(index,quantityDefault,sortBy,order);
+        return  productDaoImpl.sortByFilter(index,quantityDefault,order,whereClause);
     }
     public int countTotalRowProductInDatabase(){
         ProductDaoImpl productDaoImpl = new ProductDaoImpl();
