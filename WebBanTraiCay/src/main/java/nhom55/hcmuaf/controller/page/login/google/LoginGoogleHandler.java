@@ -41,6 +41,7 @@ public class LoginGoogleHandler extends HttpServlet {
       RequestDispatcher dis = request.getRequestDispatcher("login.jsp");
       dis.forward(request, response);
     } else {
+      request.removeAttribute("result");
       String accessToken = GoogleUtils.getToken(code);
       GooglePojo googlePojo = GoogleUtils.getUserInfo(accessToken);
       Users userDB = UserService.getInstance().getUserByEmail(googlePojo.getEmail());
