@@ -198,131 +198,165 @@
                     <table style="border-collapse:collapse;
                 border: none; ">
 
-                        <tr>
-                            <td><label for="id_sp">Id <span style="color: red">*</span></label></td>
-                            <td><input name="id_san_pham" style="width: 300px" id="id_sp" type="text" value="${product.getId()}" disabled></td>
-                            <td><input type="hidden" name="id_san_pham" value="${product.getId()}"></td>
-                        </tr>
-                        <td><br></td>
 
-                        <tr>
-                            <td><label for="ten_sp">Tên sản phẩm <span style="color: red">*</span></label></td>
-                            <td><input name="ten_san_pham" style="width: 300px" id="ten_sp" type="text"  value="${product.getNameOfProduct()}"></td>
-                        </tr>
-                        <td><br></td>
-                        <td><p class="error" id="ten_sp_error"></td>
-                        <c:if test="${not empty ten_sp_error}" >
-                            <td><p style="color: red">${ten_sp_error}</p></td>
-                        </c:if>
+          <tr>
+            <td><label for="id_sp">Id <span style="color: red">*</span></label></td>
+            <td><input name="id_san_pham" style="width: 300px" id="id_sp" type="text" value="${product.getId()}" disabled></td>
+            <td><input type="hidden" name="id_san_pham" value="${product.getId()}"></td>
+          </tr>
+          <td><br></td>
 
-                        <tr>
-                            <td><label for="mota_sp">Mô tả sản phẩm <span style="color: red">*</span></label></td>
-                            <td><textarea cols="44" rows="10" id="mota_sp" name="mo_ta_san_pham"  >${product.getDescription()}</textarea></td>
+          <tr>
+            <td><label for="ten_sp">Tên sản phẩm <span style="color: red">*</span></label></td>
+            <td><input name="ten_san_pham" style="width: 300px" id="ten_sp" type="text"  value="${product.getNameOfProduct()}"></td>
+          </tr>
+          <td><br></td>
+          <td><p class="error" id="ten_sp_error"></td>
+          <c:if test="${not empty ten_sp_error}" >
+            <td><p style="color: red">${ten_sp_error}</p></td>
+          </c:if>
 
-                        </tr>
-                        <td><br></td>
-                        <td><p class="error" id="mota_sp_error"></td>
-                        <c:if test="${not empty mo_ta_error}" >
-                            <td><p style="color: red">${mo_ta_error}</p></td>
-                        </c:if>
-                        <tr>
-                            <td><label for="giatien_sp">Giá tiền <span style="color: red">*</span></label></td>
-                            <td><input style="width: 300px" name="gia_tien_san_pham" id="giatien_sp" type="text" value="${product.getPrice()}"></td>
+          <tr>
+            <td><label for="mota_sp">Mô tả sản phẩm <span style="color: red">*</span></label></td>
+            <td><textarea cols="44" rows="10" id="mota_sp" name="mo_ta_san_pham"  >${product.getDescription()}</textarea></td>
 
-                        </tr>
-                        <td><br></td>
-                        <td><p class="error" id="giatien_sp_error"></td>
-                        <c:if test="${not empty gia_tien_error}" >
-                            <td><p style="color: red">${gia_tien_error}</p></td>
-                        </c:if>
-                        <tr>
-                            <td><label for="kl_sp">Khối lượng sản phẩm <span style="color: red">*</span></label></td>
-                            <td><input style="width: 300px" name="khoi_luong_san_pham" id="kl_sp" type="text" value="${product.getWeight()}"></td>
+          </tr>
+          <td><br></td>
+          <td><p class="error" id="mota_sp_error"></td>
+          <c:if test="${not empty mo_ta_error}" >
+            <td><p style="color: red">${mo_ta_error}</p></td>
+          </c:if>
+          <tr>
+            <td><label for="upfileAnh">Trái cây theo mùa <span style="color: red">*</span></label></td>
+            <td>
+              <select style="width: 300px" id="seasonalFruitSelect" name="selectedSeasonalFruit">
+                <option value="spring">Mùa xuân</option>
+                <option value="summer">Mùa hạ</option>
+                <option value="fall">Mùa thu</option>
+                <option value="winter">Mùa đông</option>
+              </select>
+            </td>
+          </tr>
+          <td><br></td>
+          <tr>
+            <td><label for="upfileAnh">Nguồn nhập<span style="color: red">*</span></label></td>
+            <td>
+              <select style="width: 300px" id="sourceImport" name="selectedSourceImport">
+                <option value="local">Trong nước</option>
+                <option value="imported">Ở nước ngoài</option>
+              </select>
+            </td>
+          </tr>
+          <td><br></td>
+          <tr>
+            <td><label for="upfileAnh">Trái cây khô<span style="color: red">*</span></label></td>
+            <td>
+              <select style="width: 300px" id="driedFruit" name="selectedDriedFruit">
+                <option value="dried">Có</option>
+                <option value="">Không</option>
+              </select>
+            </td>
+          </tr>
+          <td><br></td>
+          <tr>
+            <td><label for="giatien_sp">Giá tiền <span style="color: red">*</span></label></td>
+            <td><input style="width: 300px" name="gia_tien_san_pham" id="giatien_sp" type="text" value="${product.getPrice()}"></td>
 
-                        </tr>
-                        <td><br></td>
-                        <td><p class="error" id="kl_sp_error"></td>
-                        <c:if test="${not empty khoi_luong_errorr}" >
-                            <td><p style="color: red">${khoi_luong_error}</p></td>
-                        </c:if>
-                        <tr>
-                            <td><label for="kgMacDinh_sp">Số kg mặc định của sản phẩm <span
-                                    style="color: red">*</span></label></td>
-                            <td><input style="width: 300px" name="so_kg_mac_dinh" id="kgMacDinh_sp" type="text"  value="${product.getWeightDefault()}"></td>
+          </tr>
+          <td><br></td>
+          <td><p class="error" id="giatien_sp_error"></td>
+          <c:if test="${not empty gia_tien_error}" >
+            <td><p style="color: red">${gia_tien_error}</p></td>
+          </c:if>
+          <tr>
+            <td><label for="kl_sp">Khối lượng sản phẩm <span style="color: red">*</span></label></td>
+            <td><input style="width: 300px" name="khoi_luong_san_pham" id="kl_sp" type="text" value="${product.getWeight()}"></td>
 
-                        </tr>
-                        <td><br></td>
-                        <td><p class="error" id="kgMacDinh_sp_error"></td>
-                        <c:if test="${not empty khoi_luong_mac_dinh_error}" >
-                            <td><p style="color: red">${khoi_luong_mac_dinh_error}</p></td>
-                        </c:if>
+          </tr>
+          <td><br></td>
+          <td><p class="error" id="kl_sp_error"></td>
+          <c:if test="${not empty khoi_luong_errorr}" >
+            <td><p style="color: red">${khoi_luong_error}</p></td>
+          </c:if>
+          <tr>
+            <td><label for="kgMacDinh_sp">Số kg mặc định của sản phẩm <span
+                    style="color: red">*</span></label></td>
+            <td><input style="width: 300px" name="so_kg_mac_dinh" id="kgMacDinh_sp" type="text"  value="${product.getWeightDefault()}"></td>
 
-                        <tr>
-                            <td><label for="expired_day">Ngày nhập hàng <span style="color: red">*</span></label></td>
-                            <td><input style="width: 300px" name="ngay_nhap_hang" id="imported_day" type="date"  value="${product.getDateOfImporting()}"></td>
+          </tr>
+          <td><br></td>
+          <td><p class="error" id="kgMacDinh_sp_error"></td>
+          <c:if test="${not empty khoi_luong_mac_dinh_error}" >
+            <td><p style="color: red">${khoi_luong_mac_dinh_error}</p></td>
+          </c:if>
 
-                        </tr>
-                        <td><br></td>
-                        <td><p class="error" id="imported_day_error"></td>
-                        <c:if test="${not empty ngay_nhap_hang_error}" >
-                            <td><p style="color: red">${ngay_nhap_hang_error}</p></td>
-                        </c:if>
-                        <tr>
-                            <td><label for="expired_day">Ngày hết hạn <span style="color: red">*</span></label></td>
-                            <td><input style="width: 300px" name="ngay_het_han" id="expired_day" type="date"  value="${product.getExpriredDay()}"></td>
+          <tr>
+            <td><label for="expired_day">Ngày nhập hàng <span style="color: red">*</span></label></td>
+            <td><input style="width: 300px" name="ngay_nhap_hang" id="imported_day" type="date"  value="${product.getDateOfImporting()}"></td>
 
-                        </tr>
-                        <td><br></td>
-                        <td><p class="error" id="expired_day_error"></td>
-                        <c:if test="${not empty ngay_het_han_error}" >
-                            <td><p style="color: red">${ngay_het_han_error}</p></td>
-                        </c:if>
+          </tr>
+          <td><br></td>
+          <td><p class="error" id="imported_day_error"></td>
+          <c:if test="${not empty ngay_nhap_hang_error}" >
+            <td><p style="color: red">${ngay_nhap_hang_error}</p></td>
+          </c:if>
+          <tr>
+            <td><label for="expired_day">Ngày hết hạn <span style="color: red">*</span></label></td>
+            <td><input style="width: 300px" name="ngay_het_han" id="expired_day" type="date"  value="${product.getExpriredDay()}"></td>
 
-                        <tr>
-                            <td><label for="upfileAnh">Nhà cung cấp <span style="color: red">*</span></label></td>
-                            <td>
-                                <select style="width: 300px" id="providerSelect" name="selectedProviderID">
-                                    <c:forEach items="${listProvider}" var="provider">
-                                        <option value="${provider.getId()}">${provider.getProviderName()}</option>
-                                    </c:forEach>
-                                </select>
-                            </td>
-                        </tr>
-                        <td><br></td>
-                        <td><p class="error" id="provider_product_error"></td>
-                        <c:if test="${not empty nha_cung_cap_error}" >
-                            <td><p style="color: red">${nha_cung_cap_error}</p></td>
-                        </c:if>
-                        <tr>
-                            <td><label for="upfileAnh">Up file ảnh sản phẩm <span style="color: red">*</span></label></td>
-                            <td><input style="width: 300px" name="file" id="upfileAnh" type="file"></td>
-                        </tr>
+          </tr>
+          <td><br></td>
+          <td><p class="error" id="expired_day_error"></td>
+          <c:if test="${not empty ngay_het_han_error}" >
+            <td><p style="color: red">${ngay_het_han_error}</p></td>
+          </c:if>
+
+          <tr>
+            <td><label for="upfileAnh">Nhà cung cấp <span style="color: red">*</span></label></td>
+            <td>
+              <select style="width: 300px" id="providerSelect" name="selectedProviderID">
+                <c:forEach items="${listProvider}" var="provider">
+                  <option value="${provider.getId()}">${provider.getProviderName()}</option>
+                </c:forEach>
+              </select>
+            </td>
+          </tr>
+          <td><br></td>
+          <td><p class="error" id="provider_product_error"></td>
+          <c:if test="${not empty nha_cung_cap_error}" >
+            <td><p style="color: red">${nha_cung_cap_error}</p></td>
+          </c:if>
+          <tr>
+            <td><label for="upfileAnh">Up file ảnh sản phẩm <span style="color: red">*</span></label></td>
+            <td><input style="width: 300px" name="file" id="upfileAnh" type="file"></td>
+          </tr>
 
 
-                        <tr>
-                            <td></td>
-                            <td>
-                                <div class="product-img">
-                                    <img id="previewImage" src="${product.getImg()}">
-                                </div>
-                            </td>
-                        </tr>
+          <tr>
+            <td></td>
+            <td>
+              <div class="product-img">
+                <img id="previewImage" src="${product.getImg()}">
+              </div>
+            </td>
+          </tr>
 
-                    </table>
-                    <button type="submit">
-                        Lưu thông tin
-                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
-                            <path d="M288 109.3V352c0 17.7-14.3 32-32 32s-32-14.3-32-32V109.3l-73.4 73.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0l128 128c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L288 109.3zM64 352H192c0 35.3 28.7 64 64 64s64-28.7 64-64H448c35.3 0 64 28.7 64 64v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V416c0-35.3 28.7-64 64-64zM432 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z"/></svg>
-                    </button>
-                    <button type="reset">
-                        Làm mới
-                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
-                            <path d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"/></svg>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
+        </table>
+        <button type="submit">
+          Lưu thông tin
+          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+            <path d="M288 109.3V352c0 17.7-14.3 32-32 32s-32-14.3-32-32V109.3l-73.4 73.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0l128 128c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L288 109.3zM64 352H192c0 35.3 28.7 64 64 64s64-28.7 64-64H448c35.3 0 64 28.7 64 64v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V416c0-35.3 28.7-64 64-64zM432 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z"/></svg>
+        </button>
+        <button type="reset">
+          Làm mới
+          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+            <path d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
 </div>
 <script>
   let arrow = document.querySelectorAll(".arrow");

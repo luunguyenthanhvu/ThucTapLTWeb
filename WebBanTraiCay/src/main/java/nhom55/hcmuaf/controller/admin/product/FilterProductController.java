@@ -1,25 +1,32 @@
-package nhom55.hcmuaf.controller.page.shop;
+package nhom55.hcmuaf.controller.admin.product;
 
 import nhom55.hcmuaf.beans.Products;
+import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.services.ShopService;
-
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
-import java.io.IOException;
-import java.util.List;
 import nhom55.hcmuaf.util.MyUtils;
 
-@WebServlet(name = "FilterForAllProduct", value = "/page/shop/filter-for-all-product")
-public class FilterForAllProduct extends HttpServlet {
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.List;
+
+@WebServlet(name = "FilterProductController", value = "/admin/product/filter-product")
+public class FilterProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       doPost(request,response);
+        doPost(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//       Lấy các thuộc tính của filter
+        HttpSession session = request.getSession();
+        Users admin = MyUtils.getLoginedUser(session);
+        //       Lấy các thuộc tính của filter
         String  price_sortAsc = request.getParameter("price_sortAsc");
 
         String  price_sortDesc = request.getParameter("price_sortDesc");
@@ -79,6 +86,12 @@ public class FilterForAllProduct extends HttpServlet {
         order = order.replaceAll(", $", "");
         whereClause = whereClause.replaceAll(" Or $", "");
 
+
+
+
+//        String sortBy = request.getParameter("sortBy");
+//        String order = request.getParameter("order");
+
         // pageSTR(pageNumber là kiểu int khi chuyển từ String PageSTr),  là số mà người dùng bấm vào số mà muốn chuyển trang
         String pageStr = request.getParameter("pageId");
         int pageNumber = 0;
@@ -96,7 +109,7 @@ public class FilterForAllProduct extends HttpServlet {
         List<Products> list =  ShopService.getInstance().sortByFilter(pageNumber,quantityDefault,order,whereClause);
 
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/shop.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/admin/product-list.jsp");
 
         request.setAttribute("order",order);
         request.setAttribute("whereClause",whereClause);
@@ -113,9 +126,9 @@ public class FilterForAllProduct extends HttpServlet {
         request.setAttribute("imported",importedFruit);
         request.setAttribute("dried",driedFruit);
 
-
+        request.setAttribute("admin", admin);
         request.setAttribute("haveMaxPage",haveMaxPage);
-        request.setAttribute("listOfProduct",list);
+        request.setAttribute("listProduct",list);
         request.setAttribute("pageId",pageNumber);
         rd.forward(request,response);
     }
