@@ -72,6 +72,7 @@
 <script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
 <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
 <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-filter/dist/filepond-plugin-image-filter.js"></script>
 <style>
   .upload-img {
     width: 200px;
@@ -157,11 +158,6 @@
     </div>
 </nav>
 <div>
-    <form id="upload-img">
-        <input type="file" id="file-field">
-        <button>Upload</button>
-    </form>
-
     <input id="file-field2" type="file"
            class="filepond upload-img"
            name="filepond"
@@ -180,14 +176,42 @@
       FilePondPluginImageExifOrientation,
       FilePondPluginFileValidateSize,
       FilePondPluginImageEdit,
-      FilePondPluginImageEdit
+      FilePondPluginImageCrop,
+      FilePondPluginImageTransform,
+      FilePondPluginImageFilter
   );
 
   // Select the file input and use
   // create() to turn it into a pond
-  FilePond.create(
-      document.querySelector('#file-field2')
-  );
+  // FilePond.create(
+  //     document.querySelector('#file-field2')
+  // );
+  FilePond.create(document.querySelector('#file-field2'), {
+    imageEditorAfterWriteImage: ({ src, dest, imageState }) =>
+        new Promise((resolve, reject) => {
+          // use Pintura Image Editor to process the source image again
+          processImage(src, {
+            imageReader: createDefaultImageReader(),
+            imageWriter: createDefaultImageWriter({
+              targetSize: {
+                width: 128,
+                height: 128,
+                fit: 'cover',
+              },
+            }),
+            imageState,
+          })
+          // we get the thumbnail and add it to the files
+          .then((thumb) =>
+              resolve([
+                { name: 'input_', file: src },
+                { name: 'output_', file: dest },
+                { name: 'thumb_', file: thumb.dest },
+              ])
+          )
+          .catch(reject);
+        }),
+  });
 
   FilePond.setOptions({
     server: {
