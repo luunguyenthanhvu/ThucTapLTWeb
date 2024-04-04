@@ -1,14 +1,10 @@
 package nhom55.hcmuaf.beans;
 
-import com.cloudinary.utils.ObjectUtils;
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import nhom55.hcmuaf.Log.IModel;
-import nhom55.hcmuaf.dao.UsersDao;
-import nhom55.hcmuaf.dao.UsersDaoImpl;
+import nhom55.hcmuaf.log.IModel;
 
 public class Users implements Serializable, IModel {
 

@@ -1,15 +1,13 @@
 package nhom55.hcmuaf.dao;
 
 import java.time.LocalDateTime;
-import nhom55.hcmuaf.Log.AbsDAO;
+import nhom55.hcmuaf.log.AbsDAO;
 import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.database.JDBIConnector;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import nhom55.hcmuaf.util.MyUtils;
 
 public class UsersDaoImpl extends AbsDAO<Users> implements UsersDao {
 

@@ -154,9 +154,33 @@
         <div class="row">
             <c:set var="product" value="${requestScope.showProduct}"/>
             <div class="col-lg-6 mb-5 ftco-animate">
-                <a href="" class="image-popup"><img src="${product.getImg()}"
-                                                    class="img-fluid"
-                                                    alt="Colorlib Template"></a>
+                <a href="${product.getImg()}" class="image-popup">
+                    <img src="${product.getImg()}" class="img-fluid" alt="Colorlib Template">
+                </a>
+<%--                <div class="slider">--%>
+<%--                    <div class="list">--%>
+<%--                        <div class="item">--%>
+<%--                            <img src="https://images8.alphacoders.com/129/thumb-1920-1292335.jpg">--%>
+<%--                        </div>--%>
+<%--                        <div class="item">--%>
+<%--                            <img src="https://wallpapercave.com/wp/wp8364523.jpg" alt="">--%>
+<%--                        </div>--%>
+<%--                        <div class="item">--%>
+<%--                            <img src="https://images4.alphacoders.com/114/1144157.jpg" alt="">--%>
+<%--                        </div>--%>
+<%--                        <div class="item">--%>
+<%--                            <img src="https://wallpapercave.com/wp/wp5432785.jpg" alt="">--%>
+<%--                        </div>--%>
+<%--                        <div class="item">--%>
+<%--                            <img src="https://wallpapersmug.com/download/1600x900/1a66d0/beautiful-anime-kamado-nezuko.jpg" alt="">--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="buttons">--%>
+<%--                        <button id="prev"><</button>--%>
+<%--                        <button id="next">></button>--%>
+<%--                    </div>--%>
+
+<%--                </div>--%>
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                 <h3>${product.getNameOfProduct()}</h3>

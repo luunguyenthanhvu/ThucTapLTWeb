@@ -2,7 +2,7 @@ package nhom55.hcmuaf.dao;
 
 import java.util.List;
 import nhom55.hcmuaf.database.JDBIConnector;
-import nhom55.hcmuaf.Log.Log;
+import nhom55.hcmuaf.log.Log;
 
 public class LogDaoImpl<T> implements LogDao<T>{
 

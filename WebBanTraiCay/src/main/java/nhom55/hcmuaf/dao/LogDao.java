@@ -1,8 +1,7 @@
 package nhom55.hcmuaf.dao;
 
-import java.sql.Timestamp;
 import java.util.List;
-import nhom55.hcmuaf.Log.Log;
+import nhom55.hcmuaf.log.Log;
 
 public interface LogDao<T> {
   public void insertLog(T model);

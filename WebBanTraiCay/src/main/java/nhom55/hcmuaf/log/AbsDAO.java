@@ -1,4 +1,4 @@
-package nhom55.hcmuaf.Log;
+package nhom55.hcmuaf.log;
 
 import nhom55.hcmuaf.dao.LogDao;
 import nhom55.hcmuaf.dao.LogDaoImpl;

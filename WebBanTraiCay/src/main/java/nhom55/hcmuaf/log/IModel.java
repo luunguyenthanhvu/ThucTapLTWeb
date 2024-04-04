@@ -1,4 +1,4 @@
-package nhom55.hcmuaf.Log;
+package nhom55.hcmuaf.log;
 
 public interface IModel {
   String getTable();
