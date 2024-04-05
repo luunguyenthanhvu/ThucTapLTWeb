@@ -46,6 +46,7 @@
 <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
 <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
 <script src="https://unpkg.com/filepond-plugin-image-filter/dist/filepond-plugin-image-filter.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/ck-editor/ckeditor.js"></script>
 <body onload="myFunction()" style="margin:0;">
 <div id="loader"></div>
 <div style="display:none;" id="myDiv" class="animate-bottom">
@@ -54,6 +55,7 @@
             <i>
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512">
                     <path d="M36.8 192H603.2c20.3 0 36.8-16.5 36.8-36.8c0-7.3-2.2-14.4-6.2-20.4L558.2 21.4C549.3 8 534.4 0 518.3 0H121.7c-16 0-31 8-39.9 21.4L6.2 134.7c-4 6.1-6.2 13.2-6.2 20.4C0 175.5 16.5 192 36.8 192zM64 224V384v80c0 26.5 21.5 48 48 48H336c26.5 0 48-21.5 48-48V384 224H320V384H128V224H64zm448 0V480c0 17.7 14.3 32 32 32s32-14.3 32-32V224H512z"/>
+
                 </svg>
             </i>
             <span class="logo_name">Quản trị viên</span>
@@ -208,7 +210,7 @@
             </li>
         </ul>
     </div>
-    <section class="home-section">
+    <section class="home-section" style="height: 100%">
         <div class="home-content">
             <svg class='bx-menu' xmlns="http://www.w3.org/2000/svg" height="1em"
                  viewBox="0 0 448 512">
@@ -216,11 +218,11 @@
             </svg>
             <span class="text">Thêm sản phẩm</span>
         </div>
-        <div class="container">
+        <div class="container" style="height: 100%">
             <!--       code thêm ở đây-->
-            <div class="form-sp">
+            <div class="form-sp" style="height: 100%">
                 <form id="FormThemSanPham" action="${pageContext.request.contextPath}/admin/product/add-new-product" method="post"
-                      enctype="multipart/form-data">
+                      enctype="multipart/form-data" style="height: 100%">
                     <table style="border-collapse:collapse;
                 border: none; ">
                         <tr>
@@ -235,10 +237,10 @@
                             <td><p style="color: red">${ten_sp_error}</p></td>
                         </c:if>
                         <tr>
-                            <td><label for="mota_sp">Mô tả sản phẩm <span
+                            <td><label for="editor">Mô tả sản phẩm <span
                                     style="color: red">*</span></label></td>
-                            <td><textarea cols="44" rows="7" id="mota_sp"
-                                          name="mo_ta_san_pham">${mota_sp}</textarea></td>
+                            <td><textarea cols="44" rows="7" id="editor"
+                                          name="mo_ta_san_pham editor">${mota_sp}</textarea></td>
 
                         </tr>
                         <td><br></td>
@@ -325,7 +327,7 @@
                                        multiple
                                        data-allow-reorder="true"
                                        data-max-file-size="3MB"
-                                       data-max-files="3">
+                                       data-max-files="5">
                             </td>
                         </tr>
                         <tr>
@@ -369,35 +371,9 @@
 
   // Select the file input and use
   // create() to turn it into a pond
-  // FilePond.create(
-  //     document.querySelector('#file-field2')
-  // );
-  FilePond.create(document.querySelector('#upfileAnh'), {
-    imageEditorAfterWriteImage: ({ src, dest, imageState }) =>
-        new Promise((resolve, reject) => {
-          // use Pintura Image Editor to process the source image again
-          processImage(src, {
-            imageReader: createDefaultImageReader(),
-            imageWriter: createDefaultImageWriter({
-              targetSize: {
-                width: 128,
-                height: 128,
-                fit: 'cover',
-              },
-            }),
-            imageState,
-          })
-          // we get the thumbnail and add it to the files
-          .then((thumb) =>
-              resolve([
-                { name: 'input_', file: src },
-                { name: 'output_', file: dest },
-                { name: 'thumb_', file: thumb.dest },
-              ])
-          )
-          .catch(reject);
-        }),
-  });
+  FilePond.create(
+      document.querySelector('#upfileAnh')
+  );
 
   FilePond.setOptions({
     server: {
@@ -473,6 +449,7 @@
   });
 </script>
 <script>
+  CKEDITOR.replace('editor');
   let arrow = document.querySelectorAll(".arrow");
   for (var i = 0; i < arrow.length; i++) {
     arrow[i].addEventListener("click", (e) => {
@@ -498,7 +475,7 @@
 
   // validate for input
   var tenSP = document.getElementById("ten_sp");
-  var moTaSP = document.getElementById("mota_sp");
+  var moTaSP = document.getElementById("editor");
   var giaTienSP = document.getElementById("giatien_sp");
   var khoiLuongSP = document.getElementById("kl_sp");
   var kgMacDinhSP = document.getElementById("kgMacDinh_sp");

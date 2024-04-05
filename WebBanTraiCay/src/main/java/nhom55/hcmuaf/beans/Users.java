@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import nhom55.hcmuaf.log.IModel;
 
-public class Users implements Serializable, IModel {
+public class Users implements Serializable{
 
   private int id;
   private String username;
@@ -290,37 +290,6 @@ public class Users implements Serializable, IModel {
             ", sexual='" + sexual + '\'' +
             ", role=" + role +
             '}';
-  }
-
-  @Override
-  public String getTable() {
-    return "User";
-  }
-
-  @Override
-  public String beforeData(Object model) {
-    if (model != null) {
-      Users user = (Users) model;
-      JsonObject json = new JsonObject();
-      json.addProperty("id", user.getId());
-      json.addProperty("username", user.getUsername());
-      System.out.println(json.toString());
-      return json.toString();
-    }
-    return null;
-  }
-
-  @Override
-  public String afterData(Object model) {
-    if (model != null) {
-      Users user = (Users) model;
-      JsonObject json = new JsonObject();
-      json.addProperty("id", user.getId());
-      json.addProperty("username", user.getUsername());
-      System.out.println(json.toString());
-      return json.toString();
-    }
-    return null;
   }
 
 }

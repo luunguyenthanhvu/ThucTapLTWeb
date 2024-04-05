@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UsersDaoImpl extends AbsDAO<Users> implements UsersDao {
+public class UsersDaoImpl implements UsersDao {
 
     /**
      * @param email
@@ -59,7 +59,6 @@ public class UsersDaoImpl extends AbsDAO<Users> implements UsersDao {
             return "FAIL";
         }
 
-        super.insert(new Users(username,password,hash,email,address,phoneNumber,address,0,LocalDateTime.now()));
         // add new user
         return JDBIConnector.get().withHandle(handle -> {
             handle.createUpdate(
