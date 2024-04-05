@@ -1,10 +1,12 @@
 package nhom55.hcmuaf.beans;
 
+import com.google.gson.JsonObject;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import nhom55.hcmuaf.log.IModel;
 
-public class Users implements Serializable {
+public class Users implements Serializable{
 
   private int id;
   private String username;
@@ -152,6 +154,22 @@ public class Users implements Serializable {
     this.creationTime = creationTime;
   }
 
+  public Users(String username, String password, String hash, String email, String address, String phoneNumber, String address1, int i, LocalDateTime now) {
+    this.id = id;
+    this.username = username;
+    this.password = password;
+    this.hash = hash;
+    this.email = email;
+    this.address = address;
+    this.phoneNumber = phoneNumber;
+    this.status = status;
+    this.img = img;
+    this.dateOfBirth = dateOfBirth;
+    this.sexual = sexual;
+    this.role = role;
+    this.creationTime = creationTime;
+  }
+
   public LocalDateTime getCreationTime() {
     return creationTime;
   }
@@ -273,4 +291,5 @@ public class Users implements Serializable {
             ", role=" + role +
             '}';
   }
+
 }

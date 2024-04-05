@@ -22,9 +22,31 @@
 
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/css/admin-css/add-product.css">
+    <link href="https://unpkg.com/filepond/dist/filepond.min.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"
+          rel="stylesheet"/>
+    <link
+            href="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css"
+            rel="stylesheet"
+    />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
+        integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-filter/dist/filepond-plugin-image-filter.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/ck-editor/ckeditor.js"></script>
 <body onload="myFunction()" style="margin:0;">
 <div id="loader"></div>
 <div style="display:none;" id="myDiv" class="animate-bottom">
@@ -33,6 +55,7 @@
             <i>
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512">
                     <path d="M36.8 192H603.2c20.3 0 36.8-16.5 36.8-36.8c0-7.3-2.2-14.4-6.2-20.4L558.2 21.4C549.3 8 534.4 0 518.3 0H121.7c-16 0-31 8-39.9 21.4L6.2 134.7c-4 6.1-6.2 13.2-6.2 20.4C0 175.5 16.5 192 36.8 192zM64 224V384v80c0 26.5 21.5 48 48 48H336c26.5 0 48-21.5 48-48V384 224H320V384H128V224H64zm448 0V480c0 17.7 14.3 32 32 32s32-14.3 32-32V224H512z"/>
+
                 </svg>
             </i>
             <span class="logo_name">Quản trị viên</span>
@@ -187,7 +210,7 @@
             </li>
         </ul>
     </div>
-    <section class="home-section">
+    <section class="home-section" style="height: 100%">
         <div class="home-content">
             <svg class='bx-menu' xmlns="http://www.w3.org/2000/svg" height="1em"
                  viewBox="0 0 448 512">
@@ -195,11 +218,11 @@
             </svg>
             <span class="text">Thêm sản phẩm</span>
         </div>
-        <div class="container">
+        <div class="container" style="height: 100%">
             <!--       code thêm ở đây-->
-            <div class="form-sp">
+            <div class="form-sp" style="height: 100%">
                 <form id="FormThemSanPham" action="${pageContext.request.contextPath}/admin/product/add-new-product" method="post"
-                      enctype="multipart/form-data">
+                      enctype="multipart/form-data" style="height: 100%">
                     <table style="border-collapse:collapse;
                 border: none; ">
                         <tr>
@@ -214,10 +237,10 @@
                             <td><p style="color: red">${ten_sp_error}</p></td>
                         </c:if>
                         <tr>
-                            <td><label for="mota_sp">Mô tả sản phẩm <span
+                            <td><label for="editor">Mô tả sản phẩm <span
                                     style="color: red">*</span></label></td>
-                            <td><textarea cols="44" rows="7" id="mota_sp"
-                                          name="mo_ta_san_pham">${mota_sp}</textarea></td>
+                            <td><textarea cols="44" rows="7" id="editor"
+                                          name="mo_ta_san_pham editor">${mota_sp}</textarea></td>
 
                         </tr>
                         <td><br></td>
@@ -297,15 +320,14 @@
                         <tr>
                             <td><label for="upfileAnh">Up file ảnh sản phẩm <span
                                     style="color: red">*</span></label></td>
-                            <td><input style="width: 300px" name="upload_file_san_pham"
-                                       id="upfileAnh" type="file"></td>
-                        </tr>
-                        <tr>
-                            <td></td>
                             <td>
-                                <div class="product-img">
-                                    <img id="previewImage" src="${pageContext.request.contextPath}/static/images/product-demo.jpg">
-                                </div>
+                                <input id="upfileAnh" type="file"
+                                       class="filepond upload-img"
+                                       name="filepond"
+                                       multiple
+                                       data-allow-reorder="true"
+                                       data-max-file-size="3MB"
+                                       data-max-files="5">
                             </td>
                         </tr>
                         <tr>
@@ -334,6 +356,100 @@
     </section>
 </div>
 <script>
+  // api key of cloudinary
+
+  const api_key = "899244476586798";
+  FilePond.registerPlugin(
+      FilePondPluginImagePreview,
+      FilePondPluginImageExifOrientation,
+      FilePondPluginFileValidateSize,
+      FilePondPluginImageEdit,
+      FilePondPluginImageCrop,
+      FilePondPluginImageTransform,
+      FilePondPluginImageFilter
+  );
+
+  // Select the file input and use
+  // create() to turn it into a pond
+  FilePond.create(
+      document.querySelector('#upfileAnh')
+  );
+
+  FilePond.setOptions({
+    server: {
+      process: async (fieldName, file, metadata, load, error, progress, abort, transfer,
+          options) => {
+        try {
+          let public_id;
+          const signatureResponse = await axios.get(
+              `${pageContext.request.contextPath}/cloudinary/get-signature`);
+
+          const formData = new FormData();
+          formData.append("file", file);
+          formData.append("api_key", api_key);
+          formData.append("signature", signatureResponse.data.signature);
+          formData.append("timestamp", signatureResponse.data.timestamp);
+
+          const xhr = new XMLHttpRequest();
+          xhr.open('POST', 'https://api.cloudinary.com/v1_1/dter3mlpl/image/upload');
+          xhr.upload.onprogress = (event) => {
+            console.log(event.loaded / event.total); // Log the progress
+            const progressPercentage = Math.round((event.loaded / event.total) * 100);
+            progress(progressPercentage);
+          };
+          xhr.onload = () => {
+            if (xhr.status >= 200 && xhr.status < 300) {
+              load(xhr.responseText);
+              const response = JSON.parse(xhr.responseText);
+              console.log(response);
+              public_id = response.public_id;
+              FilePond.setOptions({
+                fileMetadata: {
+                  [file.id]: {
+                    fileId: public_id
+                  }
+                }
+              });
+              load(public_id);
+            } else {
+              error('Upload error');
+            }
+          };
+          xhr.onerror = () => {
+            error('Upload error');
+          };
+
+          xhr.send(formData);
+
+          // Return a function to handle cancellation
+          return {
+            abort: () => {
+              xhr.abort();
+              abort();
+            }
+          };
+        } catch (err) {
+          console.error(err);
+          error('Error occurred during upload');
+        }
+      },
+      revert: (source, load, error) => {
+        console.log('remove', source)
+        const doDelete = async function() {
+          axios.get(`${pageContext.request.contextPath}/cloudinary/remove-image`, {
+            params: {id: source},
+          }).then((response) => {
+            console.log(response)
+            load('')
+          });
+        }
+        doDelete();
+      },
+    }
+  });
+</script>
+<script>
+  CKEDITOR.replace('editor');
   let arrow = document.querySelectorAll(".arrow");
   for (var i = 0; i < arrow.length; i++) {
     arrow[i].addEventListener("click", (e) => {
@@ -348,18 +464,6 @@
     sidebar.classList.toggle("close");
   });
 
-  $(document).ready(function () {
-    $('#upfileAnh').change(function (e) {
-      var file = e.target.files[0];
-      var reader = new FileReader();
-      reader.onload = function (event) {
-        $('#previewImage').attr('src', event.target.result);
-      };
-      reader.readAsDataURL(file);
-    });
-  });
-  var myVar;
-
   function myFunction() {
     myVar = setTimeout(showPage, 5);
   }
@@ -371,7 +475,7 @@
 
   // validate for input
   var tenSP = document.getElementById("ten_sp");
-  var moTaSP = document.getElementById("mota_sp");
+  var moTaSP = document.getElementById("editor");
   var giaTienSP = document.getElementById("giatien_sp");
   var khoiLuongSP = document.getElementById("kl_sp");
   var kgMacDinhSP = document.getElementById("kgMacDinh_sp");
@@ -547,5 +651,9 @@
   })
 </script>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://kit.fontawesome.com/4c38acb8c6.js" crossorigin="anonymous"></script>
 </html>

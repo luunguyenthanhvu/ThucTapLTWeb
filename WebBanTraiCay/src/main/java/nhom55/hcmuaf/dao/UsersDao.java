@@ -53,6 +53,7 @@ public interface UsersDao {
   String addNewGoogleUser(String username, String email, String img);
 
   String updateTimeStampUser(String email);
+
 }
 
 
