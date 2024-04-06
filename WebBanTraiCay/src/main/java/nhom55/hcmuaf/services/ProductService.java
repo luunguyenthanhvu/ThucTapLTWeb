@@ -28,9 +28,9 @@ public class ProductService {
     return instance;
   }
 
-  public void addNewProduct(String productName, String description, double price,
+  public void addNewProduct(String productName, String description,String seasonalFruit,String sourceImport,String driedFruit, double price,
       double weightQuantity,double weightDefault, Date dateImport, Date expirationDate,String imgProduct, int adminId, int provider) {
-     productDao.addNewProduct(productName, description,price, weightQuantity, weightDefault,dateImport,
+     productDao.addNewProduct(productName, description,seasonalFruit,sourceImport,driedFruit,price, weightQuantity, weightDefault,dateImport,
              expirationDate,imgProduct, adminId, provider);
   }
 

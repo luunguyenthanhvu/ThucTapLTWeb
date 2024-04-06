@@ -208,7 +208,7 @@ public class ProductDaoImpl implements ProductDao {
   }
 
   @Override
-  public void addNewProduct(String productName, String description, double price,
+  public void addNewProduct(String productName, String description,String seasonalFruit,String sourceImport,String driedFruit, double price,
       double weightQuantity, double weightDefault, Date dateImport, Date expirationDate,
       String imgProduct, int adminId, int provider) {
 
@@ -224,22 +224,47 @@ public class ProductDaoImpl implements ProductDao {
     if (products != null) {
 
     } else {
-      JDBIConnector.get().withHandle(h -> {
-        return h.createUpdate(
-                "INSERT INTO products(nameOfProduct, description, price, weight, weightDefault, dateOfImporting, expriredDay, img, adminCreate, provider) "
-                    + "VALUES (:nameOfProduct, :description, :price, :weight, :weightDefault, :dateOfImporting, :expriredDay, :img, :adminCreate, :provider)")
-            .bind("nameOfProduct", productName)
-            .bind("description", description)
-            .bind("price", price)
-            .bind("weight", weightQuantity)
-            .bind("weightDefault", weightDefault)
-            .bind("dateOfImporting", dateImport)
-            .bind("expriredDay", expirationDate)
-            .bind("img", imgProduct)
-            .bind("adminCreate", adminId)
-            .bind("provider", provider)
-            .execute();
-      });
+ if(sourceImport.equals("local")){
+   JDBIConnector.get().withHandle(h -> {
+     return h.createUpdate(
+                     "INSERT INTO products(nameOfProduct, description,seasonalFruit,domesticFruit,driedFruit, price, weight, weightDefault, dateOfImporting, expriredDay, img, adminCreate, provider) "
+                             + "VALUES (:nameOfProduct, :description,:seasonalFruit,:domesticFruit,:driedFruit, :price, :weight, :weightDefault, :dateOfImporting, :expriredDay, :img, :adminCreate, :provider)")
+             .bind("nameOfProduct", productName)
+             .bind("description", description)
+             .bind("price", price)
+             .bind("weight", weightQuantity)
+             .bind("weightDefault", weightDefault)
+             .bind("dateOfImporting", dateImport)
+             .bind("expriredDay", expirationDate)
+             .bind("img", imgProduct)
+             .bind("adminCreate", adminId)
+             .bind("provider", provider)
+             .bind("seasonalFruit",seasonalFruit)
+             .bind("domesticFruit",sourceImport)
+             .bind("driedFruit",driedFruit)
+             .execute();
+   });
+ } else {
+   JDBIConnector.get().withHandle(h -> {
+     return h.createUpdate(
+                     "INSERT INTO products(nameOfProduct, description,seasonalFruit,importedFruit,driedFruit, price, weight, weightDefault, dateOfImporting, expriredDay, img, adminCreate, provider) "
+                             + "VALUES (:nameOfProduct, :description,:seasonalFruit,:importedFruit,:driedFruit, :price, :weight, :weightDefault, :dateOfImporting, :expriredDay, :img, :adminCreate, :provider)")
+             .bind("nameOfProduct", productName)
+             .bind("description", description)
+             .bind("price", price)
+             .bind("weight", weightQuantity)
+             .bind("weightDefault", weightDefault)
+             .bind("dateOfImporting", dateImport)
+             .bind("expriredDay", expirationDate)
+             .bind("img", imgProduct)
+             .bind("adminCreate", adminId)
+             .bind("provider", provider)
+             .bind("seasonalFruit",seasonalFruit)
+             .bind("importedFruit",sourceImport)
+             .bind("driedFruit",driedFruit)
+             .execute();
+   });
+ }
     }
   }
 //   Phần phục vụ cho quản lý sản phẩm của admin

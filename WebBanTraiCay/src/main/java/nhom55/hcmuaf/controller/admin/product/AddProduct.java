@@ -66,6 +66,9 @@ public class AddProduct extends HttpServlet {
     String description = request.getParameter("mo_ta_san_pham");
     String priceString = request.getParameter("gia_tien_san_pham");
     String weightQuantityString = request.getParameter("khoi_luong_san_pham");
+    String seasonalFruit = request.getParameter("selectedSeasonalFruit");
+    String sourceImport = request.getParameter("selectedSourceImport");
+    String driedFruit = request.getParameter("selectedDriedFruit");
     String weightDefaultString = request.getParameter("so_kg_mac_dinh");
     String expirationDateString = request.getParameter("ngay_het_han");
     String providerString = request.getParameter("provider");
@@ -114,7 +117,7 @@ public class AddProduct extends HttpServlet {
       Date dateImport = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
 
       ProductService.getInstance()
-          .addNewProduct(productName, description, price, weightQuantity, weightDefault, dateImport,
+          .addNewProduct(productName, description, seasonalFruit, sourceImport, driedFruit,price, weightQuantity, weightDefault, dateImport,
               expirationDate, imgProduct, admin.getId(), provider);
       response.sendRedirect(request.getContextPath() + "/admin/product/add-new-product");
 
