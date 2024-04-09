@@ -1,7 +1,5 @@
 package nhom55.hcmuaf.controller.admin.product;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,7 +8,6 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 import nhom55.hcmuaf.beans.Products;
 import nhom55.hcmuaf.beans.Providers;
 import nhom55.hcmuaf.beans.Users;
@@ -26,7 +22,6 @@ import nhom55.hcmuaf.services.ProductService;
 import nhom55.hcmuaf.services.ProviderService;
 import nhom55.hcmuaf.util.MyUtils;
 import nhom55.hcmuaf.util.ProductValidator;
-import org.codehaus.jackson.map.ObjectMapper;
 
 @WebServlet(name = "AddProduct", value = "/admin/product/add-new-product")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 10, maxRequestSize =
@@ -70,17 +65,23 @@ public class AddProduct extends HttpServlet {
     HttpSession session = request.getSession();
     Users admin = MyUtils.getLoginedUser(session);
 
-    BufferedReader reader = request.getReader();
-    StringBuilder stringBuilder = new StringBuilder();
-    String line;
-    while ((line = reader.readLine()) != null) {
-      stringBuilder.append(line);
+    String productName = request.getParameter("name");
+    String description = request.getParameter("description");
+    double price = Double.parseDouble(request.getParameter("price"));
+    double quantity = Double.parseDouble(request.getParameter("quantity"));
+    double defaultWeight = Double.parseDouble(request.getParameter("defaultWeight"));
+    String supplier = request.getParameter("supplier");
+    String expirationDateStr = request.getParameter("expirationDate");
+
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+    // generate expiration date
+    Date expirationDate = null;
+    try {
+      expirationDate = formatter.parse(expirationDateStr);
+    } catch (ParseException e) {
+      e.printStackTrace();
     }
-
-    String jsonData = stringBuilder.toString();
-
-    ObjectMapper objectMapper = new ObjectMapper();
-    Products products = objectMapper.readValue(jsonData, Products.class);
 
     // value field from front end
 //    String productName = request.getParameter("ten_san_pham");
@@ -92,7 +93,14 @@ public class AddProduct extends HttpServlet {
 //    String providerString = request.getParameter("provider");
 //    Part filePart = request.getPart("upload_file_san_pham");
 //    String filePartString = filePart.getSubmittedFileName();
-
+    Products products = new Products();
+    products.setNameOfProduct(productName);
+    products.setDescription(description);
+    products.setPrice(price);
+    products.setWeight(quantity);
+    products.setWeightDefault(defaultWeight);
+    products.setProvider(Integer.parseInt(supplier));
+    products.setExpriredDay((java.sql.Date) expirationDate);
     // if user Enter correct data
     if (checkValidate(request, response, products.getNameOfProduct(), products.getDescription(),
         String.valueOf(products.getPrice()),
@@ -135,7 +143,7 @@ public class AddProduct extends HttpServlet {
       // generate date admin import product
       LocalDateTime localDateTime = LocalDateTime.now();
       Date dateImport = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
-
+      products.setDateOfImporting((java.sql.Date) dateImport);
       products.setAdminCreate(admin.getId());
       ProductService.getInstance().addNewProduct(products);
       response.sendRedirect(request.getContextPath() + "/admin/product/add-new-product");

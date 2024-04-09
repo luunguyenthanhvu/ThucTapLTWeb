@@ -313,11 +313,11 @@ function addNewProduct() {
   const isNhaCCValid = validateNhaCC();
   const isNgayHetHanValid = validateNgayHetHan();
   const isFileValid = validateFileUpload();
-  //
-  // if (!isTenSPValid || !isMoTaSPValid || !isGiaTienValid || !isKhoiLuongSPValid
-  //     || !isKgMacDinhSPValid || !isNhaCCValid || !isNgayHetHanValid || !isFileValid) {
-  //   console.log(imgList);
-  // } else {
+
+  if (!isTenSPValid || !isMoTaSPValid || !isGiaTienValid || !isKhoiLuongSPValid
+      || !isKgMacDinhSPValid || !isNhaCCValid || !isNgayHetHanValid || !isFileValid) {
+    console.log(imgList);
+  } else {
     const product = {
       name: tenSP.value,
       description: moTaSP.getData(),
@@ -329,21 +329,22 @@ function addNewProduct() {
       img: imgList
     };
 
-    fetch(`${window.context}/admin/product/add-new-product`, {
-      method: 'POST',
-      headers: {
-        'Content-Type' : 'application/json',
-      },
-      body: JSON.stringify(product),
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-    })
-    .catch(error => {
-      console.error('Their is some problem with your fetch operation', error)
-    })
-  // }
+    console.log(product);
+    // fetch(`${window.context}/admin/product/add-new-product`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type' : 'application/json',
+    //   },
+    //   body: JSON.stringify(product),
+    // })
+    // .then(response => {
+    //   if (!response.ok) {
+    //     throw new Error('Network response was not ok');
+    //   }
+    // })
+    // .catch(error => {
+    //   console.error('Their is some problem with your fetch operation', error)
+    // })
+  }
 }
 

@@ -1,9 +1,6 @@
 package nhom55.hcmuaf.services;
 
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,12 +31,9 @@ public class ProductService {
   }
 
   public void addNewProduct(Products products) {
-    LocalDateTime localDateTime = LocalDateTime.now();
-    Date dateImport = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
-
     int id = productDao.addNewProduct(products.getNameOfProduct(), products.getDescription(),
         products.getPrice(), products.getWeight(),
-        products.getWeightDefault(), dateImport,
+        products.getWeightDefault(), products.getDateOfImporting(),
         products.getExpriredDay(), products.getAdminCreate(), products.getProvider());
 
     List<Image> imageList = products.getImageList();
@@ -71,7 +65,7 @@ public class ProductService {
    * add more quantity
    */
   public boolean addMoreWeight(int id, double weight) {
-    return productDao.addMoreWeight(id,weight);
+    return productDao.addMoreWeight(id, weight);
   }
 
   /**
