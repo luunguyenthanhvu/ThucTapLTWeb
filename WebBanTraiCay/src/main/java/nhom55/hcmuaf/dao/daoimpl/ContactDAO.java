@@ -1,4 +1,4 @@
-package nhom55.hcmuaf.dao;
+package nhom55.hcmuaf.dao.daoimpl;
 
 import nhom55.hcmuaf.beans.Contact;
 import nhom55.hcmuaf.database.JDBIConnector;

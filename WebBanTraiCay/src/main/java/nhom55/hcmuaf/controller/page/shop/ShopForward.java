@@ -1,7 +1,7 @@
 package nhom55.hcmuaf.controller.page.shop;
 
 import nhom55.hcmuaf.beans.Products;
-import nhom55.hcmuaf.dao.ProductDaoImpl;
+import nhom55.hcmuaf.dao.daoimpl.ProductDaoImpl;
 import nhom55.hcmuaf.services.ShopService;
 
 import javax.servlet.*;
@@ -9,7 +9,6 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
-import nhom55.hcmuaf.util.MyUtils;
 
 @WebServlet(name = "ShopForward", value = "/page/shop/shop-forward")
 public class ShopForward extends HttpServlet {

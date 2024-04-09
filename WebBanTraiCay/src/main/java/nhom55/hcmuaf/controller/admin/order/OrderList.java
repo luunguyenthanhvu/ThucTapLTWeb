@@ -3,7 +3,7 @@ package nhom55.hcmuaf.controller.admin.order;
 import nhom55.hcmuaf.beans.Bills;
 import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.dao.BillDao;
-import nhom55.hcmuaf.dao.BillDaoImpl;
+import nhom55.hcmuaf.dao.daoimpl.BillDaoImpl;
 import nhom55.hcmuaf.util.MyUtils;
 
 import javax.servlet.*;

@@ -137,7 +137,7 @@ function showPage() {
 
 // validate for input
 var tenSP = document.getElementById("ten_sp");
-var moTaSP = document.getElementById("editor");
+var moTaSP = CKEDITOR.instances.editor;
 var giaTienSP = document.getElementById("giatien_sp");
 var khoiLuongSP = document.getElementById("kl_sp");
 var kgMacDinhSP = document.getElementById("kgMacDinh_sp");
@@ -202,18 +202,18 @@ function validateNgayHetHan() {
 }
 
 function validateFileUpload() {
-  // var inputUploadFile = document.getElementById("upfileAnh");
-  // var error = document.getElementById("upfileAnh_error");
-  //
-  // // Kiểm tra xem người dùng đã chọn file ảnh hay chưa
-  // if (inputUploadFile.files.length === 0) {
-  //   error.textContent = "Vui lòng chọn file ảnh.";
-  //   error.style.display = "block";
-  //   return false;
-  // } else {
-  //   error.style.display = "none";
-  //   return true;
-  // }
+  var inputUploadFile = document.getElementById("upfileAnh");
+  var error = document.getElementById("upfileAnh_error");
+
+  // Kiểm tra xem người dùng đã chọn file ảnh hay chưa
+  if (imgList.length === 0) {
+    error.textContent = "Vui lòng chọn file ảnh.";
+    error.style.display = "block";
+    return false;
+  } else {
+    error.style.display = "none";
+    return true;
+  }
 }
 
 function validateKhoiLuongSP() {
@@ -268,15 +268,22 @@ function validateGiaTienSP() {
 }
 
 function validateMoTaSP() {
-  var text = moTaSP.value;
-  var kyTuHopLe = /^(?=.*[^\s]).*$/;
+  var editor = CKEDITOR.instances.editor;
   var error = document.getElementById("mota_sp_error");
-  if (text.length == 0 || text == null) {
-    error.textContent = "Vui lòng nhập vào mô tả sản phầm.";
+
+  // Kiểm tra xem trình soạn thảo đã khởi tạo chưa
+  if (!editor) {
+    error.textContent = "Không thể truy cập trình soạn thảo.";
     error.style.display = "block";
     return false;
-  } else if (!kyTuHopLe.test(text)) {
-    error.textContent = "Mô tả sản phẩm chỉ chứa chữ cái, chữ số.";
+  }
+
+  // Lấy nội dung từ trình soạn thảo
+  var text = editor.getData().trim(); // Loại bỏ khoảng trắng ở đầu và cuối
+
+  // Kiểm tra xem có nội dung không
+  if (text.length === 0) {
+    error.textContent = "Vui lòng nhập vào mô tả sản phẩm.";
     error.style.display = "block";
     return false;
   } else {
@@ -285,9 +292,10 @@ function validateMoTaSP() {
   }
 }
 
+
 // add event to check input
 tenSP.addEventListener("blur", validateTenSP);
-moTaSP.addEventListener("blur", validateMoTaSP);
+// moTaSP.addEventListener("blur", validateMoTaSP);
 giaTienSP.addEventListener("blur", validateGiaTienSP);
 khoiLuongSP.addEventListener("blur", validateKhoiLuongSP);
 kgMacDinhSP.addEventListener("blur", validateKgMacDinhSP);
@@ -305,12 +313,37 @@ function addNewProduct() {
   const isNhaCCValid = validateNhaCC();
   const isNgayHetHanValid = validateNgayHetHan();
   const isFileValid = validateFileUpload();
+  //
+  // if (!isTenSPValid || !isMoTaSPValid || !isGiaTienValid || !isKhoiLuongSPValid
+  //     || !isKgMacDinhSPValid || !isNhaCCValid || !isNgayHetHanValid || !isFileValid) {
+  //   console.log(imgList);
+  // } else {
+    const product = {
+      name: tenSP.value,
+      description: moTaSP.getData(),
+      price: giaTienSP.value,
+      quantity: khoiLuongSP.value,
+      defaultWeight: kgMacDinhSP.value,
+      supplier: nhaCC.value,
+      expirationDate: ngayHetHan.value,
+      img: imgList
+    };
 
-  if (!isTenSPValid || !isMoTaSPValid || !isGiaTienValid || !isKhoiLuongSPValid
-      || !isKgMacDinhSPValid || !isNhaCCValid || !isNgayHetHanValid || !isFileValid) {
-    console.log(imgList);
-  } else {
-    // Các hành động khi form hợp lệ
-  }
+    fetch(`${window.context}/admin/product/add-new-product`, {
+      method: 'POST',
+      headers: {
+        'Content-Type' : 'application/json',
+      },
+      body: JSON.stringify(product),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+    })
+    .catch(error => {
+      console.error('Their is some problem with your fetch operation', error)
+    })
+  // }
 }
 

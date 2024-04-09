@@ -3,7 +3,7 @@ package nhom55.hcmuaf.services;
 import java.util.List;
 import nhom55.hcmuaf.beans.Providers;
 import nhom55.hcmuaf.dao.ProviderDao;
-import nhom55.hcmuaf.dao.ProviderDaoImpl;
+import nhom55.hcmuaf.dao.daoimpl.ProviderDaoImpl;
 
 public class ProviderService {
   private static ProviderService instance;

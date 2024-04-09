@@ -2,7 +2,7 @@ package nhom55.hcmuaf.controller.admin;
 
 import nhom55.hcmuaf.beans.Contact;
 import nhom55.hcmuaf.beans.Users;
-import nhom55.hcmuaf.dao.ContactDAO;
+import nhom55.hcmuaf.dao.daoimpl.ContactDAO;
 import nhom55.hcmuaf.util.MyUtils;
 
 import javax.servlet.*;

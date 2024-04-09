@@ -105,12 +105,6 @@ public class ProductValidator {
     if (description == null || description.trim().isEmpty()) {
       return "Vui lòng nhập vào mô tả sản phẩm.";
     }
-
-    // Adjust the regular expression to match your requirements
-    if (!description.matches("^[\\s\\S]*$")) {
-      return "Mô tả sản phẩm chỉ chứa chữ cái, chữ số.";
-    }
-
     return "";
   }
 }

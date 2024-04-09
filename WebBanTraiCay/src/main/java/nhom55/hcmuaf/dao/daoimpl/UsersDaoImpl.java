@@ -1,7 +1,7 @@
-package nhom55.hcmuaf.dao;
+package nhom55.hcmuaf.dao.daoimpl;
 
 import java.time.LocalDateTime;
-import nhom55.hcmuaf.log.AbsDAO;
+import nhom55.hcmuaf.dao.UsersDao;
 import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.database.JDBIConnector;
 

@@ -2,7 +2,7 @@ package nhom55.hcmuaf.controller.page.bill;
 
 import nhom55.hcmuaf.beans.BillDetails;
 import nhom55.hcmuaf.dao.BillDao;
-import nhom55.hcmuaf.dao.BillDaoImpl;
+import nhom55.hcmuaf.dao.daoimpl.BillDaoImpl;
 
 import javax.servlet.*;
 import javax.servlet.http.*;

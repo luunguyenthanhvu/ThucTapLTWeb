@@ -52,47 +52,23 @@
   /**
 * FilePond Custom Styles
 */
-  ul.filepond--list {
-    display: flex;
-  }
   .filepond {
     margin-top: 14px;
     margin-bottom: -4px;
+    min-height: 50px;
+    max-height: 500px;
+    display: flex;
+  }
+  .filepond--image-preview-wrapper {
+    display: flex;
   }
 
-  .filepond--root {
-    font-size: 11px;
+  .filepond--list {
+    display: flex !important;
+    flex-flow: row !important ;
   }
 
-  .filepond--drop-label {
-    font-size: 14px;
-    transform: translate3d(0px, 0px, 0);
-    opacity: 1;
-    color: black;
-  }
 
-  .filepond--drop-label {
-    color: #4c4e53;
-  }
-
-  .filepond--label-action {
-    -webkit-text-decoration-color: #babdc0;
-    text-decoration-color: #babdc0;
-  }
-
-  .filepond--panel-root {
-    border-radius: 2em;
-    background-color: #edf0f4;
-    height: 1em;
-  }
-
-  .filepond--item-panel {
-    background-color: #595e68;
-  }
-
-  .filepond--drip-blob {
-    background-color: #7f8a9a;
-  }
 </style>
 <body onload="myFunction()" style="margin:0;">
 <div id="loader"></div>
@@ -403,11 +379,11 @@
     </section>
 </div>
 </body>
+<script src="${pageContext.request.contextPath}/static/js/admin-js/add-product.js" charset="UTF-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://kit.fontawesome.com/4c38acb8c6.js" crossorigin="anonymous"></script>
 <script> var context = "${pageContext.request.contextPath}";</script>
-<script src="${pageContext.request.contextPath}/static/js/admin-js/add-product.js" charset="UTF-8"></script>
 </html>

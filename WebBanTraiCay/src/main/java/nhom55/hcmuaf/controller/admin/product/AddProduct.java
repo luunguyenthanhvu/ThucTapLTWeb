@@ -1,17 +1,24 @@
 package nhom55.hcmuaf.controller.admin.product;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
-import java.io.IOException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import nhom55.hcmuaf.beans.Products;
 import nhom55.hcmuaf.beans.Providers;
 import nhom55.hcmuaf.beans.Users;
@@ -19,6 +26,7 @@ import nhom55.hcmuaf.services.ProductService;
 import nhom55.hcmuaf.services.ProviderService;
 import nhom55.hcmuaf.util.MyUtils;
 import nhom55.hcmuaf.util.ProductValidator;
+import org.codehaus.jackson.map.ObjectMapper;
 
 @WebServlet(name = "AddProduct", value = "/admin/product/add-new-product")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 10, maxRequestSize =
@@ -61,61 +69,75 @@ public class AddProduct extends HttpServlet {
       throws ServletException, IOException {
     HttpSession session = request.getSession();
     Users admin = MyUtils.getLoginedUser(session);
+
+    BufferedReader reader = request.getReader();
+    StringBuilder stringBuilder = new StringBuilder();
+    String line;
+    while ((line = reader.readLine()) != null) {
+      stringBuilder.append(line);
+    }
+
+    String jsonData = stringBuilder.toString();
+
+    ObjectMapper objectMapper = new ObjectMapper();
+    Products products = objectMapper.readValue(jsonData, Products.class);
+
     // value field from front end
-    String productName = request.getParameter("ten_san_pham");
-    String description = request.getParameter("mo_ta_san_pham");
-    String priceString = request.getParameter("gia_tien_san_pham");
-    String weightQuantityString = request.getParameter("khoi_luong_san_pham");
-    String weightDefaultString = request.getParameter("so_kg_mac_dinh");
-    String expirationDateString = request.getParameter("ngay_het_han");
-    String providerString = request.getParameter("provider");
-    Part filePart = request.getPart("upload_file_san_pham");
-    String filePartString = filePart.getSubmittedFileName();
+//    String productName = request.getParameter("ten_san_pham");
+//    String description = request.getParameter("mo_ta_san_pham");
+//    String priceString = request.getParameter("gia_tien_san_pham");
+//    String weightQuantityString = request.getParameter("khoi_luong_san_pham");
+//    String weightDefaultString = request.getParameter("so_kg_mac_dinh");
+//    String expirationDateString = request.getParameter("ngay_het_han");
+//    String providerString = request.getParameter("provider");
+//    Part filePart = request.getPart("upload_file_san_pham");
+//    String filePartString = filePart.getSubmittedFileName();
 
     // if user Enter correct data
-    if (checkValidate(request, response, productName, description, priceString,
-        weightQuantityString,
-        weightDefaultString, expirationDateString, filePartString, providerString)) {
+    if (checkValidate(request, response, products.getNameOfProduct(), products.getDescription(),
+        String.valueOf(products.getPrice()),
+        String.valueOf(products.getWeight()),
+        String.valueOf(products.getWeightDefault()), String.valueOf(products.getExpriredDay()),
+        String.valueOf(products.getImageList()), String.valueOf(products.getProvider()))) {
       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
       // parse to valid value
-      double price = Double.parseDouble(priceString);
-      double weightQuantity = Double.parseDouble(weightQuantityString);
-      double weightDefault = Double.parseDouble(weightDefaultString);
-      int provider = Integer.parseInt(providerString);
+//      double price = Double.parseDouble(priceString);
+//      double weightQuantity = Double.parseDouble(weightQuantityString);
+//      double weightDefault = Double.parseDouble(weightDefaultString);
+//      int provider = Integer.parseInt(providerString);
 
       // generate expiration date
-      Date expirationDate = null;
-      try {
-        expirationDate = dateFormat.parse(expirationDateString);
-      } catch (ParseException e) {
-        e.printStackTrace();
-      }
-      // generate img name
-      String imgProduct = "";
+//      Date expirationDate = null;
+//      try {
+//        expirationDate = dateFormat.parse(expirationDateString);
+//      } catch (ParseException e) {
+//        e.printStackTrace();
+//      }
+//      // generate img name
+//      String imgProduct = "";
 
-      String fileName = filePart.getSubmittedFileName();
-      ServletContext servletContext = getServletContext();
-
-      File root = new File(servletContext.getRealPath("/") + "/data");
-
-      // create a new folder if not exists
-      if (!root.exists()) {
-        root.mkdirs();
-      }
-      // save img to data folder
-      for (Part part : request.getParts()) {
-        part.write(root.getAbsolutePath() + '/' + fileName);
-        imgProduct = "/data/" + fileName;
-      }
+//      String fileName = filePart.getSubmittedFileName();
+//      ServletContext servletContext = getServletContext();
+//
+//      File root = new File(servletContext.getRealPath("/") + "/data");
+//
+//      // create a new folder if not exists
+//      if (!root.exists()) {
+//        root.mkdirs();
+//      }
+//      // save img to data folder
+//      for (Part part : request.getParts()) {
+//        part.write(root.getAbsolutePath() + '/' + fileName);
+//        imgProduct = "/data/" + fileName;
+//      }
 
       // generate date admin import product
       LocalDateTime localDateTime = LocalDateTime.now();
       Date dateImport = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
 
-      ProductService.getInstance()
-          .addNewProduct(productName, description, price, weightQuantity, weightDefault, dateImport,
-              expirationDate, imgProduct, admin.getId(), provider);
+      products.setAdminCreate(admin.getId());
+      ProductService.getInstance().addNewProduct(products);
       response.sendRedirect(request.getContextPath() + "/admin/product/add-new-product");
 
       // user Enter Wrong data
@@ -149,7 +171,7 @@ public class AddProduct extends HttpServlet {
       String filePart, String provider) {
     // check validate
     String checkName = ProductValidator.validateTenSP(productName);
-    String checkDescription = ProductValidator.validateMoTaSP(description);
+    String checkDescription = "";
     String checkPrice = ProductValidator.validateGiaTienSP(price);
     String checkWeightQuantity = ProductValidator.validateKhoiLuongSP(weightQuantity);
     String checkWeightDefault = ProductValidator.validateKgMacDinhSP(weightDefault);

@@ -1,10 +1,7 @@
 package nhom55.hcmuaf.controller.page.login.google;
 
-import java.util.Properties;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.*;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.beans.cart.UserCart;
-import nhom55.hcmuaf.controller.page.login.google.properties.GoogleProperties;
-import nhom55.hcmuaf.dao.LoginDao;
+import nhom55.hcmuaf.dao.daoimpl.LoginDao;
 import nhom55.hcmuaf.services.UserService;
 import nhom55.hcmuaf.util.MyUtils;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.fluent.Request;
-import org.apache.http.client.fluent.Form;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.util.EntityUtils;
 
 
 @WebServlet(name = "LoginGoogleHandler", value = "/LoginGoogleHandler")
