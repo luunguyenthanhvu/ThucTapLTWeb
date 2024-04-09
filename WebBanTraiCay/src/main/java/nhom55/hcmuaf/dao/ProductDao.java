@@ -35,7 +35,7 @@ public interface ProductDao {
 //    Sắp xếp theo điều kiện filter (option: tên, giá, ngày nhập khẩu, filter:asc,desc)
   List<Products> sortByFilter(int index, int quantityDefault, String sortBy, String order);
 
-  void addNewProduct(String productName, String description, double price,
+  void addNewProduct(String productName, String description,String seasonalFruit,String sourceImport,String driedFruit, double price,
       double weightQuantity, double weightDefault, Date dateImport, Date expirationDate,
       String imgProduct, int adminId, int provider);
 

@@ -227,7 +227,7 @@
             <td><p style="color: red">${mo_ta_error}</p></td>
           </c:if>
           <tr>
-            <td><label for="upfileAnh">Trái cây theo mùa <span style="color: red">*</span></label></td>
+            <td><label >Trái cây theo mùa <span style="color: red">*</span></label></td>
             <td>
               <select style="width: 300px" id="seasonalFruitSelect" name="selectedSeasonalFruit">
                 <option value="spring">Mùa xuân</option>
@@ -239,7 +239,7 @@
           </tr>
           <td><br></td>
           <tr>
-            <td><label for="upfileAnh">Nguồn nhập<span style="color: red">*</span></label></td>
+            <td><label >Nguồn nhập<span style="color: red">*</span></label></td>
             <td>
               <select style="width: 300px" id="sourceImport" name="selectedSourceImport">
                 <option value="local">Trong nước</option>
@@ -249,7 +249,7 @@
           </tr>
           <td><br></td>
           <tr>
-            <td><label for="upfileAnh">Trái cây khô<span style="color: red">*</span></label></td>
+            <td><label >Trái cây khô<span style="color: red">*</span></label></td>
             <td>
               <select style="width: 300px" id="driedFruit" name="selectedDriedFruit">
                 <option value="dried">Có</option>
