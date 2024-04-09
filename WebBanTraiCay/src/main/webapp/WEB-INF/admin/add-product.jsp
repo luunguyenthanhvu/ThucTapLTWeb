@@ -233,7 +233,7 @@
             </li>
         </ul>
     </div>
-    <section class="home-section" style="height: 100%">
+    <section class="home-section" style="height: auto">
         <div class="home-content">
             <svg class='bx-menu' xmlns="http://www.w3.org/2000/svg" height="1em"
                  viewBox="0 0 448 512">
@@ -241,11 +241,11 @@
             </svg>
             <span class="text">Thêm sản phẩm</span>
         </div>
-        <div class="container">
+        <div class="container" style="height: auto">
             <!--       code thêm ở đây-->
-            <div class="form-sp">
-                <form id="FormThemSanPham" onsubmit="event.preventDefault();addNewProduct();"
-                      enctype="multipart/form-data">
+            <div class="form-sp" style="height: auto">
+                <form id="FormThemSanPham" action="${pageContext.request.contextPath}/admin/product/add-new-product" method="post"
+                      enctype="multipart/form-data" style="height: 100%">
                     <table style="border-collapse:collapse;
                 border: none; ">
                         <tr>
@@ -271,6 +271,38 @@
                         <c:if test="${not empty mo_ta_error}" >
                             <td><p style="color: red">${mo_ta_error}</p></td>
                         </c:if>
+                        <tr>
+                            <td><label >Trái cây theo mùa <span style="color: red">*</span></label></td>
+                            <td>
+                                <select style="width: 300px" id="seasonalFruitSelect" name="selectedSeasonalFruit">
+                                    <option value="spring">Mùa xuân</option>
+                                    <option value="summer">Mùa hạ</option>
+                                    <option value="fall">Mùa thu</option>
+                                    <option value="winter">Mùa đông</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <td><br></td>
+                        <tr>
+                            <td><label >Nguồn nhập<span style="color: red">*</span></label></td>
+                            <td>
+                                <select style="width: 300px" id="sourceImport" name="selectedSourceImport">
+                                    <option value="local">Trong nước</option>
+                                    <option value="imported">Ở nước ngoài</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <td><br></td>
+                        <tr>
+                            <td><label>Trái cây khô<span style="color: red">*</span></label></td>
+                            <td>
+                                <select style="width: 300px" id="driedFruit" name="selectedDriedFruit">
+                                    <option value="dried">Có</option>
+                                    <option value="">Không</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <td><br></td>
                         <tr>
                             <td><label for="giatien_sp">Giá tiền <span
                                     style="color: red">*</span></label></td>
@@ -361,18 +393,21 @@
                             </c:if>
                         </tr>
                     </table>
-                    <button type="submit" id="submit_product_btn">
-                        Lưu thông tin
-                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
-                            <path d="M288 109.3V352c0 17.7-14.3 32-32 32s-32-14.3-32-32V109.3l-73.4 73.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0l128 128c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L288 109.3zM64 352H192c0 35.3 28.7 64 64 64s64-28.7 64-64H448c35.3 0 64 28.7 64 64v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V416c0-35.3 28.7-64 64-64zM432 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z"/>
-                        </svg>
-                    </button>
-                    <button type="reset">
-                        Làm mới
-                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
-                            <path d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"/>
-                        </svg>
-                    </button>
+                    <div style=" display: flex; justify-content: center; align-items: center;">
+                        <button type="submit" id="submit_product_btn">
+                            Lưu thông tin
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                                <path d="M288 109.3V352c0 17.7-14.3 32-32 32s-32-14.3-32-32V109.3l-73.4 73.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0l128 128c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L288 109.3zM64 352H192c0 35.3 28.7 64 64 64s64-28.7 64-64H448c35.3 0 64 28.7 64 64v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V416c0-35.3 28.7-64 64-64zM432 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z"/>
+                            </svg>
+                        </button>
+                        <button type="reset">
+                            Làm mới
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                                <path d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+
                 </form>
             </div>
         </div>

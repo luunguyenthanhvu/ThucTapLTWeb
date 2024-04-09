@@ -71,7 +71,7 @@ public class ProductService {
    * add more quantity
    */
   public boolean addMoreWeight(int id, double weight) {
-    return productDao.addMoreWeight(id, weight);
+    return productDao.addMoreWeight(id,weight);
   }
 
   /**
@@ -82,3 +82,4 @@ public class ProductService {
   }
 
 }
+
