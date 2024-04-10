@@ -244,7 +244,7 @@
         <div class="container" style="height: auto">
             <!--       code thêm ở đây-->
             <div class="form-sp" style="height: auto">
-                <form id="FormThemSanPham" action="${pageContext.request.contextPath}/admin/product/add-new-product" method="post"
+                <form id="FormThemSanPham" action="javascript:void(0);" method="post"
                       enctype="multipart/form-data" style="height: 100%">
                     <table style="border-collapse:collapse;
                 border: none; ">
@@ -414,7 +414,7 @@
     </section>
 </div>
 </body>
-<script src="${pageContext.request.contextPath}/static/js/admin-js/add-product.js" charset="UTF-8"></script>
+<script src="${pageContext.request.contextPath}/static/js/admin-js/add-new-products.js" charset="UTF-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>

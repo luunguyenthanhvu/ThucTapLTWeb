@@ -3,24 +3,29 @@ package nhom55.hcmuaf.beans;
 import java.io.Serializable;
 
 public class Image implements Serializable {
-  private int id;
+  private String id;
   private int productId;
   private String url;
 
-  public Image(int id, String url, int productId) {
+  public Image(String id, String url, int productId) {
     this.id = id;
     this.url = url;
     this.productId = productId;
   }
 
+  public Image(String id, String url) {
+    this.id = id;
+    this.url = url;
+  }
+
   public Image() {
   }
 
-  public int getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(String id) {
     this.id = id;
   }
 

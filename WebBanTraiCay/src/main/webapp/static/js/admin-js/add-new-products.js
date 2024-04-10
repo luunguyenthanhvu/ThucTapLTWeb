@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 const api_key = "899244476586798";
 FilePond.registerPlugin(
@@ -303,6 +303,7 @@ nhaCC.addEventListener("blur", validateNhaCC);
 ngayHetHan.addEventListener("blur", validateNgayHetHan);
 upfileAnh.addEventListener("blur", validateFileUpload);
 
+$("#submit_product_btn").click(addNewProduct);
 // stop user send post to server
 function addNewProduct() {
   const isTenSPValid = validateTenSP();
@@ -329,22 +330,36 @@ function addNewProduct() {
       img: imgList
     };
 
-    console.log(product);
-    // fetch(`${window.context}/admin/product/add-new-product`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type' : 'application/json',
-    //   },
-    //   body: JSON.stringify(product),
-    // })
-    // .then(response => {
-    //   if (!response.ok) {
-    //     throw new Error('Network response was not ok');
-    //   }
-    // })
-    // .catch(error => {
-    //   console.error('Their is some problem with your fetch operation', error)
-    // })
+    console.log(product)
+
+    $.ajax({
+      type: 'POST',
+      url: `${window.context}/admin/product/add-new-product`,
+      data: {
+        action: 'add',
+        name: tenSP.value,
+        description: moTaSP.getData(),
+        price: giaTienSP.value,
+        quantity: khoiLuongSP.value,
+        defaultWeight: kgMacDinhSP.value,
+        supplier: nhaCC.value,
+        expirationDate: ngayHetHan.value,
+        img: imgList
+      },
+      success: function () {
+
+      },
+      error: function (error) {
+        console.log(error); // Xem nội dung của error object trong console
+
+        // Kiểm tra xem có thuộc tính message hay không
+        if (error.hasOwnProperty('message')) {
+          alert(error.message);
+        } else {
+          alert("Lỗi không xác định");
+        }
+      }
+    })
   }
 }
 

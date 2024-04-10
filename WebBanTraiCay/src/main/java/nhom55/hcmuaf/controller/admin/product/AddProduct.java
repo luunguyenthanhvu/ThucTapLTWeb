@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import nhom55.hcmuaf.beans.Image;
 import nhom55.hcmuaf.beans.Products;
 import nhom55.hcmuaf.beans.Providers;
 import nhom55.hcmuaf.beans.Users;
@@ -66,33 +68,40 @@ public class AddProduct extends HttpServlet {
     Users admin = MyUtils.getLoginedUser(session);
 
     String productName = request.getParameter("name");
+
+    System.out.println(productName);
     String description = request.getParameter("description");
     double price = Double.parseDouble(request.getParameter("price"));
     double quantity = Double.parseDouble(request.getParameter("quantity"));
     double defaultWeight = Double.parseDouble(request.getParameter("defaultWeight"));
     String supplier = request.getParameter("supplier");
     String expirationDateStr = request.getParameter("expirationDate");
+    String[] imgPublicIds = request.getParameterValues("img[public_id]");
+    String[] imgUrls = request.getParameterValues("img[url]");
+
+    // Process the image list
+    List<Image> imgList = new ArrayList<>();
+    if (imgPublicIds != null && imgUrls != null && imgPublicIds.length == imgUrls.length) {
+      for (int i = 0; i < imgPublicIds.length; i++) {
+        String publicId = imgPublicIds[i];
+        String url = imgUrls[i];
+        imgList.add(new Image(publicId, url));
+      }
+    }
+
+    System.out.println("img n");
+    imgList.forEach(img -> System.out.println(img));
 
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     // generate expiration date
     Date expirationDate = null;
-    try {
-      expirationDate = formatter.parse(expirationDateStr);
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
+//    try {
+//      expirationDate = formatter.parse(expirationDateStr);
+//    } catch (ParseException e) {
+//      e.printStackTrace();
+//    }
 
-    // value field from front end
-//    String productName = request.getParameter("ten_san_pham");
-//    String description = request.getParameter("mo_ta_san_pham");
-//    String priceString = request.getParameter("gia_tien_san_pham");
-//    String weightQuantityString = request.getParameter("khoi_luong_san_pham");
-//    String weightDefaultString = request.getParameter("so_kg_mac_dinh");
-//    String expirationDateString = request.getParameter("ngay_het_han");
-//    String providerString = request.getParameter("provider");
-//    Part filePart = request.getPart("upload_file_san_pham");
-//    String filePartString = filePart.getSubmittedFileName();
     Products products = new Products();
     products.setNameOfProduct(productName);
     products.setDescription(description);
@@ -102,49 +111,20 @@ public class AddProduct extends HttpServlet {
     products.setProvider(Integer.parseInt(supplier));
     products.setExpriredDay((java.sql.Date) expirationDate);
     // if user Enter correct data
-    if (checkValidate(request, response, products.getNameOfProduct(), products.getDescription(),
-        String.valueOf(products.getPrice()),
-        String.valueOf(products.getWeight()),
-        String.valueOf(products.getWeightDefault()), String.valueOf(products.getExpriredDay()),
-        String.valueOf(products.getImageList()), String.valueOf(products.getProvider()))) {
+//    checkValidate(request, response, products.getNameOfProduct(), products.getDescription(),
+//        String.valueOf(products.getPrice()),
+//        String.valueOf(products.getWeight()),
+//        String.valueOf(products.getWeightDefault()), String.valueOf(products.getExpriredDay()),
+//        String.valueOf(products.getImageList()), String.valueOf(products.getProvider()))
+    if (true) {
       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-      // parse to valid value
-//      double price = Double.parseDouble(priceString);
-//      double weightQuantity = Double.parseDouble(weightQuantityString);
-//      double weightDefault = Double.parseDouble(weightDefaultString);
-//      int provider = Integer.parseInt(providerString);
-
-      // generate expiration date
-//      Date expirationDate = null;
-//      try {
-//        expirationDate = dateFormat.parse(expirationDateString);
-//      } catch (ParseException e) {
-//        e.printStackTrace();
-//      }
-//      // generate img name
-//      String imgProduct = "";
-
-//      String fileName = filePart.getSubmittedFileName();
-//      ServletContext servletContext = getServletContext();
-//
-//      File root = new File(servletContext.getRealPath("/") + "/data");
-//
-//      // create a new folder if not exists
-//      if (!root.exists()) {
-//        root.mkdirs();
-//      }
-//      // save img to data folder
-//      for (Part part : request.getParts()) {
-//        part.write(root.getAbsolutePath() + '/' + fileName);
-//        imgProduct = "/data/" + fileName;
-//      }
 
       // generate date admin import product
       LocalDateTime localDateTime = LocalDateTime.now();
-      Date dateImport = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
-      products.setDateOfImporting((java.sql.Date) dateImport);
+      Date dateImport = null;
+      products.setDateOfImporting(null);
       products.setAdminCreate(admin.getId());
+      products.setImageList(imgList);
       ProductService.getInstance().addNewProduct(products);
       response.sendRedirect(request.getContextPath() + "/admin/product/add-new-product");
 
