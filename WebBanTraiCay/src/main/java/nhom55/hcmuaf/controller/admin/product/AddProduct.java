@@ -1,13 +1,16 @@
 package nhom55.hcmuaf.controller.admin.product;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -24,6 +27,9 @@ import nhom55.hcmuaf.services.ProductService;
 import nhom55.hcmuaf.services.ProviderService;
 import nhom55.hcmuaf.util.MyUtils;
 import nhom55.hcmuaf.util.ProductValidator;
+import org.codehaus.jackson.JsonProcessingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 
 @WebServlet(name = "AddProduct", value = "/admin/product/add-new-product")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 10, maxRequestSize =
@@ -76,21 +82,14 @@ public class AddProduct extends HttpServlet {
     double defaultWeight = Double.parseDouble(request.getParameter("defaultWeight"));
     String supplier = request.getParameter("supplier");
     String expirationDateStr = request.getParameter("expirationDate");
-    String[] imgPublicIds = request.getParameterValues("img[public_id]");
-    String[] imgUrls = request.getParameterValues("img[url]");
+    String imgListJSON = request.getParameter("imgList");
 
     // Process the image list
-    List<Image> imgList = new ArrayList<>();
-    if (imgPublicIds != null && imgUrls != null && imgPublicIds.length == imgUrls.length) {
-      for (int i = 0; i < imgPublicIds.length; i++) {
-        String publicId = imgPublicIds[i];
-        String url = imgUrls[i];
-        imgList.add(new Image(publicId, url));
-      }
-    }
+    Gson gson = new Gson();
+    String[] imgList = gson.fromJson(imgListJSON, String[].class);
 
-    System.out.println("img n");
-    imgList.forEach(img -> System.out.println(img));
+    System.out.println("img ne");
+    Arrays.stream(imgList).toList().forEach(s -> System.out.println(s));
 
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -124,7 +123,7 @@ public class AddProduct extends HttpServlet {
       Date dateImport = null;
       products.setDateOfImporting(null);
       products.setAdminCreate(admin.getId());
-      products.setImageList(imgList);
+     // products.setImageList(imgList);
       ProductService.getInstance().addNewProduct(products);
       response.sendRedirect(request.getContextPath() + "/admin/product/add-new-product");
 

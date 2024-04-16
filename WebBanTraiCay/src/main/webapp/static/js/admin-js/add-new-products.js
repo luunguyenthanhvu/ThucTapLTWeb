@@ -18,9 +18,61 @@ FilePond.create(
     {
       allowMultiple: true,
       acceptedFileTypes: ['image/*'],
-      maxFiles: 5,
+      maxFiles: 1,
       instantUpload: true,
-      labelIdle: 'Kéo và thả hoặc click để chọn tệp',
+      labelIdle: 'Chọn ảnh',
+      stylePanelLayout: 'stacked',
+      styleButtonProcessItemPosition: 'right'
+    }
+);
+
+FilePond.create(
+    document.querySelector('#upfileAnh1'),
+    {
+      allowMultiple: true,
+      acceptedFileTypes: ['image/*'],
+      maxFiles: 1,
+      instantUpload: true,
+      labelIdle: 'Chọn ảnh',
+      stylePanelLayout: 'stacked',
+      styleButtonProcessItemPosition: 'right'
+    }
+);
+
+FilePond.create(
+    document.querySelector('#upfileAnh2'),
+    {
+      allowMultiple: true,
+      acceptedFileTypes: ['image/*'],
+      maxFiles: 1,
+      instantUpload: true,
+      labelIdle: 'Chọn ảnh',
+      stylePanelLayout: 'stacked',
+      styleButtonProcessItemPosition: 'right'
+    }
+);
+
+FilePond.create(
+    document.querySelector('#upfileAnh3'),
+    {
+      allowMultiple: true,
+      acceptedFileTypes: ['image/*'],
+      maxFiles: 1,
+      instantUpload: true,
+      labelIdle: 'Chọn ảnh',
+      stylePanelLayout: 'stacked',
+      styleButtonProcessItemPosition: 'right'
+    }
+);
+
+FilePond.create(
+    document.querySelector('#upfileAnh4'),
+    {
+      allowMultiple: true,
+      acceptedFileTypes: ['image/*'],
+      maxFiles: 1,
+      instantUpload: true,
+      labelIdle: 'Chọn ảnh',
       stylePanelLayout: 'stacked',
       styleButtonProcessItemPosition: 'right'
     }
@@ -56,10 +108,7 @@ FilePond.setOptions({
             const response = JSON.parse(xhr.responseText);
             console.log(response);
             public_id = response.public_id;
-            imgList.push({
-              public_id: response.public_id,
-              url: response.url
-            });
+            imgList.push(response.url);
             FilePond.setOptions({
               fileMetadata: {
                 [file.id]: {
@@ -318,6 +367,7 @@ function addNewProduct() {
   if (!isTenSPValid || !isMoTaSPValid || !isGiaTienValid || !isKhoiLuongSPValid
       || !isKgMacDinhSPValid || !isNhaCCValid || !isNgayHetHanValid || !isFileValid) {
     console.log(imgList);
+    var imgListJSON = JSON.stringify(imgList);
   } else {
     const product = {
       name: tenSP.value,
@@ -327,7 +377,7 @@ function addNewProduct() {
       defaultWeight: kgMacDinhSP.value,
       supplier: nhaCC.value,
       expirationDate: ngayHetHan.value,
-      img: imgList
+      img: imgListJSON
     };
 
     console.log(product)
