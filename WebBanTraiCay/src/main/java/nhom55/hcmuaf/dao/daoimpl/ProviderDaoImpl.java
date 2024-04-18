@@ -1,11 +1,11 @@
-package nhom55.hcmuaf.dao;
+package nhom55.hcmuaf.dao.daoimpl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import nhom55.hcmuaf.beans.Products;
 import nhom55.hcmuaf.beans.Providers;
+import nhom55.hcmuaf.dao.ProviderDao;
 import nhom55.hcmuaf.database.JDBIConnector;
 
 public class ProviderDaoImpl implements ProviderDao {

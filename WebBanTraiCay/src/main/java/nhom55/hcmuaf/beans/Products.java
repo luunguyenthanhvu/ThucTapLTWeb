@@ -2,146 +2,202 @@ package nhom55.hcmuaf.beans;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 public class Products implements Serializable {
-    private int id;
-    private String nameOfProduct;
-    private String description;
-    private double price;
-    private double weight;
-    private double weightDefault;
-    private Date dateOfImporting;
-    private Date expriredDay;
-    private String img;
-    private int adminCreate;
-    private int provider;
 
-    public Products() {
+  private int id;
+  private String nameOfProduct;
+  private String description;
+  private double price;
+  private double weight;
+  private double weightDefault;
+  private Date dateOfImporting;
+  private Date expriredDay;
+  private String img;
+  private List<Image> imageList;
+  private int adminCreate;
+  private int provider;
 
-    }
+  public Products() {
 
-    public Products(int id, String nameOfProduct, String description, double price, double weight, double weightDefault, Date dateOfImporting, Date expriredDay, String img, int adminCreate, int provider) {
-        this.id = id;
-        this.nameOfProduct = nameOfProduct;
-        this.description = description;
-        this.price = price;
-        this.weight = weight;
-        this.weightDefault = weightDefault;
-        this.dateOfImporting = dateOfImporting;
-        this.expriredDay = expriredDay;
-        this.img = img;
-        this.adminCreate = adminCreate;
-        this.provider = provider;
-    }
+  }
 
-    public Products(int id, double weight) {
-        this.id = id;
-        this.weight = weight;
-    }
+  public Products(String nameOfProduct, String description, double price, double weight,
+      double weightDefault, int provider, Date expriredDay, List<Image> imageList) {
+    this.nameOfProduct = nameOfProduct;
+    this.description = description;
+    this.price = price;
+    this.weight = weight;
+    this.weightDefault = weightDefault;
+    this.provider = provider;
+    this.expriredDay = expriredDay;
+    this.imageList = imageList;
+  }
 
-    public int getId() {
-        return id;
-    }
+  public Products(int id, String nameOfProduct, String description, double price, double weight,
+      double weightDefault, Date expriredDay, List<Image> imageList, int provider) {
+    this.id = id;
+    this.nameOfProduct = nameOfProduct;
+    this.description = description;
+    this.price = price;
+    this.weight = weight;
+    this.weightDefault = weightDefault;
+    this.expriredDay = expriredDay;
+    this.imageList = imageList;
+    this.provider = provider;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public Products(int id, String nameOfProduct, String description, double price, double weight,
+      double weightDefault, Date dateOfImporting, Date expriredDay, String img,
+      List<Image> imageList,
+      int adminCreate, int provider) {
+    this.id = id;
+    this.nameOfProduct = nameOfProduct;
+    this.description = description;
+    this.price = price;
+    this.weight = weight;
+    this.weightDefault = weightDefault;
+    this.dateOfImporting = dateOfImporting;
+    this.expriredDay = expriredDay;
+    this.img = img;
+    this.imageList = imageList;
+    this.adminCreate = adminCreate;
+    this.provider = provider;
+  }
 
-    public String getNameOfProduct() {
-        return nameOfProduct;
-    }
+  public Products(int id, String nameOfProduct, String description, double price, double weight,
+      double weightDefault, Date dateOfImporting, Date expriredDay, String img, int adminCreate,
+      int provider) {
+    this.id = id;
+    this.nameOfProduct = nameOfProduct;
+    this.description = description;
+    this.price = price;
+    this.weight = weight;
+    this.weightDefault = weightDefault;
+    this.dateOfImporting = dateOfImporting;
+    this.expriredDay = expriredDay;
+    this.img = img;
+    this.adminCreate = adminCreate;
+    this.provider = provider;
+  }
 
-    public void setNameOfProduct(String nameOfProduct) {
-        this.nameOfProduct = nameOfProduct;
-    }
+  public Products(int id, double weight) {
+    this.id = id;
+    this.weight = weight;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public double getPrice() {
-        return price;
-    }
+  public String getNameOfProduct() {
+    return nameOfProduct;
+  }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+  public void setNameOfProduct(String nameOfProduct) {
+    this.nameOfProduct = nameOfProduct;
+  }
 
-    public double getWeight() {
-        return weight;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-    public double getWeightDefault() {
-        return weightDefault;
-    }
+  public double getPrice() {
+    return price;
+  }
 
-    public void setWeightDefault(double weightDefault) {
-        this.weightDefault = weightDefault;
-    }
+  public void setPrice(double price) {
+    this.price = price;
+  }
 
-    public Date getDateOfImporting() {
-        return dateOfImporting;
-    }
+  public double getWeight() {
+    return weight;
+  }
 
-    public void setDateOfImporting(Date dateOfImporting) {
-        this.dateOfImporting = dateOfImporting;
-    }
+  public void setWeight(double weight) {
+    this.weight = weight;
+  }
 
-    public Date getExpriredDay() {
-        return expriredDay;
-    }
+  public double getWeightDefault() {
+    return weightDefault;
+  }
 
-    public void setExpriredDay(Date expriredDay) {
-        this.expriredDay = expriredDay;
-    }
+  public void setWeightDefault(double weightDefault) {
+    this.weightDefault = weightDefault;
+  }
 
-    public String getImg() {
-        return img;
-    }
+  public Date getDateOfImporting() {
+    return dateOfImporting;
+  }
 
-    public void setImg(String img) {
-        this.img = img;
-    }
+  public void setDateOfImporting(Date dateOfImporting) {
+    this.dateOfImporting = dateOfImporting;
+  }
 
-    public int getAdminCreate() {
-        return adminCreate;
-    }
+  public Date getExpriredDay() {
+    return expriredDay;
+  }
 
-    public void setAdminCreate(int adminCreate) {
-        this.adminCreate = adminCreate;
-    }
+  public void setExpriredDay(Date expriredDay) {
+    this.expriredDay = expriredDay;
+  }
 
-    public int getProvider() {
-        return provider;
-    }
+  public String getImg() {
+    return img;
+  }
 
-    public void setProvider(int provider) {
-        this.provider = provider;
-    }
+  public void setImg(String img) {
+    this.img = img;
+  }
 
-    @Override
-    public String toString() {
-        return "Products{" +
-                "id=" + id +
-                ", nameOfProduct='" + nameOfProduct + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", weight=" + weight +
-                ", weightDefault=" + weightDefault +
-                ", dateOfImporting=" + dateOfImporting +
-                ", expriredDay=" + expriredDay +
-                ", img='" + img + '\'' +
-                ", adminCreate=" + adminCreate +
-                ", provider=" + provider +
-                '}';
-    }
+  public int getAdminCreate() {
+    return adminCreate;
+  }
+
+  public void setAdminCreate(int adminCreate) {
+    this.adminCreate = adminCreate;
+  }
+
+  public int getProvider() {
+    return provider;
+  }
+
+  public void setProvider(int provider) {
+    this.provider = provider;
+  }
+
+  public List<Image> getImageList() {
+    return imageList;
+  }
+
+  public void setImageList(List<Image> imageList) {
+    this.imageList = imageList;
+  }
+
+  @Override
+  public String toString() {
+    return "Products{" +
+        "id=" + id +
+        ", nameOfProduct='" + nameOfProduct + '\'' +
+        ", description='" + description + '\'' +
+        ", price=" + price +
+        ", weight=" + weight +
+        ", weightDefault=" + weightDefault +
+        ", dateOfImporting=" + dateOfImporting +
+        ", expriredDay=" + expriredDay +
+        ", img='" + img + '\'' +
+        ", adminCreate=" + adminCreate +
+        ", provider=" + provider +
+        '}';
+  }
 
 }

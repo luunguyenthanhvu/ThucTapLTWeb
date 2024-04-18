@@ -13,6 +13,13 @@
   <url>http://maven.apache.org</url>
 
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.json/json -->
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20240303</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/fluent-hc -->
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>

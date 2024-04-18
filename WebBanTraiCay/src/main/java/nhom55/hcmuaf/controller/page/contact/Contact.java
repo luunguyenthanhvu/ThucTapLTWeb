@@ -1,7 +1,7 @@
 package nhom55.hcmuaf.controller.page.contact;
 
 import nhom55.hcmuaf.beans.Users;
-import nhom55.hcmuaf.dao.ContactDAO;
+import nhom55.hcmuaf.dao.daoimpl.ContactDAO;
 import nhom55.hcmuaf.util.ContactValidator;
 import nhom55.hcmuaf.util.MyUtils;
 

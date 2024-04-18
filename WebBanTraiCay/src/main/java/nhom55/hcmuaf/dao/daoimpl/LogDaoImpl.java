@@ -1,10 +1,11 @@
-package nhom55.hcmuaf.dao;
+package nhom55.hcmuaf.dao.daoimpl;
 
 import java.util.List;
+import nhom55.hcmuaf.dao.LogDao;
 import nhom55.hcmuaf.database.JDBIConnector;
 import nhom55.hcmuaf.log.Log;
 
-public class LogDaoImpl<T> implements LogDao<T>{
+public class LogDaoImpl<T> implements LogDao<T> {
 
   @Override
   public void insertLog(T model) {

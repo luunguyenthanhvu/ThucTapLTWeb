@@ -1,7 +1,7 @@
 package nhom55.hcmuaf.services;
 
 import nhom55.hcmuaf.dao.UsersDao;
-import nhom55.hcmuaf.dao.UsersDaoImpl;
+import nhom55.hcmuaf.dao.daoimpl.UsersDaoImpl;
 
 public class AdminService {
     private static AdminService instance;

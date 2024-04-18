@@ -440,6 +440,7 @@
   document.getElementById('${pageId}').classList.add("active")
 </script>
 </body>
+<script> var context = "${pageContext.request.contextPath}";</script>
 <script src="https://kit.fontawesome.com/4c38acb8c6.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/static/js/admin-js/admin-product-list.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>

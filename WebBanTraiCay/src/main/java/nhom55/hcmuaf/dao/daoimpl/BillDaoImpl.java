@@ -1,9 +1,10 @@
-package nhom55.hcmuaf.dao;
+package nhom55.hcmuaf.dao.daoimpl;
 
 
 import nhom55.hcmuaf.beans.BillDetails;
 import nhom55.hcmuaf.beans.Bills;
 import nhom55.hcmuaf.beans.Products;
+import nhom55.hcmuaf.dao.BillDao;
 import nhom55.hcmuaf.database.JDBIConnector;
 
 import java.time.LocalDateTime;

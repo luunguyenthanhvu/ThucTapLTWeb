@@ -20,7 +20,7 @@ import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.beans.cart.Cart;
 import nhom55.hcmuaf.beans.cart.CartProduct;
 import nhom55.hcmuaf.dao.BillDao;
-import nhom55.hcmuaf.dao.BillDaoImpl;
+import nhom55.hcmuaf.dao.daoimpl.BillDaoImpl;
 import nhom55.hcmuaf.sendmail.MailProperties;
 import nhom55.hcmuaf.util.MyUtils;
 import nhom55.hcmuaf.util.OrderValidator;

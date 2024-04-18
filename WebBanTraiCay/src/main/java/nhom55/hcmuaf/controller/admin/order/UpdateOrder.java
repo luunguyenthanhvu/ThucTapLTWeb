@@ -3,16 +3,16 @@ package nhom55.hcmuaf.controller.admin.order;
 
 import nhom55.hcmuaf.beans.BillDetails;
 import nhom55.hcmuaf.beans.Bills;
-import nhom55.hcmuaf.beans.Products;
 import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.dao.*;
+import nhom55.hcmuaf.dao.daoimpl.BillDaoImpl;
+import nhom55.hcmuaf.dao.daoimpl.UsersDaoImpl;
 import nhom55.hcmuaf.util.MyUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "UpdateOrder", value = "/admin/provider/updateOrder")

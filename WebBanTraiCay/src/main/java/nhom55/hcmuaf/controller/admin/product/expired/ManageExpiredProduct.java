@@ -2,7 +2,7 @@ package nhom55.hcmuaf.controller.admin.product.expired;
 
 import nhom55.hcmuaf.beans.Products;
 import nhom55.hcmuaf.beans.Users;
-import nhom55.hcmuaf.dao.ProductDaoImpl;
+import nhom55.hcmuaf.dao.daoimpl.ProductDaoImpl;
 import nhom55.hcmuaf.services.ShopService;
 import nhom55.hcmuaf.util.MyUtils;
 

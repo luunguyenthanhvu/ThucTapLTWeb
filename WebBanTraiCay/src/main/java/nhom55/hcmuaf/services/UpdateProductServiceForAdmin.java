@@ -2,7 +2,7 @@ package nhom55.hcmuaf.services;
 
 
 import nhom55.hcmuaf.dao.ProductDao;
-import nhom55.hcmuaf.dao.ProductDaoImpl;
+import nhom55.hcmuaf.dao.daoimpl.ProductDaoImpl;
 
 import java.sql.Date;
 

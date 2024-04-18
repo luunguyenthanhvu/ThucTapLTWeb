@@ -2,7 +2,7 @@ package nhom55.hcmuaf.services;
 
 import nhom55.hcmuaf.beans.RegisterBean;
 import nhom55.hcmuaf.dao.UsersDao;
-import nhom55.hcmuaf.dao.UsersDaoImpl;
+import nhom55.hcmuaf.dao.daoimpl.UsersDaoImpl;
 import nhom55.hcmuaf.sendmail.MailProperties;
 
 import javax.mail.Message;

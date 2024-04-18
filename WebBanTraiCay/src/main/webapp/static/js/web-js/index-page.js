@@ -2,7 +2,7 @@
 function addToCart(productId) {
   $.ajax({
     type: 'POST',
-    url: '/page/cart/add-cart',
+    url: `${window.context}/page/cart/add-cart`,
     // value mặc định là 1
     data: {
       productId: productId,
@@ -33,7 +33,7 @@ function addToCart(productId) {
 function updateCartAmount() {
   $.ajax({
     type: 'GET',
-    url: '/page/cart/get-cart-amount',
+    url: `${window.context}/page/cart/get-cart-amount`,
     data: {},
     success: function (response) {
       $(".cart-total-amount").html(response);
