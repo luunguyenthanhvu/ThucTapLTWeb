@@ -688,6 +688,6 @@
   }
 
 </script>
-
+<script> var context = "${pageContext.request.contextPath}";</script>
 </body>
 </html>

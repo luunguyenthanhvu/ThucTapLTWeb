@@ -4,7 +4,7 @@ function addToCart(productId) {
   const quantity = parseInt($('#quantity').val());
   $.ajax({
     type: 'POST',
-    url: '/page/cart/add-cart',
+    url: `${window.context}/page/cart/add-cart`,
     data: {
       productId: productId,
       quantity: quantity
@@ -34,7 +34,7 @@ function addToCart(productId) {
 function updateCartAmount() {
   $.ajax({
     type: 'GET',
-    url: '/page/cart/get-cart-amount',
+    url: `${window.context}/page/cart/get-cart-amount`,
     data: {},
     success: function (response) {
       $(".cart-total-amount").html(response);

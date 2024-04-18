@@ -19,7 +19,7 @@ public class UsersDaoImpl implements UsersDao {
     public Users getUserByEmail(String email) {
         List<Users> users = JDBIConnector.get().withHandle(h ->
                 h.createQuery(
-                                "SELECT * FROM Users WHERE email = ?")
+                                "SELECT * FROM users WHERE email = ?")
                         .bind(0, email)
                         .mapToBean(Users.class)
                         .stream()
@@ -49,7 +49,7 @@ public class UsersDaoImpl implements UsersDao {
         // check if exist
         List<Users> users = JDBIConnector.get().withHandle(h ->
                 h.createQuery(
-                                "SELECT id,username,email,phoneNumber,address,status,img,dateOfBirth,sexual FROM Users WHERE email = ?")
+                                "SELECT id,username,email,phoneNumber,address,status,img,dateOfBirth,sexual FROM users WHERE email = ?")
                         .bind(0, email)
                         .mapToBean(Users.class)
                         .stream()
@@ -62,7 +62,7 @@ public class UsersDaoImpl implements UsersDao {
         // add new user
         return JDBIConnector.get().withHandle(handle -> {
             handle.createUpdate(
-                            "INSERT INTO Users (username, password, hash, email, phoneNumber, address, status, creationTime) VALUES (:username, :password, :hash, :email, :phoneNumber, :address, :status, :creationTime)")
+                            "INSERT INTO users (username, password, hash, email, phoneNumber, address, status, creationTime) VALUES (:username, :password, :hash, :email, :phoneNumber, :address, :status, :creationTime)")
                     .bind("username", username)
                     .bind("password", password)
                     .bind("hash", hash)
@@ -81,7 +81,7 @@ public class UsersDaoImpl implements UsersDao {
         // check if exist
         List<Users> users = JDBIConnector.get().withHandle(h ->
                 h.createQuery(
-                                "SELECT id,username,email,phoneNumber,address,status,img,dateOfBirth,sexual FROM Users WHERE email = ?")
+                                "SELECT id,username,email,phoneNumber,address,status,img,dateOfBirth,sexual FROM users WHERE email = ?")
                         .bind(0, email)
                         .mapToBean(Users.class)
                         .stream()
@@ -94,7 +94,7 @@ public class UsersDaoImpl implements UsersDao {
         // add new user
         return JDBIConnector.get().withHandle(handle -> {
             handle.createUpdate(
-                            "INSERT INTO Users (username, email, status, img) VALUES (:username, :email, :status, :img)")
+                            "INSERT INTO users (username, email, status, img) VALUES (:username, :email, :status, :img)")
                     .bind("username", username)
                     .bind("email", email)
                     .bind("status", 1)
@@ -109,7 +109,7 @@ public class UsersDaoImpl implements UsersDao {
         // check is exit
         List<Users> users = JDBIConnector.get().withHandle(h ->
                 h.createQuery(
-                                "SELECT email, hash, status  FROM Users WHERE email = :email AND status = 0")
+                                "SELECT email, hash, status  FROM users WHERE email = :email AND status = 0")
                         .bind("email", email)
                         .mapToBean(Users.class)
                         .stream()
@@ -120,7 +120,7 @@ public class UsersDaoImpl implements UsersDao {
         }
         Users user = users.get(0);
         return JDBIConnector.get().withHandle(handle -> {
-            handle.createUpdate("update Users set creationTime = :creationTime where email = :email ")
+            handle.createUpdate("update users set creationTime = :creationTime where email = :email ")
                     .bind("creationTime", LocalDateTime.now())
                     .bind("email", email)
                     .execute();
@@ -138,7 +138,7 @@ public class UsersDaoImpl implements UsersDao {
         // check is exit
         List<Users> users = JDBIConnector.get().withHandle(h ->
                 h.createQuery(
-                                "SELECT email, hash, status  FROM Users WHERE email = :email AND hash = :hash AND status = 0")
+                                "SELECT email, hash, status  FROM users WHERE email = :email AND hash = :hash AND status = 0")
                         .bind("email", email)
                         .bind("hash", hash)
                         .mapToBean(Users.class)
@@ -150,7 +150,7 @@ public class UsersDaoImpl implements UsersDao {
         }
         Users user = users.get(0);
         return JDBIConnector.get().withHandle(handle -> {
-            handle.createUpdate("update Users set status = 1 where email = :email AND hash = :hash ")
+            handle.createUpdate("update users set status = 1 where email = :email AND hash = :hash ")
                     .bind("hash", hash)
                     .bind("email", email)
                     .execute();
@@ -167,7 +167,7 @@ public class UsersDaoImpl implements UsersDao {
     @Override
     public String updateNewPassWord(String email, String password) {
         List<Users> users = JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT email, hash, status  FROM Users WHERE email = :email")
+                h.createQuery("SELECT email, hash, status  FROM users WHERE email = :email")
                         .bind("email", email)
                         .mapToBean(Users.class)
                         .stream()
@@ -178,7 +178,7 @@ public class UsersDaoImpl implements UsersDao {
         }
         Users user = users.get(0);
         return JDBIConnector.get().withHandle(handle -> {
-            handle.createUpdate("update Users set password = :password where email = :email")
+            handle.createUpdate("update users set password = :password where email = :email")
                     .bind("password", password)
                     .bind("email", email)
                     .execute();
@@ -193,7 +193,7 @@ public class UsersDaoImpl implements UsersDao {
         // check if exist
         List<Users> users = JDBIConnector.get().withHandle(h ->
                 h.createQuery(
-                                "SELECT id,username,email,phoneNumber,address,status,img,dateOfBirth,sexual FROM Users WHERE email = ?")
+                                "SELECT id,username,email,phoneNumber,address,status,img,dateOfBirth,sexual FROM users WHERE email = ?")
                         .bind(0, email)
                         .mapToBean(Users.class)
                         .stream()
@@ -206,7 +206,7 @@ public class UsersDaoImpl implements UsersDao {
         // add new user
         return JDBIConnector.get().withHandle(handle -> {
             handle.createUpdate(
-                            "INSERT INTO Users (username, password, hash, email, phoneNumber, address, status,img,dateOfBirth,sexual,role) VALUES (:username, :password, :hash, :email, :phoneNumber, :address, :status, :img, :dateOfBirth, :sexual, :role)")
+                            "INSERT INTO users (username, password, hash, email, phoneNumber, address, status,img,dateOfBirth,sexual,role) VALUES (:username, :password, :hash, :email, :phoneNumber, :address, :status, :img, :dateOfBirth, :sexual, :role)")
                     .bind("username", username)
                     .bind("password", password)
                     .bind("hash", hash)
@@ -260,7 +260,7 @@ public class UsersDaoImpl implements UsersDao {
     @Override
     public boolean checkPassUser(int id, String password) {
         Users user = JDBIConnector.get().withHandle(handle ->
-                handle.createQuery("SELECT * FROM Users WHERE id = :id AND password = :password")
+                handle.createQuery("SELECT * FROM users WHERE id = :id AND password = :password")
                         .bind("id", id)
                         .bind("password", password)
                         .mapToBean(Users.class)
@@ -279,7 +279,7 @@ public class UsersDaoImpl implements UsersDao {
                               int newRole) {
         JDBIConnector.get().withHandle(handle ->
                 handle.createUpdate(
-                                "UPDATE Users SET username = :username, email = :email, address = :address, phoneNumber = :phoneNumber, dateOfBirth = :dateOfBirth, sexual = :sexual, status = :status, role = :role WHERE id = :id")
+                                "UPDATE users SET username = :username, email = :email, address = :address, phoneNumber = :phoneNumber, dateOfBirth = :dateOfBirth, sexual = :sexual, status = :status, role = :role WHERE id = :id")
                         .bind("id", userId)
                         .bind("username", newUserName)
                         .bind("email", newEmail)
@@ -305,7 +305,7 @@ public class UsersDaoImpl implements UsersDao {
                                          String newSexual) {
         boolean updateSuccess = JDBIConnector.get().withHandle(handle -> {
             int updateResult = handle.createUpdate(
-                            "UPDATE Users SET username = :username, email = :email, address = :address, phoneNumber = :phoneNumber, dateOfBirth = :dateOfBirth , img = :img, sexual = :sexual WHERE id = :id")
+                            "UPDATE users SET username = :username, email = :email, address = :address, phoneNumber = :phoneNumber, dateOfBirth = :dateOfBirth , img = :img, sexual = :sexual WHERE id = :id")
                     .bind("id", userId)
                     .bind("username", newUserName)
                     .bind("email", newEmail)
@@ -327,7 +327,7 @@ public class UsersDaoImpl implements UsersDao {
      */
     public String updatePassWordUser(int id, String password) {
         Users user = JDBIConnector.get().withHandle(handle ->
-                handle.createQuery("SELECT id FROM Users WHERE id = :id")
+                handle.createQuery("SELECT id FROM users WHERE id = :id")
                         .bind("id", id)
                         .mapToBean(Users.class)
                         .findOne()

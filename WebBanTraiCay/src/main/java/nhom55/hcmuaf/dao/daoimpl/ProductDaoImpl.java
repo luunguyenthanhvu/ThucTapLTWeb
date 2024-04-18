@@ -33,7 +33,7 @@ public class ProductDaoImpl implements ProductDao {
   public List<Products> getProduct() {
     return JDBIConnector.get().withHandle(h ->
         h.createQuery(
-                "SELECT * FROM Products where expriredDay >=  CURDATE() ORDER BY dateOfImporting ASC LIMIT 8")
+                "SELECT * FROM products where expriredDay >=  CURDATE() ORDER BY dateOfImporting ASC LIMIT 8")
             .mapToBean(Products.class)
             .stream()
             .collect(Collectors.toList())
