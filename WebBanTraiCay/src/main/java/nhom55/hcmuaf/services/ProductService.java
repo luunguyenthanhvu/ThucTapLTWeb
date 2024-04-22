@@ -1,6 +1,7 @@
 package nhom55.hcmuaf.services;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,14 +31,14 @@ public class ProductService {
     return instance;
   }
 
-  public void addNewProduct(Products products) {
+  public void addNewProduct(Products products, List<String> imgList) {
     int id = productDao.addNewProduct(products.getNameOfProduct(), products.getDescription(),
         products.getPrice(), products.getWeight(),
         products.getWeightDefault(), products.getDateOfImporting(),
         products.getExpriredDay(), products.getAdminCreate(), products.getProvider());
 
-    List<Image> imageList = products.getImageList();
-    imageList.forEach(img -> img.setProductId(id));
+    List<Image> imageList = new ArrayList<>();
+    imgList.forEach(img -> imageList.add(new Image(id, img)));
     imageDao.addImageProduct(imageList);
   }
 

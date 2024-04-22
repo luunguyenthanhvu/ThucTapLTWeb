@@ -1,16 +1,10 @@
 package nhom55.hcmuaf.controller.admin.product;
 
-import com.google.gson.Gson;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -19,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import nhom55.hcmuaf.beans.Image;
 import nhom55.hcmuaf.beans.Products;
 import nhom55.hcmuaf.beans.Providers;
 import nhom55.hcmuaf.beans.Users;
@@ -27,14 +20,11 @@ import nhom55.hcmuaf.services.ProductService;
 import nhom55.hcmuaf.services.ProviderService;
 import nhom55.hcmuaf.util.MyUtils;
 import nhom55.hcmuaf.util.ProductValidator;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
 
 @WebServlet(name = "AddProduct", value = "/admin/product/add-new-product")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 10, maxRequestSize =
     1024 * 1024 * 100)
-public class AddProduct extends HttpServlet {
+public class AddProductController extends HttpServlet {
 
   /**
    * @param request  an {@link HttpServletRequest} object that contains the request the client has
@@ -77,54 +67,35 @@ public class AddProduct extends HttpServlet {
 
     System.out.println(productName);
     String description = request.getParameter("description");
-    double price = Double.parseDouble(request.getParameter("price"));
-    double quantity = Double.parseDouble(request.getParameter("quantity"));
-    double defaultWeight = Double.parseDouble(request.getParameter("defaultWeight"));
+    String price = request.getParameter("price");
+    String quantity = request.getParameter("quantity");
+    String defaultWeight = request.getParameter("defaultWeight");
     String supplier = request.getParameter("supplier");
     String expirationDateStr = request.getParameter("expirationDate");
-    String imgListJSON = request.getParameter("imgList");
+    String img = request.getParameter("imgList");
+    String imgList = request.getParameter("supImages");
 
-    // Process the image list
-    Gson gson = new Gson();
-    String[] imgList = gson.fromJson(imgListJSON, String[].class);
-
-    System.out.println("img ne");
-    Arrays.stream(imgList).toList().forEach(s -> System.out.println(s));
-
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-    // generate expiration date
-    Date expirationDate = null;
-//    try {
-//      expirationDate = formatter.parse(expirationDateStr);
-//    } catch (ParseException e) {
-//      e.printStackTrace();
-//    }
-
-    Products products = new Products();
-    products.setNameOfProduct(productName);
-    products.setDescription(description);
-    products.setPrice(price);
-    products.setWeight(quantity);
-    products.setWeightDefault(defaultWeight);
-    products.setProvider(Integer.parseInt(supplier));
-    products.setExpriredDay((java.sql.Date) expirationDate);
     // if user Enter correct data
-//    checkValidate(request, response, products.getNameOfProduct(), products.getDescription(),
-//        String.valueOf(products.getPrice()),
-//        String.valueOf(products.getWeight()),
-//        String.valueOf(products.getWeightDefault()), String.valueOf(products.getExpriredDay()),
-//        String.valueOf(products.getImageList()), String.valueOf(products.getProvider()))
-    if (true) {
+    if (checkValidate(request, response, productName, description, price, quantity, defaultWeight,
+        expirationDateStr, img, supplier)) {
       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
+      List<String> imageList = List.of(imgList.split(","));
       // generate date admin import product
       LocalDateTime localDateTime = LocalDateTime.now();
+      Products products = new Products();
+      products.setNameOfProduct(productName);
+      products.setDescription(description);
+      products.setPrice(Double.valueOf(price));
+      products.setWeight(Double.valueOf(quantity));
+      products.setWeightDefault(Double.valueOf(defaultWeight));
+      products.setProvider(Integer.parseInt(supplier));
+      products.setExpriredDay(java.sql.Date.valueOf(expirationDateStr));
+      products.setImg(img);
       Date dateImport = null;
       products.setDateOfImporting(null);
       products.setAdminCreate(admin.getId());
-     // products.setImageList(imgList);
-      ProductService.getInstance().addNewProduct(products);
+      // products.setImageList(imgList);
+      ProductService.getInstance().addNewProduct(products, imageList);
       response.sendRedirect(request.getContextPath() + "/admin/product/add-new-product");
 
       // user Enter Wrong data
@@ -153,9 +124,8 @@ public class AddProduct extends HttpServlet {
    * @return
    */
   private static boolean checkValidate(HttpServletRequest request, HttpServletResponse response,
-      String productName, String description, String price,
-      String weightQuantity, String weightDefault, String expirationDate,
-      String filePart, String provider) {
+      String productName, String description, String price, String weightQuantity,
+      String weightDefault, String expirationDate, String filePart, String provider) {
     // check validate
     String checkName = ProductValidator.validateTenSP(productName);
     String checkDescription = "";
