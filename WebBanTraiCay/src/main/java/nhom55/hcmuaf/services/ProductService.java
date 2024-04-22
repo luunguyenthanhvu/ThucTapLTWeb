@@ -33,10 +33,11 @@ public class ProductService {
 
   public void addNewProduct(Products products, List<String> imgList) {
     int id = productDao.addNewProduct(products.getNameOfProduct(), products.getDescription(),
-        products.getPrice(), products.getWeight(),
-        products.getWeightDefault(), products.getDateOfImporting(),
-        products.getExpriredDay(), products.getAdminCreate(), products.getProvider());
-
+        products.getPrice(), products.getWeight(), products.getWeightDefault(),
+        products.getDateOfImporting(), products.getExpriredDay(), products.getAdminCreate(),
+        products.getProvider(), products.getImg(), products.getSeasonalFruit(),
+        products.getImportedFruit(), products.getDriedFruit());
+    System.out.println("Id của sản phẩm nè:" + id);
     List<Image> imageList = new ArrayList<>();
     imgList.forEach(img -> imageList.add(new Image(id, img)));
     imageDao.addImageProduct(imageList);

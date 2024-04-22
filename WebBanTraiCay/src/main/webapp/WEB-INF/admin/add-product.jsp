@@ -285,6 +285,12 @@
                                            class="filepond upload-img"
                                            name="filepond" multiple data-allow-reorder="true"
                                            data-max-file-size="3MB">
+
+                                    <p class="error" style="color: red; display: none"
+                                       id="upfileAnh_error">
+                                        <c:if test="${not empty file_anh_error}">
+                                    <p style="color: red">${file_anh_error}</p></td>
+                                    </c:if>
                                 </div>
                             </div>
 
@@ -451,14 +457,6 @@
                                 <c:if test="${not empty ngay_het_han_error}">
                                     <td><p style="color: red">${ngay_het_han_error}</p></td>
                                 </c:if>
-                                <tr>
-                                    <td></td>
-                                    <td><p class="error" style="color: red; display: none"
-                                           id="upfileAnh_error"></td>
-                                    <c:if test="${not empty file_anh_error}">
-                                        <td><p style="color: red">${file_anh_error}</p></td>
-                                    </c:if>
-                                </tr>
                             </table>
                             <div style=" display: flex; justify-content: center; align-items: center;">
                                 <button type="submit" id="submit_product_btn">
@@ -484,6 +482,7 @@
     </section>
 </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="${pageContext.request.contextPath}/static/js/admin-js/add-new-products2.js"
         charset="UTF-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"

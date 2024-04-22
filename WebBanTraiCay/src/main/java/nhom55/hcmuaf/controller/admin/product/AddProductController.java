@@ -1,9 +1,10 @@
 package nhom55.hcmuaf.controller.admin.product;
-
+import java.time.ZoneId;
+import java.util.Date;
+import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -64,7 +65,8 @@ public class AddProductController extends HttpServlet {
     Users admin = MyUtils.getLoginedUser(session);
 
     String productName = request.getParameter("name");
-
+    LocalDateTime localDateTime = LocalDateTime.now();
+    Date dateImport = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     System.out.println(productName);
     String description = request.getParameter("description");
     String price = request.getParameter("price");
@@ -72,40 +74,57 @@ public class AddProductController extends HttpServlet {
     String defaultWeight = request.getParameter("defaultWeight");
     String supplier = request.getParameter("supplier");
     String expirationDateStr = request.getParameter("expirationDate");
-    String img = request.getParameter("imgList");
+    String img = request.getParameter("img");
     String imgList = request.getParameter("supImages");
-
+    String importedFruit = request.getParameter("sourceImport");
+    String seasonalFruit = request.getParameter("seasonalFruit");
+    String driedFruit = request.getParameter("driedFruit");
     // if user Enter correct data
-    if (checkValidate(request, response, productName, description, price, quantity, defaultWeight,
-        expirationDateStr, img, supplier)) {
-      SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-      List<String> imageList = List.of(imgList.split(","));
-      // generate date admin import product
-      LocalDateTime localDateTime = LocalDateTime.now();
-      Products products = new Products();
-      products.setNameOfProduct(productName);
-      products.setDescription(description);
-      products.setPrice(Double.valueOf(price));
-      products.setWeight(Double.valueOf(quantity));
-      products.setWeightDefault(Double.valueOf(defaultWeight));
-      products.setProvider(Integer.parseInt(supplier));
-      products.setExpriredDay(java.sql.Date.valueOf(expirationDateStr));
-      products.setImg(img);
-      Date dateImport = null;
-      products.setDateOfImporting(null);
-      products.setAdminCreate(admin.getId());
-      // products.setImageList(imgList);
-      ProductService.getInstance().addNewProduct(products, imageList);
-      response.sendRedirect(request.getContextPath() + "/admin/product/add-new-product");
+    //checkValidate(request, response, productName, description, price, quantity, defaultWeight,
+    //        expirationDateStr, img, supplier)
+    if (true) {
+      try {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        List<String> imageList = List.of(imgList.split(","));
 
-      // user Enter Wrong data
+        Products products = new Products();
+        products.setNameOfProduct(productName);
+        products.setDescription(description);
+        products.setPrice(Double.valueOf(price));
+        products.setWeight(Double.valueOf(quantity));
+        products.setWeightDefault(Double.valueOf(defaultWeight));
+        products.setProvider(Integer.parseInt(supplier));
+        products.setExpriredDay(java.sql.Date.valueOf(expirationDateStr));
+        products.setImg(img);
+        products.setImportedFruit(importedFruit);
+        products.setDriedFruit(driedFruit);
+        products.setSeasonalFruit(seasonalFruit);
+        products.setDateOfImporting(new java.sql.Date(dateImport.getTime()));
+        products.setAdminCreate(admin.getId());
+        System.out.println(products);
+        ProductService.getInstance().addNewProduct(products, imageList);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        JsonObject json = new JsonObject();
+        json.addProperty("message", "Thêm sản phẩm thành công!");
+        response.getWriter().write(json.toString());
+        response.getWriter().flush();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     } else {
-      List<Providers> providerList = ProviderService.getInstance().getAll();
-      request.setAttribute("providerList", providerList);
-      request.setAttribute("admin", admin);
-      RequestDispatcher dispatcher = this.getServletContext()
-          .getRequestDispatcher("/WEB-INF/admin/add-product.jsp");
-      dispatcher.forward(request, response);
+//      List<Providers> providerList = ProviderService.getInstance().getAll();
+//      request.setAttribute("providerList", providerList);
+//      request.setAttribute("admin", admin);
+//      RequestDispatcher dispatcher = this.getServletContext()
+//          .getRequestDispatcher("/WEB-INF/admin/add-product.jsp");
+//      dispatcher.forward(request, response);
+
+      response.setContentType("application/json");
+      response.setCharacterEncoding("UTF-8");
+      JsonObject json = new JsonObject();
+      json.addProperty("message", "Lỗi cmnr");
     }
 
   }
