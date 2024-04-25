@@ -37,7 +37,8 @@ public interface ProductDao {
 
   int addNewProduct(String productName, String description, double price,
       double weightQuantity, double weightDefault, Date dateImport, Date expirationDate,
-      int adminId, int provider, String img, String season, String imported, String dried);
+      int adminId, int provider, String img, String season, String imported, String dried,
+      String imgPublicId, String imgAssetId);
 
 //   Phần phục vụ cho quản lý sản phẩm của admin
 

@@ -11,12 +11,12 @@ public class ImageDaoImpl implements ImageDao {
   @Override
   public void addImageProduct(List<Image> imageList) {
     JDBIConnector.get().withHandle(handle -> {
-      String sql = "INSERT INTO images (idProduct, url) VALUES (:idProduct, :url)"; // Đảm bảo rằng bạn sử dụng tên bảng là "images" thay vì "image"
+      String sql = "INSERT INTO images (idProduct, imgPublicId, imgAssetId) VALUES (:idProduct, :imgPublicId, :imgAssetId)";
       PreparedBatch batch = handle.prepareBatch(sql);
       for (Image img : imageList) {
         batch.bind("idProduct", img.getProductId())
-            .bind("url", img.getUrl())
-            .add();
+            .bind("imgPublicId", img.getPublicId())
+            .bind("imgAssetId", img.getAssetId()).add();
       }
       batch.execute();
       return null;

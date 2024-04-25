@@ -219,7 +219,8 @@ public class ProductDaoImpl implements ProductDao {
   @Override
   public int addNewProduct(String productName, String description, double price,
       double weightQuantity, double weightDefault, Date dateImport, Date expirationDate,
-      int adminId, int provider, String img, String season, String imported, String dried) {
+      int adminId, int provider, String img, String season, String imported, String dried,
+      String imgPublicId, String imgAssetId) {
 
     Products products = JDBIConnector.get().withHandle(h -> {
       return h.createQuery("SELECT * FROM products WHERE nameOfProduct = :name")
@@ -235,8 +236,8 @@ public class ProductDaoImpl implements ProductDao {
     } else {
       return
           JDBIConnector.get().withHandle(h -> h.createUpdate(
-                  "INSERT INTO products(nameOfProduct, description, price, weight, weightDefault, dateOfImporting, expriredDay, adminCreate, provider, img, seasonalFruit, importedFruit, driedFruit) "
-                      + "VALUES (:nameOfProduct, :description, :price, :weight, :weightDefault, :dateOfImporting, :expriredDay, :adminCreate, :provider, :img, :seasonalFruit, importedFruit, driedFruit)")
+                  "INSERT INTO products(nameOfProduct, description, price, weight, weightDefault, dateOfImporting, expriredDay, adminCreate, provider, img, seasonalFruit, importedFruit, driedFruit, imgPublicId, imgAssetId) "
+                      + "VALUES (:nameOfProduct, :description, :price, :weight, :weightDefault, :dateOfImporting, :expriredDay, :adminCreate, :provider, :img, :seasonalFruit, :importedFruit, :driedFruit, :imgPublicId, :imgAssetId)")
               .bind("nameOfProduct", productName)
               .bind("description", description)
               .bind("price", price)
@@ -250,6 +251,8 @@ public class ProductDaoImpl implements ProductDao {
               .bind("seasonalFruit", season)
               .bind("importedFruit", imported)
               .bind("driedFruit", dried)
+              .bind("imgPublicId", imgPublicId)
+              .bind("imgAssetId", imgAssetId)
               .executeAndReturnGeneratedKeys("id")
               .mapTo(int.class)
               .one());

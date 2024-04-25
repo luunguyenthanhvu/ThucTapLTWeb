@@ -22,6 +22,8 @@ public class Products implements Serializable {
   private String importedFruit;
   private String driedFruit;
 
+  private String imgPublicId;
+  private String imgAssetId;
 
   public Products() {
 
@@ -84,6 +86,22 @@ public class Products implements Serializable {
     this.img = img;
     this.adminCreate = adminCreate;
     this.provider = provider;
+  }
+
+  public String getImgPublicId() {
+    return imgPublicId;
+  }
+
+  public void setImgPublicId(String imgPublicId) {
+    this.imgPublicId = imgPublicId;
+  }
+
+  public String getImgAssetId() {
+    return imgAssetId;
+  }
+
+  public void setImgAssetId(String imgAssetId) {
+    this.imgAssetId = imgAssetId;
   }
 
   public String getSeasonalFruit() {

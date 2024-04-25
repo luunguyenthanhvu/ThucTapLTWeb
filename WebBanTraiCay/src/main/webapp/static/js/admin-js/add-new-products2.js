@@ -46,7 +46,10 @@ FilePond.create(document.querySelector('#upfileAnh'), {
             console.log(response);
             public_id = response.public_id;
             imgList.push({
-              publicId: response.public_id, url: response.url, category: 'main'
+              publicId: response.public_id,
+              assetId: response.asset_id,
+              url: response.url,
+              category: 'main'
             });
             console.log(imgList)
             FilePond.setOptions({
@@ -130,7 +133,10 @@ FilePond.create(document.querySelector('#upMultiFileImg'), {
             console.log(response);
             public_id = response.public_id;
             imgList.push({
-              publicId: response.public_id, url: response.url, category: 'sup'
+              publicId: response.public_id,
+              assetId: response.asset_id,
+              url: response.url,
+              category: 'sup'
             });
             console.log(imgList)
             FilePond.setOptions({
@@ -390,12 +396,27 @@ function addNewProduct() {
   const isNhaCCValid = validateNhaCC();
   const isNgayHetHanValid = validateNgayHetHan();
   const isFileValid = validateFileUpload();
+
+  // get info image thumbnail for product
   let mainImages = imgList.filter(image => image.category === 'main').map(
       image => image.url);
-
+  let mainImgPublicId = imgList.filter(image => image.category === 'main').map(
+      image => image.publicId);
+  let mainImgAssetId = imgList.filter(image => image.category === 'main').map(
+      image => image.assetId);
+  // get sub img info for product
   const supImages = imgList.filter(image => image.category === 'sup').map(
       image => image.url);
   const supImagesString = supImages.join(',');
+
+  const supImgPublicId = imgList.filter(image => image.category === 'sup').map(
+      image => image.publicId);
+  const supImgPublicIdStr = supImgPublicId.join(',');
+
+  const supImgAssetId = imgList.filter(image => image.category === 'sup').map(
+      image => image.assetId);
+  const supImgAssetIdStr = supImgAssetId.join(',');
+
   Swal.fire({
     title: "Bạn có muốn lưu sản phẩm không?",
     showDenyButton: true,
@@ -426,9 +447,14 @@ function addNewProduct() {
             supplier: nhaCC.value,
             expirationDate: ngayHetHan.value,
             img: mainImages[0],
-            supImages: supImagesString
+            supImages: supImagesString,
+            mainImgPublicId: mainImgPublicId[0],
+            mainImgAssetId: mainImgAssetId[0],
+            supImgPublicId: supImgPublicIdStr,
+            supImgAssetId: supImgAssetIdStr
           },
           success: function (response) {
+            console.log(response.message)
             Swal.fire(response.message, "", "success");
           },
           error: function (error) {

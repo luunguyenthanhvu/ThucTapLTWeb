@@ -1,10 +1,11 @@
 package nhom55.hcmuaf.controller.admin.product;
-import java.time.ZoneId;
-import java.util.Date;
+
 import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -79,6 +80,17 @@ public class AddProductController extends HttpServlet {
     String importedFruit = request.getParameter("sourceImport");
     String seasonalFruit = request.getParameter("seasonalFruit");
     String driedFruit = request.getParameter("driedFruit");
+
+    // public id and asset id of product
+    String mainImgPublicId = request.getParameter("mainImgPublicId");
+    String mainImgAssetId = request.getParameter("mainImgAssetId");
+
+    String supImgPublicId = request.getParameter("supImgPublicId");
+    System.out.println("public id nè");
+    System.out.println(supImgPublicId);
+    String supImgAssetId = request.getParameter("supImgAssetId");
+    System.out.println("asset id nè");
+    System.out.println(supImgAssetId);
     // if user Enter correct data
     //checkValidate(request, response, productName, description, price, quantity, defaultWeight,
     //        expirationDateStr, img, supplier)
@@ -86,7 +98,8 @@ public class AddProductController extends HttpServlet {
       try {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         List<String> imageList = List.of(imgList.split(","));
-
+        List<String> listImgPublicId = List.of(supImgPublicId.split(","));
+        List<String> listImgAssetId = List.of(supImgAssetId.split(","));
         Products products = new Products();
         products.setNameOfProduct(productName);
         products.setDescription(description);
@@ -101,8 +114,10 @@ public class AddProductController extends HttpServlet {
         products.setSeasonalFruit(seasonalFruit);
         products.setDateOfImporting(new java.sql.Date(dateImport.getTime()));
         products.setAdminCreate(admin.getId());
-        System.out.println(products);
-        ProductService.getInstance().addNewProduct(products, imageList);
+        products.setImgPublicId(mainImgPublicId);
+        products.setImgAssetId(mainImgAssetId);
+        ProductService.getInstance()
+            .addNewProduct(products, imageList, listImgPublicId, listImgAssetId);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -114,13 +129,6 @@ public class AddProductController extends HttpServlet {
         e.printStackTrace();
       }
     } else {
-//      List<Providers> providerList = ProviderService.getInstance().getAll();
-//      request.setAttribute("providerList", providerList);
-//      request.setAttribute("admin", admin);
-//      RequestDispatcher dispatcher = this.getServletContext()
-//          .getRequestDispatcher("/WEB-INF/admin/add-product.jsp");
-//      dispatcher.forward(request, response);
-
       response.setContentType("application/json");
       response.setCharacterEncoding("UTF-8");
       JsonObject json = new JsonObject();
