@@ -47,7 +47,7 @@ public class ProductDaoImpl implements ProductDao {
     return JDBIConnector.get().withHandle(h ->
         // hiển thị sản phẩm vs id được truyền vào
         h.createQuery(
-                "SELECT id, nameOfProduct, description, price, img, weight, weightDefault FROM Products WHERE id = :id")
+                "SELECT id, nameOfProduct, description, price, imgPublicId, weight, weightDefault  FROM Products WHERE id = :id")
             .bind("id", productId)
             .mapToBean(Products.class)
             .findFirst()

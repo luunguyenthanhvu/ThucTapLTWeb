@@ -9,4 +9,4 @@ $('.ftco-animate.fadeInUp.ftco-animated .product .img-prod').each(
       const publicId = $(elements).data('assets');
       const imageUrl = cl.url(publicId);
       $(elements).find('img').prop('src', imageUrl);
-    })
+    });

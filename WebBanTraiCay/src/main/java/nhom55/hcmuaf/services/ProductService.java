@@ -63,7 +63,10 @@ public class ProductService {
 
   // hiển thị chi tiết sản phẩm
   public Products showProductDetails(int productId) {
-    return productDao.showProductDetails(productId);
+    Products result = productDao.showProductDetails(productId);
+    List<Image> imgList = imageDao.getImageList(productId);
+    result.setImageList(imgList);
+    return result;
   }
 
   /**

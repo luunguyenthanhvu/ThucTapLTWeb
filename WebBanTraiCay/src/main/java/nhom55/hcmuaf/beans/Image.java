@@ -7,8 +7,8 @@ public class Image implements Serializable {
   private String id;
   private int productId;
   private String url;
-  private String publicId;
-  private String assetId;
+  private String imgPublicId;
+  private String imgAssetId;
 
   public Image(String id, String url, int productId) {
     this.id = id;
@@ -16,11 +16,11 @@ public class Image implements Serializable {
     this.productId = productId;
   }
 
-  public Image(int productId, String url, String publicId, String assetId) {
+  public Image(int productId, String url, String imgPublicId, String imgAssetId) {
     this.productId = productId;
     this.url = url;
-    this.publicId = publicId;
-    this.assetId = assetId;
+    this.imgPublicId = imgPublicId;
+    this.imgAssetId = imgAssetId;
   }
 
   public Image(String id, String url) {
@@ -32,6 +32,7 @@ public class Image implements Serializable {
     this.productId = productId;
     this.url = url;
   }
+
 
   public Image() {
   }
@@ -61,19 +62,19 @@ public class Image implements Serializable {
     this.productId = productId;
   }
 
-  public String getPublicId() {
-    return publicId;
+  public String getImgPublicId() {
+    return imgPublicId;
   }
 
-  public void setPublicId(String publicId) {
-    this.publicId = publicId;
+  public void setImgPublicId(String imgPublicId) {
+    this.imgPublicId = imgPublicId;
   }
 
-  public String getAssetId() {
-    return assetId;
+  public String getImgAssetId() {
+    return imgAssetId;
   }
 
-  public void setAssetId(String assetId) {
-    this.assetId = assetId;
+  public void setImgAssetId(String imgAssetId) {
+    this.imgAssetId = imgAssetId;
   }
 }
