@@ -50,6 +50,8 @@ public class UpdateOrder extends HttpServlet {
         BillDao billDao = new BillDaoImpl();
         billDao.updateStatusABill(idBill,status);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/order/order-list");
+
         dispatcher.forward(request,response);
+
     }
 }

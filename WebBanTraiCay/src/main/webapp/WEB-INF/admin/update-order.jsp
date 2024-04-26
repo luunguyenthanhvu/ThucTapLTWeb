@@ -191,43 +191,97 @@
                 <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
             <span class="text">Chi tiết đơn hàng</span>
         </div>
-        <div class="container" style="margin: 30px 30px 0 30px">
+        <div class="container" style="margin: 20px 20px 0 20px">
             <div class="main-container">
                 <div class="left-container">
                     <h4>Thông tin người đặt hàng</h4>
-                    <div class="user-name-img">
-                        <c:if test="${not empty user.getImg() }">
-                            <div class="img-user">
-                                <img src="${user.getImg()}" alt="profileImg">
+                    <div class="user-container">
+                        <div class="user-name-img">
+                            <c:if test="${not empty user.getImg() }">
+                                <div class="img-user">
+                                    <img src="${user.getImg()}" alt="profileImg">
+                                </div>
+                            </c:if>
+                            <c:if test="${empty user.getImg() }">
+                                <div class="img-user">
+                                    <img src="${pageContext.request.contextPath}/static/images/accountPicture.png" alt="profileImg">
+                                </div>
+                            </c:if>
+                            <div class="user-name">
+                                <span>Họ:</span>
+                                <input type="text" name="lastName" value="${bill.getLastName()}">
+                                <span>Tên:</span>
+                                <input type="text" name="firstName" value="${bill.getFirstName()}">
                             </div>
-                        </c:if>
-                        <c:if test="${empty user.getImg() }">
-                            <div class="img-user">
-                                <img src="${pageContext.request.contextPath}/static/images/accountPicture.png" alt="profileImg">
-                            </div>
-                        </c:if>
 
-                        <div class="user-name">
-                            <span>${bill.getLastName()} ${bill.getFirstName()}</span>
+                        </div>
+
+                        <div class="user-info">
+                            <div class="simple-info">
+                                <span>Số điện thoại:</span>
+                                <input type="text" name="phoneNumber" value="${bill.getPhoneNumber()}">
+                            </div>
+                            <div class="simple-info">
+                                <span>Email:</span>
+                                <input type="email" name="email" value="${bill.getEmail()}">
+                            </div>
+                            <div class="simple-info">
+                                <span>Địa chỉ:</span>
+                                <input type="email" name="streetAddress" value="${bill.getStreetAddress()}">
+                            </div>
+                            <div class = "simple-btn">
+                                <button type="submit">Lưu thay đổi</button>
+                            </div>
+
                         </div>
                     </div>
-
-                    <div class="user-info">
-                        <div class="simple-info">
-                            <span>Số điện thoại:</span>
-                            <span>${bill.getPhoneNumber()}</span>
-                        </div>
-                        <div class="simple-info">
-                            <span>Email:</span>
-                            <span>${bill.getEmail()}</span>
-                        </div>
-                        <div class="simple-info">
-                            <span>Địa chỉ:</span>
-                            <span>${bill.getStreetAddress()}.</span>
-                        </div>
-                    </div>
-
                 </div>
+
+            <%--                <div class="left-container">--%>
+<%--                    <h4>Thông tin người đặt hàng</h4>--%>
+<%--                    <div class="user-name-img">--%>
+<%--                        <c:if test="${not empty user.getImg() }">--%>
+<%--                            <div class="img-user">--%>
+<%--                                <img src="${user.getImg()}" alt="profileImg">--%>
+<%--                            </div>--%>
+<%--                        </c:if>--%>
+<%--                        <c:if test="${empty user.getImg() }">--%>
+<%--                            <div class="img-user">--%>
+<%--                                <img src="${pageContext.request.contextPath}/static/images/accountPicture.png" alt="profileImg">--%>
+<%--                            </div>--%>
+<%--                        </c:if>--%>
+
+<%--                        <br class="user-name">--%>
+<%--                            <span>Họ:</span>--%>
+<%--                                <input type="text" name="lastName" value="${bill.getLastName()}">--%>
+<%--                            <span>Tên:</span>--%>
+<%--                                 <input type="text" name="firstName" value="${bill.getFirstName()}">--%>
+
+
+<%--&lt;%&ndash;                                <span>${bill.getLastName()} ${bill.getFirstName()}</span>&ndash;%&gt;--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+
+<%--                    <div class="user-info">--%>
+<%--                        <div class="simple-info">--%>
+<%--                            <input type="text" name="phoneNumber" value="${bill.getPhoneNumber()}">--%>
+<%--&lt;%&ndash;                            <span>Số điện thoại:</span>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <span>${bill.getPhoneNumber()}</span>&ndash;%&gt;--%>
+<%--                        </div>--%>
+<%--                        <div class="simple-info">--%>
+<%--                            <input type="email" name="email" value="${bill.getEmail()}">--%>
+<%--&lt;%&ndash;                            <span>Email:</span>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <span>${bill.getEmail()}</span>&ndash;%&gt;--%>
+<%--                        </div>--%>
+<%--                        <div class="simple-info">--%>
+<%--                            <input type="email" name="email" value="${bill.getStreetAddress()}">--%>
+<%--&lt;%&ndash;                            <span>Địa chỉ:</span>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <span>${bill.getStreetAddress()}.</span>&ndash;%&gt;--%>
+<%--                        </div>--%>
+<%--                             <button type="submit">Lưu thay đổi</button>--%>
+<%--                    </div>--%>
+
+<%--                </div>--%>
                 <div class="right-container">
                     <form action="" method="post">
                         <div class="update-status">
@@ -248,7 +302,7 @@
                             <h4 style="padding: 10px">Thông tin đơn hàng</h4>
                             <tr>
                                 <th style="width: 50px;">ID</th>
-                                <th style="width: 250px">Tên sản phẩm</th>
+                                <th style="width: 250px;">Tên sản phẩm</th>
                                 <th style="width: 100px;">Hình ảnh</th>
                                 <th style="width: 150px;">Hạn sử dụng</th>
                                 <th style="width: 100px;">Giá tiền</th>

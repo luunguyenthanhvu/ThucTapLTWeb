@@ -23,13 +23,33 @@
     height: 100px;
 }
 .user-name-img .user-name {
-    display: flex;
+    font-weight: bold;
     align-items: center;
     justify-content: center;
 }
+.user-name input[type="text"],
+.user-info input[type="text"]
+ {
+    border: none; /* Ẩn border */
+    outline: none; /* Ẩn outline */
+    /* Kéo dài độ rộng */
 
+}
+.user-info input[type="email"]{
+    border: none; /* Ẩn border */
+    outline: none; /* Ẩn outline */
+    width: 70%;
+}
+.simple-btn{
+    border-radius: 4px;
+    text-align: center;
+}
+.user-info button[type="submit"]:hover {
+    background-color: #45a049; /* Màu nền khi hover */
+}
 .left-container  .user-info {
     margin: 10px 20px;
+    display: contents;
 }
 .user-info .simple-info span:first-child {
     font-weight: bold;
