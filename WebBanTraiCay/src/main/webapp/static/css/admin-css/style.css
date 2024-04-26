@@ -218,10 +218,11 @@
 .home-section{
     position: relative;
     background: #E4E9F7;
-    height: 100vh;
+    height: 100%;
     left: 280px;
     width: calc(100% - 280px);
     transition: all 0.5s ease;
+    padding-bottom: 30px;
 }
 .sidebar.close ~ .home-section{
     left: 78px;
