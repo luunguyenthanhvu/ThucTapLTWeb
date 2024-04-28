@@ -47,7 +47,7 @@ public class ProductDaoImpl implements ProductDao {
     return JDBIConnector.get().withHandle(h ->
         // hiển thị sản phẩm vs id được truyền vào
         h.createQuery(
-                "SELECT id, nameOfProduct, description, price, img, weight, weightDefault FROM Products WHERE id = :id")
+                "SELECT id, nameOfProduct, description, price, imgPublicId, weight, weightDefault  FROM Products WHERE id = :id")
             .bind("id", productId)
             .mapToBean(Products.class)
             .findFirst()
@@ -219,7 +219,8 @@ public class ProductDaoImpl implements ProductDao {
   @Override
   public int addNewProduct(String productName, String description, double price,
       double weightQuantity, double weightDefault, Date dateImport, Date expirationDate,
-      int adminId, int provider) {
+      int adminId, int provider, String img, String season, String imported, String dried,
+      String imgPublicId, String imgAssetId) {
 
     Products products = JDBIConnector.get().withHandle(h -> {
       return h.createQuery("SELECT * FROM products WHERE nameOfProduct = :name")
@@ -233,130 +234,140 @@ public class ProductDaoImpl implements ProductDao {
     if (products != null) {
       return 0;
     } else {
-      JDBIConnector.get().withHandle(h -> {
-        return h.createUpdate(
-                "INSERT INTO products(nameOfProduct, description, price, weight, weightDefault, dateOfImporting, expriredDay, adminCreate, provider) "
-                    + "VALUES (:nameOfProduct, :description, :price, :weight, :weightDefault, :dateOfImporting, :expriredDay, :adminCreate, :provider)")
-            .bind("nameOfProduct", productName)
-            .bind("description", description)
-            .bind("price", price)
-            .bind("weight", weightQuantity)
-            .bind("weightDefault", weightDefault)
-            .bind("dateOfImporting", dateImport)
-            .bind("expriredDay", expirationDate)
-            .bind("adminCreate", adminId)
-            .bind("provider", provider)
-            .executeAndReturnGeneratedKeys("id")
-            .mapTo(int.class)
-            .one();
-      });
+      return
+          JDBIConnector.get().withHandle(h -> h.createUpdate(
+                  "INSERT INTO products(nameOfProduct, description, price, weight, weightDefault, dateOfImporting, expriredDay, adminCreate, provider, img, seasonalFruit, importedFruit, driedFruit, imgPublicId, imgAssetId) "
+                      + "VALUES (:nameOfProduct, :description, :price, :weight, :weightDefault, :dateOfImporting, :expriredDay, :adminCreate, :provider, :img, :seasonalFruit, :importedFruit, :driedFruit, :imgPublicId, :imgAssetId)")
+              .bind("nameOfProduct", productName)
+              .bind("description", description)
+              .bind("price", price)
+              .bind("weight", weightQuantity)
+              .bind("weightDefault", weightDefault)
+              .bind("dateOfImporting", dateImport)
+              .bind("expriredDay", expirationDate)
+              .bind("adminCreate", adminId)
+              .bind("provider", provider)
+              .bind("img", img)
+              .bind("seasonalFruit", season)
+              .bind("importedFruit", imported)
+              .bind("driedFruit", dried)
+              .bind("imgPublicId", imgPublicId)
+              .bind("imgAssetId", imgAssetId)
+              .executeAndReturnGeneratedKeys("id")
+              .mapTo(int.class)
+              .one());
     }
-    return 0;
   }
 //   Phần phục vụ cho quản lý sản phẩm của admin
 
-  public void editProductNoImage(int idProduct, String name, String des,String mua, String nguonNhap,String driedFruit, double giaTien,
+  public void editProductNoImage(int idProduct, String name, String des, String mua,
+      String nguonNhap, String driedFruit, double giaTien,
       double khoiLuong, double soKgMacDinh, Date ngayNhapKho, Date ngayHetHan, int idAdmin,
       int idnhaCungCap) {
-    if(nguonNhap.equals("local")) {
+    if (nguonNhap.equals("local")) {
       JDBIConnector.get().withHandle(h ->
-              h.createUpdate(
-                              "UPDATE products SET nameOfProduct = :name, description = :des, seasonalFruit = :mua,domesticFruit = :nguonNhap,driedFruit = :driedFruit,price = :giaTien, " +
-                                      "weight = :khoiLuong, weightDefault = :soKgMacDinh,dateOfImporting =:ngayNhapKho, expriredDay = :ngayHetHan, adminCreate = :idAdmin, provider = :idnhaCungCap "
-                                      +
-                                      "WHERE id = :idProduct")
-                      .bind("name", name)
-                      .bind("des", des)
-                      .bind("mua", mua)
-                      .bind("nguonNhap", nguonNhap)
-                      .bind("driedFruit",driedFruit)
-                      .bind("giaTien",giaTien)
-                      .bind("khoiLuong", khoiLuong)
-                      .bind("soKgMacDinh", soKgMacDinh)
-                      .bind("ngayNhapKho", ngayNhapKho)
-                      .bind("ngayHetHan", ngayHetHan)
-                      .bind("idAdmin", idAdmin)
-                      .bind("idProduct", idProduct)
-                      .bind("idnhaCungCap", idnhaCungCap)
-                      .execute()
+          h.createUpdate(
+                  "UPDATE products SET nameOfProduct = :name, description = :des, seasonalFruit = :mua,domesticFruit = :nguonNhap,driedFruit = :driedFruit,price = :giaTien, "
+                      +
+                      "weight = :khoiLuong, weightDefault = :soKgMacDinh,dateOfImporting =:ngayNhapKho, expriredDay = :ngayHetHan, adminCreate = :idAdmin, provider = :idnhaCungCap "
+                      +
+                      "WHERE id = :idProduct")
+              .bind("name", name)
+              .bind("des", des)
+              .bind("mua", mua)
+              .bind("nguonNhap", nguonNhap)
+              .bind("driedFruit", driedFruit)
+              .bind("giaTien", giaTien)
+              .bind("khoiLuong", khoiLuong)
+              .bind("soKgMacDinh", soKgMacDinh)
+              .bind("ngayNhapKho", ngayNhapKho)
+              .bind("ngayHetHan", ngayHetHan)
+              .bind("idAdmin", idAdmin)
+              .bind("idProduct", idProduct)
+              .bind("idnhaCungCap", idnhaCungCap)
+              .execute()
       );
     } else {
       JDBIConnector.get().withHandle(h ->
-              h.createUpdate(
-                              "UPDATE products SET nameOfProduct = :name, description = :des, seasonalFruit = :mua,importedFruit = :nguonNhap,driedFruit =:driedFruit,price = :giaTien, " +
-                                      "weight = :khoiLuong, weightDefault = :soKgMacDinh,dateOfImporting =:ngayNhapKho, expriredDay = :ngayHetHan, adminCreate = :idAdmin, provider = :idnhaCungCap "
-                                      +
-                                      "WHERE id = :idProduct")
-                      .bind("name", name)
-                      .bind("des", des)
-                      .bind("mua", mua)
-                      .bind("nguonNhap", nguonNhap)
-                      .bind("driedFruit",driedFruit)
-                      .bind("giaTien",giaTien)
-                      .bind("khoiLuong", khoiLuong)
-                      .bind("soKgMacDinh", soKgMacDinh)
-                      .bind("ngayNhapKho", ngayNhapKho)
-                      .bind("ngayHetHan", ngayHetHan)
-                      .bind("idAdmin", idAdmin)
-                      .bind("idProduct", idProduct)
-                      .bind("idnhaCungCap", idnhaCungCap)
-                      .execute()
+          h.createUpdate(
+                  "UPDATE products SET nameOfProduct = :name, description = :des, seasonalFruit = :mua,importedFruit = :nguonNhap,driedFruit =:driedFruit,price = :giaTien, "
+                      +
+                      "weight = :khoiLuong, weightDefault = :soKgMacDinh,dateOfImporting =:ngayNhapKho, expriredDay = :ngayHetHan, adminCreate = :idAdmin, provider = :idnhaCungCap "
+                      +
+                      "WHERE id = :idProduct")
+              .bind("name", name)
+              .bind("des", des)
+              .bind("mua", mua)
+              .bind("nguonNhap", nguonNhap)
+              .bind("driedFruit", driedFruit)
+              .bind("giaTien", giaTien)
+              .bind("khoiLuong", khoiLuong)
+              .bind("soKgMacDinh", soKgMacDinh)
+              .bind("ngayNhapKho", ngayNhapKho)
+              .bind("ngayHetHan", ngayHetHan)
+              .bind("idAdmin", idAdmin)
+              .bind("idProduct", idProduct)
+              .bind("idnhaCungCap", idnhaCungCap)
+              .execute()
       );
     }
 
 
   }
 
-  public void editProductHaveImage(int idProduct, String name, String des,String mua, String nguonNhap,String driedFruit, double giaTien,
+  public void editProductHaveImage(int idProduct, String name, String des, String mua,
+      String nguonNhap, String driedFruit, double giaTien,
       double khoiLuong, double soKgMacDinh, Date ngayNhapKho, Date ngayHetHan, String tenAnh,
       int idAdmin, int idnhaCungCap) {
-    if(nguonNhap.equals("local")) {
+    if (nguonNhap.equals("local")) {
       JDBIConnector.get().withHandle(h ->
-              h.createUpdate(
-                              "UPDATE products SET nameOfProduct = :name, description = :des,  seasonalFruit = :mua,domesticFruit = :nguonNhap,driedFruit =:driedFruit,price = :giaTien, " +
-                                      "weight = :khoiLuong, weightDefault = :soKgMacDinh,dateOfImporting =:ngayNhapKho, expriredDay = :ngayHetHan,img =:tenAnh, adminCreate = :idAdmin, provider = :idnhaCungCap "
-                                      +
-                                      "WHERE id = :idProduct")
-                      .bind("name", name)
-                      .bind("des", des)
-                      .bind("des", des)
-                      .bind("mua", mua)
-                      .bind("nguonNhap", nguonNhap)
-                      .bind("driedFruit",driedFruit)
-                      .bind("giaTien", giaTien)
-                      .bind("khoiLuong", khoiLuong)
-                      .bind("soKgMacDinh", soKgMacDinh)
-                      .bind("ngayNhapKho", ngayNhapKho)
-                      .bind("ngayHetHan", ngayHetHan)
-                      .bind("tenAnh", tenAnh)
-                      .bind("idAdmin", idAdmin)
-                      .bind("idProduct", idProduct)
-                      .bind("idnhaCungCap", idnhaCungCap)
-                      .execute()
+          h.createUpdate(
+                  "UPDATE products SET nameOfProduct = :name, description = :des,  seasonalFruit = :mua,domesticFruit = :nguonNhap,driedFruit =:driedFruit,price = :giaTien, "
+                      +
+                      "weight = :khoiLuong, weightDefault = :soKgMacDinh,dateOfImporting =:ngayNhapKho, expriredDay = :ngayHetHan,img =:tenAnh, adminCreate = :idAdmin, provider = :idnhaCungCap "
+                      +
+                      "WHERE id = :idProduct")
+              .bind("name", name)
+              .bind("des", des)
+              .bind("des", des)
+              .bind("mua", mua)
+              .bind("nguonNhap", nguonNhap)
+              .bind("driedFruit", driedFruit)
+              .bind("giaTien", giaTien)
+              .bind("khoiLuong", khoiLuong)
+              .bind("soKgMacDinh", soKgMacDinh)
+              .bind("ngayNhapKho", ngayNhapKho)
+              .bind("ngayHetHan", ngayHetHan)
+              .bind("tenAnh", tenAnh)
+              .bind("idAdmin", idAdmin)
+              .bind("idProduct", idProduct)
+              .bind("idnhaCungCap", idnhaCungCap)
+              .execute()
       );
     } else {
       JDBIConnector.get().withHandle(h ->
-              h.createUpdate(
-                              "UPDATE products SET nameOfProduct = :name, description = :des,  seasonalFruit = :mua,importedFruit = :nguonNhap,driedFruit =:driedFruit,price = :giaTien, " +
-                                      "weight = :khoiLuong, weightDefault = :soKgMacDinh,dateOfImporting =:ngayNhapKho, expriredDay = :ngayHetHan,img =:tenAnh, adminCreate = :idAdmin, provider = :idnhaCungCap "
-                                      +
-                                      "WHERE id = :idProduct")
-                      .bind("name", name)
-                      .bind("des", des)
-                      .bind("des", des)
-                      .bind("mua", mua)
-                      .bind("nguonNhap", nguonNhap)
-                      .bind("driedFruit",driedFruit)
-                      .bind("giaTien", giaTien)
-                      .bind("khoiLuong", khoiLuong)
-                      .bind("soKgMacDinh", soKgMacDinh)
-                      .bind("ngayNhapKho", ngayNhapKho)
-                      .bind("ngayHetHan", ngayHetHan)
-                      .bind("tenAnh", tenAnh)
-                      .bind("idAdmin", idAdmin)
-                      .bind("idProduct", idProduct)
-                      .bind("idnhaCungCap", idnhaCungCap)
-                      .execute()
+          h.createUpdate(
+                  "UPDATE products SET nameOfProduct = :name, description = :des,  seasonalFruit = :mua,importedFruit = :nguonNhap,driedFruit =:driedFruit,price = :giaTien, "
+                      +
+                      "weight = :khoiLuong, weightDefault = :soKgMacDinh,dateOfImporting =:ngayNhapKho, expriredDay = :ngayHetHan,img =:tenAnh, adminCreate = :idAdmin, provider = :idnhaCungCap "
+                      +
+                      "WHERE id = :idProduct")
+              .bind("name", name)
+              .bind("des", des)
+              .bind("des", des)
+              .bind("mua", mua)
+              .bind("nguonNhap", nguonNhap)
+              .bind("driedFruit", driedFruit)
+              .bind("giaTien", giaTien)
+              .bind("khoiLuong", khoiLuong)
+              .bind("soKgMacDinh", soKgMacDinh)
+              .bind("ngayNhapKho", ngayNhapKho)
+              .bind("ngayHetHan", ngayHetHan)
+              .bind("tenAnh", tenAnh)
+              .bind("idAdmin", idAdmin)
+              .bind("idProduct", idProduct)
+              .bind("idnhaCungCap", idnhaCungCap)
+              .execute()
       );
     }
 
@@ -375,12 +386,12 @@ public class ProductDaoImpl implements ProductDao {
     int start = (index - 1) * quantityDefault;
 
     result = JDBIConnector.get().withHandle(h ->
-            h.createQuery(
-                            "SELECT * FROM products WHERE expriredDay <= CURDATE() ORDER BY dateOfImporting DESC LIMIT :start, :quantityDefault")
-                    .bind("start", start)
-                    .bind("quantityDefault", quantityDefault)
-                    .mapToBean(Products.class)
-                    .list()
+        h.createQuery(
+                "SELECT * FROM products WHERE expriredDay <= CURDATE() ORDER BY dateOfImporting DESC LIMIT :start, :quantityDefault")
+            .bind("start", start)
+            .bind("quantityDefault", quantityDefault)
+            .mapToBean(Products.class)
+            .list()
     );
 
     return result;

@@ -5,5 +5,6 @@ import nhom55.hcmuaf.beans.Image;
 
 public interface ImageDao {
   void addImageProduct(List<Image> imageList);
-  void getAllImage();
+  List<Image> getImageList(int idProduct);
+
 }
