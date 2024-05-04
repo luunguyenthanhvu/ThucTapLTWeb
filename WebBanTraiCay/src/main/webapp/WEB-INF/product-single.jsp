@@ -159,7 +159,7 @@
                 <div class="swiper gallery-top">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide" data-assets="${product.getImgPublicId()}"
-                             style="background-image:url(${pageContext.request.contextPath}/static/images/loading-cat.gif)"></div>
+                             style="background-image:url(/static/images/loading-cat.gif)"></div>
                         <c:if test="${not empty product.getImageList()}">
                             <c:forEach items="${product.getImageList()}" var="image">
                                 <div class="swiper-slide" data-assets="${image.getImgPublicId()}"
@@ -174,7 +174,7 @@
                 <div class="swiper gallery-thumbs">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide" data-assets="${product.getImgPublicId()}"
-                             style="background-image:url(${pageContext.request.contextPath}/static/images/loading-cat.gif)"></div>
+                             style="background-image:url(/static/images/loading-cat.gif)"></div>
                         <c:if test="${not empty product.getImageList()}">
                             <c:forEach items="${product.getImageList()}" var="image">
                                 <div class="swiper-slide" data-assets="${image.getImgPublicId()}"

@@ -11,8 +11,7 @@ public class AbsDAO <T extends IModel> implements IDAO<T>{
    logDao = new LogDaoImpl();
   }
   @Override
-  public void insert(T model) {
+  public void insert(Log<T> model) {
     logDao.insertLog(model);
-
   }
 }

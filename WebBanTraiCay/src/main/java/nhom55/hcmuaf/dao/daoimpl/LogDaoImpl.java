@@ -8,14 +8,16 @@ import nhom55.hcmuaf.log.Log;
 public class LogDaoImpl<T> implements LogDao<T> {
 
   @Override
-  public void insertLog(T model) {
-      Log<T> log = (Log<T>) model;
+  public void insertLog(Log<T> log) {
       JDBIConnector.get().withHandle(handle -> {
-        handle.createUpdate("INSERT INTO logs (ip, level, address, pre_value, cur_value, create_at, update_at) " +
-                "VALUES (:ip, :level, :address, :preValue, :curValue, :createAt, :updateAt)")
-            .bind("ip", log.getIp())
+        handle.createUpdate("INSERT INTO logs (ip, level,national,note, address, preValue, currentValue, createAt, updateAt) "
+                +
+                "VALUES (:ip, :level,:national,:note , :address, :preValue, :curValue, :createAt, :updateAt)")
+            .bind("ip", log.getRequestInfo().getIp())
             .bind("level", log.getLevel().toString()) // Convert enum to string
-            .bind("address", log.getAddress())
+            .bind("address", log.getRequestInfo().getAddress())
+            .bind("national", log.getRequestInfo().getNation())
+            .bind("note", log.getNote())
             .bind("preValue", log.getPreValue())
             .bind("curValue", log.getCurValue())
             .bind("createAt", log.getCreateAt())
