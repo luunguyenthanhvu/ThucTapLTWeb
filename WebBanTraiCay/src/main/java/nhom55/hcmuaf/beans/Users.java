@@ -1,12 +1,12 @@
 package nhom55.hcmuaf.beans;
 
-import com.google.gson.JsonObject;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import nhom55.hcmuaf.log.IModel;
+import nhom55.hcmuaf.log.Log;
 
-public class Users implements Serializable{
+public class Users<T> extends Log<Users> implements Serializable, IModel {
 
   private int id;
   private String username;
@@ -23,7 +23,7 @@ public class Users implements Serializable{
   private LocalDateTime creationTime;
 
   public Users(String username, String password, String hash, String email, String address,
-               String phoneNumber) {
+      String phoneNumber) {
     this.username = username;
     this.password = password;
     this.hash = hash;
@@ -32,7 +32,8 @@ public class Users implements Serializable{
     this.phoneNumber = phoneNumber;
   }
 
-  public Users(int id, String username, String password, String hash, String email, String address, String phoneNumber, int status, String img, LocalDate dateOfBirth, String sexual, int role) {
+  public Users(int id, String username, String password, String hash, String email, String address,
+      String phoneNumber, int status, String img, LocalDate dateOfBirth, String sexual, int role) {
     this.id = id;
     this.username = username;
     this.password = password;
@@ -48,7 +49,7 @@ public class Users implements Serializable{
   }
 
   public Users(int id, String username, String password, String hash, String email, String address,
-               String phoneNumber, int status, String img, int role) {
+      String phoneNumber, int status, String img, int role) {
     this.id = id;
     this.username = username;
     this.password = password;
@@ -62,7 +63,7 @@ public class Users implements Serializable{
   }
 
   public Users(String username, String password, String email, String address, String phoneNum,
-               int status, String img, LocalDate date, String sexual, int role) {
+      int status, String img, LocalDate date, String sexual, int role) {
     this.username = username;
     this.password = password;
     this.email = email;
@@ -76,7 +77,7 @@ public class Users implements Serializable{
   }
 
   public Users(int id, String username, String email, String address, String phoneNumber,
-               int status, String img, LocalDate dateOfBirth, String sexual, int role) {
+      int status, String img, LocalDate dateOfBirth, String sexual, int role) {
     this.id = id;
     this.username = username;
     this.email = email;
@@ -90,7 +91,7 @@ public class Users implements Serializable{
   }
 
   public Users(String username, String password, String hash, String email, String address,
-               String phoneNum, int status) {
+      String phoneNum, int status) {
     this.username = username;
     this.password = password;
     this.hash = hash;
@@ -109,6 +110,15 @@ public class Users implements Serializable{
     this.role = role;
   }
 
+  public Users(String username, String email, String address, String phoneNumber, int status) {
+    this.username = username;
+    this.email = email;
+    this.address = address;
+    this.phoneNumber = phoneNumber;
+    this.status = status;
+    this.creationTime = LocalDateTime.now();
+  }
+
   public Users(String email, String hash, int status) {
     this.hash = hash;
     this.email = email;
@@ -119,10 +129,12 @@ public class Users implements Serializable{
     this.id = id;
     this.password = password;
   }
+
   public Users() {
   }
 
-  public Users(int id, String username, String email, String address, String phoneNumber, int status, LocalDate dateOfBirth, String gender, int role) {
+  public Users(int id, String username, String email, String address, String phoneNumber,
+      int status, LocalDate dateOfBirth, String gender, int role) {
     this.id = id;
     this.username = username;
     this.password = password;
@@ -137,8 +149,8 @@ public class Users implements Serializable{
   }
 
   public Users(int id, String username, String password, String hash, String email, String address,
-               String phoneNumber, int status, String img, LocalDate dateOfBirth, String sexual, int role,
-               LocalDateTime creationTime) {
+      String phoneNumber, int status, String img, LocalDate dateOfBirth, String sexual, int role,
+      LocalDateTime creationTime) {
     this.id = id;
     this.username = username;
     this.password = password;
@@ -154,7 +166,8 @@ public class Users implements Serializable{
     this.creationTime = creationTime;
   }
 
-  public Users(String username, String password, String hash, String email, String address, String phoneNumber, String address1, int i, LocalDateTime now) {
+  public Users(String username, String password, String hash, String email, String address,
+      String phoneNumber, String address1, int i, LocalDateTime now) {
     this.id = id;
     this.username = username;
     this.password = password;
@@ -277,19 +290,33 @@ public class Users implements Serializable{
   @Override
   public String toString() {
     return "Users{" +
-            "id=" + id +
-            ", username='" + username + '\'' +
-            ", password='" + password + '\'' +
-            ", hash='" + hash + '\'' +
-            ", email='" + email + '\'' +
-            ", address='" + address + '\'' +
-            ", phoneNumber='" + phoneNumber + '\'' +
-            ", status=" + status +
-            ", img='" + img + '\'' +
-            ", dateOfBirth=" + dateOfBirth +
-            ", sexual='" + sexual + '\'' +
-            ", role=" + role +
-            '}';
+        "id=" + id +
+        ", username='" + username + '\'' +
+        ", password='" + password + '\'' +
+        ", hash='" + hash + '\'' +
+        ", email='" + email + '\'' +
+        ", address='" + address + '\'' +
+        ", phoneNumber='" + phoneNumber + '\'' +
+        ", status=" + status +
+        ", img='" + img + '\'' +
+        ", dateOfBirth=" + dateOfBirth +
+        ", sexual='" + sexual + '\'' +
+        ", role=" + role +
+        '}';
   }
 
+  @Override
+  public String getTable() {
+    return "Users";
+  }
+
+  @Override
+  public String getBeforeData() {
+    return super.getPreValue();
+  }
+
+  @Override
+  public String GetAfterData() {
+    return super.getCurValue();
+  }
 }

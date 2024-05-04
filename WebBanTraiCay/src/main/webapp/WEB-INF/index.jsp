@@ -388,7 +388,7 @@
                 stroke-miterlimit="10"
                 stroke="#F96D00"/>
     </svg>
-</div>
+</div>void(0
 <script> var context = "${pageContext.request.contextPath}";</script>
 <script src="${pageContext.request.contextPath}/static/js/web-js/index-page.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>

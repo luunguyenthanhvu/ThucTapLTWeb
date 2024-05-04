@@ -1,10 +1,10 @@
 package nhom55.hcmuaf.enums;
 
 public enum LogLevels {
-  INFO("info"),
-  ALERT("alert"),
-  WARNING("warning"),
-  DANGER("danger");
+  INFO("INFO"),
+  ALERT("ALERT"),
+  WARNING("WARNING"),
+  DANGER("DANGER");
 
   private final String level;
 
