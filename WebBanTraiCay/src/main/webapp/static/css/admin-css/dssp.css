@@ -10,7 +10,7 @@
 .table-sanpham  {
     width: 100%;
     border-collapse: collapse;
-    height: 100%;
+    height: auto;
 }
 .table-sanpham th, td {
     padding: 10px;
