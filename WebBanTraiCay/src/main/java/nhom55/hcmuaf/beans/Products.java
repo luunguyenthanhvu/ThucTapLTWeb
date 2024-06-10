@@ -18,6 +18,12 @@ public class Products implements Serializable {
   private List<Image> imageList;
   private int adminCreate;
   private int provider;
+  private String seasonalFruit;
+  private String importedFruit;
+  private String driedFruit;
+
+  private String imgPublicId;
+  private String imgAssetId;
 
   public Products() {
 
@@ -80,6 +86,46 @@ public class Products implements Serializable {
     this.img = img;
     this.adminCreate = adminCreate;
     this.provider = provider;
+  }
+
+  public String getImgPublicId() {
+    return imgPublicId;
+  }
+
+  public void setImgPublicId(String imgPublicId) {
+    this.imgPublicId = imgPublicId;
+  }
+
+  public String getImgAssetId() {
+    return imgAssetId;
+  }
+
+  public void setImgAssetId(String imgAssetId) {
+    this.imgAssetId = imgAssetId;
+  }
+
+  public String getSeasonalFruit() {
+    return seasonalFruit;
+  }
+
+  public void setSeasonalFruit(String seasonalFruit) {
+    this.seasonalFruit = seasonalFruit;
+  }
+
+  public String getImportedFruit() {
+    return importedFruit;
+  }
+
+  public void setImportedFruit(String importedFruit) {
+    this.importedFruit = importedFruit;
+  }
+
+  public String getDriedFruit() {
+    return driedFruit;
+  }
+
+  public void setDriedFruit(String driedFruit) {
+    this.driedFruit = driedFruit;
   }
 
   public Products(int id, double weight) {
@@ -183,6 +229,7 @@ public class Products implements Serializable {
     this.imageList = imageList;
   }
 
+
   @Override
   public String toString() {
     return "Products{" +
@@ -195,9 +242,12 @@ public class Products implements Serializable {
         ", dateOfImporting=" + dateOfImporting +
         ", expriredDay=" + expriredDay +
         ", img='" + img + '\'' +
+        ", imageList=" + imageList +
         ", adminCreate=" + adminCreate +
         ", provider=" + provider +
+        ", seasonalFruit='" + seasonalFruit + '\'' +
+        ", importedFruit='" + importedFruit + '\'' +
+        ", driedFruit='" + driedFruit + '\'' +
         '}';
   }
-
 }

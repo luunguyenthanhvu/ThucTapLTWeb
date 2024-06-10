@@ -8,7 +8,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html lang="en">
 <head>
@@ -52,16 +51,18 @@
           href="${pageContext.request.contextPath}/static/css/web-css/flaticon.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/icomoon.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/fix.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/fix.css?v=2">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/toast.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <body class="goto-here">
 <nav class="navbar-container navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
      id="ftco-navbar">
     <div class="container navbar-container">
         <div class="navbar-brand">
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/page/home">Cửa Hàng Trái
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/page/home">Cửa Hàng
+                Trái
                 Cây</a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
@@ -73,8 +74,9 @@
             <ul class="navbar-nav">
                 <li class="nav-item active"><a href="${pageContext.request.contextPath}/page/home"
                                                class="nav-link">Trang Chủ</a></li>
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/page/shop/shop-forward"
-                                        class="nav-link">Cửa Hàng</a></li>
+                <li class="nav-item"><a
+                        href="${pageContext.request.contextPath}/page/shop/shop-forward"
+                        class="nav-link">Cửa Hàng</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/page/about"
                                         class="nav-link">Về Chúng Tôi</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/page/contact"
@@ -152,35 +154,35 @@
 <section class="ftco-section">
     <div class="container">
         <div class="row">
-            <c:set var="product" value="${requestScope.showProduct}"/>
             <div class="col-lg-6 mb-5 ftco-animate">
-                <a href="${product.getImg()}" class="image-popup">
-                    <img src="${product.getImg()}" class="img-fluid" alt="Colorlib Template">
-                </a>
-<%--                <div class="slider">--%>
-<%--                    <div class="list">--%>
-<%--                        <div class="item">--%>
-<%--                            <img src="https://images8.alphacoders.com/129/thumb-1920-1292335.jpg">--%>
-<%--                        </div>--%>
-<%--                        <div class="item">--%>
-<%--                            <img src="https://wallpapercave.com/wp/wp8364523.jpg" alt="">--%>
-<%--                        </div>--%>
-<%--                        <div class="item">--%>
-<%--                            <img src="https://images4.alphacoders.com/114/1144157.jpg" alt="">--%>
-<%--                        </div>--%>
-<%--                        <div class="item">--%>
-<%--                            <img src="https://wallpapercave.com/wp/wp5432785.jpg" alt="">--%>
-<%--                        </div>--%>
-<%--                        <div class="item">--%>
-<%--                            <img src="https://wallpapersmug.com/download/1600x900/1a66d0/beautiful-anime-kamado-nezuko.jpg" alt="">--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="buttons">--%>
-<%--                        <button id="prev"><</button>--%>
-<%--                        <button id="next">></button>--%>
-<%--                    </div>--%>
-
-<%--                </div>--%>
+                <c:set var="product" value="${requestScope.showProduct}"/>
+                <div class="swiper gallery-top">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" data-assets="${product.getImgPublicId()}"
+                             style="background-image:url(/static/images/loading-cat.gif)"></div>
+                        <c:if test="${not empty product.getImageList()}">
+                            <c:forEach items="${product.getImageList()}" var="image">
+                                <div class="swiper-slide" data-assets="${image.getImgPublicId()}"
+                                     style="background-image:url(${pageContext.request.contextPath}/static/images/loading-cat.gif)"></div>
+                            </c:forEach>
+                        </c:if>
+                    </div>
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next swiper-button-black"></div>
+                    <div class="swiper-button-prev swiper-button-black"></div>
+                </div>
+                <div class="swiper gallery-thumbs">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" data-assets="${product.getImgPublicId()}"
+                             style="background-image:url(/static/images/loading-cat.gif)"></div>
+                        <c:if test="${not empty product.getImageList()}">
+                            <c:forEach items="${product.getImageList()}" var="image">
+                                <div class="swiper-slide" data-assets="${image.getImgPublicId()}"
+                                     style="background-image:url(${pageContext.request.contextPath}/static/images/loading-cat.gif)"></div>
+                            </c:forEach>
+                        </c:if>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                 <h3>${product.getNameOfProduct()}</h3>
@@ -281,9 +283,12 @@
                 <div class="ftco-footer-widget mb-4 ml-md-5">
                     <h2 class="ftco-heading-2">Menu</h2>
                     <ul class="list-unstyled">
-                        <li><a href="${pageContext.request.contextPath}/page/shop/shop-forward" class="py-2 d-block">Cửa hàng chúng tôi</a></li>
-                        <li><a href="${pageContext.request.contextPath}/page/about" class="py-2 d-block">Về chúng tôi</a></li>
-                        <li><a  href="${pageContext.request.contextPath}/page/contact" class="py-2 d-block">Liên hệ với chúng tôi</a></li>
+                        <li><a href="${pageContext.request.contextPath}/page/shop/shop-forward"
+                               class="py-2 d-block">Cửa hàng chúng tôi</a></li>
+                        <li><a href="${pageContext.request.contextPath}/page/about"
+                               class="py-2 d-block">Về chúng tôi</a></li>
+                        <li><a href="${pageContext.request.contextPath}/page/contact"
+                               class="py-2 d-block">Liên hệ với chúng tôi</a></li>
                     </ul>
                 </div>
             </div>
@@ -366,10 +371,10 @@
 <script src="${pageContext.request.contextPath}/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="${pageContext.request.contextPath}/static/js/google-map.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/main.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.11.2/cloudinary-core-shrinkwrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/web-js/product-single.js?v=-2"></script>
 <script>
   $(document).ready(function () {
-
     var quantitiy = 0;
     $('.my-quantity-right-plus').click(function (e) {
 

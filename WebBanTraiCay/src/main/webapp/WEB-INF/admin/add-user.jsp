@@ -412,9 +412,9 @@
     var kyTuHopLe = /^[\p{L}\s']+$/u;
     var error = document.getElementById("ten_user_error");
     if (text.length == 0 || text == null) {
-      error.textContent = "Vui lòng nhập tên người dùng";
-      error.style.display = "block";
-      return false;
+        error.textContent = "Vui lòng nhập tên người dùng";
+        error.style.display = "block";
+        return false;
     } else if (!kyTuHopLe.test(text)) {
       error.textContent = "Tên người dùng  chỉ chứa ký tự chữ cái, khoảng trắng.";
       error.style.display = "block";
@@ -506,7 +506,7 @@
       error.style.display = "block";
       return false;
     } else if (!(check.test(text))) {
-      error.textContent = "Không đúng điịnh dạng số điện thoại. Vui lòng nhập lại (Vd: 0982407940)";
+      error.textContent = "Không đúng định dạng số điện thoại. Vui lòng nhập lại (Vd: 0982407940)";
       error.style.display = "block";
       return false;
     } else {

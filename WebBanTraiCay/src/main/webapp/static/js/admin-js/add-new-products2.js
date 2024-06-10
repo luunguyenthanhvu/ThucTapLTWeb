@@ -1,89 +1,24 @@
 ﻿'use strict';
 
 const api_key = "899244476586798";
-FilePond.registerPlugin(
-    FilePondPluginImagePreview,
-    FilePondPluginImageExifOrientation,
-    FilePondPluginFileValidateSize,
-    FilePondPluginImageEdit,
-    FilePondPluginImageCrop,
-    FilePondPluginImageTransform,
-    FilePondPluginImageFilter
-);
+FilePond.registerPlugin(FilePondPluginImagePreview,
+    FilePondPluginImageExifOrientation, FilePondPluginFileValidateSize,
+    FilePondPluginImageEdit, FilePondPluginImageCrop,
+    FilePondPluginImageTransform, FilePondPluginImageFilter);
 
 // Select the file input and use
 // create() to turn it into a pond
-FilePond.create(
-    document.querySelector('#upfileAnh'),
-    {
-      allowMultiple: true,
-      acceptedFileTypes: ['image/*'],
-      maxFiles: 1,
-      instantUpload: true,
-      labelIdle: 'Chọn ảnh',
-      stylePanelLayout: 'stacked',
-      styleButtonProcessItemPosition: 'right'
-    }
-);
-
-FilePond.create(
-    document.querySelector('#upfileAnh1'),
-    {
-      allowMultiple: true,
-      acceptedFileTypes: ['image/*'],
-      maxFiles: 1,
-      instantUpload: true,
-      labelIdle: 'Chọn ảnh',
-      stylePanelLayout: 'stacked',
-      styleButtonProcessItemPosition: 'right'
-    }
-);
-
-FilePond.create(
-    document.querySelector('#upfileAnh2'),
-    {
-      allowMultiple: true,
-      acceptedFileTypes: ['image/*'],
-      maxFiles: 1,
-      instantUpload: true,
-      labelIdle: 'Chọn ảnh',
-      stylePanelLayout: 'stacked',
-      styleButtonProcessItemPosition: 'right'
-    }
-);
-
-FilePond.create(
-    document.querySelector('#upfileAnh3'),
-    {
-      allowMultiple: true,
-      acceptedFileTypes: ['image/*'],
-      maxFiles: 1,
-      instantUpload: true,
-      labelIdle: 'Chọn ảnh',
-      stylePanelLayout: 'stacked',
-      styleButtonProcessItemPosition: 'right'
-    }
-);
-
-FilePond.create(
-    document.querySelector('#upfileAnh4'),
-    {
-      allowMultiple: true,
-      acceptedFileTypes: ['image/*'],
-      maxFiles: 1,
-      instantUpload: true,
-      labelIdle: 'Chọn ảnh',
-      stylePanelLayout: 'stacked',
-      styleButtonProcessItemPosition: 'right'
-    }
-);
-
-let imgList = [];
-
-FilePond.setOptions({
+FilePond.create(document.querySelector('#upfileAnh'), {
+  allowMultiple: true,
+  acceptedFileTypes: ['image/*'],
+  maxFiles: 1,
+  instantUpload: true,
+  labelIdle: 'Chọn ảnh',
+  stylePanelLayout: 'stacked',
+  styleButtonProcessItemPosition: 'right',
   server: {
-    process: async (fieldName, file, metadata, load, error, progress, abort, transfer,
-        options) => {
+    process: async (fieldName, file, metadata, load, error, progress, abort,
+        transfer, options) => {
       try {
         let public_id;
         const signatureResponse = await axios.get(
@@ -96,10 +31,12 @@ FilePond.setOptions({
         formData.append("timestamp", signatureResponse.data.timestamp);
 
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://api.cloudinary.com/v1_1/dter3mlpl/image/upload');
+        xhr.open('POST',
+            'https://api.cloudinary.com/v1_1/dter3mlpl/image/upload');
         xhr.upload.onprogress = (event) => {
           console.log(event.loaded / event.total); // Log the progress
-          const progressPercentage = Math.round((event.loaded / event.total) * 100);
+          const progressPercentage = Math.round(
+              (event.loaded / event.total) * 100);
           progress(progressPercentage);
         };
         xhr.onload = () => {
@@ -108,7 +45,13 @@ FilePond.setOptions({
             const response = JSON.parse(xhr.responseText);
             console.log(response);
             public_id = response.public_id;
-            imgList.push(response.url);
+            imgList.push({
+              publicId: response.public_id,
+              assetId: response.asset_id,
+              url: response.url,
+              category: 'main'
+            });
+            console.log(imgList)
             FilePond.setOptions({
               fileMetadata: {
                 [file.id]: {
@@ -138,10 +81,96 @@ FilePond.setOptions({
         console.error(err);
         error('Error occurred during upload');
       }
-    },
-    revert: (source, load, error) => {
+    }, revert: (source, load, error) => {
       removeImage(source);
-      const doDelete = async function() {
+      const doDelete = async function () {
+        axios.get(`${window.context}/cloudinary/remove-image`, {
+          params: {id: source},
+        }).then((response) => {
+          console.log(response)
+          load('')
+        });
+      }
+      doDelete();
+    },
+  }
+});
+FilePond.create(document.querySelector('#upMultiFileImg'), {
+  allowMultiple: true,
+  acceptedFileTypes: ['image/*'],
+  maxFiles: 6,
+  instantUpload: true,
+  labelIdle: 'Chọn ảnh',
+  stylePanelLayout: 'stacked',
+  styleButtonProcessItemPosition: 'right',
+  server: {
+    process: async (fieldName, file, metadata, load, error, progress, abort,
+        transfer, options) => {
+      try {
+        let public_id;
+        const signatureResponse = await axios.get(
+            `${window.context}/cloudinary/get-signature`);
+
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("api_key", api_key);
+        formData.append("signature", signatureResponse.data.signature);
+        formData.append("timestamp", signatureResponse.data.timestamp);
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST',
+            'https://api.cloudinary.com/v1_1/dter3mlpl/image/upload');
+        xhr.upload.onprogress = (event) => {
+          console.log(event.loaded / event.total); // Log the progress
+          const progressPercentage = Math.round(
+              (event.loaded / event.total) * 100);
+          progress(progressPercentage);
+        };
+        xhr.onload = () => {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            load(xhr.responseText);
+            const response = JSON.parse(xhr.responseText);
+            console.log(response);
+            public_id = response.public_id;
+            imgList.push({
+              publicId: response.public_id,
+              assetId: response.asset_id,
+              url: response.url,
+              category: 'sup'
+            });
+            console.log(imgList)
+            FilePond.setOptions({
+              fileMetadata: {
+                [file.id]: {
+                  fileId: public_id
+                }
+              }
+            });
+            load(public_id);
+          } else {
+            error('Upload error');
+          }
+        };
+        xhr.onerror = () => {
+          error('Upload error');
+        };
+
+        xhr.send(formData);
+
+        // Return a function to handle cancellation
+        return {
+          abort: () => {
+            xhr.abort();
+            abort();
+          }
+        };
+      } catch (err) {
+        console.error(err);
+        error('Error occurred during upload');
+      }
+    }, revert: (source, load, error) => {
+      removeImage(source);
+      const doDelete = async function () {
         axios.get(`${window.context}/cloudinary/remove-image`, {
           params: {id: source},
         }).then((response) => {
@@ -154,10 +183,11 @@ FilePond.setOptions({
   }
 });
 
-function removeImage(public_id) {
-  imgList = imgList.filter((image) => image.public_id !== public_id);
-}
+let imgList = [];
 
+function removeImage(public_id) {
+  imgList = imgList.filter((image) => image.publicId !== public_id);
+}
 
 CKEDITOR.replace('editor');
 let arrow = document.querySelectorAll(".arrow");
@@ -175,6 +205,7 @@ sidebarBtn.addEventListener("click", () => {
 });
 
 var myVar;
+
 function myFunction() {
   myVar = setTimeout(showPage, 5);
 }
@@ -193,6 +224,9 @@ var kgMacDinhSP = document.getElementById("kgMacDinh_sp");
 var nhaCC = document.getElementById("provider_product");
 var ngayHetHan = document.getElementById("expired_day");
 var upfileAnh = document.getElementById("upfileAnh");
+var seasonalFruit = document.getElementById("seasonalFruitSelect");
+var sourceImport = document.getElementById("sourceImport");
+var driedFruit = document.getElementById("driedFruit");
 
 function validateTenSP() {
   var text = tenSP.value;
@@ -341,7 +375,6 @@ function validateMoTaSP() {
   }
 }
 
-
 // add event to check input
 tenSP.addEventListener("blur", validateTenSP);
 // moTaSP.addEventListener("blur", validateMoTaSP);
@@ -351,8 +384,8 @@ kgMacDinhSP.addEventListener("blur", validateKgMacDinhSP);
 nhaCC.addEventListener("blur", validateNhaCC);
 ngayHetHan.addEventListener("blur", validateNgayHetHan);
 upfileAnh.addEventListener("blur", validateFileUpload);
-
 $("#submit_product_btn").click(addNewProduct);
+
 // stop user send post to server
 function addNewProduct() {
   const isTenSPValid = validateTenSP();
@@ -364,52 +397,79 @@ function addNewProduct() {
   const isNgayHetHanValid = validateNgayHetHan();
   const isFileValid = validateFileUpload();
 
-  if (!isTenSPValid || !isMoTaSPValid || !isGiaTienValid || !isKhoiLuongSPValid
-      || !isKgMacDinhSPValid || !isNhaCCValid || !isNgayHetHanValid || !isFileValid) {
-    console.log(imgList);
-    var imgListJSON = JSON.stringify(imgList);
-  } else {
-    const product = {
-      name: tenSP.value,
-      description: moTaSP.getData(),
-      price: giaTienSP.value,
-      quantity: khoiLuongSP.value,
-      defaultWeight: kgMacDinhSP.value,
-      supplier: nhaCC.value,
-      expirationDate: ngayHetHan.value,
-      img: imgListJSON
-    };
+  // get info image thumbnail for product
+  let mainImages = imgList.filter(image => image.category === 'main').map(
+      image => image.url);
+  let mainImgPublicId = imgList.filter(image => image.category === 'main').map(
+      image => image.publicId);
+  let mainImgAssetId = imgList.filter(image => image.category === 'main').map(
+      image => image.assetId);
+  // get sub img info for product
+  const supImages = imgList.filter(image => image.category === 'sup').map(
+      image => image.url);
+  const supImagesString = supImages.join(',');
 
-    console.log(product)
+  const supImgPublicId = imgList.filter(image => image.category === 'sup').map(
+      image => image.publicId);
+  const supImgPublicIdStr = supImgPublicId.join(',');
 
-    $.ajax({
-      type: 'POST',
-      url: `${window.context}/admin/product/add-new-product`,
-      data: {
-        action: 'add',
-        name: tenSP.value,
-        description: moTaSP.getData(),
-        price: giaTienSP.value,
-        quantity: khoiLuongSP.value,
-        defaultWeight: kgMacDinhSP.value,
-        supplier: nhaCC.value,
-        expirationDate: ngayHetHan.value,
-        img: imgList
-      },
-      success: function () {
+  const supImgAssetId = imgList.filter(image => image.category === 'sup').map(
+      image => image.assetId);
+  const supImgAssetIdStr = supImgAssetId.join(',');
 
-      },
-      error: function (error) {
-        console.log(error); // Xem nội dung của error object trong console
-
-        // Kiểm tra xem có thuộc tính message hay không
-        if (error.hasOwnProperty('message')) {
-          alert(error.message);
-        } else {
-          alert("Lỗi không xác định");
-        }
+  Swal.fire({
+    title: "Bạn có muốn lưu sản phẩm không?",
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: "Lưu",
+    denyButtonText: `Không lưu`,
+    cancelButtonText: 'Hủy',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      if (!isTenSPValid || !isMoTaSPValid || !isGiaTienValid
+          || !isKhoiLuongSPValid
+          || !isKgMacDinhSPValid || !isNhaCCValid || !isNgayHetHanValid
+          || !isFileValid) {
+        Swal.fire("Vui Lòng nhập dữ liệu!", "", "warning");
+      } else {
+        $.ajax({
+          type: 'POST',
+          url: `${window.context}/admin/product/add-new-product`,
+          data: {
+            name: tenSP.value,
+            description: moTaSP.getData(),
+            seasonalFruit: seasonalFruit.value,
+            sourceImport: sourceImport.value,
+            driedFruit: driedFruit.value,
+            price: giaTienSP.value,
+            quantity: khoiLuongSP.value,
+            defaultWeight: kgMacDinhSP.value,
+            supplier: nhaCC.value,
+            expirationDate: ngayHetHan.value,
+            img: mainImages[0],
+            supImages: supImagesString,
+            mainImgPublicId: mainImgPublicId[0],
+            mainImgAssetId: mainImgAssetId[0],
+            supImgPublicId: supImgPublicIdStr,
+            supImgAssetId: supImgAssetIdStr
+          },
+          success: function (response) {
+            console.log(response.message)
+            Swal.fire(response.message, "", "success");
+          },
+          error: function (error) {
+            console.log(error); // Xem nội dung của error object trong console
+            if (error.hasOwnProperty('message')) {
+              alert(error.message);
+            } else {
+              alert("Lỗi không xác định");
+            }
+          }
+        })
       }
-    })
-  }
+    } else if (result.isDenied) {
+      Swal.fire("Changes are not saved", "", "info");
+    }
+  });
 }
 

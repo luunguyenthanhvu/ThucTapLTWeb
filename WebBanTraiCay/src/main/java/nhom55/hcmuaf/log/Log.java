@@ -5,27 +5,36 @@ import nhom55.hcmuaf.enums.LogLevels;
 
 public class Log<T> {
   private int id;
-  private String ip;
   private LogLevels level;
-  private String address;
+  private String note;
   private String preValue;
   private String curValue;
   private LocalDateTime createAt;
   private LocalDateTime updateAt;
+  private RequestInfo requestInfo;
 
-  public Log(int id, String ip, LogLevels level, String address, String preValue, String curValue, LocalDateTime createAt, LocalDateTime updateAt) {
+
+  public Log() {
+
+  }
+
+  public Log(int id, LogLevels level, String preValue, String curValue, LocalDateTime createAt,
+      LocalDateTime updateAt, RequestInfo requestInfo) {
     this.id = id;
-    this.ip = ip;
     this.level = level;
-    this.address = address;
     this.preValue = preValue;
     this.curValue = curValue;
     this.createAt = createAt;
     this.updateAt = updateAt;
+    this.requestInfo = requestInfo;
   }
 
-  public Log() {
-
+  public Log(String preValue, String curValue,
+     LocalDateTime updateAt) {
+    this.preValue = preValue;
+    this.curValue = curValue;
+    this.createAt = LocalDateTime.now();
+    this.updateAt = updateAt;
   }
 
   public int getId() {
@@ -36,28 +45,12 @@ public class Log<T> {
     this.id = id;
   }
 
-  public String getIp() {
-    return ip;
-  }
-
-  public void setIp(String ip) {
-    this.ip = ip;
-  }
-
   public LogLevels getLevel() {
     return level;
   }
 
   public void setLevel(LogLevels level) {
     this.level = level;
-  }
-
-  public String getAddress() {
-    return address;
-  }
-
-  public void setAddress(String address) {
-    this.address = address;
   }
 
   public String getPreValue() {
@@ -90,5 +83,22 @@ public class Log<T> {
 
   public void setUpdateAt(LocalDateTime updateAt) {
     this.updateAt = updateAt;
+  }
+
+  public RequestInfo getRequestInfo() {
+    return requestInfo;
+  }
+
+
+  public void setRequestInfo(RequestInfo requestInfo) {
+    this.requestInfo = requestInfo;
+  }
+
+  public String getNote() {
+    return note;
+  }
+
+  public void setNote(String note) {
+    this.note = note;
   }
 }
