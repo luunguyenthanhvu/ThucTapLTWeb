@@ -67,7 +67,6 @@ FilePond.create(document.querySelector('#upfileAnh'), {
         xhr.onerror = () => {
           error('Upload error');
         };
-
         xhr.send(formData);
 
         // Return a function to handle cancellation
