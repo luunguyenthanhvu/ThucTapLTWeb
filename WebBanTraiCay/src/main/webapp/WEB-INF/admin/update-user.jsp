@@ -13,7 +13,7 @@
     <%@ page isELIgnored="false" %>
     <meta charset="UTF-8">
     <title>Quản lý cửa hàng</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin-css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin-css/style.css?v=2">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin-css/update-user.css">
 
     <!-- Boxiocns CDN Link -->
@@ -32,7 +32,10 @@
                     <path d="M36.8 192H603.2c20.3 0 36.8-16.5 36.8-36.8c0-7.3-2.2-14.4-6.2-20.4L558.2 21.4C549.3 8 534.4 0 518.3 0H121.7c-16 0-31 8-39.9 21.4L6.2 134.7c-4 6.1-6.2 13.2-6.2 20.4C0 175.5 16.5 192 36.8 192zM64 224V384v80c0 26.5 21.5 48 48 48H336c26.5 0 48-21.5 48-48V384 224H320V384H128V224H64zm448 0V480c0 17.7 14.3 32 32 32s32-14.3 32-32V224H512z"/>
                 </svg>
             </i>
-            <span class="logo_name">Quản trị viên</span>
+            <span class="logo_name" style="font-size: 19px">Quản trị viên</span>
+            <i class="btn-close-home" style="padding-left: 13px;padding-top: 10px;  display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" height="0.8em" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/></svg>
+            </i>
         </div>
         <ul class="nav-links">
             <li>
@@ -338,29 +341,32 @@
 
 <script>
   let arrow = document.querySelectorAll(".arrow");
+  let closeSideBarBtn = document.querySelector(".btn-close-home");
+
   for (var i = 0; i < arrow.length; i++) {
     arrow[i].addEventListener("click", (e) => {
-      let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+      let arrowParent = e.target.parentElement.parentElement; // Trở về phần tử cha của mũi tên
       arrowParent.classList.toggle("showMenu");
     });
   }
+
   let sidebar = document.querySelector(".sidebar");
   let sidebarBtn = document.querySelector(".bx-menu");
 
-  console.log(sidebarBtn);
   sidebarBtn.addEventListener("click", () => {
     sidebar.classList.toggle("close");
+
+    // Sau khi toggle sidebar, kiểm tra và điều chỉnh hiển thị nút đóng sidebar
+    if (!sidebar.classList.contains("close")) {
+      closeSideBarBtn.style.display = "inline-block"; // Hiển thị nút đóng
+    } else {
+      closeSideBarBtn.style.display = "none"; // Ẩn nút đóng
+    }
   });
 
-  $(document).ready(function () {
-    $('#fileInput').change(function (e) {
-      var file = e.target.files[0];
-      var reader = new FileReader();
-      reader.onload = function (event) {
-        $('#previewImage').attr('src', event.target.result);
-      };
-      reader.readAsDataURL(file);
-    });
+  closeSideBarBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("close");
+    closeSideBarBtn.style.display = "none"; // Luôn ẩn nút đóng khi click để đóng sidebar
   });
 
   var myVar;
@@ -373,7 +379,6 @@
     document.getElementById("loader").style.display = "none";
     document.getElementById("myDiv").style.display = "block";
   }
-
 
 </script>
 
