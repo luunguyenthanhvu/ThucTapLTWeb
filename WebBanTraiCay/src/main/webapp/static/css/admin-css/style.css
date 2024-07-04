@@ -12,8 +12,12 @@
 .fill-black {
     fill: black;
 }
+.logo_name {
+    font-size: 19px;
+}
 .sidebar{
-    position: fixed;
+    position: absolute;
+    z-index: 1000;
     top: 0;
     left: 0;
     height: 100%;
@@ -24,6 +28,7 @@
 }
 .sidebar.close{
     width: 78px;
+    position:fixed;
 }
 .sidebar .logo-details{
     height: 60px;
@@ -215,14 +220,19 @@
 .sidebar .profile-details .job{
     font-size: 12px;
 }
-.home-section{
+.home-section {
     position: relative;
     background: #E4E9F7;
+    left: 78px;
     height: 100%;
-    left: 280px;
-    width: calc(100% - 280px);
+    min-height: 100vh;
+    width: calc(100% - 78px);
     transition: all 0.5s ease;
     padding-bottom: 30px;
+}
+.sidebar.close ~ .home-section {
+    left: 78px;
+    width: calc(100% - 78px);
 }
 .sidebar.close ~ .home-section{
     left: 78px;
@@ -330,6 +340,4 @@
 i svg {
     fill: #FFFFFF;
 }
-.error {
-    color: red;
-}
+
