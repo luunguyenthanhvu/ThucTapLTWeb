@@ -83,6 +83,12 @@ public class BillDaoImpl implements BillDao {
              return true;
          }
     }
+
+    @Override
+    public String getStatusOfABill(int idBill) {
+        return null;
+    }
+
     @Override
     public boolean degreeAmountWhenOderingSuccessfully(int idProduct, int quantity) {
         JDBIConnector.get().withHandle( h-> {
