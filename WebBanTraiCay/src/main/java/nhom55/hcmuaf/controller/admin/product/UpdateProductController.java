@@ -4,11 +4,9 @@ import nhom55.hcmuaf.beans.Products;
 import nhom55.hcmuaf.beans.Providers;
 import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.dao.ProviderDao;
-import nhom55.hcmuaf.dao.ProviderDaoImpl;
-import nhom55.hcmuaf.services.ProviderService;
+import nhom55.hcmuaf.dao.daoimpl.ProviderDaoImpl;
 import nhom55.hcmuaf.services.ShopService;
 import nhom55.hcmuaf.services.UpdateProductServiceForAdmin;
-import nhom55.hcmuaf.util.ProductValidator;
 import nhom55.hcmuaf.util.UpdatedProductValidator;
 
 import javax.servlet.*;

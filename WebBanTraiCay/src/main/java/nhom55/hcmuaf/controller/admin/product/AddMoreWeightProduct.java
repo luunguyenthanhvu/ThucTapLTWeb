@@ -32,7 +32,7 @@ public class AddMoreWeightProduct extends HttpServlet {
     Products products = ProductService.getInstance().getById(id);
     if(result) {
       response.getWriter()
-          .write("{ \"status\": \"success\", \"message\": \"Success\" , \"updatedWeight\" : \"" +products.getWeight()+ "\"}");
+          .write("{ \"status\": \"success\", \"message\": \"Success\" , \"updatedWeight\" }");
     } else {
       response.getWriter()
           .write("{ \"status\": \"error\", \"message\": \"Product does not exist\" }");

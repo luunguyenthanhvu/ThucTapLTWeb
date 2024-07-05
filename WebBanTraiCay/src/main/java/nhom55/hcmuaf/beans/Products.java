@@ -2,146 +2,210 @@ package nhom55.hcmuaf.beans;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 public class Products implements Serializable {
-    private int id;
-    private String nameOfProduct;
-    private String description;
-    private double price;
-    private double weight;
-    private double weightDefault;
-    private Date dateOfImporting;
-    private Date expriredDay;
-    private String img;
-    private int adminCreate;
-    private int provider;
 
-    public Products() {
+  private int id;
+  private String nameOfProduct;
+  private String description;
+  private double price;
+  private double weightDefault;
+  private Date dateOfImporting;
+  private int expriredDay;
+  private List<Image> imageList;
+  private int adminCreate;
+  private int provider;
+  private String seasonalFruit;
+  private String importedFruit;
+  private String imgPublicId;
+  private String imgAssetId;
 
-    }
+  public Products() {
 
-    public Products(int id, String nameOfProduct, String description, double price, double weight, double weightDefault, Date dateOfImporting, Date expriredDay, String img, int adminCreate, int provider) {
-        this.id = id;
-        this.nameOfProduct = nameOfProduct;
-        this.description = description;
-        this.price = price;
-        this.weight = weight;
-        this.weightDefault = weightDefault;
-        this.dateOfImporting = dateOfImporting;
-        this.expriredDay = expriredDay;
-        this.img = img;
-        this.adminCreate = adminCreate;
-        this.provider = provider;
-    }
+  }
 
-    public Products(int id, double weight) {
-        this.id = id;
-        this.weight = weight;
-    }
+  public Products(String nameOfProduct, String description, double price,
+      double weightDefault, int provider,int expriredDay, List<Image> imageList) {
+    this.nameOfProduct = nameOfProduct;
+    this.description = description;
+    this.price = price;
+    this.weightDefault = weightDefault;
+    this.provider = provider;
+    this.expriredDay = expriredDay;
+    this.imageList = imageList;
+  }
 
-    public int getId() {
-        return id;
-    }
+  public Products(int id, String nameOfProduct, String description, double price,
+      double weightDefault, int expriredDay, List<Image> imageList, int provider) {
+    this.id = id;
+    this.nameOfProduct = nameOfProduct;
+    this.description = description;
+    this.price = price;
+    this.weightDefault = weightDefault;
+    this.expriredDay = expriredDay;
+    this.imageList = imageList;
+    this.provider = provider;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public Products(int id, String nameOfProduct, String description, double price,
+      double weightDefault, Date dateOfImporting, int expriredDay,
+      List<Image> imageList,
+      int adminCreate, int provider) {
+    this.id = id;
+    this.nameOfProduct = nameOfProduct;
+    this.description = description;
+    this.price = price;
+    this.weightDefault = weightDefault;
+    this.dateOfImporting = dateOfImporting;
+    this.expriredDay = expriredDay;
+    this.imageList = imageList;
+    this.adminCreate = adminCreate;
+    this.provider = provider;
+  }
 
-    public String getNameOfProduct() {
-        return nameOfProduct;
-    }
+  public Products(int id, String nameOfProduct, String description, double price,
+      double weightDefault, Date dateOfImporting, int expriredDay, int adminCreate,
+      int provider) {
+    this.id = id;
+    this.nameOfProduct = nameOfProduct;
+    this.description = description;
+    this.price = price;
+    this.weightDefault = weightDefault;
+    this.dateOfImporting = dateOfImporting;
+    this.expriredDay = expriredDay;
+    this.adminCreate = adminCreate;
+    this.provider = provider;
+  }
 
-    public void setNameOfProduct(String nameOfProduct) {
-        this.nameOfProduct = nameOfProduct;
-    }
+  public String getImgPublicId() {
+    return imgPublicId;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public void setImgPublicId(String imgPublicId) {
+    this.imgPublicId = imgPublicId;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  public String getImgAssetId() {
+    return imgAssetId;
+  }
 
-    public double getPrice() {
-        return price;
-    }
+  public void setImgAssetId(String imgAssetId) {
+    this.imgAssetId = imgAssetId;
+  }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+  public String getSeasonalFruit() {
+    return seasonalFruit;
+  }
 
-    public double getWeight() {
-        return weight;
-    }
+  public void setSeasonalFruit(String seasonalFruit) {
+    this.seasonalFruit = seasonalFruit;
+  }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
+  public String getImportedFruit() {
+    return importedFruit;
+  }
 
-    public double getWeightDefault() {
-        return weightDefault;
-    }
+  public void setImportedFruit(String importedFruit) {
+    this.importedFruit = importedFruit;
+  }
 
-    public void setWeightDefault(double weightDefault) {
-        this.weightDefault = weightDefault;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public Date getDateOfImporting() {
-        return dateOfImporting;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public void setDateOfImporting(Date dateOfImporting) {
-        this.dateOfImporting = dateOfImporting;
-    }
+  public String getNameOfProduct() {
+    return nameOfProduct;
+  }
 
-    public Date getExpriredDay() {
-        return expriredDay;
-    }
+  public void setNameOfProduct(String nameOfProduct) {
+    this.nameOfProduct = nameOfProduct;
+  }
 
-    public void setExpriredDay(Date expriredDay) {
-        this.expriredDay = expriredDay;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public String getImg() {
-        return img;
-    }
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-    public void setImg(String img) {
-        this.img = img;
-    }
+  public double getPrice() {
+    return price;
+  }
 
-    public int getAdminCreate() {
-        return adminCreate;
-    }
+  public void setPrice(double price) {
+    this.price = price;
+  }
 
-    public void setAdminCreate(int adminCreate) {
-        this.adminCreate = adminCreate;
-    }
+  public double getWeightDefault() {
+    return weightDefault;
+  }
 
-    public int getProvider() {
-        return provider;
-    }
+  public void setWeightDefault(double weightDefault) {
+    this.weightDefault = weightDefault;
+  }
 
-    public void setProvider(int provider) {
-        this.provider = provider;
-    }
+  public Date getDateOfImporting() {
+    return dateOfImporting;
+  }
 
-    @Override
-    public String toString() {
-        return "Products{" +
-                "id=" + id +
-                ", nameOfProduct='" + nameOfProduct + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", weight=" + weight +
-                ", weightDefault=" + weightDefault +
-                ", dateOfImporting=" + dateOfImporting +
-                ", expriredDay=" + expriredDay +
-                ", img='" + img + '\'' +
-                ", adminCreate=" + adminCreate +
-                ", provider=" + provider +
-                '}';
-    }
+  public void setDateOfImporting(Date dateOfImporting) {
+    this.dateOfImporting = dateOfImporting;
+  }
 
+  public int getExpriredDay() {
+    return expriredDay;
+  }
+
+  public void setExpriredDay(int expriredDay) {
+    this.expriredDay = expriredDay;
+  }
+
+  public int getAdminCreate() {
+    return adminCreate;
+  }
+
+  public void setAdminCreate(int adminCreate) {
+    this.adminCreate = adminCreate;
+  }
+
+  public int getProvider() {
+    return provider;
+  }
+
+  public void setProvider(int provider) {
+    this.provider = provider;
+  }
+
+  public List<Image> getImageList() {
+    return imageList;
+  }
+
+  public void setImageList(List<Image> imageList) {
+    this.imageList = imageList;
+  }
+
+
+  @Override
+  public String toString() {
+    return "Products{" +
+        "id=" + id +
+        ", nameOfProduct='" + nameOfProduct + '\'' +
+        ", description='" + description + '\'' +
+        ", price=" + price +
+        ", weightDefault=" + weightDefault +
+        ", dateOfImporting=" + dateOfImporting +
+        ", expriredDay=" + expriredDay +
+        ", imageList=" + imageList +
+        ", adminCreate=" + adminCreate +
+        ", provider=" + provider +
+        ", seasonalFruit='" + seasonalFruit + '\'' +
+        ", importedFruit='" + importedFruit + '\'' +
+        '}';
+  }
 }

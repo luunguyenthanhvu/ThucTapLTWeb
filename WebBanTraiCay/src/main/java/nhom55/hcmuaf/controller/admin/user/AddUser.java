@@ -3,7 +3,7 @@ package nhom55.hcmuaf.controller.admin.user;
 import nhom55.hcmuaf.beans.Role;
 import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.dao.RoleDAO;
-import nhom55.hcmuaf.dao.RoleDAOImpl;
+import nhom55.hcmuaf.dao.daoimpl.RoleDAOImpl;
 import nhom55.hcmuaf.services.RegisterAccountServiceForAdmin;
 import nhom55.hcmuaf.util.MyUtils;
 import nhom55.hcmuaf.util.UserValidator;

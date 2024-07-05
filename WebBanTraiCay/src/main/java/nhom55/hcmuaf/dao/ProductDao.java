@@ -35,17 +35,19 @@ public interface ProductDao {
 //    Sắp xếp theo điều kiện filter (option: tên, giá, ngày nhập khẩu, filter:asc,desc)
   List<Products> sortByFilter(int index, int quantityDefault, String sortBy, String order);
 
-  void addNewProduct(String productName, String description, double price,
-      double weightQuantity, double weightDefault, Date dateImport, Date expirationDate,
-      String imgProduct, int adminId, int provider);
+  int addNewProduct(String productName, String description, double price, double weightDefault, Date dateImport, int expirationDate,
+      int adminId, int provider, String season,
+      String imgPublicId, String imgAssetId);
 
 //   Phần phục vụ cho quản lý sản phẩm của admin
 
-  public void editProductNoImage(int idProduct, String name, String des,String mua, String nguonNhap, String driedFruit, double giaTien,
+  public void editProductNoImage(int idProduct, String name, String des, String mua,
+      String nguonNhap, String driedFruit, double giaTien,
       double khoiLuong, double soKgMacDinh, Date ngayNhapKho, Date ngayHetHan, int idAdmin,
       int idnhaCungCap);
 
-  public void editProductHaveImage(int idProduct, String name, String des,String mua, String nguonNhap, String driedFruit, double giaTien,
+  public void editProductHaveImage(int idProduct, String name, String des, String mua,
+      String nguonNhap, String driedFruit, double giaTien,
       double khoiLuong, double soKgMacDinh, Date ngayNhapKho, Date ngayHetHan, String tenAnh,
       int idAdmin, int idnhaCungCap);
 
@@ -54,8 +56,13 @@ public interface ProductDao {
   public List<Products> printExpiredProduct(int index, int quantityDefault);
 
   public List<Products> searchExpiredProduct(String search, int index, int sizePage);
+
   boolean addMoreWeight(int id, double weight);
+
   double getTotalMoneyMonth(int month);
+
   public int countTotalRowProductInDatabaseForExpiredProduct();
+
   public int countResultSearchingProductForExpiredProduct(String txtSearch);
 };
+

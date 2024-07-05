@@ -57,7 +57,8 @@
      id="ftco-navbar">
     <div class="container navbar-container">
         <div class="navbar-brand">
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/page/home">Cửa Hàng Trái
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/page/home">Cửa Hàng
+                Trái
                 Cây</a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
@@ -69,8 +70,9 @@
             <ul class="navbar-nav">
                 <li class="nav-item active"><a href="${pageContext.request.contextPath}/page/home"
                                                class="nav-link">Trang Chủ</a></li>
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/page/shop/shop-forward"
-                                        class="nav-link">Cửa Hàng</a></li>
+                <li class="nav-item"><a
+                        href="${pageContext.request.contextPath}/page/shop/shop-forward"
+                        class="nav-link">Cửa Hàng</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/page/about"
                                         class="nav-link">Về Chúng Tôi</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/page/contact"
@@ -242,11 +244,11 @@
             <c:forEach items="${listProducts}" var="product">
                 <div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
                     <div class="product">
-                        <a href="" class="img-prod"><img
-                                style="width: 253.4px; height: 164px; object-fit: cover"
-                                class="img-fluid" src="${product.getImg()}"
-                                alt="Colorlib Template">
-
+                        <a href="" class="img-prod" data-assets="${product.getImgPublicId()}">
+                            <img
+                                    style="width: 253.4px; height: 164px; object-fit: cover"
+                                    class="img-fluid" src="${pageContext.request.contextPath}/static/images/loading-cat.gif"
+                                    alt="Colorlib Template">
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
                             <span name="quantity-product" hidden data-value="1"> </span>
@@ -311,11 +313,14 @@
                 <div class="ftco-footer-widget mb-4 ml-md-5">
                     <h2 class="ftco-heading-2">Menu</h2>
                     <ul class="list-unstyled">
-                        <li><a href="${pageContext.request.contextPath}/page/shop/shop-forward" class="py-2 d-block">Cửa
+                        <li><a href="${pageContext.request.contextPath}/page/shop/shop-forward"
+                               class="py-2 d-block">Cửa
                             hàng chúng tôi</a></li>
-                        <li><a href="${pageContext.request.contextPath}/page/about" class="py-2 d-block">Về chúng
+                        <li><a href="${pageContext.request.contextPath}/page/about"
+                               class="py-2 d-block">Về chúng
                             tôi</a></li>
-                        <li><a href="${pageContext.request.contextPath}/page/contact" class="py-2 d-block">Liên hệ với
+                        <li><a href="${pageContext.request.contextPath}/page/contact"
+                               class="py-2 d-block">Liên hệ với
                             chúng tôi</a></li>
                     </ul>
                 </div>
@@ -383,7 +388,8 @@
                 stroke-miterlimit="10"
                 stroke="#F96D00"/>
     </svg>
-</div>
+</div>void(0
+<script> var context = "${pageContext.request.contextPath}";</script>
 <script src="${pageContext.request.contextPath}/static/js/web-js/index-page.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/jquery-migrate-3.0.1.min.js"></script>
@@ -401,6 +407,9 @@
 <script src="${pageContext.request.contextPath}/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="${pageContext.request.contextPath}/static/js/google-map.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.11.2/cloudinary-core-shrinkwrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/web-js/load-image.js?v=3"
+        charset="UTF-8"></script>
 </body>
 
 </html>

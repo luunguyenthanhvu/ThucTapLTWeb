@@ -3,12 +3,11 @@ package nhom55.hcmuaf.controller.page.login;
 import java.util.Map;
 import nhom55.hcmuaf.beans.LoginBean;
 import nhom55.hcmuaf.beans.Users;
-import nhom55.hcmuaf.beans.cart.Cart;
 import nhom55.hcmuaf.beans.cart.CartProduct;
 import nhom55.hcmuaf.beans.cart.UserCart;
-import nhom55.hcmuaf.dao.LoginDao;
+import nhom55.hcmuaf.dao.daoimpl.LoginDao;
 import nhom55.hcmuaf.dao.UsersDao;
-import nhom55.hcmuaf.dao.UsersDaoImpl;
+import nhom55.hcmuaf.dao.daoimpl.UsersDaoImpl;
 import nhom55.hcmuaf.services.UserService;
 import nhom55.hcmuaf.util.MyUtils;
 import nhom55.hcmuaf.util.UserValidator;
@@ -78,6 +77,7 @@ public class Login extends HttpServlet {
                         .getRequestDispatcher("/WEB-INF/login/login.jsp");
                 dispatcher.forward(request, response);
             } else {
+                request.removeAttribute("result");
                 HttpSession session = request.getSession();
                 Users user = UserService.getInstance().getUserByEmail(email);
                 MyUtils.storeLoginedUser(session, user);

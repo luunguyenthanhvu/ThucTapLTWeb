@@ -41,13 +41,13 @@ public class CartProduct {
   }
 
   public void increQuantity(int quantity) {
-    if(quantity < products.getWeight()) {
-      this.quantity += quantity;
-      this.price += products.getPrice() * quantity;
-    } else {
-      this.quantity = (int) products.getWeight();
-      this.price = products.getPrice() * quantity;
-    }
+//    if(quantity < products.getWeight()) {
+//      this.quantity += quantity;
+//      this.price += products.getPrice() * quantity;
+//    } else {
+//      this.quantity = (int) products.getWeight();
+//      this.price = products.getPrice() * quantity;
+//    }
   }
   public void decreQuantity(int quantity) {
     if(this.quantity > 1) {

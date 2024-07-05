@@ -77,7 +77,7 @@ submitQuantity.addEventListener("click", function (event) {
 function addToCart(productId, weight) {
   $.ajax({
     type: 'POST',
-    url: '/admin/product/add-more-weight',
+    url: `${window.context}/admin/product/add-more-weight`,
     data: {
       productId: productId,
       weight: weight

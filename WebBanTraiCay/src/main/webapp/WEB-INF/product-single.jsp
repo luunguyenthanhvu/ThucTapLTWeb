@@ -1,14 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: PC
-  Date: 26/03/2024
-  Time: 4:51 PM
-  To change this template use File | Settings | File Templates.
---%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html lang="en">
 <head>
@@ -18,7 +10,7 @@
     <title>Cửa hàng trái cây</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link href="${pageContext.request.contextPath}/static/css/read-more/normal/jquery.readall.css"rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
@@ -52,17 +44,28 @@
           href="${pageContext.request.contextPath}/static/css/web-css/flaticon.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/icomoon.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/fix.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/fix.css?v=2">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/toast.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
+<style>
+  .readall-button {
+    background-color: #82ae46;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <body class="goto-here">
 <nav class="navbar-container navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
      id="ftco-navbar">
     <div class="container navbar-container">
         <div class="navbar-brand">
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/page/home">Cửa Hàng Trái
-                Cây</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/page/home">Cửa Hàng Trái Cây</a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,8 +76,9 @@
             <ul class="navbar-nav">
                 <li class="nav-item active"><a href="${pageContext.request.contextPath}/page/home"
                                                class="nav-link">Trang Chủ</a></li>
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/page/shop/shop-forward"
-                                        class="nav-link">Cửa Hàng</a></li>
+                <li class="nav-item"><a
+                        href="${pageContext.request.contextPath}/page/shop/shop-forward"
+                        class="nav-link">Cửa Hàng</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/page/about"
                                         class="nav-link">Về Chúng Tôi</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/page/contact"
@@ -152,11 +156,35 @@
 <section class="ftco-section">
     <div class="container">
         <div class="row">
-            <c:set var="product" value="${requestScope.showProduct}"/>
-            <div class="col-lg-6 mb-5 ftco-animate">
-                <a href="" class="image-popup"><img src="${product.getImg()}"
-                                                    class="img-fluid"
-                                                    alt="Colorlib Template"></a>
+            <div class="col-lg-6 mb-5 ftco-animate" style="width: 542px; height: 542px;">
+                <c:set var="product" value="${requestScope.showProduct}"/>
+                <div class="swiper gallery-top">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" data-assets="${product.getImgPublicId()}"
+                             style="background-image:url(/static/images/loading-cat.gif)"></div>
+                        <c:if test="${not empty product.getImageList()}">
+                            <c:forEach items="${product.getImageList()}" var="image">
+                                <div class="swiper-slide" data-assets="${image.getImgPublicId()}"
+                                     style="background-image:url(${pageContext.request.contextPath}/static/images/loading-cat.gif); background-size: cover;"></div>
+                            </c:forEach>
+                        </c:if>
+                    </div>
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next swiper-button-black"></div>
+                    <div class="swiper-button-prev swiper-button-black"></div>
+                </div>
+                <div class="swiper gallery-thumbs">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" data-assets="${product.getImgPublicId()}"
+                             style="background-image:url(/static/images/loading-cat.gif); background-size: cover;"></div>
+                        <c:if test="${not empty product.getImageList()}">
+                            <c:forEach items="${product.getImageList()}" var="image">
+                                <div class="swiper-slide" data-assets="${image.getImgPublicId()}"
+                                     style="background-image:url(${pageContext.request.contextPath}/static/images/loading-cat.gif)"></div>
+                            </c:forEach>
+                        </c:if>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                 <h3>${product.getNameOfProduct()}</h3>
@@ -189,9 +217,6 @@
 
                 <span><fmt:formatNumber pattern="#,##0 đ"
                                         value="${product.getPrice()}"/>/ ${product.getWeightDefault()} kg</span></p>
-
-
-                <p>${product.getDescription()}</p>
                 <div class="row mt-4">
                     <div class="w-100"></div>
                     <div class="input-group col-md-6 d-flex mb-3">
@@ -212,8 +237,8 @@
                     </div>
                     <div class="w-100"></div>
                     <div class="col-md-12">
-                        <p style="color: #000;">${product.getWeight()} kg hợp lệ</p>
-                        <span id="max-product" hidden="hidden">${product.getWeight()}</span>
+<%--                        <p style="color: #000;">${product.getWeight()} kg hợp lệ</p>--%>
+<%--                        <span id="max-product" hidden="hidden">${product.getWeight()}</span>--%>
                     </div>
                 </div>
                 <p><a id="addToCartLink" href="javascript:void(0);"
@@ -225,6 +250,9 @@
                 <p>Không tìm thấy sản phẩm hoặc ID không hợp lệ.</p>
             </c:if>
 
+        </div>
+        <div id="readmore-description">
+            <p>${product.getDescription()}</p>
         </div>
     </div>
 </section>
@@ -257,9 +285,12 @@
                 <div class="ftco-footer-widget mb-4 ml-md-5">
                     <h2 class="ftco-heading-2">Menu</h2>
                     <ul class="list-unstyled">
-                        <li><a href="${pageContext.request.contextPath}/page/shop/shop-forward" class="py-2 d-block">Cửa hàng chúng tôi</a></li>
-                        <li><a href="${pageContext.request.contextPath}/page/about" class="py-2 d-block">Về chúng tôi</a></li>
-                        <li><a  href="${pageContext.request.contextPath}/page/contact" class="py-2 d-block">Liên hệ với chúng tôi</a></li>
+                        <li><a href="${pageContext.request.contextPath}/page/shop/shop-forward"
+                               class="py-2 d-block">Cửa hàng chúng tôi</a></li>
+                        <li><a href="${pageContext.request.contextPath}/page/about"
+                               class="py-2 d-block">Về chúng tôi</a></li>
+                        <li><a href="${pageContext.request.contextPath}/page/contact"
+                               class="py-2 d-block">Liên hệ với chúng tôi</a></li>
                     </ul>
                 </div>
             </div>
@@ -324,7 +355,9 @@
                 stroke="#F96D00"/>
     </svg>
 </div>
-<script src="${pageContext.request.contextPath}/static/js/web-js/product-single-page.js"></script>
+
+<script> var context = "${pageContext.request.contextPath}";</script>
+<script src="${pageContext.request.contextPath}/static/js/web-js/product-single-page.js?v=1"></script>
 <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/jquery-migrate-3.0.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/popper.min.js"></script>
@@ -341,9 +374,22 @@
 <script src="${pageContext.request.contextPath}/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="${pageContext.request.contextPath}/static/js/google-map.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/main.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.11.2/cloudinary-core-shrinkwrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/web-js/product-single.js?v=5"></script>
+<script src="${pageContext.request.contextPath}/static/js/read-more/jquery.readall.js"></script>
 <script>
   $(document).ready(function () {
+    //Set options
+    var options = {
+      showheight: null,
+      showrows: 15,
+      animationspeed: 500,
+      btnTextShowmore: 'Xem thêm',
+      btnTextShowless: 'Thu gọn',
+      btnClassShowmore: 'readall-button',
+    }
+
+    $('#readmore-description').readall(options);
 
     var quantitiy = 0;
     $('.my-quantity-right-plus').click(function (e) {

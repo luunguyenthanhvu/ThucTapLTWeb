@@ -4,7 +4,7 @@ function deleteProduct(productId) {
   if(isRemoved) {
     $.ajax({
       type: 'POST',
-      url: '/page/cart/remove-product-cart',
+      url: `${window.context}/page/cart/remove-product-cart`,
       data: {
         productId: productId
       },
@@ -25,7 +25,7 @@ function deleteProduct(productId) {
 function incProduct(productId) {
   $.ajax({
     type: 'POST',
-    url: '/page/cart/quantity-inc-dec',
+    url: `${window.context}/page/cart/quantity-inc-dec`,
     data: {
       productId: productId,
       actionType: 'inc'
@@ -44,7 +44,7 @@ function incProduct(productId) {
 function decProduct(productId) {
   $.ajax({
     type: 'POST',
-    url: '/page/cart/quantity-inc-dec',
+    url: `${window.context}/page/cart/quantity-inc-dec`,
     data: {
       productId: productId,
       actionType: 'dec'
@@ -66,7 +66,7 @@ function decProduct(productId) {
 function reloadCartProduct() {
   $.ajax({
     type: 'POST',
-    url: '/page/cart',
+    url: `${window.context}/page/cart`,
     data: {},
     success: function (updateHTML) {
       $('#mainContent').html(updateHTML);

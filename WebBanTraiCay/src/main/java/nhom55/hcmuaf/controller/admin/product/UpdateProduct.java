@@ -6,7 +6,7 @@ import nhom55.hcmuaf.beans.Providers;
 
 import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.dao.ProviderDao;
-import nhom55.hcmuaf.dao.ProviderDaoImpl;
+import nhom55.hcmuaf.dao.daoimpl.ProviderDaoImpl;
 
 import nhom55.hcmuaf.services.ShopService;
 import nhom55.hcmuaf.util.MyUtils;
@@ -15,7 +15,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.nio.DoubleBuffer;
 import java.util.List;
 
 @WebServlet(name = "UpdateProduct", value = "/admin/product/update")
