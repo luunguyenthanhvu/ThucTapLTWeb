@@ -3,7 +3,7 @@ package nhom55.hcmuaf.cloundinary;
 import java.io.IOException;
 import java.util.Properties;
 
-public class CloudProperties {
+public class   CloudProperties {
   private static final Properties prop = new Properties();
 
   static {
