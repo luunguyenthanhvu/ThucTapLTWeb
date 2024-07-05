@@ -53,7 +53,7 @@ public class ShowCart extends HttpServlet {
               + "                                            <img\n"
               + "                                                    style=\"width: 100px; height: 100px; object-fit: cover\"\n"
               + "                                                    class=\"img-fluid\"\n"
-              + "                                                    src=" + c.getProducts().getImg() + "\n"
+              + "                                                    src="  + "\n"
               + "                                                    alt=\"Colorlib Template\">\n"
               + "                                        </div>\n"
               + "                                    </td>\n"

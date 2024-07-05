@@ -10,18 +10,14 @@ public class Products implements Serializable {
   private String nameOfProduct;
   private String description;
   private double price;
-  private double weight;
   private double weightDefault;
   private Date dateOfImporting;
-  private Date expriredDay;
-  private String img;
+  private int expriredDay;
   private List<Image> imageList;
   private int adminCreate;
   private int provider;
   private String seasonalFruit;
   private String importedFruit;
-  private String driedFruit;
-
   private String imgPublicId;
   private String imgAssetId;
 
@@ -29,61 +25,55 @@ public class Products implements Serializable {
 
   }
 
-  public Products(String nameOfProduct, String description, double price, double weight,
-      double weightDefault, int provider, Date expriredDay, List<Image> imageList) {
+  public Products(String nameOfProduct, String description, double price,
+      double weightDefault, int provider,int expriredDay, List<Image> imageList) {
     this.nameOfProduct = nameOfProduct;
     this.description = description;
     this.price = price;
-    this.weight = weight;
     this.weightDefault = weightDefault;
     this.provider = provider;
     this.expriredDay = expriredDay;
     this.imageList = imageList;
   }
 
-  public Products(int id, String nameOfProduct, String description, double price, double weight,
-      double weightDefault, Date expriredDay, List<Image> imageList, int provider) {
+  public Products(int id, String nameOfProduct, String description, double price,
+      double weightDefault, int expriredDay, List<Image> imageList, int provider) {
     this.id = id;
     this.nameOfProduct = nameOfProduct;
     this.description = description;
     this.price = price;
-    this.weight = weight;
     this.weightDefault = weightDefault;
     this.expriredDay = expriredDay;
     this.imageList = imageList;
     this.provider = provider;
   }
 
-  public Products(int id, String nameOfProduct, String description, double price, double weight,
-      double weightDefault, Date dateOfImporting, Date expriredDay, String img,
+  public Products(int id, String nameOfProduct, String description, double price,
+      double weightDefault, Date dateOfImporting, int expriredDay,
       List<Image> imageList,
       int adminCreate, int provider) {
     this.id = id;
     this.nameOfProduct = nameOfProduct;
     this.description = description;
     this.price = price;
-    this.weight = weight;
     this.weightDefault = weightDefault;
     this.dateOfImporting = dateOfImporting;
     this.expriredDay = expriredDay;
-    this.img = img;
     this.imageList = imageList;
     this.adminCreate = adminCreate;
     this.provider = provider;
   }
 
-  public Products(int id, String nameOfProduct, String description, double price, double weight,
-      double weightDefault, Date dateOfImporting, Date expriredDay, String img, int adminCreate,
+  public Products(int id, String nameOfProduct, String description, double price,
+      double weightDefault, Date dateOfImporting, int expriredDay, int adminCreate,
       int provider) {
     this.id = id;
     this.nameOfProduct = nameOfProduct;
     this.description = description;
     this.price = price;
-    this.weight = weight;
     this.weightDefault = weightDefault;
     this.dateOfImporting = dateOfImporting;
     this.expriredDay = expriredDay;
-    this.img = img;
     this.adminCreate = adminCreate;
     this.provider = provider;
   }
@@ -120,19 +110,6 @@ public class Products implements Serializable {
     this.importedFruit = importedFruit;
   }
 
-  public String getDriedFruit() {
-    return driedFruit;
-  }
-
-  public void setDriedFruit(String driedFruit) {
-    this.driedFruit = driedFruit;
-  }
-
-  public Products(int id, double weight) {
-    this.id = id;
-    this.weight = weight;
-  }
-
   public int getId() {
     return id;
   }
@@ -165,14 +142,6 @@ public class Products implements Serializable {
     this.price = price;
   }
 
-  public double getWeight() {
-    return weight;
-  }
-
-  public void setWeight(double weight) {
-    this.weight = weight;
-  }
-
   public double getWeightDefault() {
     return weightDefault;
   }
@@ -189,20 +158,12 @@ public class Products implements Serializable {
     this.dateOfImporting = dateOfImporting;
   }
 
-  public Date getExpriredDay() {
+  public int getExpriredDay() {
     return expriredDay;
   }
 
-  public void setExpriredDay(Date expriredDay) {
+  public void setExpriredDay(int expriredDay) {
     this.expriredDay = expriredDay;
-  }
-
-  public String getImg() {
-    return img;
-  }
-
-  public void setImg(String img) {
-    this.img = img;
   }
 
   public int getAdminCreate() {
@@ -237,17 +198,14 @@ public class Products implements Serializable {
         ", nameOfProduct='" + nameOfProduct + '\'' +
         ", description='" + description + '\'' +
         ", price=" + price +
-        ", weight=" + weight +
         ", weightDefault=" + weightDefault +
         ", dateOfImporting=" + dateOfImporting +
         ", expriredDay=" + expriredDay +
-        ", img='" + img + '\'' +
         ", imageList=" + imageList +
         ", adminCreate=" + adminCreate +
         ", provider=" + provider +
         ", seasonalFruit='" + seasonalFruit + '\'' +
         ", importedFruit='" + importedFruit + '\'' +
-        ", driedFruit='" + driedFruit + '\'' +
         '}';
   }
 }

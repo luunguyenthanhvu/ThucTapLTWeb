@@ -126,9 +126,8 @@ public class BillDaoImpl implements BillDao {
                        p.setNameOfProduct(rs.getString("nameOfProduct"));
                        p.setDescription(rs.getString("description"));
                        p.setPrice(rs.getDouble("price"));
-                       p.setImg(rs.getString("img"));
                        p.setDateOfImporting(rs.getDate("dateOfImporting"));
-                       p.setExpriredDay(rs.getDate("expriredDay"));
+                       p.setExpriredDay(rs.getInt("expriredDay"));
                        bd.setProducts(p);
 
                        return bd;
