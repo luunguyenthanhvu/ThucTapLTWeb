@@ -21,22 +21,22 @@ public class Cart {
   }
 
   public String add(int add, int quantity) {
-    Products p = ProductService.getInstance().getById(add);
-    if (p == null) {
-      return "Product does not exist";
-    }
-    CartProduct cartProduct = null;
-    if (data.containsKey(add)) {
-      cartProduct = data.get(add);
-      if (cartProduct.getQuantity() + quantity <= cartProduct.getProducts().getWeight()) {
-        cartProduct.increQuantity(quantity);
-      } else {
-        return "Out of quantity";
-      }
-    } else {
-      cartProduct = new CartProduct(quantity, p);
-    }
-    data.put(add, cartProduct);
+//    Products p = ProductService.getInstance().getById(add);
+//    if (p == null) {
+//      return "Product does not exist";
+//    }
+//    CartProduct cartProduct = null;
+//    if (data.containsKey(add)) {
+//      cartProduct = data.get(add);
+//      if (cartProduct.getQuantity() + quantity <= cartProduct.getProducts().getWeight()) {
+//        cartProduct.increQuantity(quantity);
+//      } else {
+//        return "Out of quantity";
+//      }
+//    } else {
+//      cartProduct = new CartProduct(quantity, p);
+//    }
+//    data.put(add, cartProduct);
     return "Success";
   }
 

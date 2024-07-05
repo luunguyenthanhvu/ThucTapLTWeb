@@ -34,14 +34,14 @@ public class ProductService {
   public void addNewProduct(Products products, List<String> imgList, List<String> imgPublicId,
       List<String> imgAssetId) {
     int id = productDao.addNewProduct(products.getNameOfProduct(), products.getDescription(),
-        products.getPrice(), products.getWeight(), products.getWeightDefault(),
+        products.getPrice(), products.getWeightDefault(),
         products.getDateOfImporting(), products.getExpriredDay(), products.getAdminCreate(),
-        products.getProvider(), products.getImg(), products.getSeasonalFruit(),
-        products.getImportedFruit(), products.getDriedFruit(), products.getImgPublicId(),
+        products.getProvider(), products.getSeasonalFruit() ,
+        products.getImgPublicId(),
         products.getImgAssetId());
     List<Image> imageList = new ArrayList<>();
     for (int i = 0; i < imgList.size(); i++) {
-      imageList.add(new Image(id, imgList.get(i), imgPublicId.get(i), imgAssetId.get(i)));
+      imageList.add(new Image(id, imgPublicId.get(i), imgAssetId.get(i)));
     }
     imageDao.addImageProduct(imageList);
   }

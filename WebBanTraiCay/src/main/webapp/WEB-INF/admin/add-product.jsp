@@ -354,30 +354,30 @@
                                         </select>
                                     </td>
                                 </tr>
-                                <td><br></td>
-                                <tr>
-                                    <td><label>Nguồn nhập<span style="color: red">*</span></label>
-                                    </td>
-                                    <td>
-                                        <select style="width: 300px" id="sourceImport"
-                                                name="selectedSourceImport">
-                                            <option value="local">Trong nước</option>
-                                            <option value="imported">Ở nước ngoài</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <td><br></td>
-                                <tr>
-                                    <td><label>Trái cây khô<span style="color: red">*</span></label>
-                                    </td>
-                                    <td>
-                                        <select style="width: 300px" id="driedFruit"
-                                                name="selectedDriedFruit">
-                                            <option value="dried">Có</option>
-                                            <option value="">Không</option>
-                                        </select>
-                                    </td>
-                                </tr>
+<%--                                <td><br></td>--%>
+<%--                                <tr>--%>
+<%--                                    <td><label>Nguồn nhập<span style="color: red">*</span></label>--%>
+<%--                                    </td>--%>
+<%--                                    <td>--%>
+<%--                                        <select style="width: 300px" id="sourceImport"--%>
+<%--                                                name="selectedSourceImport">--%>
+<%--                                            <option value="local">Trong nước</option>--%>
+<%--                                            <option value="imported">Ở nước ngoài</option>--%>
+<%--                                        </select>--%>
+<%--                                    </td>--%>
+<%--                                </tr>--%>
+<%--                                <td><br></td>--%>
+<%--                                <tr>--%>
+<%--                                    <td><label>Trái cây khô<span style="color: red">*</span></label>--%>
+<%--                                    </td>--%>
+<%--                                    <td>--%>
+<%--                                        <select style="width: 300px" id="driedFruit"--%>
+<%--                                                name="selectedDriedFruit">--%>
+<%--                                            <option value="dried">Có</option>--%>
+<%--                                            <option value="">Không</option>--%>
+<%--                                        </select>--%>
+<%--                                    </td>--%>
+<%--                                </tr>--%>
                                 <td><br></td>
                                 <tr>
                                     <td><label for="giatien_sp">Giá tiền <span
@@ -393,21 +393,21 @@
                                 <c:if test="${not empty gia_tien_error}">
                                     <td><p style="color: red">${gia_tien_error}</p></td>
                                 </c:if>
-                                <tr>
-                                    <td><label for="kl_sp">Khối lượng nhập hàng <span
-                                            style="color: red">*</span></label></td>
-                                    <td><input style="width: 300px" name="khoi_luong_san_pham"
-                                               id="kl_sp"
-                                               type="text" value="${khoi_luong_sp}"></td>
+<%--                                <tr>--%>
+<%--                                    <td><label for="kl_sp">Khối lượng nhập hàng <span--%>
+<%--                                            style="color: red">*</span></label></td>--%>
+<%--                                    <td><input style="width: 300px" name="khoi_luong_san_pham"--%>
+<%--                                               id="kl_sp"--%>
+<%--                                               type="text" value="${khoi_luong_sp}"></td>--%>
 
-                                </tr>
-                                <td><br></td>
-                                <td><p class="error" style="color: red; display: none"
-                                       id="kl_sp_error">
-                                </td>
-                                <c:if test="${not empty khoi_luong_errorr}">
-                                    <td><p style="color: red">${khoi_luong_error}</p></td>
-                                </c:if>
+<%--                                </tr>--%>
+<%--                                <td><br></td>--%>
+<%--                                <td><p class="error" style="color: red; display: none"--%>
+<%--                                       id="kl_sp_error">--%>
+<%--                                </td>--%>
+<%--                                <c:if test="${not empty khoi_luong_errorr}">--%>
+<%--                                    <td><p style="color: red">${khoi_luong_error}</p></td>--%>
+<%--                                </c:if>--%>
                                 <tr>
                                     <td><label for="kgMacDinh_sp">Số kg mặc định của sản phẩm <span
                                             style="color: red">*</span></label></td>
@@ -451,7 +451,7 @@
                                             style="color: red">*</span></label></td>
                                     <td><input style="width: 300px" name="ngay_het_han"
                                                id="expired_day"
-                                               type="date" value="${ngay_het_han_sp}"></td>
+                                               type="text" value="${ngay_het_han_sp}"></td>
 
                                 </tr>
                                 <td><br></td>
@@ -487,7 +487,7 @@
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="${pageContext.request.contextPath}/static/js/admin-js/add-new-products2.js?v=3"
+<script src="${pageContext.request.contextPath}/static/js/admin-js/add-new-products2.js?v=10"
         charset="UTF-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="

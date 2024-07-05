@@ -233,25 +233,20 @@ function showPage() {
 var tenSP = document.getElementById("ten_sp");
 var moTaSP = CKEDITOR.instances.editor;
 var giaTienSP = document.getElementById("giatien_sp");
-var khoiLuongSP = document.getElementById("kl_sp");
+// var khoiLuongSP = document.getElementById("kl_sp");
 var kgMacDinhSP = document.getElementById("kgMacDinh_sp");
 var nhaCC = document.getElementById("provider_product");
 var ngayHetHan = document.getElementById("expired_day");
 var upfileAnh = document.getElementById("upfileAnh");
 var seasonalFruit = document.getElementById("seasonalFruitSelect");
-var sourceImport = document.getElementById("sourceImport");
-var driedFruit = document.getElementById("driedFruit");
+// var sourceImport = document.getElementById("sourceImport");
+// var driedFruit = document.getElementById("driedFruit");
 
 function validateTenSP() {
   var text = tenSP.value;
-  var kyTuHopLe = /^[\p{L}\s']+$/u;
   var error = document.getElementById("ten_sp_error");
   if (text.length == 0 || text == null) {
     error.textContent = "Vui lòng nhập vào tên sản phầm";
-    error.style.display = "block";
-    return false;
-  } else if (!kyTuHopLe.test(text)) {
-    error.textContent = "Tên trái cây chỉ chứa ký tự chữ cái, khoảng trắng.";
     error.style.display = "block";
     return false;
   } else {
@@ -393,11 +388,11 @@ function validateMoTaSP() {
 tenSP.addEventListener("blur", validateTenSP);
 // moTaSP.addEventListener("blur", validateMoTaSP);
 giaTienSP.addEventListener("blur", validateGiaTienSP);
-khoiLuongSP.addEventListener("blur", validateKhoiLuongSP);
+// khoiLuongSP.addEventListener("blur", validateKhoiLuongSP);
 kgMacDinhSP.addEventListener("blur", validateKgMacDinhSP);
 nhaCC.addEventListener("blur", validateNhaCC);
-ngayHetHan.addEventListener("blur", validateNgayHetHan);
-upfileAnh.addEventListener("blur", validateFileUpload);
+// ngayHetHan.addEventListener("blur", validateNgayHetHan);
+// upfileAnh.addEventListener("blur", validateFileUpload);
 $("#submit_product_btn").click(addNewProduct);
 
 // stop user send post to server
@@ -405,11 +400,11 @@ function addNewProduct() {
   const isTenSPValid = validateTenSP();
   const isMoTaSPValid = validateMoTaSP();
   const isGiaTienValid = validateGiaTienSP();
-  const isKhoiLuongSPValid = validateKhoiLuongSP();
+  // const isKhoiLuongSPValid = validateKhoiLuongSP();
   const isKgMacDinhSPValid = validateKgMacDinhSP();
   const isNhaCCValid = validateNhaCC();
-  const isNgayHetHanValid = validateNgayHetHan();
-  const isFileValid = validateFileUpload();
+  // const isNgayHetHanValid = validateNgayHetHan();
+  // const isFileValid = validateFileUpload();
 
   // get info image thumbnail for product
   let mainImages = imgList.filter(image => image.category === 'main').map(
@@ -440,10 +435,8 @@ function addNewProduct() {
     cancelButtonText: 'Hủy',
   }).then((result) => {
     if (result.isConfirmed) {
-      if (!isTenSPValid || !isMoTaSPValid || !isGiaTienValid
-          || !isKhoiLuongSPValid
-          || !isKgMacDinhSPValid || !isNhaCCValid || !isNgayHetHanValid
-          || !isFileValid) {
+      if (!validateMoTaSP() || !validateGiaTienSP() || !validateNhaCC()
+          || !validateKgMacDinhSP()) {
         Swal.fire("Vui Lòng nhập dữ liệu!", "", "warning");
       } else {
         $.ajax({
@@ -453,14 +446,14 @@ function addNewProduct() {
             name: tenSP.value,
             description: moTaSP.getData(),
             seasonalFruit: seasonalFruit.value,
-            sourceImport: sourceImport.value,
-            driedFruit: driedFruit.value,
+            // sourceImport: sourceImport.value,
+            // driedFruit: driedFruit.value,
             price: giaTienSP.value,
-            quantity: khoiLuongSP.value,
+            // quantity: khoiLuongSP.value,
             defaultWeight: kgMacDinhSP.value,
             supplier: nhaCC.value,
             expirationDate: ngayHetHan.value,
-            img: mainImages[0],
+            // img: mainImages[0],
             supImages: supImagesString,
             mainImgPublicId: mainImgPublicId[0],
             mainImgAssetId: mainImgAssetId[0],
@@ -469,7 +462,9 @@ function addNewProduct() {
           },
           success: function (response) {
             console.log(response.message)
-            Swal.fire(response.message, "", "success");
+            Swal.fire(response.message, "", "success").then(() => {
+              window.location.href = `${window.context}/admin/product/add-new-product`;
+            });
           },
           error: function (error) {
             console.log(error); // Xem nội dung của error object trong console

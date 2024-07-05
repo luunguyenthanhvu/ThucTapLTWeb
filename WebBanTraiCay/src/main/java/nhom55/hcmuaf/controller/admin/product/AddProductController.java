@@ -71,32 +71,27 @@ public class AddProductController extends HttpServlet {
     System.out.println(productName);
     String description = request.getParameter("description");
     String price = request.getParameter("price");
-    String quantity = request.getParameter("quantity");
+//    String quantity = request.getParameter("quantity");
     String defaultWeight = request.getParameter("defaultWeight");
     String supplier = request.getParameter("supplier");
     String expirationDateStr = request.getParameter("expirationDate");
-    String img = request.getParameter("img");
     String imgList = request.getParameter("supImages");
-    String importedFruit = request.getParameter("sourceImport");
+//    String importedFruit = request.getParameter("sourceImport");
     String seasonalFruit = request.getParameter("seasonalFruit");
-    String driedFruit = request.getParameter("driedFruit");
+//    String driedFruit = request.getParameter("driedFruit");
 
     // public id and asset id of product
     String mainImgPublicId = request.getParameter("mainImgPublicId");
     String mainImgAssetId = request.getParameter("mainImgAssetId");
 
     String supImgPublicId = request.getParameter("supImgPublicId");
-    System.out.println("public id nè");
-    System.out.println(supImgPublicId);
     String supImgAssetId = request.getParameter("supImgAssetId");
-    System.out.println("asset id nè");
-    System.out.println(supImgAssetId);
+
     // if user Enter correct data
     //checkValidate(request, response, productName, description, price, quantity, defaultWeight,
     //        expirationDateStr, img, supplier)
     if (true) {
       try {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         List<String> imageList = List.of(imgList.split(","));
         List<String> listImgPublicId = List.of(supImgPublicId.split(","));
         List<String> listImgAssetId = List.of(supImgAssetId.split(","));
@@ -104,13 +99,8 @@ public class AddProductController extends HttpServlet {
         products.setNameOfProduct(productName);
         products.setDescription(description);
         products.setPrice(Double.valueOf(price));
-        products.setWeight(Double.valueOf(quantity));
         products.setWeightDefault(Double.valueOf(defaultWeight));
         products.setProvider(Integer.parseInt(supplier));
-        products.setExpriredDay(java.sql.Date.valueOf(expirationDateStr));
-        products.setImg(img);
-        products.setImportedFruit(importedFruit);
-        products.setDriedFruit(driedFruit);
         products.setSeasonalFruit(seasonalFruit);
         products.setDateOfImporting(new java.sql.Date(dateImport.getTime()));
         products.setAdminCreate(admin.getId());

@@ -33,7 +33,7 @@ public class ProductDaoImpl implements ProductDao {
   public List<Products> getProduct() {
     return JDBIConnector.get().withHandle(h ->
         h.createQuery(
-                "SELECT * FROM products where expriredDay >=  CURDATE() ORDER BY dateOfImporting ASC LIMIT 8")
+                "SELECT * FROM products ORDER BY dateOfImporting ASC LIMIT 8")
             .mapToBean(Products.class)
             .stream()
             .collect(Collectors.toList())
@@ -47,7 +47,7 @@ public class ProductDaoImpl implements ProductDao {
     return JDBIConnector.get().withHandle(h ->
         // hiển thị sản phẩm vs id được truyền vào
         h.createQuery(
-                "SELECT id, nameOfProduct, description, price, imgPublicId, weight, weightDefault  FROM Products WHERE id = :id")
+                "SELECT id, nameOfProduct, description, price, imgPublicId, weightDefault  FROM Products WHERE id = :id")
             .bind("id", productId)
             .mapToBean(Products.class)
             .findFirst()
@@ -82,7 +82,7 @@ public class ProductDaoImpl implements ProductDao {
   public int countResultSearchingProductForExpiredProduct(String txtSearch) {
     return JDBIConnector.get().withHandle(h ->
         h.select(
-                "SELECT count(*)  FROM products where nameOfProduct like ? and expriredDay < CURDATE() ",
+                "SELECT count(*)  FROM products where nameOfProduct like ? ",
                 "%" + txtSearch + "%")
             .mapTo(Integer.class)
             .one()
@@ -149,7 +149,7 @@ public class ProductDaoImpl implements ProductDao {
 
     result = JDBIConnector.get().withHandle(h ->
         h.createQuery(
-                "SELECT * FROM products where expriredDay >= CURDATE() ORDER BY dateOfImporting DESC LIMIT :start, :quantityDefault")
+                "SELECT * FROM products ORDER BY nameOfProduct where DESC LIMIT :start, :quantityDefault")
             .bind("start", start)
             .bind("quantityDefault", quantityDefault)
             .mapToBean(Products.class)
@@ -164,7 +164,7 @@ public class ProductDaoImpl implements ProductDao {
   @Override
   public int countTotalRowProductInDatabase() {
     return JDBIConnector.get().withHandle(h ->
-        h.createQuery("SELECT COUNT(id) FROM products where expriredDay >= CURDATE()")
+        h.createQuery("SELECT COUNT(id) FROM products ")
             .mapTo(Integer.class).one()
     );
   }
@@ -172,7 +172,7 @@ public class ProductDaoImpl implements ProductDao {
   @Override
   public int countTotalRowProductInDatabaseForExpiredProduct() {
     return JDBIConnector.get().withHandle(h ->
-        h.createQuery("SELECT COUNT(id) FROM products where expriredDay < CURDATE()")
+        h.createQuery("SELECT COUNT(id) FROM products ")
             .mapTo(Integer.class).one()
     );
   }
@@ -194,7 +194,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     // Tạo câu lệnh SQL
-    String query = "SELECT * FROM products WHERE expriredDay >= CURDATE()";
+    String query = "SELECT * FROM products ";
     if (whereClause != null && !("".equals(whereClause))) {
 
       query += " And " + whereClause;
@@ -218,45 +218,27 @@ public class ProductDaoImpl implements ProductDao {
 
   @Override
   public int addNewProduct(String productName, String description, double price,
-      double weightQuantity, double weightDefault, Date dateImport, Date expirationDate,
-      int adminId, int provider, String img, String season, String imported, String dried,
+      double weightDefault, Date dateImport, int expirationDate,
+      int adminId, int provider, String season,
       String imgPublicId, String imgAssetId) {
-
-    Products products = JDBIConnector.get().withHandle(h -> {
-      return h.createQuery("SELECT * FROM products WHERE nameOfProduct = :name")
-          .bind("name", productName)
-          .mapToBean(Products.class)
-          .findFirst()
-          .orElse(null); // hoặc thực hiện xử lý khi không tìm thấy dữ liệu
-    });
-
-    // if products != null update product
-    if (products != null) {
-      return 0;
-    } else {
-      return
-          JDBIConnector.get().withHandle(h -> h.createUpdate(
-                  "INSERT INTO products(nameOfProduct, description, price, weight, weightDefault, dateOfImporting, expriredDay, adminCreate, provider, img, seasonalFruit, importedFruit, driedFruit, imgPublicId, imgAssetId) "
-                      + "VALUES (:nameOfProduct, :description, :price, :weight, :weightDefault, :dateOfImporting, :expriredDay, :adminCreate, :provider, :img, :seasonalFruit, :importedFruit, :driedFruit, :imgPublicId, :imgAssetId)")
-              .bind("nameOfProduct", productName)
-              .bind("description", description)
-              .bind("price", price)
-              .bind("weight", weightQuantity)
-              .bind("weightDefault", weightDefault)
-              .bind("dateOfImporting", dateImport)
-              .bind("expriredDay", expirationDate)
-              .bind("adminCreate", adminId)
-              .bind("provider", provider)
-              .bind("img", img)
-              .bind("seasonalFruit", season)
-              .bind("importedFruit", imported)
-              .bind("driedFruit", dried)
-              .bind("imgPublicId", imgPublicId)
-              .bind("imgAssetId", imgAssetId)
-              .executeAndReturnGeneratedKeys("id")
-              .mapTo(int.class)
-              .one());
-    }
+    return
+        JDBIConnector.get().withHandle(h -> h.createUpdate(
+                "INSERT INTO products(nameOfProduct, description, price, weightDefault, dateOfImporting, expriredDay, adminCreate, provider, seasonalFruit, imgPublicId, imgAssetId) "
+                    + "VALUES (:nameOfProduct, :description, :price, :weightDefault, :dateOfImporting, :expriredDay, :adminCreate, :provider, :seasonalFruit, :imgPublicId, :imgAssetId)")
+            .bind("nameOfProduct", productName)
+            .bind("description", description)
+            .bind("price", price)
+            .bind("weightDefault", weightDefault)
+            .bind("dateOfImporting", dateImport)
+            .bind("expriredDay", expirationDate)
+            .bind("adminCreate", adminId)
+            .bind("provider", provider)
+            .bind("seasonalFruit", season)
+            .bind("imgPublicId", imgPublicId)
+            .bind("imgAssetId", imgAssetId)
+            .executeAndReturnGeneratedKeys("id")
+            .mapTo(int.class)
+            .one());
   }
 //   Phần phục vụ cho quản lý sản phẩm của admin
 
@@ -430,21 +412,21 @@ public class ProductDaoImpl implements ProductDao {
 
   @Override
   public boolean addMoreWeight(int id, double weight) {
-    Products product = JDBIConnector.get()
-        .withHandle(h -> h.createQuery("SELECT * FROM products WHERE id = :id")
-            .bind("id", id)
-            .mapToBean(Products.class)
-            .findFirst()
-            .orElse(null));
-    if (product != null) {
-      return JDBIConnector.get().withHandle(handle -> {
-        int rowsUpdate = handle.createUpdate("UPDATE products SET weight = :weight WHERE id = :id")
-            .bind("weight", product.getWeight() + weight)
-            .bind("id", id)
-            .execute();
-        return rowsUpdate > 0;
-      });
-    }
+//    Products product = JDBIConnector.get()
+//        .withHandle(h -> h.createQuery("SELECT * FROM products WHERE id = :id")
+//            .bind("id", id)
+//            .mapToBean(Products.class)
+//            .findFirst()
+//            .orElse(null));
+//    if (product != null) {
+//      return JDBIConnector.get().withHandle(handle -> {
+//        int rowsUpdate = handle.createUpdate("UPDATE products SET weight = :weight WHERE id = :id")
+//            .bind("weight", product.getWeight() + weight)
+//            .bind("id", id)
+//            .execute();
+//        return rowsUpdate > 0;
+//      });
+//    }
     return false;
   }
 
