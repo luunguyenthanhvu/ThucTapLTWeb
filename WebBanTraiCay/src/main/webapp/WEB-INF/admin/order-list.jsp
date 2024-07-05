@@ -201,8 +201,10 @@
             </form>
         </div>
         <div class="container" style="margin: 30px 30px 0 30px">
-            <div class="table-sanpham">
-                <table class="table-sanpham">
+            <div class="table">
+                <table class="table-sanpham"  style=" width: 100%;
+    border-collapse: collapse;
+    height: auto;">
                     <tr>
                         <th style="width: 100px;">Id</th>
                         <th style="width: 200px;">Tên người dùng</th>

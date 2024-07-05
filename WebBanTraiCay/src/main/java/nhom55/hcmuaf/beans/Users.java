@@ -317,6 +317,6 @@ public class Users<T> extends Log<Users> implements Serializable, IModel {
 
   @Override
   public String GetAfterData() {
-    return super.getCurValue();
+    return super.getCurrentValue();
   }
 }

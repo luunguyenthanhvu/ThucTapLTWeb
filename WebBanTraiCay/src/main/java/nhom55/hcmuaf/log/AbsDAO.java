@@ -10,6 +10,13 @@ public class AbsDAO <T extends IModel> implements IDAO<T>{
   public AbsDAO() {
    logDao = new LogDaoImpl();
   }
+
+  public static AbsDAO getInstance() {
+    if (instance == null) {
+      instance = new AbsDAO();
+    }
+    return instance;
+  }
   @Override
   public void insert(Log<T> model) {
     logDao.insertLog(model);

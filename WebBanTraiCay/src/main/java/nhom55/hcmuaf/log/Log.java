@@ -5,34 +5,34 @@ import nhom55.hcmuaf.enums.LogLevels;
 
 public class Log<T> {
   private int id;
+  private String ip;
   private LogLevels level;
+  private String address;
+  private String national;
   private String note;
   private String preValue;
-  private String curValue;
+  private String currentValue;
   private LocalDateTime createAt;
   private LocalDateTime updateAt;
-  private RequestInfo requestInfo;
 
+  public Log() {}
 
-  public Log() {
-
-  }
-
-  public Log(int id, LogLevels level, String preValue, String curValue, LocalDateTime createAt,
-      LocalDateTime updateAt, RequestInfo requestInfo) {
+  public Log(int id, String ip, LogLevels level, String address, String national, String note, String preValue, String currentValue, LocalDateTime createAt, LocalDateTime updateAt) {
     this.id = id;
+    this.ip = ip;
     this.level = level;
+    this.address = address;
+    this.national = national;
+    this.note = note;
     this.preValue = preValue;
-    this.curValue = curValue;
+    this.currentValue = currentValue;
     this.createAt = createAt;
     this.updateAt = updateAt;
-    this.requestInfo = requestInfo;
   }
 
-  public Log(String preValue, String curValue,
-     LocalDateTime updateAt) {
+  public Log(String preValue, String currentValue, LocalDateTime updateAt) {
     this.preValue = preValue;
-    this.curValue = curValue;
+    this.currentValue = currentValue;
     this.createAt = LocalDateTime.now();
     this.updateAt = updateAt;
   }
@@ -45,12 +45,44 @@ public class Log<T> {
     this.id = id;
   }
 
+  public String getIp() {
+    return ip;
+  }
+
+  public void setIp(String ip) {
+    this.ip = ip;
+  }
+
   public LogLevels getLevel() {
     return level;
   }
 
   public void setLevel(LogLevels level) {
     this.level = level;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  public String getNational() {
+    return national;
+  }
+
+  public void setNational(String national) {
+    this.national = national;
+  }
+
+  public String getNote() {
+    return note;
+  }
+
+  public void setNote(String note) {
+    this.note = note;
   }
 
   public String getPreValue() {
@@ -61,12 +93,12 @@ public class Log<T> {
     this.preValue = preValue;
   }
 
-  public String getCurValue() {
-    return curValue;
+  public String getCurrentValue() {
+    return currentValue;
   }
 
-  public void setCurValue(String curValue) {
-    this.curValue = curValue;
+  public void setCurrentValue(String currentValue) {
+    this.currentValue = currentValue;
   }
 
   public LocalDateTime getCreateAt() {
@@ -83,22 +115,5 @@ public class Log<T> {
 
   public void setUpdateAt(LocalDateTime updateAt) {
     this.updateAt = updateAt;
-  }
-
-  public RequestInfo getRequestInfo() {
-    return requestInfo;
-  }
-
-
-  public void setRequestInfo(RequestInfo requestInfo) {
-    this.requestInfo = requestInfo;
-  }
-
-  public String getNote() {
-    return note;
-  }
-
-  public void setNote(String note) {
-    this.note = note;
   }
 }
