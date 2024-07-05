@@ -68,6 +68,7 @@ public class Login extends  HttpServlet  {
 
         if (checkValidate(request, response, email, password)) {
             LoginBean loginBean = new LoginBean(email, password, MyUtils.encodePass(password));
+//            Ghi lại log khi đăng nhap
             AbsDAO absDAO = AbsDAO.getInstance();
             Log<Users> usersLog = new Log<>();
             RequestInfo requestInfo = new RequestInfo(request.getRemoteAddr(),"HCM", "VietNam");

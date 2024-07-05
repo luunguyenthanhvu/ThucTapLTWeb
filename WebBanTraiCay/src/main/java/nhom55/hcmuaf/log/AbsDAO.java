@@ -21,4 +21,5 @@ public class AbsDAO <T extends IModel> implements IDAO<T>{
   public void insert(Log<T> model) {
     logDao.insertLog(model);
   }
+
 }
