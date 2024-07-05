@@ -59,21 +59,21 @@ public class RegisterService extends AbsDAO {
         verifyAccount(email, hash);
 
         // log into server
-        Users newUser = usersDao.getUserByEmail(email);
-        Log<Users> log = newUser;
-        System.out.println(log);
-        log.setNote("New User Register");
-        log.setLevel(LogLevels.INFO);
-        log.setPreValue("");
-        try {
-          log.setCurValue(MyUtils.convertToJson(newUser));
-        } catch (IOException ioException) {
-          ioException.printStackTrace();
-          System.out.println("can't convert");
-        }
-        log.setCreateAt(LocalDateTime.now());
-        log.setRequestInfo(new RequestInfo(request.getRemoteAddr(), "HCM", "VietNam"));
-        super.insert(log);
+//        Users newUser = usersDao.getUserByEmail(email);
+//        Log<Users> log = newUser;
+//        System.out.println(log);
+//        log.setNote("New User Register");
+//        log.setLevel(LogLevels.INFO);
+//        log.setPreValue("");
+//        try {
+//          log.setCurValue(MyUtils.convertToJson(newUser));
+//        } catch (IOException ioException) {
+//          ioException.printStackTrace();
+//          System.out.println("can't convert");
+//        }
+//        log.setCreateAt(LocalDateTime.now());
+//        log.setRequestInfo(new RequestInfo(request.getRemoteAddr(), "HCM", "VietNam"));
+//        super.insert(log);
       }
 
     } else {
