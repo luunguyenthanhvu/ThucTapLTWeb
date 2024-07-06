@@ -1,0 +1,105 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+.bulk-update {
+  width: 100%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #f1f1f1;
+  border: none;
+  margin-right: 10px;
+}
+
+.tab.active {
+  background-color: #E4E9F7;
+  color: #000;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.upload-section {
+  width: 25%; /* Giảm chiều rộng phần upload */
+  text-align: center;
+  border: 2px dashed #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.upload-section h3 {
+  margin-top: 0;
+}
+
+.upload-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #E4E9F7;
+  color: #000;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.note {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.saved-files {
+  width: 74%; /* Tăng chiều rộng phần bảng dữ liệu */
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.saved-files h3 {
+  margin-top: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.no-files {
+  text-align: center;
+  color: #999;
+}
+
+#table-update-inventory {
+  width: 100% !important;
+}
+
+#table-update-inventory thead th {
+  background-color:  #E4E9F7;
+}
