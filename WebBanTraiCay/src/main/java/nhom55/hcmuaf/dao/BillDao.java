@@ -24,5 +24,6 @@ public interface BillDao {
     public Bills getABill(int id);
     public void updateStatusABill(int idBill, String status);
     public int getIdUser(int idBill);
+    public void updateProductQuantity(int billId, int productId, int quantity);
 
 }

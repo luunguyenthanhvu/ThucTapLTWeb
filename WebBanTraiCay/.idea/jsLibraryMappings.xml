@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$" libraries="{boxicons, filepond, filepond-plugin-file-encode, filepond-plugin-file-validate-size, filepond-plugin-image-edit, filepond-plugin-image-exif-orientation, filepond-plugin-image-preview, jquery}" />
+    <file url="file://$PROJECT_DIR$" libraries="{font-awesome}" />
   </component>
 </project>

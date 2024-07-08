@@ -233,6 +233,18 @@ public class BillDaoImpl implements BillDao {
         });
     }
 
+    @Override
+    public void updateProductQuantity(int idBill, int idProduct, int quantity) {
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("UPDATE bill_details SET quantity = :quantity WHERE id = :idBill AND idProduct = :idProduct")
+                    .bind("quantity", quantity)
+                    .bind("billId", idBill)
+                    .bind("productId", idProduct)
+                    .execute();
+        });
+
+    }
+
     public static void main(String[] args) {
         BillDaoImpl billDao = new BillDaoImpl();
         List<BillDetails> billDetails = billDao.getListProductInABill(24);
