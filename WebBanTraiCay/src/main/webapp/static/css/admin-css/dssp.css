@@ -7,11 +7,7 @@
 .table-sanpham {
     overflow-x: auto;
 }
-.table-sanpham  {
-    width: 100%;
-    border-collapse: collapse;
-    height: 100%;
-}
+
 .table-sanpham th, td {
     padding: 10px;
     text-align: left;

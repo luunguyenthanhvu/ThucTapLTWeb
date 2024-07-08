@@ -1,6 +1,10 @@
 package nhom55.hcmuaf.controller.user;
 
 import nhom55.hcmuaf.beans.Users;
+import nhom55.hcmuaf.enums.LogLevels;
+import nhom55.hcmuaf.log.AbsDAO;
+import nhom55.hcmuaf.log.Log;
+import nhom55.hcmuaf.log.RequestInfo;
 import nhom55.hcmuaf.services.UserService;
 import nhom55.hcmuaf.util.MyUtils;
 import nhom55.hcmuaf.util.UserValidator;
@@ -12,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +29,6 @@ public class UpdateInfoUser extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Users user = MyUtils.getLoginedUser(session);
-
         List<Users> listUser= UserService.getInstance().showInfoUser();
         for(Users u: listUser) {
             if(u.getId() == user.getId()) {
@@ -45,6 +49,8 @@ public class UpdateInfoUser extends HttpServlet {
         Users user = MyUtils.getLoginedUser(session);
 
 
+
+//        Thông tin của người dùng sau khi muốn chỉnh sửa
         String username = request.getParameter("ten_nguoi_dung");
         String email = request.getParameter("email_nguoi_dung");
         String gender = request.getParameter("gender");
@@ -84,6 +90,21 @@ public class UpdateInfoUser extends HttpServlet {
 
             String result = UserService.getInstance().updateProfileWithImage(user.getId(), username, email, address, phoneNumber, myBirthDay, imgUser, gender);
             request.setAttribute("result", "Cập nhật thành công");
+
+//            Ghi lại log
+            AbsDAO<Users> absDAO = AbsDAO.getInstance();
+            Log<Users> usersLog = new Log<>();
+            RequestInfo requestInfo = new RequestInfo(request.getRemoteAddr(),"HCM", "VietNam");
+            usersLog.setIp(requestInfo.getIp());
+            usersLog.setLevel(LogLevels.INFO);
+            usersLog.setAddress(requestInfo.getAddress());
+            usersLog.setNational(requestInfo.getNation());
+            usersLog.setNote("User "+user.getUsername()+" đã cập nhật thông tin cá nhân mới");
+            usersLog.setPreValue(user.getUsername()+","+user.getEmail()+","+user.getSexual()+","+user.getAddress()+","+user.getAddress()+","+user.getPhoneNumber()+","+"Sinh nhật: "+user.getDateOfBirth());
+            usersLog.setCurrentValue(username+","+email+","+gender+","+address+","+phoneNumber+","+dateOfBirth);
+            usersLog.setCreateAt(user.getCreationTime());
+            usersLog.setUpdateAt(LocalDateTime.now());
+            absDAO.insert(usersLog);
 
             // Nếu người dùng thay đổi email
             if(!user.getEmail().equals(email)) {

@@ -12,14 +12,14 @@ public class LogDaoImpl<T> implements LogDao<T> {
       JDBIConnector.get().withHandle(handle -> {
         handle.createUpdate("INSERT INTO logs (ip, level,national,note, address, preValue, currentValue, createAt, updateAt) "
                 +
-                "VALUES (:ip, :level,:national,:note , :address, :preValue, :curValue, :createAt, :updateAt)")
-            .bind("ip", log.getRequestInfo().getIp())
+                "VALUES (:ip, :level,:national,:note , :address, :preValue, :currentValue, :createAt, :updateAt)")
+            .bind("ip", log.getIp())
             .bind("level", log.getLevel().toString()) // Convert enum to string
-            .bind("address", log.getRequestInfo().getAddress())
-            .bind("national", log.getRequestInfo().getNation())
+            .bind("address", log.getAddress())
+            .bind("national", log.getNational())
             .bind("note", log.getNote())
             .bind("preValue", log.getPreValue())
-            .bind("curValue", log.getCurValue())
+            .bind("currentValue", log.getCurrentValue())
             .bind("createAt", log.getCreateAt())
             .bind("updateAt", log.getUpdateAt())
             .execute();
@@ -28,11 +28,10 @@ public class LogDaoImpl<T> implements LogDao<T> {
   }
 
   @Override
-  public void delete(int id) {
-    JDBIConnector.get().withHandle(h ->
-        h.createUpdate("DELETE  FROM  logs WHERE id = :idLog")
-            .bind("idLog", id)
-    );
+  public void delete(int idLog) {
+ JDBIConnector.get().withHandle( h ->{
+   return h.createUpdate("DELETE FROM logs WHERE id = :idLog").bind("idLog", idLog).execute();
+ });
   }
 
   @Override
@@ -43,4 +42,5 @@ public class LogDaoImpl<T> implements LogDao<T> {
             .list()
     );
   }
+
 }
