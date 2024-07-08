@@ -80,7 +80,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="footer-w3l">
 
 </div>
+<style>
+    input[type="submit"],
+    input[type="password"],
+    input[type="tel"],
+    input[type="text"],
+    input[type="email"],
+    input[type="date"]
+    {
+        border-radius: 10px; /* Bo tròn các góc của border */
+        padding: 8px; /* Điều chỉnh khoảng cách bên trong input */
+        border: 1px solid #ccc; /* Đặt border và màu sắc của border */
+        outline: none; /* Loại bỏ đường viền khi focus */
+        width: 250px; /* Độ rộng của input */
 
+    }
+    input[type="submit"]:hover,
+    input[type="password"]:hover,
+    input[type="text"]:hover,
+    input[type="tel"]:hover,
+    input[type="email"]:hover,
+    input[type="date"]:hover {
+        border-color: #4CAF50; /* Đổi màu viền khi hover */
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Thêm shadow khi hover */
+        /* Các thuộc tính khác có thể thêm cho hiệu ứng hover */
+    }
+
+</style>
 <script>
     // validate for input
     var name1 = document.getElementById("nameUser");

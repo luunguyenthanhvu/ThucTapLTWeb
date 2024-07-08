@@ -55,7 +55,7 @@
 <nav class="navbar-container navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container navbar-container">
         <div class="navbar-brand">
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/home">Cửa Hàng Trái Cây</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/page/home">Cửa Hàng Trái Cây</a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -140,7 +140,7 @@
         <div class="container-child-right">
             <h4>Thông Tin Tài Khoản</h4>
             <div class="line_of_account"></div>
-            <span style="font-size: 20px ">Thông Tin Cơ Bản</span>
+            <span style="font-size: 20px ; font-weight: bold" >Thông Tin Cơ Bản</span>
             <br>
             <br>
 
@@ -149,13 +149,13 @@
                     <table style="border-collapse:collapse;
                     border: none; ">
                         <tr>
-                            <td><label for="ten_nd">Tên người dùng <span style="color: red">*</span></label></td>
+                            <td><label for="ten_nd" style="font-weight: bold">Tên người dùng <span style="color: red">*</span></label></td>
                             <td><span style="position: relative; top: -5px; margin-left: 80px"  id="ten_nd">${user.getUsername()}</span></td>
                         </tr>
                         <td><br></td>
 
                         <tr>
-                            <td><label for="email_nd">Email <span style="color: red">*</span></label></td>
+                            <td><label for="email_nd" style="font-weight: bold">Email <span style="color: red">*</span></label></td>
                             <td><span style="position: relative; top: -5px; margin-left: 80px" id="email_nd" type="text">${user.getEmail()}
                             </span></td>
                         </tr>
@@ -165,25 +165,25 @@
                         <td><br></td>
 
                         <tr>
-                            <td><label for="gender">Giới tính <span style="color: red">*</span></label></td>
+                            <td><label for="gender" style="font-weight: bold">Giới tính <span style="color: red">*</span></label></td>
                             <td><span style="position: relative; top: -5px; margin-left: 80px"  id="gender">${user.getSexual()}</span></td>
                         </tr>
                         <td><br></td>
                         <tr>
-                            <td><label for="dc_nd">Địa chỉ <span style="color: red">*</span></label></td>
+                            <td><label for="dc_nd" style="font-weight: bold">Địa chỉ <span style="color: red">*</span></label></td>
                             <td><span style="position: relative; top: -5px;margin-left: 80px" id="dc_nd" type="text">${user.getAddress()}</span></td>
                         </tr>
                         <td><br></td>
 
 
                         <tr>
-                            <td><label for="sdt_nd">Số điện thoại <span style="color: red">*</span></label></td>
+                            <td><label for="sdt_nd" style="font-weight: bold">Số điện thoại <span style="color: red">*</span></label></td>
 
                             <td><span style="position: relative; top: -5px;margin-left: 80px" id="sdt_nd">${user.getPhoneNumber()}</span></td>
                         </tr>
                         <td><br></td>
                         <tr>
-                            <td><label for="sn_nd">Sinh nhật <span
+                            <td><label for="sn_nd" style="font-weight: bold">Sinh nhật <span
                                     style="color: red">*</span></label></td>
 
                             <td><span style="position: relative; top: -5px;margin-left: 80px" id="sn_nd"> ${user.getDateOfBirth()}</span></td>
@@ -204,8 +204,10 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
+
             </div>
             <p style="color: red;padding: 30px"> ${result}</p>
+
         </div>
 
     </div>

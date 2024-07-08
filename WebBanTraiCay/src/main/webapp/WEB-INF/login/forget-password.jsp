@@ -62,7 +62,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="footer-w3l">
 
 </div>
+<style>
+  input[type="submit"],
+  input[type="email"]
 
+  {
+    border-radius: 10px; /* Bo tròn các góc của border */
+    padding: 8px; /* Điều chỉnh khoảng cách bên trong input */
+    border: 1px solid #ccc; /* Đặt border và màu sắc của border */
+    outline: none; /* Loại bỏ đường viền khi focus */
+    width: 250px; /* Độ rộng của input */
+
+  }
+  input[type="submit"]:hover,
+  input[type="email"]:hover {
+    border-color: #4CAF50; /* Đổi màu viền khi hover */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Thêm shadow khi hover */
+    /* Các thuộc tính khác có thể thêm cho hiệu ứng hover */
+  }
+
+</style>
 <script>
   // validate for input
   var email = document.getElementById("emailnd");

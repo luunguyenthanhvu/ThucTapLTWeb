@@ -56,7 +56,7 @@
      id="ftco-navbar">
     <div class="container navbar-container">
         <div class="navbar-brand">
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/home">Cửa Hàng Trái Cây</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/page/home">Cửa Hàng Trái Cây</a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,7 +135,7 @@
         <div class="container-child-right">
             <h4>Chỉnh sửa thông tin </h4>
             <div class="line_of_account"></div>
-            <span style="font-size: 20px ">Thông Tin Cơ Bản</span>
+            <span style="font-size: 20px ; font-weight: bold ">Thông Tin Cơ Bản</span>
             <br>
             <br>
 
@@ -242,6 +242,7 @@
                                 <td><label for="sdt_nd">Số điện thoại <span style="color: red">*</span></label></td>
                                 <td><input style="margin-left: 60px; width: 250px" name="so_dien_thoai_nguoi_dung"
                                            id="sdt_nd"
+                                           type="tel"
                                            value="${user.getPhoneNumber()}">
                                     <span class="error-msg required" id="phoneNumber-error"
                                           style="display: none;margin-left: 60px;color: red"></span>
@@ -333,7 +334,31 @@
 <script src="${pageContext.request.contextPath}/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="${pageContext.request.contextPath}/static/js/google-map.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/main.js"></script>
+<style>
 
+    input[type="tel"],
+    input[type="text"],
+    input[type="email"],
+    input[type="date"]
+  {
+        border-radius: 10px; /* Bo tròn các góc của border */
+        padding: 8px; /* Điều chỉnh khoảng cách bên trong input */
+        border: 1px solid #ccc; /* Đặt border và màu sắc của border */
+        outline: none; /* Loại bỏ đường viền khi focus */
+        width: 250px; /* Độ rộng của input */
+        margin-left: 10px; /* Điều chỉnh khoảng cách bên trái */
+    }
+
+    input[type="text"]:hover,
+    input[type="tel"]:hover,
+    input[type="email"]:hover,
+    input[type="date"]:hover {
+        border-color: #4CAF50; /* Đổi màu viền khi hover */
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Thêm shadow khi hover */
+        /* Các thuộc tính khác có thể thêm cho hiệu ứng hover */
+    }
+
+</style>
 <script>
   $(document).ready(function () {
     $('#fileInput').change(function (e) {
