@@ -1,12 +1,13 @@
 package nhom55.hcmuaf.controller.admin.product;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import nhom55.hcmuaf.beans.Products;
 import nhom55.hcmuaf.beans.Providers;
 import nhom55.hcmuaf.beans.Users;
+import nhom55.hcmuaf.dto.response.AddProductResponseDTO;
 import nhom55.hcmuaf.services.ProductService;
 import nhom55.hcmuaf.services.ProviderService;
 import nhom55.hcmuaf.util.MyUtils;
@@ -64,7 +66,13 @@ public class AddProductController extends HttpServlet {
       throws ServletException, IOException {
     HttpSession session = request.getSession();
     Users admin = MyUtils.getLoginedUser(session);
-
+    Gson gson = new Gson();
+    String requestData = request.getReader().lines().collect(Collectors.joining());
+    System.out.println("Djt me lang coc truipc khi convert");
+    System.out.println(requestData);
+    AddProductResponseDTO dto = gson.fromJson(requestData, AddProductResponseDTO.class);
+    System.out.println("Djt me lang coc cututttakojidjasqjkdsajdnk");
+    System.out.println(dto);
     String productName = request.getParameter("name");
     LocalDateTime localDateTime = LocalDateTime.now();
     Date dateImport = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());

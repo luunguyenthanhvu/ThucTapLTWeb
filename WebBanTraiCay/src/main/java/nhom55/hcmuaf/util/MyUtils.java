@@ -1,6 +1,5 @@
 package nhom55.hcmuaf.util;
 
-import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.Random;
 import javax.servlet.http.HttpSession;
@@ -120,11 +119,25 @@ public class MyUtils {
     session.setAttribute("previousURL", url);
   }
 
-  public static String convertToJson(Object object) throws IOException {
-    ObjectMapper Obj = new ObjectMapper();
-    String json = Obj.writeValueAsString(object);
-    System.out.println(json);
-    return json;
+  public static String convertToJson(Object object) {
+    try {
+      ObjectMapper Obj = new ObjectMapper();
+      String json = Obj.writeValueAsString(object);
+      return json;
+    } catch (Exception e) {
+      return null;
+    }
+  }
+
+
+  public static Object convertJsonToObject(String json) {
+    try {
+      ObjectMapper Obj = new ObjectMapper();
+      Object result = Obj.readValue(json, Object.class);
+      return json;
+    } catch (Exception e) {
+      return null;
+    }
   }
 
   public static void main(String[] args) throws IOException {
