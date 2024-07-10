@@ -178,6 +178,29 @@
                         <div class="w-100"></div>
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label >Tỉnh / Thành phố <span
+                                        style="color: red">*</span></label>
+                                <div class="w-100"></div>
+                                <select name="thanh-pho" id="provinces"class="form-control" style="color: black !important;">
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label >Quận / Huyện <span
+                                        style="color: red">*</span></label>
+                                <div class="w-100"></div>
+                                <select name="thanh-pho" id="districts" class="form-control" style="color: black !important;" >
+                                    <%--                                   --%>
+                                </select>
+
+
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <label for="street-address">Địa chỉ đường phố <span
                                         style="color: red">*</span></label>
                                 <input name="dia-chi_nguoi-dung" style="color: black !important;"
@@ -186,20 +209,6 @@
                                 <p style="color: red; display: none" id="address_error"></p>
                                 <c:if test="${not empty addressError}" >
                                     <p style="color: red">${addressError}</p>
-                                </c:if>
-                            </div>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="city">Thị trấn / Thành phố <span
-                                        style="color: red">*</span></label>
-                                <input name="thanh-pho" style="color: black !important;"
-                                       id="city" type="text" class="form-control"
-                                       placeholder="Thị Trấn / Thành phố" value="${city}">
-                                <p style="color: red; display: none" id="city_error"></p>
-                                <c:if test="${not empty cityError}" >
-                                    <p style="color: red">${cityError}</p>
                                 </c:if>
                             </div>
                         </div>
@@ -236,10 +245,10 @@
                 <div class="col-xl-5">
                     <div class="row mt-5 pt-3">
                         <div class="col-md-12 d-flex mb-5">
-                            <div class="cart-detail cart-total p-3 p-md-4">
+                            <div style="width: 600px;" class="cart-detail cart-total p-3 p-md-4">
                                 <h3 class="billing-heading mb-4">Hóa đơn</h3>
                                 <p class="d-flex">
-                                    <span>Tổng phụ</span>
+                                    <span>Giá tiền</span>
                                     <span class="tong_phu">
                                         <fmt:formatNumber pattern="#,##0 ₫"
                                                           value="${subTotalPrice}"/>
@@ -248,17 +257,7 @@
 
                                 <p class="d-flex">
                                     <span>Phí vận chuyển</span>
-                                    <span class="phi_van_chuyen">
-                                        <c:choose>
-                                            <c:when test="${not empty transportPrice}">
-                                                <fmt:formatNumber pattern="#,##0 ₫"
-                                                                  value="${transportPrice}"/>
-                                            </c:when>
-                                            <c:otherwise>
-                                                Miễn phí giao hàng!
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </span>
+                                    <span id="delivery_fee"></span>
                                 </p>
                                 <hr>
                                 <p class="d-flex total-price">
@@ -689,5 +688,7 @@
 
 </script>
 <script> var context = "${pageContext.request.contextPath}";</script>
+<%--Js xử lý lấy dữ liệu vận chuyển--%>
+<script src="${pageContext.request.contextPath}/static/js/web-js/process-delivery-fee.js" ></script>
 </body>
 </html>

@@ -41,13 +41,7 @@ public class CheckOut extends HttpServlet {
       List<CartProduct> selectedProducts = cart.getSelectedProducts(selectedProductIds);
       subTotalPrice = getTotalPrice(selectedProducts);
     }
-    // set transport price
-    if (subTotalPrice >= 200000) {
-      request.setAttribute("totalPrice", subTotalPrice);
-    } else {
-      request.setAttribute("transportPrice", 20000);
-      request.setAttribute("totalPrice", subTotalPrice + 20000);
-    }
+
     request.setAttribute("subTotalPrice", subTotalPrice);
     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/checkout.jsp");
     dispatcher.forward(request, response);
