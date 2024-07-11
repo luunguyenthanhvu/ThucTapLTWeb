@@ -7,6 +7,7 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
 .dataTables_wrapper {
   font-family: 'Poppins', sans-serif; /* Thay thế 'Roboto' bằng font-family mong muốn */
   font-size: 14px; /* Kích thước chữ mặc định */
@@ -165,7 +166,7 @@ table.dataTable tbody td {
 }
 
 .btn-hide {
-  background-color: #f44336;
+  background-color: #fff;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -173,7 +174,24 @@ table.dataTable tbody td {
   border-radius: 5px;
 }
 
-.btn-edit svg, .btn-hide svg {
+.btn-show {
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.btn-hide svg {
+  fill: #f44336;
+}
+
+.btn-show svg {
+  fill: #007bff;
+}
+
+.btn-edit svg, .btn-hide svg, .btn-show svg {
   width: 16px;
   height: 16px;
   vertical-align: middle;
@@ -231,6 +249,7 @@ table.dataTable tbody td {
   padding: 5px; /* Khoảng cách bên trong input */
   font-size: 14px; /* Kích thước chữ */
 }
+
 .shipment-transaction-note {
   padding: 5px;
   font-size: 14px;
@@ -249,6 +268,7 @@ table.dataTable tbody td {
 .dataTables_wrapper table.dataTable thead th {
   border-bottom: 2px solid #ddd; /* Đường gạch ngang ở phần đầu bảng */
 }
+
 .save-shipment {
   display: flex;
   justify-content: space-between; /* Các phần tử bên trong sẽ căn đều */
@@ -269,4 +289,8 @@ table.dataTable tbody td {
 
 input {
   cursor: pointer;
+}
+
+.btn-edit svg {
+  fill: #fff;
 }
