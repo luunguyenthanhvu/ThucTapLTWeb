@@ -50,13 +50,11 @@ let tableAddNewShipment = new DataTable('#table-add-shipment', {
   ajax: {
     url: `${window.context}/api/get-product-list`,
     contentType: 'application/json',
-    dataFilter: function(data){
-      var json = jQuery.parseJSON( data );
-      json.recordsTotal = json.total;
-      json.recordsFiltered = json.total;
-      json.data = json.list;
-
-      return JSON.stringify( json );
+    type: "POST",
+    dataType: "json",
+    data: function (d) {
+      console.log(d)
+      return JSON.stringify( d );
     }
   },
   serverSide: true,

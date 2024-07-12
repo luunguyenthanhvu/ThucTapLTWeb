@@ -307,5 +307,5 @@
 <script src="${pageContext.request.contextPath}/static/js/main.js"></script>
 <script src="https://kit.fontawesome.com/4c38acb8c6.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/static/js/datatable/datatables.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/admin-js/product-list.js?v=15"></script>
+<script src="${pageContext.request.contextPath}/static/js/admin-js/product-list.js?v=16"></script>
 </html>

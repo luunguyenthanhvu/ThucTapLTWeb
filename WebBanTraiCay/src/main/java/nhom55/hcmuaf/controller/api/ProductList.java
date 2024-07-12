@@ -3,6 +3,7 @@ package nhom55.hcmuaf.controller.api;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -77,12 +78,16 @@ public class ProductList extends HttpServlet {
       // start transaction
       productService.begin();
       var list = productService.findAllBy();
+      var newList = new ArrayList<>();
+      for (int i = dataTableRequestDTO.getStart(); i < dataTableRequestDTO.getStart() + 10; i++) {
+        newList.add(list.get(i));
+      }
       DataTableResponse dataTableResponse =
           DataTableResponse.builder()
-              .draw(10)
+              .draw(dataTableRequestDTO.getDraw() + 1)
               .recordsTotal(1000)
               .recordsFiltered(800)
-              .data(list)
+              .data(newList)
               .build();
       out.println(MyUtils.convertToJson(dataTableResponse));
       out.flush();
