@@ -1,5 +1,6 @@
 package nhom55.hcmuaf.filter;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.Filter;
@@ -12,7 +13,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import nhom55.hcmuaf.dto.response.MessageResponseDTO;
-import nhom55.hcmuaf.my_handle_exception.TestException;
+import nhom55.hcmuaf.my_handle_exception.MyHandleException;
 
 @WebFilter(filterName = "global_3", urlPatterns = "/api/*")
 public class GlobalExceptionFilter implements Filter {
@@ -27,14 +28,24 @@ public class GlobalExceptionFilter implements Filter {
       FilterChain filterChain) throws IOException, ServletException {
     HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
     HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+    StringBuilder sb = new StringBuilder();
+    BufferedReader reader = servletRequest.getReader();
+    String line;
+    while ((line = reader.readLine()) != null) {
+      sb.append(line);
+    }
+    String requestBody = sb.toString();
+    System.out.println("djtme request body");
+    System.out.println(requestBody);
     PrintWriter out = servletResponse.getWriter();
+    httpServletRequest.setAttribute("requestBody", requestBody);
     try {
       filterChain.doFilter(servletRequest, servletResponse);
     } catch (Exception e) {
       servletResponse.setContentType("json/application");
       servletResponse.setCharacterEncoding("UTF8");
-      if (e instanceof TestException) {
-        httpServletResponse.setStatus(((TestException) e).getHttpStatusCode());
+      if (e instanceof MyHandleException) {
+        httpServletResponse.setStatus(((MyHandleException) e).getHttpStatusCode());
         out.println(MessageResponseDTO.builder()
             .message(e.getMessage())
             .build());

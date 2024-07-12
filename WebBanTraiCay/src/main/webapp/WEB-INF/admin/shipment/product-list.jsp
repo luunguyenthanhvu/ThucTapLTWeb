@@ -14,15 +14,20 @@
     <%@ page isELIgnored="false" %>
     <meta charset="UTF-8">
     <title>Quản lý cửa hàng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/css/admin-css/style.css?v=2">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin-css/dssp.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin-css/add-new-shipment.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin-css/shipment.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/static/css/admin-css/add-new-shipment.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/static/css/admin-css/shipment.css">
     <!-- Boxiocns CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/js/datatable/datatables.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/js/datatable/datatables.min.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/static/js/datatable/datatables.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/static/css/admin-css/override-datatable.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body onload="myFunction()" style="margin:0;">
@@ -240,7 +245,7 @@
 
                 <div class="nav-function-add-shipment">
                     <div class="nav-details">
-                        <span>20 Sản phẩm được chọn</span>
+                        <span> <span id="selectedProductCount">0</span> Sản phẩm được chọn</span>
                     </div>
                     <div class="nav-button flex">
                         <button class="add">
@@ -269,9 +274,9 @@
                                 <th>Sản phẩm | Phân loại</th>
                                 <th>Mã SKU</th>
                                 <th>Nhà cung cấp</th>
-                                <th>Số lượng thực tế trong kho</th>
+                                <th>Tồn kho</th>
                                 <th>Trạng thái</th>
-                                <th>Chức năng</th>
+                                <th></th>
                             </tr>
                             </thead>
                         </table>
@@ -299,13 +304,8 @@
 <script src="${pageContext.request.contextPath}/static/js/jquery.animateNumber.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/bootstrap-datepicker.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/scrollax.min.js"></script>
-<script src="${pageContext.request.contextPath}/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="${pageContext.request.contextPath}/static/js/google-map.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/main.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/admin-js/product-list.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/main.js"></script>
 <script src="https://kit.fontawesome.com/4c38acb8c6.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/static/js/datatable/datatables.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/datatable/datatables.min.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/admin-js/product-list.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/admin-js/product-list.js?v=15"></script>
 </html>

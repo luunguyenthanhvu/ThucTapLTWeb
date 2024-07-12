@@ -4,11 +4,11 @@ import javax.servlet.ServletException;
 import lombok.Data;
 
 @Data
-public class TestException extends ServletException {
+public class MyHandleException extends ServletException {
 
   int httpStatusCode;
 
-  public TestException(String message, int httpStatusCode) {
+  public MyHandleException(String message, int httpStatusCode) {
     super(message);
     this.httpStatusCode = httpStatusCode;
   }

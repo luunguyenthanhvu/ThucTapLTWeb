@@ -222,7 +222,7 @@ table.dataTable tbody td {
 }
 
 .image-table-product .product-name {
-  width: 150px;
+  width: 200px;
   white-space: normal;
   word-wrap: break-word;
 }
@@ -293,4 +293,28 @@ input {
 
 .btn-edit svg {
   fill: #fff;
+}
+thead tr {
+  background-color:#E4E9F7 !important;
+}
+
+#table-add-shipment th, #table-add-shipment td {
+  text-align: left;
+}
+.dt-scroll-headInner , .dataTable{
+  width: 100%;
+}
+thead {
+  width: 100%;
+}
+thead tr th{
+  background-color:#E4E9F7 !important;
+}
+
+.dt-scroll-body  {
+  width:100%;
+  overflow-y:scroll !important;
+}
+table.dataTable tfoot {
+  display: table-header-group;
 }

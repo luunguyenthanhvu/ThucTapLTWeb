@@ -41,4 +41,8 @@ public abstract class AbstractService {
       this.handle.close();
     }
   }
+
+  public Handle getHandle() {
+    return handle;
+  }
 }

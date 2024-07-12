@@ -20,6 +20,6 @@ public class ShipmentDetails {
   Integer productId;
   Integer shipmentsId;
   Integer quantity;
-  String status;
+  Integer available;
 
 }

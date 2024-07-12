@@ -1,4 +1,4 @@
-package nhom55.hcmuaf.dto.response;
+package nhom55.hcmuaf.dto.data_table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MessageResponseDTO {
+public class DataTableResponse {
 
-  String message;
+  Integer draw;
+  Integer recordsTotal;
+  Integer recordsFiltered;
+  Object data;
 }
