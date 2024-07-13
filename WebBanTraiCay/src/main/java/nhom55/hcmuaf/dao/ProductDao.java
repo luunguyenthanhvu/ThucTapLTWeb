@@ -36,7 +36,7 @@ public interface ProductDao {
   List<Products> sortByFilter(int index, int quantityDefault, String sortBy, String order);
 
   int addNewProduct(String productName, String description, double price, double weightDefault, Date dateImport, int expirationDate,
-      int adminId, int provider, String season,
+      int adminId, int provider, String category,
       String imgPublicId, String imgAssetId);
 
 //   Phần phục vụ cho quản lý sản phẩm của admin

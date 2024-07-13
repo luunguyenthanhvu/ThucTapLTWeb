@@ -1,0 +1,60 @@
+{
+  "draw" : 1,
+  "recordsTotal" : 57,
+  "recordsFiltered" : 57,
+  "data" : [
+    {
+      "productCode": "A001",
+      "productName": "Dưa hấu DJTME Lang coc",
+      "image": "https://scontent.fsgn2-11.fna.fbcdn.net/v/t39.30808-6/309007133_628584232085812_416912229949138941_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeHlqmYdhbA38kSphv3DFzrcgFxm5iJU6dOAXGbmIlTp02GGdwbtdHVKbD6q7hKgW2KweD8KOfhPboGSq24Twaeg&_nc_ohc=Btp-GpCRWHsQ7kNvgH4AD0u&_nc_ht=scontent.fsgn2-11.fna&oh=00_AYDTVXVE-WNVkOghDcqwceyvfcm2NrA7iVmzKNGluEVVsQ&oe=668CF243",
+      "stockQuantity": "61 ",
+      "status": "Đã ẩn",
+      "supplier": "Công Ty TNHH Seon Gold HCM"
+    }, {
+      "productCode": "A002",
+      "productName": "Cam",
+      "image": "https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/294491648_571890434421859_2466714619768542754_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeF7h6pIxPQiw4ZFJNFufBaPo14pXz6aCZGjXilfPpoJkSKmtr6q0N95d2Mk_orTFoSe6O0g4-hYqfzQ-o8YzoRC&_nc_ohc=TuE_z7sumOkQ7kNvgGeP2DP&_nc_ht=scontent.fsgn2-8.fna&oh=00_AYCNjXSL2KJtk_7lL2vQJ23NIC051rupGl4MTOQUdFBqYA&oe=668CECDD",
+      "stockQuantity": "61 ",
+      "status": "Đã ẩn",
+      "supplier": "Công Ty TNHH ABC"
+    }, {
+      "productCode": "A002",
+      "productName": "Cam",
+      "image": "https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/294491648_571890434421859_2466714619768542754_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeF7h6pIxPQiw4ZFJNFufBaPo14pXz6aCZGjXilfPpoJkSKmtr6q0N95d2Mk_orTFoSe6O0g4-hYqfzQ-o8YzoRC&_nc_ohc=TuE_z7sumOkQ7kNvgGeP2DP&_nc_ht=scontent.fsgn2-8.fna&oh=00_AYCNjXSL2KJtk_7lL2vQJ23NIC051rupGl4MTOQUdFBqYA&oe=668CECDD",
+      "stockQuantity": "61 ",
+      "status": "Chưa ẩn",
+      "supplier": "Công Ty TNHH ABC"
+    }
+  , {
+      "productCode": "A002",
+      "productName": "Cam",
+      "image": "https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/294491648_571890434421859_2466714619768542754_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeF7h6pIxPQiw4ZFJNFufBaPo14pXz6aCZGjXilfPpoJkSKmtr6q0N95d2Mk_orTFoSe6O0g4-hYqfzQ-o8YzoRC&_nc_ohc=TuE_z7sumOkQ7kNvgGeP2DP&_nc_ht=scontent.fsgn2-8.fna&oh=00_AYCNjXSL2KJtk_7lL2vQJ23NIC051rupGl4MTOQUdFBqYA&oe=668CECDD",
+      "stockQuantity": "61 ",
+      "status": "Chưa ẩn",
+      "supplier": "Công Ty TNHH ABC"
+    }
+  , {
+      "productCode": "A002",
+      "productName": "Cam",
+      "image": "https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/294491648_571890434421859_2466714619768542754_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeF7h6pIxPQiw4ZFJNFufBaPo14pXz6aCZGjXilfPpoJkSKmtr6q0N95d2Mk_orTFoSe6O0g4-hYqfzQ-o8YzoRC&_nc_ohc=TuE_z7sumOkQ7kNvgGeP2DP&_nc_ht=scontent.fsgn2-8.fna&oh=00_AYCNjXSL2KJtk_7lL2vQJ23NIC051rupGl4MTOQUdFBqYA&oe=668CECDD",
+      "stockQuantity": "61 ",
+      "status": "Chưa ẩn",
+      "supplier": "Công Ty TNHH ABC"
+    }
+  , {
+      "productCode": "A002",
+      "productName": "Cam",
+      "image": "https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/294491648_571890434421859_2466714619768542754_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeF7h6pIxPQiw4ZFJNFufBaPo14pXz6aCZGjXilfPpoJkSKmtr6q0N95d2Mk_orTFoSe6O0g4-hYqfzQ-o8YzoRC&_nc_ohc=TuE_z7sumOkQ7kNvgGeP2DP&_nc_ht=scontent.fsgn2-8.fna&oh=00_AYCNjXSL2KJtk_7lL2vQJ23NIC051rupGl4MTOQUdFBqYA&oe=668CECDD",
+      "stockQuantity": "61 ",
+      "status": "Chưa ẩn",
+      "supplier": "Công Ty TNHH ABC"
+    }, {
+      "productCode": "A002",
+      "productName": "Cam",
+      "image": "https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/294491648_571890434421859_2466714619768542754_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeF7h6pIxPQiw4ZFJNFufBaPo14pXz6aCZGjXilfPpoJkSKmtr6q0N95d2Mk_orTFoSe6O0g4-hYqfzQ-o8YzoRC&_nc_ohc=TuE_z7sumOkQ7kNvgGeP2DP&_nc_ht=scontent.fsgn2-8.fna&oh=00_AYCNjXSL2KJtk_7lL2vQJ23NIC051rupGl4MTOQUdFBqYA&oe=668CECDD",
+      "stockQuantity": "61 ",
+      "status": "Chưa ẩn",
+      "supplier": "Công Ty TNHH ABC"
+    }
+  ]
+}

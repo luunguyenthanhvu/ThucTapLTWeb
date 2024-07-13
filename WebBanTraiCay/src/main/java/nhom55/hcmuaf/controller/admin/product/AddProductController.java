@@ -1,12 +1,13 @@
 package nhom55.hcmuaf.controller.admin.product;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import nhom55.hcmuaf.beans.Products;
 import nhom55.hcmuaf.beans.Providers;
 import nhom55.hcmuaf.beans.Users;
+import nhom55.hcmuaf.dto.response.AddProductResponseDTO;
 import nhom55.hcmuaf.services.ProductService;
 import nhom55.hcmuaf.services.ProviderService;
 import nhom55.hcmuaf.util.MyUtils;
@@ -64,7 +66,6 @@ public class AddProductController extends HttpServlet {
       throws ServletException, IOException {
     HttpSession session = request.getSession();
     Users admin = MyUtils.getLoginedUser(session);
-
     String productName = request.getParameter("name");
     LocalDateTime localDateTime = LocalDateTime.now();
     Date dateImport = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
@@ -77,7 +78,7 @@ public class AddProductController extends HttpServlet {
     String expirationDateStr = request.getParameter("expirationDate");
     String imgList = request.getParameter("supImages");
 //    String importedFruit = request.getParameter("sourceImport");
-    String seasonalFruit = request.getParameter("seasonalFruit");
+    String category = request.getParameter("category");
 //    String driedFruit = request.getParameter("driedFruit");
 
     // public id and asset id of product
@@ -101,7 +102,15 @@ public class AddProductController extends HttpServlet {
         products.setPrice(Double.valueOf(price));
         products.setWeightDefault(Double.valueOf(defaultWeight));
         products.setProvider(Integer.parseInt(supplier));
-        products.setSeasonalFruit(seasonalFruit);
+        String categoryData;
+        if(category.equalsIgnoreCase("trai-cay-viet")) {
+          categoryData = "Trái cây Việt";
+        } else if(category.equalsIgnoreCase("trai-cay-nhap")) {
+          categoryData = "Trái cây Nhập";
+        } else {
+          categoryData = "Quà Tặng Trái Cây";
+        }
+        products.setCategory(categoryData);
         products.setDateOfImporting(new java.sql.Date(dateImport.getTime()));
         products.setAdminCreate(admin.getId());
         products.setImgPublicId(mainImgPublicId);

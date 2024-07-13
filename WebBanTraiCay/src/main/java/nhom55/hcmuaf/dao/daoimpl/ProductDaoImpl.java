@@ -219,12 +219,12 @@ public class ProductDaoImpl implements ProductDao {
   @Override
   public int addNewProduct(String productName, String description, double price,
       double weightDefault, Date dateImport, int expirationDate,
-      int adminId, int provider, String season,
+      int adminId, int provider, String category,
       String imgPublicId, String imgAssetId) {
     return
         JDBIConnector.get().withHandle(h -> h.createUpdate(
-                "INSERT INTO products(nameOfProduct, description, price, weightDefault, dateOfImporting, expriredDay, adminCreate, provider, seasonalFruit, imgPublicId, imgAssetId) "
-                    + "VALUES (:nameOfProduct, :description, :price, :weightDefault, :dateOfImporting, :expriredDay, :adminCreate, :provider, :seasonalFruit, :imgPublicId, :imgAssetId)")
+                "INSERT INTO products(nameOfProduct, description, price, weightDefault, dateOfImporting, expriredDay, adminCreate, provider, category, imgPublicId, imgAssetId) "
+                    + "VALUES (:nameOfProduct, :description, :price, :weightDefault, :dateOfImporting, :expriredDay, :adminCreate, :provider, :category, :imgPublicId, :imgAssetId)")
             .bind("nameOfProduct", productName)
             .bind("description", description)
             .bind("price", price)
@@ -233,7 +233,7 @@ public class ProductDaoImpl implements ProductDao {
             .bind("expriredDay", expirationDate)
             .bind("adminCreate", adminId)
             .bind("provider", provider)
-            .bind("seasonalFruit", season)
+            .bind("category", category)
             .bind("imgPublicId", imgPublicId)
             .bind("imgAssetId", imgAssetId)
             .executeAndReturnGeneratedKeys("id")

@@ -238,7 +238,7 @@ var kgMacDinhSP = document.getElementById("kgMacDinh_sp");
 var nhaCC = document.getElementById("provider_product");
 var ngayHetHan = document.getElementById("expired_day");
 var upfileAnh = document.getElementById("upfileAnh");
-var seasonalFruit = document.getElementById("seasonalFruitSelect");
+var doanhMuc = document.getElementById("doanhMuc");
 // var sourceImport = document.getElementById("sourceImport");
 // var driedFruit = document.getElementById("driedFruit");
 
@@ -439,13 +439,31 @@ function addNewProduct() {
           || !validateKgMacDinhSP()) {
         Swal.fire("Vui Lòng nhập dữ liệu!", "", "warning");
       } else {
+        const data = {
+          name: tenSP.value,
+          description: moTaSP.getData(),
+          category: doanhMuc.value,
+          // sourceImport: sourceImport.value,
+          // driedFruit: driedFruit.value,
+          price: giaTienSP.value,
+          // quantity: khoiLuongSP.value,
+          defaultWeight: kgMacDinhSP.value,
+          supplier: nhaCC.value,
+          expirationDate: ngayHetHan.value,
+          // img: mainImages[0],
+          supImages: supImagesString,
+          mainImgPublicId: mainImgPublicId[0],
+          mainImgAssetId: mainImgAssetId[0],
+          supImgPublicId: supImgPublicIdStr,
+          supImgAssetId: supImgAssetIdStr
+        }
         $.ajax({
           type: 'POST',
           url: `${window.context}/admin/product/add-new-product`,
           data: {
             name: tenSP.value,
             description: moTaSP.getData(),
-            seasonalFruit: seasonalFruit.value,
+            category: doanhMuc.value,
             // sourceImport: sourceImport.value,
             // driedFruit: driedFruit.value,
             price: giaTienSP.value,

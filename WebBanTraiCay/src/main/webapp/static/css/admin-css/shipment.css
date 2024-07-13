@@ -1,0 +1,371 @@
+/* Google Fonts Import Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.container-child{
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+#inventory-table_wrapper .dt-scroll-head {
+    background: #E4E9F7;
+}
+#inventory-table_wrapper .dataTables_scrollHeadInner thead th:first-child {
+    width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
+    background: #E4E9F7;
+}
+
+.display.dataTable thead tr th:first-child{
+    display: inline-block;
+    background: #E4E9F7;
+    min-width: max-content;
+    width: 100% !important;
+}
+.display.dataTable thead tr th span:first-child {
+    background: #E4E9F7;
+    display: inline-block;
+    width: 100% !important;
+}
+.header h1 {
+    margin: 0;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat span {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.management {
+    margin-top: 20px;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.download {
+    display: flex;
+    background-color: #fff;
+    color: #000;
+    border: solid #000 1px;
+}
+
+.toolbar {
+    display: flex;
+    gap: 10px; /* Khoảng cách giữa các nút */
+}
+
+.toolbar button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.toolbar button svg {
+    width: 20px;
+    height: 20px;
+}
+.tabs, .tabs-date {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.tab, .tab-date{
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.tab.active, .tab-date.active {
+    background-color: #fff;
+    border-bottom: 2px solid #007bff;
+}
+
+.search {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.search input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.search button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.tab-content {
+    margin-bottom: 10px !important;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f1f1f1;
+}
+
+.download-btn-wrapper {
+    text-align: right;
+}
+
+.edit-btn, .restock-btn {
+    color: #fff;
+    margin-right: 5px;
+}
+@media only screen and (max-width: 600px) {
+    table {
+      width: 100%;
+    }
+}
+
+.display.dataTable.no-footer {
+    width: 100% !important;
+}
+
+#inventory-table {
+    width: 100% !important;
+}
+
+#inventory-table tr {
+   padding: 10px !important;
+}
+
+#inventory-table {
+    border-collapse: collapse;
+}
+
+#inventory-table td {
+    border: none;
+}
+#inventory-table th {
+    background-color: rgb(238, 238, 238);
+}
+
+#inventory-table tr {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+
+}
+#inventory-table tr td {
+    height: 100px;
+    background-color: #fff;
+}
+
+.toolbar .bulk-update {
+    background-color: #007bff;
+    fill: #fff;
+    color: #fff;
+}
+
+/* custom table */
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.batch-code {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: row;
+}
+
+.product-image img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.product-details {
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    grid-gap: 8px;
+    margin-left: 16px;
+    flex-grow: 1;
+}
+
+.product-details div {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-details label {
+    font-weight: bold;
+}
+.status {
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    text-align: center;
+}
+
+.status-green {
+    background-color: #6cd67c; /* Màu xanh lá cây */
+    color: #fff; /* Màu chữ trắng */
+}
+
+.status-yellow {
+    background-color: #ffd700; /* Màu vàng */
+    color: #000; /* Màu chữ đen */
+}
+
+.status-red {
+    background-color: #ff6347; /* Màu đỏ */
+    color: #fff; /* Màu chữ trắng */
+}
+
+
+/*inventory history for table */
+.inventory-history table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.inventory-history th, .inventory-history td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.inventory-history th {
+    background-color: #f1f1f1;
+    font-size: 14px;
+}
+
+.inventory-history td {
+    font-size: 14px;
+}
+
+.inventory-history .positive {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.inventory-history .negative {
+    color: #ff0000;
+    font-weight: bold;
+}
+#inventory-history-table{
+    width: 100% !important;
+}
+#inventory-history-table thead tr th {
+    background: rgb(228, 233, 247);
+}
+#inventory-history-table th:nth-child(1),
+#inventory-history-table td:nth-child(1) {
+    white-space: normal !important;
+    max-width: none!important;
+}
+
+#inventory-history-table th:nth-child(3),
+#inventory-history-table td:nth-child(3) {
+    white-space: normal !important;
+    max-width: none!important;
+    width: 100px;
+}
+
+#inventory-history-table th:nth-child(5),
+#inventory-history-table td:nth-child(5) {
+    white-space: normal !important;
+    max-width: none!important;
+    width: 250px;
+}
+
+.inventory-history {
+    margin: 20px 0px 20px 0;
+}
+
+.inventory-manage .header {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #000000;
+}
+
+.inventory-manage .management {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #000000;
+}
+
+.positive {
+    color: green;
+}
+
+.negative {
+    color: red;
+}
+
+.inventory-history h2 {
+    margin-bottom: 10px;
+}

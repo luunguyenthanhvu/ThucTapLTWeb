@@ -1,0 +1,320 @@
+/* Google Fonts Import Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.dataTables_wrapper {
+  font-family: 'Poppins', sans-serif; /* Thay thế 'Roboto' bằng font-family mong muốn */
+  font-size: 14px; /* Kích thước chữ mặc định */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+.container-child {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.search {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.search input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.search button {
+  background-color: #007bff;
+  color: #fff;
+}
+
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.nav-function-add-shipment {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex {
+  display: flex;
+}
+
+.nav-button button {
+  display: flex;
+  height: 30px;
+}
+
+.nav-button {
+  display: flex;
+  gap: 10px; /* Khoảng cách giữa các nút */
+}
+
+.nav-button .add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff; /* Màu nền nút */
+  color: white; /* Màu chữ */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+
+.nav-button .add:hover {
+  background-color: #0056b3; /* Màu nền khi hover */
+}
+
+.nav-button .add span {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Khoảng cách giữa icon và text */
+}
+
+.nav-button .add svg {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+}
+
+.nav-function-add-shipment {
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+#table-add-shipment {
+  width: 100% !important;
+}
+
+#table-add-shipment thead tr {
+  background: #E4E9F7;
+}
+
+.image-table-product img {
+  width: 70px;
+  height: 70px;
+}
+
+.check-product {
+  width: 50px;
+  height: 50px;
+}
+
+.check-product input {
+  width: 30px;
+  height: 30px;
+}
+
+/* CSS cho DataTable để làm mờ viền ngăn cách */
+table.dataTable {
+  border-collapse: collapse; /* Đảm bảo viền không bị chồng chéo */
+}
+
+table.dataTable thead th, table.dataTable tbody td {
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Màu viền mờ */
+  padding: 8px; /* Thêm khoảng cách bên trong ô */
+}
+
+table.dataTable tbody td {
+  background-color: #fff; /* Màu nền cho body */
+}
+
+#table-add-shipment th, #table-add-shipment td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* CSS tùy chỉnh cho các nút */
+.btn-edit {
+  background-color: #4CAF50; /* Màu nền cho nút chỉnh sửa */
+  color: white; /* Màu chữ */
+  border: none; /* Không viền */
+  padding: 10px 20px; /* Khoảng cách bên trong */
+  cursor: pointer; /* Con trỏ chuột */
+  border-radius: 5px; /* Bo tròn góc */
+  margin-right: 5px; /* Khoảng cách giữa các nút */
+}
+
+.btn-hide {
+  background-color: #fff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn-show {
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.btn-hide svg {
+  fill: #f44336;
+}
+
+.btn-show svg {
+  fill: #007bff;
+}
+
+.btn-edit svg, .btn-hide svg, .btn-show svg {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.status-product.lock span {
+  color: red;
+}
+
+.status-product.unlock span {
+  color: #4CAF50;
+}
+
+.image-table-product {
+  display: flex;
+  align-items: flex-start; /* Căn chữ theo đỉnh hình ảnh */
+}
+
+.image-table-product img {
+  width: 80px; /* Đặt kích thước cố định cho hình ảnh */
+  height: auto; /* Giữ tỉ lệ của hình ảnh */
+  margin-right: 10px; /* Khoảng cách giữa hình ảnh và tên sản phẩm */
+}
+
+.image-table-product .product-name {
+  width: 200px;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.product-name span {
+  display: block;
+}
+
+.datatable-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.dataTables_wrapper .dataTables_scrollHead thead th {
+  white-space: normal; /* Cho phép tiêu đề xuống hàng */
+  word-wrap: break-word; /* Tách từ khi nội dung quá dài */
+  max-width: 150px; /* Giới hạn chiều rộng tối đa */
+  text-overflow: ellipsis; /* Hiển thị dấu chấm (...) khi nội dung quá dài */
+  overflow: hidden; /* Ẩn phần dư thừa của nội dung */
+}
+
+
+.new-quantity-product input[type="text"] {
+  padding: 5px; /* Khoảng cách bên trong input */
+  font-size: 14px; /* Kích thước chữ */
+}
+
+.shipment-transaction-note {
+  padding: 5px;
+  font-size: 14px;
+}
+
+
+.dataTables_wrapper table.dataTable thead th,
+.dataTables_wrapper table.dataTable tbody td,
+.dataTables_wrapper table.dataTable tfoot th,
+.dataTables_wrapper table.dataTable tfoot td {
+  border-right: none !important; /* Loại bỏ đường gạch dọc */
+  border-bottom: 1px solid #ddd; /* Giữ lại đường gạch ngang */
+  padding: 8px; /* Căn lề cho nội dung */
+}
+
+.dataTables_wrapper table.dataTable thead th {
+  border-bottom: 2px solid #ddd; /* Đường gạch ngang ở phần đầu bảng */
+}
+
+.save-shipment {
+  display: flex;
+  justify-content: space-between; /* Các phần tử bên trong sẽ căn đều */
+}
+
+.save-button {
+  background-color: #4CAF50; /* Màu nền */
+  color: white; /* Màu chữ */
+  border: none; /* Bỏ viền */
+  padding: 10px 20px; /* Khoảng cách lề */
+  text-align: center; /* Căn giữa nội dung */
+  text-decoration: none; /* Bỏ gạch chân */
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px; /* Khoảng cách với phần trên */
+  margin-left: auto; /* Đẩy sang phải cực đại của phần tử cha */
+}
+
+input {
+  cursor: pointer;
+}
+
+.btn-edit svg {
+  fill: #fff;
+}
+thead tr {
+  background-color:#E4E9F7 !important;
+}
+
+#table-add-shipment th, #table-add-shipment td {
+  text-align: left;
+}
+.dt-scroll-headInner , .dataTable{
+  width: 100%;
+}
+thead {
+  width: 100%;
+}
+thead tr th{
+  background-color:#E4E9F7 !important;
+}
+
+.dt-scroll-body  {
+  width:100%;
+  overflow-y:scroll !important;
+}
+table.dataTable tfoot {
+  display: table-header-group;
+}
