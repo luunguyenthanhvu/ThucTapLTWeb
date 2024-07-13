@@ -239,6 +239,12 @@
             <div class="container-child">
                 <div class="search">
                     <input type="text" placeholder="Tên sản phẩm" id="product-name">
+                    <select id="product-category">
+                        <option value="" selected>Tất cả sản phẩm</option>
+                        <option value="Trái cây Việt">Trái cây Việt</option>
+                        <option value="Trái cây Nhập">Trái cây Nhập</option>
+                        <option value="Quà Tặng Trái Cây">Quà Tặng Trái Cây</option>
+                    </select>
                     <button class="search-btn">Tìm kiếm</button>
                     <button class="reset-btn">Cài đặt lại</button>
                 </div>
@@ -310,6 +316,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.11.2/cloudinary-core-shrinkwrap.min.js"></script>
 <script src="https://kit.fontawesome.com/4c38acb8c6.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/static/js/datatable/datatables.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/admin-js/product-list.js?v=6" charset="utf-8"> </script>
+<script src="${pageContext.request.contextPath}/static/js/admin-js/product-list.js?v=10" charset="utf-8"> </script>
 <script src="${pageContext.request.contextPath}/static/js/admin-js/load-img-datatable.js"></script>
 </html>

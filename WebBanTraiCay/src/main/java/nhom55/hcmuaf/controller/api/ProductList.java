@@ -18,6 +18,7 @@ import nhom55.hcmuaf.util.MyUtils;
 @WebServlet(name = "APIProductList", value = "/api/get-product-list")
 public class ProductList extends HttpServlet {
 
+  private final String REQUEST_BODY = "request-body";
   private ProductService productService;
 
   @Override
@@ -28,12 +29,11 @@ public class ProductList extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    response.setContentType("application/json");
+    response.setCharacterEncoding("UTF-8");
+    PrintWriter out = response.getWriter();
     try {
-      response.setContentType("application/json");
-      response.setCharacterEncoding("UTF-8");
-      PrintWriter out = response.getWriter();
-      String requestDTO = (String) request.getAttribute("requestBody");
-      System.out.println(requestDTO);
+      String requestDTO = (String) request.getAttribute(REQUEST_BODY);
 
       // convert to object
       DataTableRequestDTO dataTableRequestDTO = MyUtils.convertJsonToObject(requestDTO,
@@ -48,13 +48,14 @@ public class ProductList extends HttpServlet {
 
       // Lấy số bản ghi sau khi lọc
       Integer filteredRecords = productService.countFilteredRecords(
-          dataTableRequestDTO.getSearchText());
+          dataTableRequestDTO.getSearchText(), dataTableRequestDTO.getCategory());
 
       // Lấy danh sách sản phẩm theo phân trang và tìm kiếm
       List<ListProductResponseDTO> productList = productService.findAllBy(
           dataTableRequestDTO.getStart(),
           dataTableRequestDTO.getLength(),
-          dataTableRequestDTO.getSearchText());
+          dataTableRequestDTO.getSearchText(),
+          dataTableRequestDTO.getCategory());
 
       DataTableResponseDTO dataTableResponse =
           DataTableResponseDTO.builder()
@@ -65,7 +66,6 @@ public class ProductList extends HttpServlet {
               .build();
 
       out.println(MyUtils.convertToJson(dataTableResponse));
-      out.flush();
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -73,6 +73,7 @@ public class ProductList extends HttpServlet {
       throw new MyHandleException("Loi server", 500);
     } finally {
       productService.close();
+      out.flush();
     }
   }
 }

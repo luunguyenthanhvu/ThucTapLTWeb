@@ -1,7 +1,7 @@
 package nhom55.hcmuaf.services_remaster;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
+import java.util.Optional;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import nhom55.hcmuaf.beans_remaster.Products;
@@ -23,9 +23,10 @@ public class ProductService extends AbstractService {
     return ListProductsResponseDTOMapper.INSTANCE.toListDTO(handle, productsList);
   }
 
-  public List<ListProductResponseDTO> findAllBy(int start, int length, String searchText) {
+  public List<ListProductResponseDTO> findAllBy(int start, int length, String searchText,
+      String category) {
     List<Products> productsList = handle.attach(ProductsDAO.class)
-        .findAllBy(start, length, "%" + searchText + "%");
+        .findAllBy(start, length, "%" + searchText + "%", "%" + category + "%");
     return ListProductsResponseDTOMapper.INSTANCE.toListDTO(handle, productsList);
   }
 
@@ -33,8 +34,16 @@ public class ProductService extends AbstractService {
     return handle.attach(ProductsDAO.class).countTotalRecords();
   }
 
-  public Integer countFilteredRecords(String searchText) {
-    return handle.attach(ProductsDAO.class).countFilteredRecords("%" + searchText + "%");
+  public Integer countFilteredRecords(String searchText, String category) {
+    return handle.attach(ProductsDAO.class)
+        .countFilteredRecords("%" + searchText + "%", "%" + category + "%");
   }
 
+  public Optional<Products> findAllById(Integer id) {
+    return handle.attach(ProductsDAO.class).findAllById(id);
+  }
+
+  public void updateProductStatus(Integer status, Integer productId) {
+    handle.attach(ProductsDAO.class).updateProductStatus(status, productId);
+  }
 }

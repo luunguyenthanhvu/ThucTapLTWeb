@@ -18,6 +18,8 @@ import nhom55.hcmuaf.my_handle_exception.MyHandleException;
 @WebFilter(filterName = "global_3", urlPatterns = "/api/*")
 public class GlobalExceptionFilter implements Filter {
 
+  private final String REQUEST_BODY = "request-body";
+
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
     Filter.super.init(filterConfig);
@@ -35,10 +37,8 @@ public class GlobalExceptionFilter implements Filter {
       sb.append(line);
     }
     String requestBody = sb.toString();
-    System.out.println("djtme request body");
-    System.out.println(requestBody);
     PrintWriter out = servletResponse.getWriter();
-    httpServletRequest.setAttribute("requestBody", requestBody);
+    httpServletRequest.setAttribute(REQUEST_BODY, requestBody);
     try {
       filterChain.doFilter(servletRequest, servletResponse);
     } catch (Exception e) {
@@ -46,9 +46,7 @@ public class GlobalExceptionFilter implements Filter {
       servletResponse.setCharacterEncoding("UTF8");
       if (e instanceof MyHandleException) {
         httpServletResponse.setStatus(((MyHandleException) e).getHttpStatusCode());
-        out.println(MessageResponseDTO.builder()
-            .message(e.getMessage())
-            .build());
+        out.println(MessageResponseDTO.builder().message(e.getMessage()).build());
       }
     } finally {
       out.flush();

@@ -1,4 +1,4 @@
-package nhom55.hcmuaf.dto.data_table;
+package nhom55.hcmuaf.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -11,11 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DataTableRequestDTO {
+public class ProductDetailsRequestDTO {
 
-  Integer draw;
-  Integer start;
-  Integer length;
-  String searchText;
-  String category;
+  Integer id;
 }
