@@ -18,6 +18,7 @@ public interface ListProductsResponseDTOMapper {
   ListProductsResponseDTOMapper INSTANCE = Mappers.getMapper(ListProductsResponseDTOMapper.class);
 
   @Mapping(source = "nameOfProduct", target = "productName")
+  @Mapping(source = "category", target = "category")
   @Mapping(source = "provider", target = "provider", qualifiedByName = "getProviderName")
   @Mapping(source = "id", target = "quantityStock", qualifiedByName = "getQuantityStock")
   ListProductResponseDTO toDto(@Context Handle handle, Products products);

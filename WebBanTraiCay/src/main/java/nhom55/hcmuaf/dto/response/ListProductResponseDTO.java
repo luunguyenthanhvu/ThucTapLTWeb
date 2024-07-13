@@ -15,6 +15,7 @@ public class ListProductResponseDTO {
 
   String imgAssetId;
   String imgPublicId;
+  String category;
   String productName;
   Integer id;
   String provider;

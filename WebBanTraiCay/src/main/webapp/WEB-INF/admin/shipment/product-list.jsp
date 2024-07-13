@@ -271,7 +271,8 @@
                             <thead>
                             <tr>
                                 <th></th>
-                                <th>Sản phẩm | Phân loại</th>
+                                <th>Sản phẩm</th>
+                                <th>Phân Loại</th>
                                 <th>Mã SKU</th>
                                 <th>Nhà cung cấp</th>
                                 <th>Tồn kho</th>
@@ -309,6 +310,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.11.2/cloudinary-core-shrinkwrap.min.js"></script>
 <script src="https://kit.fontawesome.com/4c38acb8c6.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/static/js/datatable/datatables.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/admin-js/product-list.js?v=5" charset="utf-8"> </script>
+<script src="${pageContext.request.contextPath}/static/js/admin-js/product-list.js?v=6" charset="utf-8"> </script>
 <script src="${pageContext.request.contextPath}/static/js/admin-js/load-img-datatable.js"></script>
 </html>

@@ -89,6 +89,15 @@ let tableAddNewShipment = new DataTable('#table-add-shipment', {
       data: undefined,
       render: function (data, type, row) {
         return `<div class="sku-code">  
+                    <span>${row.category}</span>
+                </div>`
+      },
+      width: "20%"
+    },
+    {
+      data: undefined,
+      render: function (data, type, row) {
+        return `<div class="sku-code">  
                     <span>${row.id}</span>
                 </div>`
       },
