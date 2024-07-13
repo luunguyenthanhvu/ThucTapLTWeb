@@ -121,9 +121,11 @@ selectElement.addEventListener('change', async function() {
         console.log(data); // Handle the response data here
         document.getElementById("delivery_fee").innerHTML = data.data.service_fee.toLocaleString('vi-VN') + ' ₫';
         document.getElementById("delivery_fee").value = data.data.service_fee;
+
         var tongPhu = document.querySelector('.tong_phu').textContent;
         tongPhu = parseInt(tongPhu.replace(/[^\d]/g, ''), 10);
         var tienVanChuyen=data.data.service_fee;
+        document.getElementById("hidden_delivery_fee").value=tienVanChuyen;
         var tongCong = tongPhu + tienVanChuyen;
         document.querySelector('.tong_cong').innerHTML = tongCong.toLocaleString('vi-VN') + ' ₫';
 
