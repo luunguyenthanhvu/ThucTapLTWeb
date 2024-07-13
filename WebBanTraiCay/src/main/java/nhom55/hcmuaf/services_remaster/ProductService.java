@@ -12,10 +12,7 @@ import org.jdbi.v3.core.Handle;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class ProductService extends AbstractService {
-
-  private ProductsDAO productsDAO;
 
   public ProductService(Handle handle) {
     super(handle);
@@ -25,4 +22,19 @@ public class ProductService extends AbstractService {
     List<Products> productsList = handle.attach(ProductsDAO.class).findAllBy();
     return ListProductsResponseDTOMapper.INSTANCE.toListDTO(handle, productsList);
   }
+
+  public List<ListProductResponseDTO> findAllBy(int start, int length, String searchText) {
+    List<Products> productsList = handle.attach(ProductsDAO.class)
+        .findAllBy(start, length, "%" + searchText + "%");
+    return ListProductsResponseDTOMapper.INSTANCE.toListDTO(handle, productsList);
+  }
+
+  public Integer countTotalRecords() {
+    return handle.attach(ProductsDAO.class).countTotalRecords();
+  }
+
+  public Integer countFilteredRecords(String searchText) {
+    return handle.attach(ProductsDAO.class).countFilteredRecords("%" + searchText + "%");
+  }
+
 }

@@ -12,7 +12,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DataTableRequestDTO {
+
   Integer draw;
   Integer start;
   Integer length;
+  String searchText;
 }

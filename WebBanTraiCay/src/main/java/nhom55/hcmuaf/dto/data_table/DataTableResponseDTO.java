@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DataTableResponse {
+public class DataTableResponseDTO {
 
   Integer draw;
   Integer recordsTotal;

@@ -66,13 +66,6 @@ public class AddProductController extends HttpServlet {
       throws ServletException, IOException {
     HttpSession session = request.getSession();
     Users admin = MyUtils.getLoginedUser(session);
-    Gson gson = new Gson();
-    String requestData = request.getReader().lines().collect(Collectors.joining());
-    System.out.println("Djt me lang coc truipc khi convert");
-    System.out.println(requestData);
-    AddProductResponseDTO dto = gson.fromJson(requestData, AddProductResponseDTO.class);
-    System.out.println("Djt me lang coc cututttakojidjasqjkdsajdnk");
-    System.out.println(dto);
     String productName = request.getParameter("name");
     LocalDateTime localDateTime = LocalDateTime.now();
     Date dateImport = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
@@ -85,7 +78,7 @@ public class AddProductController extends HttpServlet {
     String expirationDateStr = request.getParameter("expirationDate");
     String imgList = request.getParameter("supImages");
 //    String importedFruit = request.getParameter("sourceImport");
-    String seasonalFruit = request.getParameter("seasonalFruit");
+    String category = request.getParameter("category");
 //    String driedFruit = request.getParameter("driedFruit");
 
     // public id and asset id of product
@@ -109,7 +102,15 @@ public class AddProductController extends HttpServlet {
         products.setPrice(Double.valueOf(price));
         products.setWeightDefault(Double.valueOf(defaultWeight));
         products.setProvider(Integer.parseInt(supplier));
-        products.setSeasonalFruit(seasonalFruit);
+        String categoryData;
+        if(category.equalsIgnoreCase("trai-cay-viet")) {
+          categoryData = "Trái cây Việt";
+        } else if(category.equalsIgnoreCase("trai-cay-nhap")) {
+          categoryData = "Trái cây Nhập";
+        } else {
+          categoryData = "Quà Tặng Trái Cây";
+        }
+        products.setCategory(categoryData);
         products.setDateOfImporting(new java.sql.Date(dateImport.getTime()));
         products.setAdminCreate(admin.getId());
         products.setImgPublicId(mainImgPublicId);

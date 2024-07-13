@@ -6,11 +6,18 @@ import javax.servlet.http.HttpSession;
 import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.beans.cart.Cart;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 
 public class MyUtils {
 
   public static final String ATT_NAME_USER_NAME = "ATTRIBUTE_FOR_STORE_USER_NAME_IN_COOKIE";
+  private static final ObjectMapper objectMapper = new ObjectMapper();
+
+  static {
+    objectMapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES,
+        false);
+  }
 
   public MyUtils() {
     super();
@@ -121,8 +128,7 @@ public class MyUtils {
 
   public static String convertToJson(Object object) {
     try {
-      ObjectMapper Obj = new ObjectMapper();
-      String json = Obj.writeValueAsString(object);
+      String json = objectMapper.writeValueAsString(object);
       return json;
     } catch (Exception e) {
       return null;
@@ -130,12 +136,11 @@ public class MyUtils {
   }
 
 
-  public static Object convertJsonToObject(String json) {
+  public static <T> T convertJsonToObject(String json, Class<T> valueType) {
     try {
-      ObjectMapper Obj = new ObjectMapper();
-      Object result = Obj.readValue(json, Object.class);
-      return json;
+      return objectMapper.readValue(json, valueType);
     } catch (Exception e) {
+      e.printStackTrace();
       return null;
     }
   }

@@ -16,7 +16,7 @@ public class Products implements Serializable {
   private List<Image> imageList;
   private int adminCreate;
   private int provider;
-  private String seasonalFruit;
+  private String category;
   private String importedFruit;
   private String imgPublicId;
   private String imgAssetId;
@@ -94,12 +94,12 @@ public class Products implements Serializable {
     this.imgAssetId = imgAssetId;
   }
 
-  public String getSeasonalFruit() {
-    return seasonalFruit;
+  public String getCategory() {
+    return category;
   }
 
-  public void setSeasonalFruit(String seasonalFruit) {
-    this.seasonalFruit = seasonalFruit;
+  public void setCategory(String category) {
+    this.category = category;
   }
 
   public String getImportedFruit() {
@@ -204,7 +204,7 @@ public class Products implements Serializable {
         ", imageList=" + imageList +
         ", adminCreate=" + adminCreate +
         ", provider=" + provider +
-        ", seasonalFruit='" + seasonalFruit + '\'' +
+        ", seasonalFruit='" + category + '\'' +
         ", importedFruit='" + importedFruit + '\'' +
         '}';
   }

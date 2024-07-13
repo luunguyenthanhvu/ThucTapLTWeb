@@ -20,7 +20,7 @@ public class Products {
   Integer id;
   String nameOfProduct;
   String description;
-  String seasonalFruit;
+  String category;
   Double price;
   Double weightDefault;
   Date dateOfImporting;

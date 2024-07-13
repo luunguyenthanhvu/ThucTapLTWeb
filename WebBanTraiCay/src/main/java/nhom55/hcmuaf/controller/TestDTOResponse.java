@@ -19,7 +19,6 @@ public class TestDTOResponse extends HttpServlet {
       throws ServletException, IOException {
     Products products = new Products();
     products.setImgAssetId("Long lz");
-    products.setSeasonalFruit("Long cc");
     products.setNameOfProduct("djtme lang coc");
 
     response.setContentType("application/json");

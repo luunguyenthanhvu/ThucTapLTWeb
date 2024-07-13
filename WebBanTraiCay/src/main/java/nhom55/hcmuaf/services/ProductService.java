@@ -36,7 +36,7 @@ public class ProductService {
     int id = productDao.addNewProduct(products.getNameOfProduct(), products.getDescription(),
         products.getPrice(), products.getWeightDefault(),
         products.getDateOfImporting(), products.getExpriredDay(), products.getAdminCreate(),
-        products.getProvider(), products.getSeasonalFruit() ,
+        products.getProvider(), products.getCategory(),
         products.getImgPublicId(),
         products.getImgAssetId());
     List<Image> imageList = new ArrayList<>();

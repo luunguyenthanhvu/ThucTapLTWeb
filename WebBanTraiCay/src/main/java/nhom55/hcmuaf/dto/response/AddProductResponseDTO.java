@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AddProductResponseDTO {
-private String name;
-private String description;
+
+  private String name;
+  private String description;
 }

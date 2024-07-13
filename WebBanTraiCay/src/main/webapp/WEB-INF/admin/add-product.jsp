@@ -341,16 +341,15 @@
                                     <td><p style="color: red">${mo_ta_error}</p></td>
                                 </c:if>
                                 <tr>
-                                    <td><label>Trái cây theo mùa <span
+                                    <td><label>Loại Trái cây <span
                                             style="color: red">*</span></label>
                                     </td>
                                     <td>
-                                        <select style="width: 300px" id="seasonalFruitSelect"
+                                        <select style="width: 300px" id="doanhMuc"
                                                 name="selectedSeasonalFruit">
-                                            <option value="spring">Mùa xuân</option>
-                                            <option value="summer">Mùa hạ</option>
-                                            <option value="fall">Mùa thu</option>
-                                            <option value="winter">Mùa đông</option>
+                                            <option value="trai-cay-viet">Trái cây Việt</option>
+                                            <option value="trai-cay-nhap">Trái cây Nhập</option>
+                                            <option value="qua-tang-trai-cay">Quà Tặng Trái Cây</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -487,8 +486,6 @@
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="${pageContext.request.contextPath}/static/js/admin-js/add-new-products2.js?v=17"
-        charset="UTF-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -497,5 +494,7 @@
 <script> var context = "${pageContext.request.contextPath}";</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.11.2/cloudinary-core-shrinkwrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/web-js/load-image.js?v=1"
+        charset="UTF-8"></script>
+<script src="${pageContext.request.contextPath}/static/js/admin-js/add-new-products2.js?v=2"
         charset="UTF-8"></script>
 </html>

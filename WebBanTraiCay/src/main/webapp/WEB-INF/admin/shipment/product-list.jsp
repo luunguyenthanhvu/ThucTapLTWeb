@@ -305,7 +305,10 @@
 <script src="${pageContext.request.contextPath}/static/js/bootstrap-datepicker.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/scrollax.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.11.2/cloudinary-core-shrinkwrap.min.js"></script>
 <script src="https://kit.fontawesome.com/4c38acb8c6.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/static/js/datatable/datatables.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/admin-js/product-list.js?v=16"></script>
+<script src="${pageContext.request.contextPath}/static/js/admin-js/product-list.js?v=5" charset="utf-8"> </script>
+<script src="${pageContext.request.contextPath}/static/js/admin-js/load-img-datatable.js"></script>
 </html>
