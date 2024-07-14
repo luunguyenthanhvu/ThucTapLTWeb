@@ -55,7 +55,8 @@ public class ProductList extends HttpServlet {
           dataTableRequestDTO.getStart(),
           dataTableRequestDTO.getLength(),
           dataTableRequestDTO.getSearchText(),
-          dataTableRequestDTO.getCategory());
+          dataTableRequestDTO.getCategory(),
+          dataTableRequestDTO.getOrder());
 
       DataTableResponseDTO dataTableResponse =
           DataTableResponseDTO.builder()

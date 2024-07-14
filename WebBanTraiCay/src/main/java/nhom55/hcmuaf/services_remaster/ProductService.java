@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import nhom55.hcmuaf.beans_remaster.Products;
 import nhom55.hcmuaf.dao_remaster.ProductsDAO;
+import nhom55.hcmuaf.dto.data_table.DataTableRequestDTO;
 import nhom55.hcmuaf.dto.response.ListProductResponseDTO;
 import nhom55.hcmuaf.mapper.response.ListProductsResponseDTOMapper;
 import org.jdbi.v3.core.Handle;
@@ -24,11 +25,15 @@ public class ProductService extends AbstractService {
   }
 
   public List<ListProductResponseDTO> findAllBy(int start, int length, String searchText,
-      String category) {
-    List<Products> productsList = handle.attach(ProductsDAO.class)
-        .findAllBy(start, length, "%" + searchText + "%", "%" + category + "%");
+      String category, List<DataTableRequestDTO.OrderDTO> orderDTOS) {
+    ProductsDAO productsDAO = handle.attach(ProductsDAO.class);
+    String orderBy = productsDAO.buildOrderByClause(orderDTOS);
+    System.out.println(orderBy);
+    List<Products> productsList = productsDAO.findAllBy(start, length, "%" + searchText + "%",
+        "%" + category + "%", orderBy);
     return ListProductsResponseDTOMapper.INSTANCE.toListDTO(handle, productsList);
   }
+
 
   public Integer countTotalRecords() {
     return handle.attach(ProductsDAO.class).countTotalRecords();

@@ -14,7 +14,10 @@
     <%@ page isELIgnored="false" %>
     <meta charset="UTF-8">
     <title>Quản lý cửa hàng</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/css/admin-css/style.css?v=2">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin-css/dssp.css">
@@ -254,15 +257,15 @@
                         <span> <span id="selectedProductCount">0</span> Sản phẩm được chọn</span>
                     </div>
                     <div class="nav-button flex">
-                        <button class="add">
+                        <button class="add" id="btn-add-new-product">
               <span class="flex">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path
                       d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
             Thêm sản phẩm mới
               </span>
                         </button>
 
-                        <button class="add">
+                        <button class="add" id="btn-add-new-shipment">
             <span class="flex">
                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path
                          d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
@@ -316,6 +319,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.11.2/cloudinary-core-shrinkwrap.min.js"></script>
 <script src="https://kit.fontawesome.com/4c38acb8c6.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/static/js/datatable/datatables.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/admin-js/product-list.js?v=10" charset="utf-8"> </script>
+<script src="${pageContext.request.contextPath}/static/js/admin-js/product-list.js?v=1"
+        charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/static/js/admin-js/load-img-datatable.js"></script>
 </html>

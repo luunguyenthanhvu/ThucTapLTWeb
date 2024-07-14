@@ -37,6 +37,8 @@ public class GlobalExceptionFilter implements Filter {
       sb.append(line);
     }
     String requestBody = sb.toString();
+    System.out.println("Before convert");
+    System.out.println(requestBody);
     PrintWriter out = servletResponse.getWriter();
     httpServletRequest.setAttribute(REQUEST_BODY, requestBody);
     try {

@@ -69,11 +69,11 @@ let tableAddNewShipment = new DataTable('#table-add-shipment', {
     {
       data: undefined,
       render: function (data, type, row) {
-        let isChecked = selectedProductCodes.includes(row.id) ? 'checked' : '';
-        console.log("cc check")
+        let isChecked = selectedProductCodes.includes(`${row.id}`) ? 'checked'
+            : '';
         console.log(isChecked)
         return `<div class="check-product">  
-                    <input type="checkbox" value="${row.id}" ${isChecked} onchange="increaseSelectedProduct(this)">
+                    <input type="checkbox" value="${row.id}" ${isChecked}>
                 </div>`;
       },
       width: "5%"
@@ -166,7 +166,15 @@ let tableAddNewShipment = new DataTable('#table-add-shipment', {
     }, 1500)
   }
 })
-
+$("#table-add-shipment").on('change', '.check-product input[type="checkbox"]',
+    function () {
+      if (!selectedProductCodes.includes($(this).val())) {
+        selectedProductCodes.push($(this).val());
+      } else {
+        selectedProductCodes = [...selectedProductCodes.filter(
+            code => code !== $(this).val())];
+      }
+    })
 // hide product
 $('#table-add-shipment').on('click', 'button[data-action="block-product"]',
     function () {
@@ -206,7 +214,6 @@ $('#table-add-shipment').on('click', 'button[data-action="block-product"]',
             }
           })
         } else if (result.isDenied) {
-
         }
       });
     })
@@ -242,11 +249,11 @@ function increaseSelectedProduct(checkbox) {
   if (checkbox.checked) {
     if (!selectedProductCodes.includes(productCode)) {
       selectedProductCodes.push(productCode);
+    } else {
+      selectedProductCodes = [...selectedProductCodes.filter(
+          code => code !== productCode)];
     }
-  } else {
-    selectedProductCodes = selectedProductCodes.filter(code => code !== productCode);
   }
-  console.log(selectedProductCodes)
 }
 
 $('#selectedProductCount').text(quantitySelected.quantity);
@@ -268,9 +275,35 @@ tableAddNewShipment.on('draw.dt', function () {
   $('tbody tr td .image-table-product.flex img').each((_, elements) => {
     const publicId = $(elements).data('assets');
     const imgUrl = cl.url(publicId);
-    $(elements).prop('src', imgUrl);
+    const imgDefault = `${window.context}/static/images/default-fruit.jpg`;
+    // check if image is exits
+    if (imgUrl !== null) {
+      $(elements).prop('src', imgUrl);
+    } else {
+      $(elements).prop('src', imgDefault);
+    }
   })
 
 });
+
+$('#btn-add-new-product').on('click', function () {
+  window.location.href = `${window.context}/admin/product/add-new-product`;
+})
+
+$('#btn-add-new-shipment').on('click', function () {
+  if (selectedProductCodes.length === 0) {
+    Swal.fire({
+      title: "Vui Lòng chọn ít nhất 1 sản phẩm",
+      icon: "warning"
+    })
+  } else {
+    let listProductCodes = selectedProductCodes.map(Number);
+    $.ajax({
+      url: `${window.context}/api/shipments-api/add-new-shipments`,
+      data: JSON.stringify(listProductCodes)
+    })
+  }
+})
+
 
 

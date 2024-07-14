@@ -53,6 +53,7 @@ public class ProductDetailsAPI extends HttpServlet {
           out.println(MyUtils.convertToJson(
               MessageResponseDTO.builder().message("Cật nhật trạng thái thành công!")));
           out.flush();
+          break;
       }
     } catch (Exception e) {
       e.printStackTrace();
