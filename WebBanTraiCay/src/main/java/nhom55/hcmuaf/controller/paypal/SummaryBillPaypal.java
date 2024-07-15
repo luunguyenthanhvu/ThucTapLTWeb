@@ -64,8 +64,8 @@ public class SummaryBillPaypal extends HttpServlet {
             String email = (String) session.getAttribute("email");
             String subtotal = (String) session.getAttribute("subtotal");
             double deliveryFee = (Double) session.getAttribute("deliveryFee");
-            String note =(String) session.getAttribute("note");
 
+            String note =(String) session.getAttribute("note");
             double subTotalPrice = Double.valueOf(subtotal);
             LocalDateTime timeNow = LocalDateTime.now();
             List<String> selectedProductIds = (List<String>) session.getAttribute("selectedProductIds");
@@ -80,7 +80,9 @@ public class SummaryBillPaypal extends HttpServlet {
                 productNameList += c.getProducts().getNameOfProduct() + "\t";
             }
             BillDao billDao = new BillDaoImpl();
+
             if (billDao.addAListProductToBills(timeNow, productNameList, "Đang giao", users.getId(), 2, firstName, lastName, address, city, phoneNumber, email, subTotalPrice,deliveryFee,note)) {
+
                 int id_bills = billDao.getIDAListProductFromBills(timeNow, users.getId());
                 for (CartProduct c : selectedProducts) {
                     if (billDao.addAProductToBillDetails(c.getProducts().getId(), id_bills, c.getQuantity(), c.getQuantity() * c.getProducts().getPrice())) {

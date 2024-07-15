@@ -19,9 +19,13 @@ public class Bills implements Serializable {
     private String email;
     private double totalPrice;
     private double deliveryFee;
+
     private String note;
 
-    public Bills(int id, LocalDateTime orderedDate, String productList, String status, int userId, int payment, String firstName, String lastName, String streetAddress, String city, String phoneNumber, String email, double totalPrice,double deliveryFee,String note) {
+
+
+    public Bills(int id, LocalDateTime orderedDate, String productList, String status, int userId, int payment, String firstName, String lastName, String streetAddress, String city, String phoneNumber, String email, double totalPrice,double deliveryFee) {
+
         this.id = id;
         this.orderedDate = orderedDate;
         this.productList = productList;
@@ -36,7 +40,9 @@ public class Bills implements Serializable {
         this.email = email;
         this.totalPrice=totalPrice;
         this.deliveryFee =deliveryFee;
+
         this.note = note;
+
     }
     public Bills() {
 
@@ -172,6 +178,7 @@ public class Bills implements Serializable {
         this.deliveryFee = deliveryFee;
     }
 
+
     public String getNote() {
         return note;
     }
@@ -179,4 +186,5 @@ public class Bills implements Serializable {
     public void setNote(String note) {
         this.note = note;
     }
+
 }

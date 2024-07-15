@@ -303,6 +303,7 @@
                                     </div>
 
 
+
                                     <div class="payment__choices-pp" id="payment__by-paypal">
                                         <label for="paypal">
                                             <svg style="position:relative;top:-10px;" xmlns="http://www.w3.org/2000/svg" height="2em"
@@ -315,6 +316,7 @@
                                         </label>
 
                                     </div>
+
                                 </div>
 
 
@@ -364,9 +366,11 @@
                                         Đặt hàng
                                     </button>
                                 </p>
+
                                 <button style="display: none" type="button" id="paypal-btn" class="btn btn-primary py-3 px-4">
                                     Thanh Toán bằng Paypal
                                 </button>
+
                             </div>
                         </div>
                     </div> <!-- .col-md-8 -->
@@ -684,6 +688,7 @@
     var paymentChoiceCreditCard = document.getElementById("payment__by-creditCard");
     var paymentChoicePayPal = document.getElementById("payment__by-paypal");
 
+
     // Khi người dùng click vào label Credit Card
     creditCardLabel.addEventListener("click", function () {
         paymentChoiceCreditCard.classList.add("selected");
@@ -704,6 +709,12 @@
         document.getElementById("component_tenNganHang").style.display = "none";
     });
 
+
+
+
+
+
+
     // validation for form
 
     function cardNumber() {
@@ -716,23 +727,10 @@
         document.getElementById('input')[0].reset
     }
 
+
 </script>
 <script>
-    <%--document.addEventListener('DOMContentLoaded', function () {--%>
-    <%--    const form = document.querySelector('.billing-form');--%>
-    <%--    const submitBtn = document.getElementById('submit-btn');--%>
-    <%--    const paypalBtn = document.getElementById('paypal-btn');--%>
 
-    <%--    submitBtn.addEventListener('click', function () {--%>
-    <%--        form.action = '${pageContext.request.contextPath}/page/order/check-out';--%>
-    <%--        form.submit();--%>
-    <%--    });--%>
-
-    <%--paypalBtn.addEventListener('click', function () {--%>
-    <%--    form.action = '${pageContext.request.contextPath}/paypal/authorize-payment';--%>
-    <%--    form.submit();--%>
-    <%--});--%>
-    <%--});--%>
 </script>
 
 <script> var context = "${pageContext.request.contextPath}";</script>
