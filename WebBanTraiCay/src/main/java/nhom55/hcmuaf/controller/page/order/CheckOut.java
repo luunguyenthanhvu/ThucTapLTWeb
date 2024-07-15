@@ -36,9 +36,11 @@ public class CheckOut extends HttpServlet {
     // get selected Product for buy
     List<String> selectedProductIds = (List<String>) session.getAttribute("selectedProductIds");
     Cart cart = (Cart) session.getAttribute("cart");
+
     if (cart != null && selectedProductIds != null) {
       // get product list selected from cart
       List<CartProduct> selectedProducts = cart.getSelectedProducts(selectedProductIds);
+
       subTotalPrice = getTotalPrice(selectedProducts);
     }
 
@@ -54,10 +56,17 @@ public class CheckOut extends HttpServlet {
     String lastName = request.getParameter("ho_nguoi-dung");
     String firstName = request.getParameter("ten_nguoi-dung");
     String address = request.getParameter("dia-chi_nguoi-dung");
-    String city = request.getParameter("thanh-pho");
+    String city = request.getParameter("provinceName");
+    String district = request.getParameter("districtName");
     String phoneNumber = request.getParameter("sdt_nguoi-dung");
     String email = request.getParameter("email_nguoi-dung");
     String payment = request.getParameter("payment_selection");
+    String deliveryFee = request.getParameter("delivery_fee");
+    String cleanedString = deliveryFee.replaceAll("[₫\\s]", "");
+    cleanedString = cleanedString.replace(".", "");
+    double deliveryFeeDouble = Double.parseDouble(cleanedString);
+
+    String note = request.getParameter("note_nguoi-dung");
     if(checkValidate(request,response,lastName,firstName,address,city,phoneNumber,email)) {
       HttpSession session = request.getSession();
       Users users = MyUtils.getLoginedUser(session);
@@ -83,8 +92,12 @@ public class CheckOut extends HttpServlet {
         } else {
           idPayment=1;
         }
+        address+=address+", quận "+district+", tỉnh "+city;
 
-        if(billDao.addAListProductToBills(timeNow,productNameList,"Đang giao", users.getId(), idPayment,firstName,lastName,address,city,phoneNumber,email,subTotalPrice )) {
+        if(billDao.addAListProductToBills(timeNow,productNameList,"Đang giao", users.getId(), idPayment,firstName,lastName,address,city,phoneNumber,email,subTotalPrice,deliveryFeeDouble,note)) {
+
+
+
           int id_bills = billDao.getIDAListProductFromBills(timeNow, users.getId());
           for(CartProduct c: selectedProducts) {
             if( billDao.addAProductToBillDetails(c.getProducts().getId(),id_bills,c.getQuantity(),c.getQuantity()*c.getProducts().getPrice())) {
