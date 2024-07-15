@@ -47,29 +47,35 @@ $('.tab').on('click', function () {
 var tableAddNewShipment = new DataTable('#table-add-shipment', {
   searching: false,
   bDeferRender: true,
-  searchDelay: 500,
-  ajax: 'product-list.json',
+  ajax: {
+    url: `${window.context}/api/shipments-api/list-item-shipments`,
+    type: 'POST',
+    data: function (d) {
+      return JSON.stringify(d);
+    }
+  },
   serverSide: true,
   processing: true,
-
+  scrollY: '550px',
+  scrollCollapse: true,
   columns: [
     {
       data: undefined,
       render: function (data, type, row) {
         return `<div class="image-table-product flex">  
-                    <img src="${row.image}"> 
+                    <img src="${row.image}" data-assets="${row.imgPublicId}" src="${window.context}/static/images/loading-cat.gif"> 
                     <div class="product-name">
                         <span>${row.productName}</span>
                     </div>
                 </div>`
       },
-      width: "20%"
+      width: "25%"
     },
     {
       data: undefined,
       render: function (data, type, row) {
         return `<div class="sku-code">  
-                    <span>${row.productCode}</span>
+                    <span>${row.id}</span>
                 </div>`
       },
       width: "5%"
@@ -77,16 +83,16 @@ var tableAddNewShipment = new DataTable('#table-add-shipment', {
       data: undefined,
       render: function (data, type, row) {
         return `<div class="supplier">  
-                   <span>${row.supplier}</span>
+                   <span>${row.provider}</span>
                 </div>`
       },
-      width: "35%"
+      width: "20%"
     },
     {
       data: undefined,
       render: function (data, type, row) {
         return `<div class="quantity-product">  
-                    <span>${row.stockQuantity}</span>
+                    <span>${row.quantityStock}</span>
                 </div>`
       },
       width: "5%"
@@ -98,16 +104,23 @@ var tableAddNewShipment = new DataTable('#table-add-shipment', {
                     <input type="text">
                 </div>`
       },
-      width: "1%"
+      width: "5%"
     },
     {
       data: undefined,
       render: function (data, type, row) {
-        return `<select class="shipment-transaction-note" name="shipment-transaction-note">
-                  <option value="add-new-product">Thêm lô hàng mới</option>
-                  <option value="out-date">Sản phẩm hết hạn</option>
-                  <option value="add-more">Thêm sản phẩm</option>
-                </select>`
+        return `<div class="new-quantity-product">  
+                    <input type="text">
+                </div>`
+      },
+      width: "5%"
+    },
+    {
+      data: undefined,
+      render: function (data, type, row) {
+        const select = $('.shipment-transaction-note').clone();
+        select.css('display', 'block');
+        return select.prop('outerHTML');
       },
       width: "10%"
     },
@@ -123,7 +136,28 @@ var tableAddNewShipment = new DataTable('#table-add-shipment', {
       width: "5%"
     },
   ],
-  "initComplete": function () {
-    console.log("cc")
+  drawCallback: function () {
+    setTimeout(() => {
+      console.log(tableAddNewShipment.rows())
+      tableAddNewShipment.columns.adjust()
+    }, 1500)
   }
 })
+
+tableAddNewShipment.on('draw.dt', function () {
+  var cloudName = 'dter3mlpl';
+  var apiKey = '899244476586798';
+  var cl = cloudinary.Cloudinary.new({cloud_name: cloudName});
+
+  $('tbody tr td .image-table-product.flex img').each((_, elements) => {
+    const publicId = $(elements).data('assets');
+    const imgUrl = cl.url(publicId);
+    const imgDefault = `${window.context}/static/images/default-fruit.jpg`;
+    // check if image is exits
+    if (imgUrl !== null) {
+      $(elements).prop('src', imgUrl);
+    } else {
+      $(elements).prop('src', imgDefault);
+    }
+  })
+});

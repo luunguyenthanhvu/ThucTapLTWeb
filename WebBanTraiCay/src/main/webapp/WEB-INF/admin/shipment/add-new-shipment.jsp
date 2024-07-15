@@ -1,14 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: PC
-  Date: 26/03/2024
-  Time: 5:14 PM
+  Date: 15/07/2024
+  Time: 12:36 PM
   To change this template use File | Settings | File Templates.
 --%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<html>
 <head>
     <fmt:setLocale value="vi_VN"/>
     <%@ page isELIgnored="false" %>
@@ -231,69 +231,47 @@
 
     <section class="home-section">
         <div class="home-content">
-            <svg class='bx-menu' xmlns="http://www.w3.org/2000/svg" height="1em"
-                 viewBox="0 0 448 512">
+            <svg class='bx-menu' xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
                 <path
                         d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
             </svg>
-            <span class="text">Danh sách sản phẩm</span>
+            <span class="text">Thêm lô hàng mới</span>
         </div>
         <div class="container">
             <div class="container-child">
                 <div class="search">
                     <input type="text" placeholder="Tên sản phẩm" id="product-name">
-                    <select id="product-category">
-                        <option value="" selected>Tất cả sản phẩm</option>
-                        <option value="Trái cây Việt">Trái cây Việt</option>
-                        <option value="Trái cây Nhập">Trái cây Nhập</option>
-                        <option value="Quà Tặng Trái Cây">Quà Tặng Trái Cây</option>
-                    </select>
                     <button class="search-btn">Tìm kiếm</button>
                     <button class="reset-btn">Cài đặt lại</button>
-                </div>
-
-                <div class="nav-function-add-shipment">
-                    <div class="nav-details">
-                        <span> <span id="selectedProductCount">0</span> Sản phẩm được chọn</span>
-                    </div>
-                    <div class="nav-button flex">
-                        <button class="add" id="btn-add-new-product">
-              <span class="flex">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path
-                      d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
-            Thêm sản phẩm mới
-              </span>
-                        </button>
-
-                        <button class="add" id="btn-add-new-shipment">
-            <span class="flex">
-                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path
-                         d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
-             Nhập lô hàng mới
-            </span>
-                        </button>
-                    </div>
                 </div>
                 <div class="main-container">
                     <div class="table-wrapper">
                         <table id="table-add-shipment">
                             <thead>
                             <tr>
-                                <th></th>
                                 <th>Sản phẩm</th>
-                                <th>Phân Loại</th>
                                 <th>Mã SKU</th>
                                 <th>Nhà cung cấp</th>
                                 <th>Tồn kho</th>
-                                <th>Trạng thái</th>
+                                <th>Số lượng mới</th>
+                                <th>Giá nhập</th>
+                                <th>Lý do điều chỉnh</th>
                                 <th></th>
                             </tr>
                             </thead>
                         </table>
                     </div>
                 </div>
+                <div class="save-shipment">
+                    <button class="save-button">Lưu</button>
+                </div>
             </div>
         </div>
+        <select style="display: none" class="shipment-transaction-note" name="shipment-transaction-note">
+            <option value="add-new-product" selected>Thêm lô hàng mới</option>
+            <option value="out-date" disabled>Sản phẩm hết hạn</option>
+            <option value="add-more" disabled>Thêm sản phẩm</option>
+        </select>
     </section>
 </div>
 <script>
@@ -320,7 +298,6 @@
 <script src="https://kit.fontawesome.com/4c38acb8c6.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/static/js/datatable/datatables.js"></script>
 <script
-        src="${pageContext.request.contextPath}/static/js/admin-js/product-list.js?v=5"
+        src="${pageContext.request.contextPath}/static/js/admin-js/shipment/add-new-shipment.js?v=5"
         charset="utf-8"></script>
-<script src="${pageContext.request.contextPath}/static/js/admin-js/load-img-datatable.js"></script>
 </html>

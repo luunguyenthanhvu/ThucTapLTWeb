@@ -1,5 +1,6 @@
 package nhom55.hcmuaf.services_remaster;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import lombok.Data;
@@ -50,5 +51,11 @@ public class ProductService extends AbstractService {
 
   public void updateProductStatus(Integer status, Integer productId) {
     handle.attach(ProductsDAO.class).updateProductStatus(status, productId);
+  }
+
+  public List<ListProductResponseDTO> findListProductByProductId(List<Integer> listProductId) {
+    List<Products> productsList = new ArrayList<>();
+    listProductId.forEach(id -> productsList.add(findAllById(id).get()));
+    return ListProductsResponseDTOMapper.INSTANCE.toListDTO(handle, productsList);
   }
 }

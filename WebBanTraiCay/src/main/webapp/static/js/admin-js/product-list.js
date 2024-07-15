@@ -300,7 +300,17 @@ $('#btn-add-new-shipment').on('click', function () {
     let listProductCodes = selectedProductCodes.map(Number);
     $.ajax({
       url: `${window.context}/api/shipments-api/add-new-shipments`,
-      data: JSON.stringify(listProductCodes)
+      type: 'POST',
+      data: JSON.stringify(listProductCodes),
+      success: function (response) {
+        window.location.href = `${window.context}/admin/shipment/add-new-shipments`;
+      },
+      error: function (xhr, status, error) {
+        console.log(xhr)
+        console.log(status)
+        console.log(error)
+      }
+
     })
   }
 })
