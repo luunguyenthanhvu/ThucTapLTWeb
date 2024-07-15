@@ -45,14 +45,15 @@ public class AuthorizePaymentServlet  extends HttpServlet {
         String lastName = request.getParameter("ho_nguoi-dung");
         String firstName = request.getParameter("ten_nguoi-dung");
         String address = request.getParameter("dia-chi_nguoi-dung");
-        String city = request.getParameter("thanh-pho");
-        String district = request.getParameter("quan-huyen");
+        String city = request.getParameter("provinceName");
+        String district = request.getParameter("districtName");
         String phoneNumber = request.getParameter("sdt_nguoi-dung");
         String email = request.getParameter("email_nguoi-dung");
         String deliveryFee = request.getParameter("delivery_fee");
         String cleanedString = deliveryFee.replaceAll("[₫\\s]", "");
         cleanedString = cleanedString.replace(".", "");
         double deliveryFeeDouble = Double.parseDouble(cleanedString);
+        String note = request.getParameter("note_nguoi-dung");
 
 //       Mặc định cho thanh toán Paypal có idPayment = 2
         int idPayment=2;
@@ -72,6 +73,7 @@ public class AuthorizePaymentServlet  extends HttpServlet {
         bills.setEmail(email);
         bills.setTotalPrice(subtotal);
         bills.setDeliveryFee(deliveryFeeDouble);
+        bills.setNote(note);
         try {
             PaymentServices paymentServices = new PaymentServices();
             String approvalLink = paymentServices.authorizePayment(bills);
@@ -83,6 +85,7 @@ public class AuthorizePaymentServlet  extends HttpServlet {
             session.setAttribute("email", email);
             session.setAttribute("subtotal", subtotal);
             session.setAttribute("deliveryFee", deliveryFeeDouble);
+            session.setAttribute("note", note);
             response.sendRedirect(approvalLink);
 
 

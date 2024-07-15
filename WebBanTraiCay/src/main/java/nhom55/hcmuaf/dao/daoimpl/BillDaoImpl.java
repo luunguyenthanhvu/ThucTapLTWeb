@@ -13,7 +13,7 @@ import java.util.List;
 
 public class BillDaoImpl implements BillDao {
     @Override
-    public boolean addAListProductToBills(LocalDateTime orderedDate, String productList, String status, int userId, int payment, String firstName, String lastName, String streetAddress, String city, String phoneNumber, String email,double totalPrice, double deliveryFee) {
+    public boolean addAListProductToBills(LocalDateTime orderedDate, String productList, String status, int userId, int payment, String firstName, String lastName, String streetAddress, String city, String phoneNumber, String email,double totalPrice, double deliveryFee, String note) {
         int count = JDBIConnector.get().withHandle(h -> {
             return h.createQuery("SELECT count(*) FROM bills WHERE productList = :productList and orderedDate = :orderedDate")
                     .bind("productList", productList)
@@ -26,8 +26,8 @@ public class BillDaoImpl implements BillDao {
             return false;
         } else {
             JDBIConnector.get().withHandle(h -> {
-                return h.createUpdate("INSERT INTO bills(orderedDate, productList, status, userId, payment, firstName, lastName, streetAddress, city, phoneNumber, email,totalPrice,deliveryFee) " +
-                                "VALUES (:orderedDate, :productList, :status, :userId, :payment, :firstName, :lastName, :streetAddress, :city, :phoneNumber, :email, :totalPrice, :deliveryFee)")
+                return h.createUpdate("INSERT INTO bills(orderedDate, productList, status, userId, payment, firstName, lastName, streetAddress, city, phoneNumber, email,totalPrice,deliveryFee,note) " +
+                                "VALUES (:orderedDate, :productList, :status, :userId, :payment, :firstName, :lastName, :streetAddress, :city, :phoneNumber, :email, :totalPrice, :deliveryFee, :note)")
                         .bind("orderedDate", orderedDate)
                         .bind("productList", productList)
                         .bind("status", status)
@@ -41,6 +41,7 @@ public class BillDaoImpl implements BillDao {
                         .bind("email", email)
                         .bind("totalPrice", totalPrice)
                         .bind("deliveryFee", deliveryFee)
+                        .bind("note",note)
                         .execute();
             });
 
