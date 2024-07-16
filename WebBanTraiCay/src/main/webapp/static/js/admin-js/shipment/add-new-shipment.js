@@ -100,8 +100,8 @@ var tableAddNewShipment = new DataTable('#table-add-shipment', {
     {
       data: undefined,
       render: function (data, type, row) {
-        return `<div class="new-quantity-product">  
-                    <input type="text">
+        return `<div style="width: 100px;" class="new-quantity-product">  
+                    <input style="width: 100px;" type="text">
                 </div>`
       },
       width: "5%"
@@ -109,8 +109,8 @@ var tableAddNewShipment = new DataTable('#table-add-shipment', {
     {
       data: undefined,
       render: function (data, type, row) {
-        return `<div class="new-quantity-product">  
-                    <input type="text">
+        return `<div style="width: 100px;" class="new-quantity-product">  
+                    <input style="width: 100px;" type="text">
                 </div>`
       },
       width: "5%"
@@ -143,6 +143,14 @@ var tableAddNewShipment = new DataTable('#table-add-shipment', {
     }, 1500)
   }
 })
+
+let totalQuantity = 0;
+$('#tableAddNewShipment').on('change',
+    '.new-quantity-product input[type="text"]',
+    function () {
+      totalQuantity += $(this).val();
+      console.log(totalQuantity);
+    })
 
 tableAddNewShipment.on('draw.dt', function () {
   var cloudName = 'dter3mlpl';

@@ -297,21 +297,49 @@ $('#btn-add-new-shipment').on('click', function () {
       icon: "warning"
     })
   } else {
+    const swalLoading = Swal.fire({
+      title: 'Loading...',
+      text: 'Please wait while we process your request.',
+      allowOutsideClick: false, // Ngăn người dùng đóng modal bằng cách nhấp ra ngoài
+      didOpen: () => {
+        Swal.showLoading(); // Hiển thị spinner loading
+      }
+    });
+
+    // Dữ liệu cần gửi
     let listProductCodes = selectedProductCodes.map(Number);
+
+    // Thực hiện yêu cầu AJAX
     $.ajax({
       url: `${window.context}/api/shipments-api/add-new-shipments`,
       type: 'POST',
+      contentType: 'application/json',
       data: JSON.stringify(listProductCodes),
       success: function (response) {
-        window.location.href = `${window.context}/admin/shipment/add-new-shipments`;
+        setTimeout(() => {
+          // Ẩn modal loading
+          swalLoading.close();
+
+          // Chuyển hướng sau khi thành công
+          window.location.href = `${window.context}/admin/shipment/add-new-shipments`;
+        }, 1000)
       },
       error: function (xhr, status, error) {
-        console.log(xhr)
-        console.log(status)
-        console.log(error)
-      }
+        // Ẩn modal loading
+        swalLoading.close();
 
-    })
+        // Hiển thị lỗi
+        console.log(xhr);
+        console.log(status);
+        console.log(error);
+
+        Swal.fire({
+          title: 'Error!',
+          text: 'Something went wrong. Please try again.',
+          icon: 'error'
+        });
+      }
+    });
   }
 })
 

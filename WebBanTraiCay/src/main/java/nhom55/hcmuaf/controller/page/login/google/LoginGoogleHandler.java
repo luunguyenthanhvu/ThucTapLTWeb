@@ -1,18 +1,19 @@
 package nhom55.hcmuaf.controller.page.login.google;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import nhom55.hcmuaf.beans.Users;
-import nhom55.hcmuaf.beans.cart.UserCart;
 import nhom55.hcmuaf.dao.daoimpl.LoginDao;
 import nhom55.hcmuaf.services.UserService;
 import nhom55.hcmuaf.util.MyUtils;
+import nhom55.hcmuaf.websocket.entities.CartsEntityWebSocket;
 
 
 @WebServlet(name = "LoginGoogleHandler", value = "/LoginGoogleHandler")
@@ -25,7 +26,7 @@ public class LoginGoogleHandler extends HttpServlet {
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
+      throws ServletException, IOException {
     String code = request.getParameter("code");
     if (code == null || code.isEmpty()) {
       RequestDispatcher dis = request.getRequestDispatcher("login.jsp");
@@ -35,16 +36,30 @@ public class LoginGoogleHandler extends HttpServlet {
       String accessToken = GoogleUtils.getToken(code);
       GooglePojo googlePojo = GoogleUtils.getUserInfo(accessToken);
       Users userDB = UserService.getInstance().getUserByEmail(googlePojo.getEmail());
-      if(userDB == null) {
+      if (userDB == null) {
         String username = googlePojo.getName();
-        if(username == null) {
+        if (username == null) {
           username = extractUsernameFromEmail(googlePojo.getEmail());
         }
-        UserService.getInstance().addNewGoogleUser(username, googlePojo.getEmail(), googlePojo.getPicture());
+        UserService.getInstance()
+            .addNewGoogleUser(username, googlePojo.getEmail(), googlePojo.getPicture());
       }
       Users user = UserService.getInstance().getUserByEmail(googlePojo.getEmail());
       MyUtils.storeLoginedUser(request.getSession(), user);
-      UserCart.updateCart(user.getId(), request.getSession());
+//      UserCart.updateCart(user.getId(), request.getSession());
+      CartsEntityWebSocket cart = nhom55.hcmuaf.websocket.UserCart.getUserCart(user.getId());
+      if (cart == null) {
+        // Nếu user chưa có giỏ hàng, tạo mới và lưu vào lưu trữ
+        cart = new CartsEntityWebSocket();
+//        cart.setUserId(user.getId());
+        cart.setCartItemList(new ArrayList<>());
+        nhom55.hcmuaf.websocket.UserCart.addUserCart(user.getId(),
+            cart); // Lưu vào lưu trữ, ví dụ như ConcurrentHashMap
+      }
+
+//      // Gửi thông tin giỏ hàng về cho client thông qua WebSocket
+//      CartWebSocket.broadcastMessage(user.getId(), MyUtils.convertToJson(cart.getTotal()));
+      // redirect to home
       HttpSession session = request.getSession();
       String result = loginDao.authorizeLoginGoogle(googlePojo.getEmail());
       if (result.equals("ADMIN")) {
@@ -55,7 +70,7 @@ public class LoginGoogleHandler extends HttpServlet {
         // redirect to home
         MyUtils.setUserRole(session, "User");
         response.sendRedirect(request.getContextPath() + "/page/home");
-      }  else if (result.equals("Manager")) {
+      } else if (result.equals("Manager")) {
         // redirect to home
         MyUtils.setUserRole(session, "MANAGER");
         response.sendRedirect(request.getContextPath() + "/admin/profile");
@@ -64,9 +79,10 @@ public class LoginGoogleHandler extends HttpServlet {
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
+      throws ServletException, IOException {
     doGet(request, response);
   }
+
   private static String extractUsernameFromEmail(String email) {
     // Split the email address by '@'
     String[] parts = email.split("@");

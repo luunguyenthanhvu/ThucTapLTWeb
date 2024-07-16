@@ -1,17 +1,19 @@
 package nhom55.hcmuaf.controller.page;
 
-import nhom55.hcmuaf.beans.Products;
-import nhom55.hcmuaf.beans.Users;
-import nhom55.hcmuaf.beans.cart.Cart;
-import nhom55.hcmuaf.beans.cart.UserCart;
-import nhom55.hcmuaf.services.ProductService;
-
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import nhom55.hcmuaf.beans.Products;
+import nhom55.hcmuaf.beans.Users;
+import nhom55.hcmuaf.services.ProductService;
 import nhom55.hcmuaf.util.MyUtils;
+import nhom55.hcmuaf.websocket.entities.CartsEntityWebSocket;
 
 @WebServlet(urlPatterns = {"/page/home"})
 public class Home extends HttpServlet {
@@ -24,7 +26,7 @@ public class Home extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
+      throws ServletException, IOException {
 
     // Dẫn đến đường link trang chủ hiển thị ra 8 sản phẩm
     List<Products> products = ProductService.getInstance().getProduct();
@@ -32,15 +34,13 @@ public class Home extends HttpServlet {
 
     HttpSession session = request.getSession();
     //create cart if not exist
-    Cart cart;
+    CartsEntityWebSocket cart = new CartsEntityWebSocket();
     Users user = MyUtils.getLoginedUser(session);
-    if (MyUtils.getLoginedUser(session) != null && UserCart.getUserCart(user.getId()) != null) {
-      cart = UserCart.getUserCart(user.getId());
-      MyUtils.storeCart(session, cart);
-    } else if (MyUtils.getCart(session) == null) {
-      cart = new Cart();
-      MyUtils.storeCart(session, cart);
+    if (MyUtils.getLoginedUser(session) != null) {
+      System.out.println("lay cart o home");
+      System.out.println(cart);
     }
+    MyUtils.storeCart(session, cart);
 
     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/index.jsp");
     dispatcher.forward(request, response);
@@ -48,7 +48,7 @@ public class Home extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
+      throws ServletException, IOException {
 
   }
 

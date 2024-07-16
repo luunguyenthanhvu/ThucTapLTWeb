@@ -1,10 +1,12 @@
 package nhom55.hcmuaf.util;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 import javax.servlet.http.HttpSession;
 import nhom55.hcmuaf.beans.Users;
-import nhom55.hcmuaf.beans.cart.Cart;
+import nhom55.hcmuaf.websocket.entities.CartsEntityWebSocket;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -18,6 +20,8 @@ public class MyUtils {
     objectMapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES,
         false);
   }
+
+  private static final Map<String, HttpSession> userHashSession = new ConcurrentHashMap<>();
 
   public MyUtils() {
     super();
@@ -50,7 +54,7 @@ public class MyUtils {
    * @param session
    * @param cart
    */
-  public static void storeCart(HttpSession session, Cart cart) {
+  public static void storeCart(HttpSession session, CartsEntityWebSocket cart) {
     session.setAttribute("cart", cart);
   }
 
@@ -69,8 +73,8 @@ public class MyUtils {
    * @param session
    * @return
    */
-  public static Cart getCart(HttpSession session) {
-    Cart cart = (Cart) session.getAttribute("cart");
+  public static CartsEntityWebSocket getCart(HttpSession session) {
+    CartsEntityWebSocket cart = (CartsEntityWebSocket) session.getAttribute("cart");
     return cart;
   }
 
@@ -143,6 +147,10 @@ public class MyUtils {
       e.printStackTrace();
       return null;
     }
+  }
+
+  public static HttpSession getSessionFromId(String id) {
+    return userHashSession.get(id);
   }
 
   public static void main(String[] args) throws IOException {

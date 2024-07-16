@@ -320,7 +320,7 @@
 <script src="https://kit.fontawesome.com/4c38acb8c6.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/static/js/datatable/datatables.js"></script>
 <script
-        src="${pageContext.request.contextPath}/static/js/admin-js/product-list.js?v=5"
+        src="${pageContext.request.contextPath}/static/js/admin-js/product-list.js?v=8"
         charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/static/js/admin-js/load-img-datatable.js"></script>
 </html>

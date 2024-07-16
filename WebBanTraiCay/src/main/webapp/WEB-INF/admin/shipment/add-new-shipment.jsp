@@ -267,7 +267,7 @@
                 </div>
             </div>
         </div>
-        <select style="display: none" class="shipment-transaction-note" name="shipment-transaction-note">
+        <select style="display: none; background-color: #f4f4f4; color: #0b0b0b" class="shipment-transaction-note" name="shipment-transaction-note" disabled>
             <option value="add-new-product" selected>Thêm lô hàng mới</option>
             <option value="out-date" disabled>Sản phẩm hết hạn</option>
             <option value="add-more" disabled>Thêm sản phẩm</option>
@@ -298,6 +298,6 @@
 <script src="https://kit.fontawesome.com/4c38acb8c6.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/static/js/datatable/datatables.js"></script>
 <script
-        src="${pageContext.request.contextPath}/static/js/admin-js/shipment/add-new-shipment.js?v=5"
+        src="${pageContext.request.contextPath}/static/js/admin-js/shipment/add-new-shipment.js?v=7"
         charset="utf-8"></script>
 </html>
