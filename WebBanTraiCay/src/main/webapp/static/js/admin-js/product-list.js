@@ -44,6 +44,7 @@ $('.tab').on('click', function () {
   $(this).addClass('active');
 });
 
+let selectedProductCodes = [];
 let tableAddNewShipment = new DataTable('#table-add-shipment', {
   searching: false,
   bDeferRender: true,
@@ -56,6 +57,7 @@ let tableAddNewShipment = new DataTable('#table-add-shipment', {
       console.log(d)
       let productName = $('#product-name').val();
       d.searchText = $('#product-name').val();
+      d.category = $('#product-category').val();
       return JSON.stringify(d);
     }
   },
@@ -67,9 +69,12 @@ let tableAddNewShipment = new DataTable('#table-add-shipment', {
     {
       data: undefined,
       render: function (data, type, row) {
+        let isChecked = selectedProductCodes.includes(`${row.id}`) ? 'checked'
+            : '';
+        console.log(isChecked)
         return `<div class="check-product">  
-                    <input type="checkbox" value="${row.id}">
-                </div>`
+                    <input type="checkbox" value="${row.id}" ${isChecked}>
+                </div>`;
       },
       width: "5%"
     },
@@ -88,7 +93,7 @@ let tableAddNewShipment = new DataTable('#table-add-shipment', {
     {
       data: undefined,
       render: function (data, type, row) {
-        return `<div class="sku-code">  
+        return `<div class="sku-code"> 
                     <span>${row.category}</span>
                 </div>`
       },
@@ -161,11 +166,18 @@ let tableAddNewShipment = new DataTable('#table-add-shipment', {
     }, 1500)
   }
 })
-
+$("#table-add-shipment").on('change', '.check-product input[type="checkbox"]',
+    function () {
+      if (!selectedProductCodes.includes($(this).val())) {
+        selectedProductCodes.push($(this).val());
+      } else {
+        selectedProductCodes = [...selectedProductCodes.filter(
+            code => code !== $(this).val())];
+      }
+    })
 // hide product
 $('#table-add-shipment').on('click', 'button[data-action="block-product"]',
     function () {
-      const productId = $(this).val();
       Swal.fire({
         title: "Ẩn sản phẩm",
         text: "Bạn chắc chắn muốn ẩn sản phẩm này?",
@@ -173,21 +185,41 @@ $('#table-add-shipment').on('click', 'button[data-action="block-product"]',
         showCancelButton: true,
         confirmButtonText: "Chắc chắn!",
         denyButtonText: "Không!",
-      }). then((result) => {
+      }).then((result) => {
         console.log(result)
-        if(result.isConfirmed) {
+        console.log($(this).val())
+        if (result.isConfirmed) {
+          console.log("ajax ne")
           $.ajax({
-            url: `${window.context}/`
+            url: `${window.context}/api/product-details/update-status`,
+            type: 'POST',
+            data: JSON.stringify({
+              id: $(this).val()
+            }),
+            success: function (response) {
+              console.log(response)
+              Swal.fire({
+                title: "Thành công",
+                text: "Ẩn sản phẩm thành công!",
+                icon: "success"
               })
+              tableAddNewShipment.ajax.reload();
+            },
+            error: function (xhr, status, error) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: xhr.responseText,
+              });
+            }
+          })
         } else if (result.isDenied) {
-
         }
       });
     })
 $('#table-add-shipment').on('change', 'input[type="checkbox"]', function () {
   const isChecked = $(this).prop('checked');
   const productCode = $(this).val();
-  console.log(productCode)
   if (isChecked) {
     quantitySelected.quantity = quantitySelected.quantity + 1;
   } else {
@@ -215,9 +247,12 @@ quantitySelected = {
 function increaseSelectedProduct(checkbox) {
   let productCode = checkbox.value;
   if (checkbox.checked) {
-    quantitySelected.quantity = ++quantitySelected.quantity;
-  } else {
-    quantitySelected.quantity = --quantitySelected.quantity;
+    if (!selectedProductCodes.includes(productCode)) {
+      selectedProductCodes.push(productCode);
+    } else {
+      selectedProductCodes = [...selectedProductCodes.filter(
+          code => code !== productCode)];
+    }
   }
 }
 
@@ -240,9 +275,73 @@ tableAddNewShipment.on('draw.dt', function () {
   $('tbody tr td .image-table-product.flex img').each((_, elements) => {
     const publicId = $(elements).data('assets');
     const imgUrl = cl.url(publicId);
-    $(elements).prop('src', imgUrl);
+    const imgDefault = `${window.context}/static/images/default-fruit.jpg`;
+    // check if image is exits
+    if (imgUrl !== null) {
+      $(elements).prop('src', imgUrl);
+    } else {
+      $(elements).prop('src', imgDefault);
+    }
   })
 
 });
+
+$('#btn-add-new-product').on('click', function () {
+  window.location.href = `${window.context}/admin/product/add-new-product`;
+})
+
+$('#btn-add-new-shipment').on('click', function () {
+  if (selectedProductCodes.length === 0) {
+    Swal.fire({
+      title: "Vui Lòng chọn ít nhất 1 sản phẩm",
+      icon: "warning"
+    })
+  } else {
+    const swalLoading = Swal.fire({
+      title: 'Loading...',
+      text: 'Please wait while we process your request.',
+      allowOutsideClick: false, // Ngăn người dùng đóng modal bằng cách nhấp ra ngoài
+      didOpen: () => {
+        Swal.showLoading(); // Hiển thị spinner loading
+      }
+    });
+
+    // Dữ liệu cần gửi
+    let listProductCodes = selectedProductCodes.map(Number);
+
+    // Thực hiện yêu cầu AJAX
+    $.ajax({
+      url: `${window.context}/api/shipments-api/add-new-shipments`,
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(listProductCodes),
+      success: function (response) {
+        setTimeout(() => {
+          // Ẩn modal loading
+          swalLoading.close();
+
+          // Chuyển hướng sau khi thành công
+          window.location.href = `${window.context}/admin/shipment/add-new-shipments`;
+        }, 1000)
+      },
+      error: function (xhr, status, error) {
+        // Ẩn modal loading
+        swalLoading.close();
+
+        // Hiển thị lỗi
+        console.log(xhr);
+        console.log(status);
+        console.log(error);
+
+        Swal.fire({
+          title: 'Error!',
+          text: 'Something went wrong. Please try again.',
+          icon: 'error'
+        });
+      }
+    });
+  }
+})
+
 
 

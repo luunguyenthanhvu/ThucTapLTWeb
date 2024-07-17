@@ -61,3 +61,11 @@ td:nth-child(n) textarea:focus{
     width: 100px;
     height: 100px;
 }
+
+#product-category {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 200px;
+    cursor: pointer;
+}

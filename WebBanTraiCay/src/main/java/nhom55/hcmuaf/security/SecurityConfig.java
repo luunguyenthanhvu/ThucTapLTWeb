@@ -1,6 +1,10 @@
 package nhom55.hcmuaf.security;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class SecurityConfig {
 
@@ -29,6 +33,7 @@ public class SecurityConfig {
     roleManages.add("/admin/profile/*");
     roleManages.add("/admin/provider/*");
     roleManages.add("/admin/profile*");
+    roleManages.add("/admin/shipment/*");
 
     List<String> roleAdmins = new ArrayList<>();
     roleManages.forEach(r -> roleAdmins.add(r));
@@ -41,6 +46,7 @@ public class SecurityConfig {
     roleAdmins.add("/admin/user/*");
     roleAdmins.add("/admin/profile*");
     roleAdmins.add("/admin/monthly-revenue*");
+    roleAdmins.add("/admin/shipment/*");
 
     mapRole.put(ROLE_USER, roleUsers);
     mapRole.put(ROLE_MANAGE, roleManages);

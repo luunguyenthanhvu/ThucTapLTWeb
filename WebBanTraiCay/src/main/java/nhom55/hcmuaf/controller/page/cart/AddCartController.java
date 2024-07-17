@@ -32,23 +32,23 @@ public class AddCartController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("productId"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
 
-        Products product = ProductService.getInstance().getById(id);
-        Cart cart = (Cart) request.getSession().getAttribute("cart");
-        String result = cart.add(id, quantity);
+//        Products product = ProductService.getInstance().getById(id);
+//        Cart cart = (Cart) request.getSession().getAttribute("cart");
+//        String result = cart.add(id, quantity);
+//
+//        // update cart
+//        MyUtils.storeCart(session, cart);
 
-        // update cart
-        MyUtils.storeCart(session, cart);
-
-        if (result.equals("Success")) {
-            response.getWriter()
-                    .write("{ \"status\": \"success\", \"message\": \"Success\" }");
-        } else if (result.equals("Out of quantity")) {
-            response.getWriter()
-                    .write("{ \"status\": \"success\", \"message\": \"Out of quantity\" }");
-        } else if (result.equals("Product does not exist")) {
-            response.getWriter()
-                    .write("{ \"status\": \"success\", \"message\": \"Product does not exist\" }");
-        }
+//        if (result.equals("Success")) {
+//            response.getWriter()
+//                    .write("{ \"status\": \"success\", \"message\": \"Success\" }");
+//        } else if (result.equals("Out of quantity")) {
+//            response.getWriter()
+//                    .write("{ \"status\": \"success\", \"message\": \"Out of quantity\" }");
+//        } else if (result.equals("Product does not exist")) {
+//            response.getWriter()
+//                    .write("{ \"status\": \"success\", \"message\": \"Product does not exist\" }");
+//        }
 
     }
 }

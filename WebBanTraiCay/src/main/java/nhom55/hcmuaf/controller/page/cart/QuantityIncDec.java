@@ -54,7 +54,7 @@ public class QuantityIncDec extends HttpServlet {
         }
       }
       // update cart
-      MyUtils.storeCart(session, cart);
+//      MyUtils.storeCart(session, cart);
     }
   }
 }
