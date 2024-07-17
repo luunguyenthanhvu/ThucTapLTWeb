@@ -319,6 +319,6 @@
 <script src="https://kit.fontawesome.com/4c38acb8c6.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/static/js/datatable/datatables.js"></script>
 <script
-        src="${pageContext.request.contextPath}/static/js/admin-js/shipment/add-new-shipment.js?v=11"
+        src="${pageContext.request.contextPath}/static/js/admin-js/shipment/add-new-shipment.js?v=13"
         charset="utf-8"></script>
 </html>

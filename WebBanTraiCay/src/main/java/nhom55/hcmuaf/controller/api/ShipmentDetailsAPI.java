@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import nhom55.hcmuaf.dto.data_table.DataTableRequestDTO;
 import nhom55.hcmuaf.dto.data_table.DataTableRequestDTO.OrderDTO;
 import nhom55.hcmuaf.dto.data_table.DataTableResponseDTO;
+import nhom55.hcmuaf.dto.request.ProductDetailsRequestDTO;
 import nhom55.hcmuaf.dto.response.ListProductResponseDTO;
 import nhom55.hcmuaf.dto.response.MessageResponseDTO;
 import nhom55.hcmuaf.my_handle_exception.MyHandleException;
@@ -64,6 +65,16 @@ public class ShipmentDetailsAPI extends HttpServlet {
           productService.begin();
           var responseDTO = getListItemForShipments(request, response, requestDTO);
           out.println(MyUtils.convertToJson(responseDTO));
+          break;
+        case "/delete-item-shipments":
+          List<Integer> productList = (List<Integer>) request.getSession()
+              .getAttribute("listProductShipments");
+          ProductDetailsRequestDTO productDetailsRequestDTO = MyUtils.convertJsonToObject(
+              requestDTO, ProductDetailsRequestDTO.class);
+
+          productList.removeIf(i -> productDetailsRequestDTO.getId().equals(i));
+          request.setAttribute("listProductShipments", productList);
+          out.println(MyUtils.convertToJson(MessageResponseDTO.builder().message("Tuan ga vkl")));
           break;
       }
     } catch (Exception e) {
