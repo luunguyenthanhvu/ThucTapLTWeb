@@ -1,11 +1,14 @@
 package nhom55.hcmuaf.services_remaster;
 
+import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import nhom55.hcmuaf.beans_remaster.Products;
 import nhom55.hcmuaf.dao_remaster.ProductsDAO;
+import nhom55.hcmuaf.dto.data_table.DataTableRequestDTO;
 import nhom55.hcmuaf.dto.response.ListProductResponseDTO;
 import nhom55.hcmuaf.mapper.response.ListProductsResponseDTOMapper;
 import org.jdbi.v3.core.Handle;
@@ -23,18 +26,41 @@ public class ProductService extends AbstractService {
     return ListProductsResponseDTOMapper.INSTANCE.toListDTO(handle, productsList);
   }
 
-  public List<ListProductResponseDTO> findAllBy(int start, int length, String searchText) {
-    List<Products> productsList = handle.attach(ProductsDAO.class)
-        .findAllBy(start, length, "%" + searchText + "%");
+  public List<ListProductResponseDTO> findAllBy(int start, int length, String searchText,
+      String category, List<DataTableRequestDTO.OrderDTO> orderDTOS) {
+    ProductsDAO productsDAO = handle.attach(ProductsDAO.class);
+    String orderBy = productsDAO.buildOrderByClause(orderDTOS);
+    System.out.println(orderBy);
+    List<Products> productsList = productsDAO.findAllBy(start, length, "%" + searchText + "%",
+        "%" + category + "%", orderBy);
     return ListProductsResponseDTOMapper.INSTANCE.toListDTO(handle, productsList);
   }
+
 
   public Integer countTotalRecords() {
     return handle.attach(ProductsDAO.class).countTotalRecords();
   }
 
-  public Integer countFilteredRecords(String searchText) {
-    return handle.attach(ProductsDAO.class).countFilteredRecords("%" + searchText + "%");
+  public Integer countFilteredRecords(String searchText, String category) {
+    return handle.attach(ProductsDAO.class)
+        .countFilteredRecords("%" + searchText + "%", "%" + category + "%");
   }
 
+  public Optional<Products> findAllById(Integer id) {
+    return handle.attach(ProductsDAO.class).findAllById(id);
+  }
+
+  public void updateProductStatus(Integer status, Integer productId) {
+    handle.attach(ProductsDAO.class).updateProductStatus(status, productId);
+  }
+
+  public List<ListProductResponseDTO> findListProductByProductId(List<Integer> listProductId) {
+    List<Products> productsList = new ArrayList<>();
+    if (listProductId.isEmpty()) {
+      return new ArrayList<>();
+    }
+    listProductId.forEach(id -> productsList.add(findAllById(id).get()));
+
+    return ListProductsResponseDTOMapper.INSTANCE.toListDTO(handle, productsList);
+  }
 }

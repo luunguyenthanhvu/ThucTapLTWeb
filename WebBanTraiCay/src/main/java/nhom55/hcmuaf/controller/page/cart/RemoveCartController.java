@@ -31,6 +31,6 @@ public class RemoveCartController extends HttpServlet {
         .write("{ \"status\": \"success\", \"message\": \"Removed from cart\" }");
 
     // update cart
-    MyUtils.storeCart(session, cart);
+//    MyUtils.storeCart(session, cart);
   }
 }

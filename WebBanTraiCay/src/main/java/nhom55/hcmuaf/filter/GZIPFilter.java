@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(filterName = "global_2")
 public class GZIPFilter implements Filter {
 
   @Override

@@ -45,6 +45,69 @@ function updateCartAmount() {
   })
 }
 
+$('.cart-total-amount').text("0");
+// Global WebSocket instance
+let socket = null;
+
+function initializeWebSocket() {
+  if (socket) {
+    console.log('WebSocket connection already established.');
+    return;
+  }
+  // Create WebSocket connection.
+  socket = new WebSocket('ws://localhost:8080/websocket/cart-socket');
+
+  // Connection opened
+  socket.onopen = () => {
+    console.log('WebConnected');
+  };
+
+  // Listen for messages
+  socket.onmessage = (event) => {
+    console.log(event.data)
+    try {
+      $('.cart-total-amount').text(event.data);
+      showToast("Success");
+    } catch (e) {
+      console.error('Failed to parse message', e);
+    }
+  };
+
+  // Handle errors
+  socket.onerror = (error) => {
+    console.error('WebSocket error observed:', error);
+  };
+
+  // Connection closed
+  socket.onclose = () => {
+    console.log('WebSocket connection closed.');
+    // Clean up WebSocket instance
+    socket = null;
+  };
+}
+
+function addProductToCart(productId) {
+  // Ensure WebSocket is initialized
+  if (!socket) {
+    initializeWebSocket();
+  }
+
+  var message = {
+    "userId": window.userId,  // Ensure window.userId is properly defined
+    "productId": productId,
+    "quantity": 1,
+    "action": "add"
+  };
+
+  // Ensure WebSocket is open before sending
+  if (socket.readyState === WebSocket.OPEN) {
+    socket.send(JSON.stringify(message));
+    console.log('Message sent:', message);
+  } else {
+    console.error('WebSocket is not open. Cannot send message.');
+  }
+}
+
 // toast function
 function toast({
   title = '',
@@ -107,28 +170,29 @@ function toast({
 }
 
 function showToast(response) {
-  if(response === "Null User") {
+  if (response === "Null User") {
     toast({
       title: 'Chưa đăng nhập',
       message: 'Để sử dụng chức năng này bạn cần phải đăng nhập!',
       type: 'warning',
       duration: 3000
     })
-  }  if(response === "Success") {
+  }
+  if (response === "Success") {
     toast({
       title: 'Thành công',
       message: 'Sản phẩm đã được thêm vào giỏ hàng!',
       type: 'success',
       duration: 3000
     })
-  } else if(response === "Out of quantity") {
+  } else if (response === "Out of quantity") {
     toast({
       title: 'Tối đa sản phẩm',
       message: 'Giỏ hàng không thể vượt quá tối đa sản phẩm tồn kho!',
       type: 'info',
       duration: 3000
     })
-  } else if(response === "Product does not exist") {
+  } else if (response === "Product does not exist") {
     toast({
       title: 'Lỗi',
       message: 'Sản phẩm không tồn tại!',

@@ -81,7 +81,7 @@
                     <a href="${pageContext.request.contextPath}/page/cart"
                        class="nav-link cart-info-container">
                         <span class="icon-shopping_cart"></span>
-                        [<span class="cart-total-amount">${cart.getTotal()}</span>]
+                        [<span class="cart-total-amount"></span>]
                     </a>
                 </li>
 
@@ -247,7 +247,8 @@
                         <a href="" class="img-prod" data-assets="${product.getImgPublicId()}">
                             <img
                                     style="width: 253.4px; height: 164px; object-fit: cover"
-                                    class="img-fluid" src="${pageContext.request.contextPath}/static/images/loading-cat.gif"
+                                    class="img-fluid"
+                                    src="${pageContext.request.contextPath}/static/images/loading-cat.gif"
                                     alt="Colorlib Template">
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
@@ -270,7 +271,7 @@
                                         <span><i class="ion-ios-menu"></i></span>
                                     </a>
                                     <a href="javascript:void(0);"
-                                       onclick="addToCart(${product.getId()})"
+                                       onclick="addProductToCart(${product.getId()})"
                                        class="buy-now d-flex justify-content-center align-items-center mx-1">
                                         <span><i class="ion-ios-cart"></i></span>
                                     </a>
@@ -388,9 +389,12 @@
                 stroke-miterlimit="10"
                 stroke="#F96D00"/>
     </svg>
-</div>void(0
-<script> var context = "${pageContext.request.contextPath}";</script>
-<script src="${pageContext.request.contextPath}/static/js/web-js/index-page.js"></script>
+</div>
+<script> var context = "${pageContext.request.contextPath}";
+document.addEventListener('DOMContentLoaded', (event) => {
+  initializeWebSocket();
+});
+</script>
 <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/jquery-migrate-3.0.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/popper.min.js"></script>
@@ -406,8 +410,9 @@
 <script src="${pageContext.request.contextPath}/static/js/scrollax.min.js"></script>
 <script src="${pageContext.request.contextPath}/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="${pageContext.request.contextPath}/static/js/google-map.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/main.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.11.2/cloudinary-core-shrinkwrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/web-js/index-page.js?v=4"></script>
 <script src="${pageContext.request.contextPath}/static/js/web-js/load-image.js?v=3"
         charset="UTF-8"></script>
 </body>
