@@ -54,13 +54,32 @@ function updateSelector(data) {
     // Sắp xếp mảng data theo tên tỉnh
     data.sort((a, b) => a.ProvinceName.localeCompare(b.ProvinceName));
 
+    // Tạo input ẩn để lưu ProvinceName
+    let hiddenInput = document.getElementById('hiddenProvinceName');
+    if (!hiddenInput) {
+        hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'provinceName';
+        hiddenInput.id = 'hiddenProvinceName';
+        selector.parentElement.appendChild(hiddenInput);
+    }
+
     // Duyệt qua mảng data đã được sắp xếp và thêm từng option vào select
     data.forEach(item => {
         const option = document.createElement('option');
         option.value = item.ProvinceID;
         option.textContent = item.ProvinceName;
+        option.setAttribute('data-province-name', item.ProvinceName); // Lưu ProvinceName vào data attribute
         selector.appendChild(option);
     });
+
+    // Lắng nghe sự kiện thay đổi của select để cập nhật input ẩn
+    selector.addEventListener('change', function() {
+        const selectedOption = selector.options[selector.selectedIndex];
+        hiddenInput.value = selectedOption.getAttribute('data-province-name');
+    });
+    // Kích hoạt sự kiện thay đổi để cập nhật giá trị ban đầu của input ẩn
+    selector.dispatchEvent(new Event('change'));
 }
 
 let selectedProvince = document.getElementById('provinces').value;
@@ -87,17 +106,37 @@ selectProvinceElement.addEventListener('change',async function() {
 })
 function updateSelectorDistrict(data) {
 
-    // Xóa các option cũ trong select
     selectElement.innerHTML = '';
-// Sắp xếp mảng data theo tên quận
+
+    // Sắp xếp mảng data theo tên quận
     data.sort((a, b) => a.DistrictName.localeCompare(b.DistrictName));
+
+    // Tạo input ẩn để lưu DistrictName
+    let hiddenInput = document.getElementById('hiddenDistrictName');
+    if (!hiddenInput) {
+        hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'districtName';
+        hiddenInput.id = 'hiddenDistrictName';
+        selectElement.parentElement.appendChild(hiddenInput);
+    }
+
     // Duyệt qua mảng data và thêm từng option vào select
     data.forEach(item => {
         const option = document.createElement('option');
         option.value = item.DistrictID;
         option.textContent = item.DistrictName;
+        option.setAttribute('data-district-name', item.DistrictName);
         selectElement.appendChild(option);
     });
+
+    // Lắng nghe sự kiện thay đổi của select để cập nhật input ẩn
+    selectElement.addEventListener('change', function() {
+        const selectedOption = selectElement.options[selectElement.selectedIndex];
+        hiddenInput.value = selectedOption.getAttribute('data-district-name');
+    });
+    // Kích hoạt sự kiện thay đổi để cập nhật giá trị ban đầu của input ẩn
+    selectElement.dispatchEvent(new Event('change'));
 }
 
 // Bắt sự kiện khi người dùng click chọn quận
@@ -121,9 +160,11 @@ selectElement.addEventListener('change', async function() {
         console.log(data); // Handle the response data here
         document.getElementById("delivery_fee").innerHTML = data.data.service_fee.toLocaleString('vi-VN') + ' ₫';
         document.getElementById("delivery_fee").value = data.data.service_fee;
+
         var tongPhu = document.querySelector('.tong_phu').textContent;
         tongPhu = parseInt(tongPhu.replace(/[^\d]/g, ''), 10);
         var tienVanChuyen=data.data.service_fee;
+        document.getElementById("hidden_delivery_fee").value=tienVanChuyen;
         var tongCong = tongPhu + tienVanChuyen;
         document.querySelector('.tong_cong').innerHTML = tongCong.toLocaleString('vi-VN') + ' ₫';
 

@@ -142,7 +142,8 @@
     </div>
 </div>
 
-<form method="post" action="${pageContext.request.contextPath}/page/order/check-out" class="billing-form">
+<form method="post" action="" class="billing-form">
+
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center">
@@ -191,8 +192,8 @@
                                 <label >Quận / Huyện <span
                                         style="color: red">*</span></label>
                                 <div class="w-100"></div>
-                                <select name="thanh-pho" id="districts" class="form-control" style="color: black !important;" >
-                                    <%--                                   --%>
+                                <select name="quan-huyen" id="districts" class="form-control" style="color: black !important;" >
+
                                 </select>
 
 
@@ -239,6 +240,16 @@
                                 </c:if>
                             </div>
                         </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="note_user">Ghi chú </label>
+                                <textarea name="note_nguoi-dung" style="color: black !important;"
+                                          id="note_user" type="text" class="form-control"
+                                          placeholder="Ghi chú" value="${noteUser}" rows="8" cols="10">
+                                      </textarea>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -257,7 +268,8 @@
 
                                 <p class="d-flex">
                                     <span>Phí vận chuyển</span>
-                                    <span id="delivery_fee"></span>
+                                    <span  id="delivery_fee"></span>
+                                    <input type="hidden" name="delivery_fee" id="hidden_delivery_fee" value="">
                                 </p>
                                 <hr>
                                 <p class="d-flex total-price">
@@ -287,9 +299,9 @@
                                             </svg>
                                             <span style="position:relative;top:-5px; right:10px">Thẻ tín dụng</span>
                                         </label>
-                                        <input type="radio" class="payment__choice" id="credit_card"
-                                               name="payment_selection" value="The tin dung" checked>
+
                                     </div>
+
 
 
                                     <div class="payment__choices-pp" id="payment__by-paypal">
@@ -302,13 +314,13 @@
                                             </svg>
                                             <span style="position:relative;top:-5px; right:10px">Paypal</span>
                                         </label>
-                                        <input type="radio" class="payment__choice" id="paypal"
-                                               name="payment_selection" value="Paypal">
+
                                     </div>
+
                                 </div>
 
 
-                                <div class="form-group">
+                                <div id="component_soThe" class="form-group">
                                     <div class="col-md-12">
                                         <div class="radio">
                                             <svg xmlns="http://www.w3.org/2000/svg" height="2em"
@@ -323,7 +335,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div id="component_tenNganHang" class="form-group">
                                     <div class="col-md-12">
                                         <div class="radio">
                                             <svg xmlns="http://www.w3.org/2000/svg" height="2em"
@@ -354,6 +366,11 @@
                                         Đặt hàng
                                     </button>
                                 </p>
+
+                                <button style="display: none" type="button" id="paypal-btn" class="btn btn-primary py-3 px-4">
+                                    Thanh Toán bằng Paypal
+                                </button>
+
                             </div>
                         </div>
                     </div> <!-- .col-md-8 -->
@@ -462,181 +479,192 @@
     </svg>
 </div>
 <script>
-  // validate for form order
-  var ho = document.getElementById("lastname");
-  var ten = document.getElementById("firstname");
-  var diaChi = document.getElementById("street-address");
-  var thanhPho = document.getElementById("city");
-  var sdt = document.getElementById("phone");
-  var email = document.getElementById("email");
-  var soThe = document.getElementById("cardNumberInput");
-  var theCVC = document.getElementById("cardCVCInput");
+    // validate for form order
+    var ho = document.getElementById("lastname");
+    var ten = document.getElementById("firstname");
+    var diaChi = document.getElementById("street-address");
 
-  function validateHo() {
-    var text = ho.value;
-    var kyTuHopLe = /^[a-zA-ZÀ-ỹ ]+$/;
-    var error = document.getElementById("lastname_error");
-    if (text.length == 0 || text == null) {
-      error.textContent = "Vui lòng nhập dữ liệu";
-      error.style.display = "block";
-      return false;
-    } else if (!kyTuHopLe.test(text)) {
-      error.textContent = "Họ chỉ chứa ký tự chữ cái, khoảng trắng.";
-      error.style.display = "block";
-      return false;
-    } else {
-      error.style.display = "none";
-      return true;
+    var sdt = document.getElementById("phone");
+    var email = document.getElementById("email");
+    var soThe = document.getElementById("cardNumberInput");
+    var theCVC = document.getElementById("cardCVCInput");
+
+    function validateHo() {
+        var text = ho.value;
+        var kyTuHopLe = /^[a-zA-ZÀ-ỹ ]+$/;
+        var error = document.getElementById("lastname_error");
+        if (text.length == 0 || text == null) {
+            error.textContent = "Vui lòng nhập dữ liệu";
+            error.style.display = "block";
+            return false;
+        } else if (!kyTuHopLe.test(text)) {
+            error.textContent = "Họ chỉ chứa ký tự chữ cái, khoảng trắng.";
+            error.style.display = "block";
+            return false;
+        } else {
+            error.style.display = "none";
+            return true;
+        }
     }
-  }
 
-  function validateTen() {
-    var text = ten.value;
-    var kyTuHopLe = /^[a-zA-ZÀ-ỹ ]+$/;
-    var error = document.getElementById("firstname_error");
-    if (text.length == 0 || text == null) {
-      error.textContent = "Vui lòng nhập dữ liệu";
-      error.style.display = "block";
-      return false;
-    } else if (!kyTuHopLe.test(text)) {
-      error.textContent = "Tên chỉ chứa ký tự chữ cái, khoảng trắng.";
-      error.style.display = "block";
-      return false;
-    } else {
-      error.style.display = "none";
-      return true;
+    function validateTen() {
+        var text = ten.value;
+        var kyTuHopLe = /^[a-zA-ZÀ-ỹ ]+$/;
+        var error = document.getElementById("firstname_error");
+        if (text.length == 0 || text == null) {
+            error.textContent = "Vui lòng nhập dữ liệu";
+            error.style.display = "block";
+            return false;
+        } else if (!kyTuHopLe.test(text)) {
+            error.textContent = "Tên chỉ chứa ký tự chữ cái, khoảng trắng.";
+            error.style.display = "block";
+            return false;
+        } else {
+            error.style.display = "none";
+            return true;
+        }
     }
-  }
 
-  function validateAddress() {
-    var text = diaChi.value;
-    var error = document.getElementById("address_error");
-    if (text.length == 0 || text == null) {
-      error.textContent = "Vui lòng nhập dữ liệu";
-      error.style.display = "block";
-      return false;
-    } else {
-      error.style.display = "none";
-      return true;
+    function validateAddress() {
+        var text = diaChi.value;
+        var error = document.getElementById("address_error");
+        if (text.length == 0 || text == null) {
+            error.textContent = "Vui lòng nhập dữ liệu";
+            error.style.display = "block";
+            return false;
+        } else {
+            error.style.display = "none";
+            return true;
+        }
     }
-  }
 
-  function validateThanhPho() {
-    var text = thanhPho.value;
-    var kyTuHopLe =/^[a-zA-ZÀ-ỹ ]+$/;
-    var error = document.getElementById("city_error");
-    if (text.length == 0 || text == null) {
-      error.textContent = "Vui lòng nhập dữ liệu";
-      error.style.display = "block";
-      return false;
-    } else if (!kyTuHopLe.test(text)) {
-      error.textContent = "Thành phố chứa ký tự chữ cái, khoảng trắng.";
-      error.style.display = "block";
-      return false;
-    } else {
-      error.style.display = "none";
-      return true;
+    function validateSDT() {
+        var text = sdt.value;
+        var kyTuHopLe = /^(?:\+|0)[0-9]{6,14}[0-9]$/;
+        var error = document.getElementById("phone_error");
+        if (text.length == 0 || text == null) {
+            error.textContent = "Vui lòng nhập dữ liệu";
+            error.style.display = "block";
+            return false;
+        } else if (!kyTuHopLe.test(text)) {
+            error.textContent = "Số điện thoại chỉ chứa số từ 0 - 9";
+            error.style.display = "block";
+            return false;
+        } else {
+            error.style.display = "none";
+            return true;
+        }
     }
-  }
 
-  function validateSDT() {
-    var text = sdt.value;
-    var kyTuHopLe = /^(?:\+|0)[0-9]{6,14}[0-9]$/;
-    var error = document.getElementById("phone_error");
-    if (text.length == 0 || text == null) {
-      error.textContent = "Vui lòng nhập dữ liệu";
-      error.style.display = "block";
-      return false;
-    } else if (!kyTuHopLe.test(text)) {
-      error.textContent = "Số điện thoại chỉ chứa số từ 0 - 9";
-      error.style.display = "block";
-      return false;
-    } else {
-      error.style.display = "none";
-      return true;
+    function validateEmail() {
+        var text = email.value;
+        var kyTuHopLe = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        var error = document.getElementById("email_error");
+        if (text.length == 0 || text == null) {
+            error.textContent = "Vui lòng nhập dữ liệu";
+            error.style.display = "block";
+            return false;
+        } else if (!kyTuHopLe.test(text)) {
+            error.textContent = "Địa chỉ email không hợp lệ.";
+            error.style.display = "block";
+            return false;
+        } else {
+            error.style.display = "none";
+            return true;
+        }
     }
-  }
 
-  function validateEmail() {
-    var text = email.value;
-    var kyTuHopLe = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    var error = document.getElementById("email_error");
-    if (text.length == 0 || text == null) {
-      error.textContent = "Vui lòng nhập dữ liệu";
-      error.style.display = "block";
-      return false;
-    } else if (!kyTuHopLe.test(text)) {
-      error.textContent = "Địa chỉ email không hợp lệ.";
-      error.style.display = "block";
-      return false;
-    } else {
-      error.style.display = "none";
-      return true;
+    function validateSoThe() {
+        var text = soThe.value;
+        var kyTuHopLe =  /^\d{16}$/;
+        var error = document.getElementById("cardNum_error");
+        if (text.length == 0 || text == null) {
+            error.textContent = "Vui lòng nhập dữ liệu";
+            error.style.display = "block";
+            return false;
+        } else if (!kyTuHopLe.test(text)) {
+            error.textContent =  "Số thẻ ngân hàng không hợp lệ. Vui lòng nhập 16 chữ số.";
+            error.style.display = "block";
+            return false;
+        } else {
+            error.style.display = "none";
+            return true;
+        }
     }
-  }
 
-  function validateSoThe() {
-    var text = soThe.value;
-    var kyTuHopLe =  /^\d{16}$/;
-    var error = document.getElementById("cardNum_error");
-    if (text.length == 0 || text == null) {
-      error.textContent = "Vui lòng nhập dữ liệu";
-      error.style.display = "block";
-      return false;
-    } else if (!kyTuHopLe.test(text)) {
-      error.textContent =  "Số thẻ ngân hàng không hợp lệ. Vui lòng nhập 16 chữ số.";
-      error.style.display = "block";
-      return false;
-    } else {
-      error.style.display = "none";
-      return true;
+    function validateTheCVC() {
+        var text = theCVC.value;
+        var cvcPattern = /^\d{3}$/;
+        var error = document.getElementById("cardCVC_error");
+        if (text.length == 0 || text == null) {
+            error.textContent = "Vui lòng nhập dữ liệu";
+            error.style.display = "block";
+            return false;
+        } else if (!cvcPattern.test(text)) {
+            error.textContent = "Mã CVC không hợp lệ. Vui lòng nhập 3 chữ số.";
+            error.style.display = "block";
+            return false;
+        } else {
+            error.style.display = "none";
+            return true;
+        }
     }
-  }
 
-  function validateTheCVC() {
-    var text = theCVC.value;
-    var cvcPattern = /^\d{3}$/;
-    var error = document.getElementById("cardCVC_error");
-    if (text.length == 0 || text == null) {
-      error.textContent = "Vui lòng nhập dữ liệu";
-      error.style.display = "block";
-      return false;
-    } else if (!cvcPattern.test(text)) {
-      error.textContent = "Mã CVC không hợp lệ. Vui lòng nhập 3 chữ số.";
-      error.style.display = "block";
-      return false;
-    } else {
-      error.style.display = "none";
-      return true;
-    }
-  }
+    // add validate for form
+    ho.addEventListener("blur", validateHo);
+    ten.addEventListener("blur", validateTen);
+    diaChi.addEventListener("blur", validateAddress);
+    sdt.addEventListener("blur", validateSDT);
+    email.addEventListener("blur", validateEmail);
+    soThe.addEventListener("blur", validateSoThe);
+    theCVC.addEventListener("blur", validateTheCVC);
 
-  // add validate for form
-  ho.addEventListener("blur", validateHo);
-  ten.addEventListener("blur", validateTen);
-  diaChi.addEventListener("blur", validateAddress);
-  thanhPho.addEventListener("blur", validateThanhPho);
-  sdt.addEventListener("blur", validateSDT);
-  email.addEventListener("blur", validateEmail);
-  soThe.addEventListener("blur", validateSoThe);
-  theCVC.addEventListener("blur", validateTheCVC);
+    ho.addEventListener("input", validateHo);
+    ten.addEventListener("input", validateTen);
+    diaChi.addEventListener("input", validateAddress);
+    sdt.addEventListener("input", validateSDT);
+    email.addEventListener("input", validateEmail);
+    soThe.addEventListener("input", validateSoThe);
+    theCVC.addEventListener("input", validateTheCVC);
 
-  var submitBtn = document.getElementById("submit-btn");
-  submitBtn.addEventListener("click", function (event) {
-    var isHoValid = validateHo();
-    var isTenValid = validateTen();
-    var isDiaChiValid  = validateAddress();
-    var isThanhPhoValid = validateThanhPho();
-    var isSdtValid = validateSDT();
-    var isEmailValid = validateEmail();
-    var isSoTheValid = validateSoThe();
-    var isTheCVCValid = validateTheCVC();
-    var checkedButton =  document.querySelector(".check");
-    if (!isHoValid || !isTenValid || !isDiaChiValid || !isThanhPhoValid
-        || !isSdtValid  || !isEmailValid || ! isSoTheValid || !isTheCVCValid || !checkedButton.checked) {
-      event.preventDefault();
-    }
-  })
+    var form = document.querySelector('.billing-form');
+    var submitBtn = document.getElementById("submit-btn");
+
+    submitBtn.addEventListener("click", function (event) {
+        var isHoValid = validateHo();
+        var isTenValid = validateTen();
+        var isDiaChiValid  = validateAddress();
+        var isSdtValid = validateSDT();
+        var isEmailValid = validateEmail();
+        var isSoTheValid = validateSoThe();
+        var isTheCVCValid = validateTheCVC();
+        var checkedButton =  document.querySelector(".check");
+        if (!isHoValid || !isTenValid || !isDiaChiValid ||  !isSdtValid  || !isEmailValid || ! isSoTheValid || !isTheCVCValid || !checkedButton.checked) {
+            event.preventDefault();
+        } else {
+            form.action ='/page/order/check-out';
+            form.submit();
+        }
+    });
+
+    var paypalBtn = document.getElementById('paypal-btn');
+    paypalBtn.addEventListener('click', function (event) {
+        var isHoValid = validateHo();
+        var isTenValid = validateTen();
+        var isDiaChiValid = validateAddress();
+        var isSdtValid = validateSDT();
+        var isEmailValid = validateEmail();
+        var checkedButton = document.querySelector(".check");
+
+        if (!isHoValid || !isTenValid || !isDiaChiValid || !isSdtValid || !isEmailValid || !checkedButton.checked) {
+            event.preventDefault();
+        } else {
+            form.action = '/paypal/authorize-payment';
+            form.submit();
+        }
+    });
+
+
 </script>
 
 <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
@@ -652,43 +680,61 @@
 <script src="${pageContext.request.contextPath}/static/js/jquery.animateNumber.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/bootstrap-datepicker.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/scrollax.min.js"></script>
-<script src="${pageContext.request.contextPath}/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="${pageContext.request.contextPath}/static/js/google-map.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/main.js"></script>
 <script>
-  // action for payment
-  var creditCardLabel = document.querySelector("label[for='credit_card']");
-  var paypalLabel = document.querySelector("label[for='paypal']");
-  var paymentChoiceCreditCard = document.getElementById("payment__by-creditCard");
-  var paymentChoicePayPal = document.getElementById("payment__by-paypal");
+    // action for payment
+    var creditCardLabel = document.querySelector("label[for='credit_card']");
+    var paypalLabel = document.querySelector("label[for='paypal']");
+    var paymentChoiceCreditCard = document.getElementById("payment__by-creditCard");
+    var paymentChoicePayPal = document.getElementById("payment__by-paypal");
 
-  // Khi người dùng click vào label Credit Card
-  creditCardLabel.addEventListener("click", function () {
-    paymentChoiceCreditCard.classList.add("selected");
-    paymentChoicePayPal.classList.remove("selected");
-  });
 
-  // Khi người dùng click vào label PayPal
-  paypalLabel.addEventListener("click", function () {
-    paymentChoiceCreditCard.classList.remove("selected");
-    paymentChoicePayPal.classList.add("selected");
-  });
+    // Khi người dùng click vào label Credit Card
+    creditCardLabel.addEventListener("click", function () {
+        paymentChoiceCreditCard.classList.add("selected");
+        paymentChoicePayPal.classList.remove("selected");
+        document.getElementById("paypal-btn").style.display = "none";
+        document.getElementById("submit-btn").style.display = "block";
+        document.getElementById("component_soThe").style.display = "block";
+        document.getElementById("component_tenNganHang").style.display = "block";
+    });
 
-  // validation for form
+    // Khi người dùng click vào label PayPal
+    paypalLabel.addEventListener("click", function () {
+        paymentChoiceCreditCard.classList.remove("selected");
+        paymentChoicePayPal.classList.add("selected");
+        document.getElementById("paypal-btn").style.display = "block";
+        document.getElementById("submit-btn").style.display = "none";
+        document.getElementById("component_soThe").style.display = "none";
+        document.getElementById("component_tenNganHang").style.display = "none";
+    });
 
-  function cardNumber() {
-    var num = document.getElementById('input');
-    var card_number = arr[0].value;
-    var card_cvc = arr[1].value;
-  }
 
-  function resetForm() {
-    document.getElementById('input')[0].reset
-  }
+
+
+
+
+
+    // validation for form
+
+    function cardNumber() {
+        var num = document.getElementById('input');
+        var card_number = arr[0].value;
+        var card_cvc = arr[1].value;
+    }
+
+    function resetForm() {
+        document.getElementById('input')[0].reset
+    }
+
 
 </script>
+<script>
+
+</script>
+
 <script> var context = "${pageContext.request.contextPath}";</script>
 <%--Js xử lý lấy dữ liệu vận chuyển--%>
-<script src="${pageContext.request.contextPath}/static/js/web-js/process-delivery-fee.js" ></script>
+<script src="${pageContext.request.contextPath}/static/js/web-js/process-delivery-fee.js?v=1" ></script>
 </body>
 </html>
