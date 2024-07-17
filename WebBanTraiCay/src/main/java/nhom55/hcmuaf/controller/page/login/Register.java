@@ -33,7 +33,6 @@ public class Register extends HttpServlet {
     String address = request.getParameter("address");
     String email = request.getParameter("email");
     String password = request.getParameter("password");
-    System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
     if (checkValidate(request, response, username, phoneNum, address, email, password)) {
       String newPassword = MyUtils.encodePass(password);
       String makeHash = MyUtils.createHash();
@@ -126,4 +125,5 @@ public class Register extends HttpServlet {
     }
     return true;
   }
+
 }

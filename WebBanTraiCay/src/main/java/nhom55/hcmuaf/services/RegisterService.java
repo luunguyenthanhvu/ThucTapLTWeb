@@ -1,6 +1,7 @@
 package nhom55.hcmuaf.services;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Properties;
 import javax.mail.Message;
@@ -14,6 +15,7 @@ import nhom55.hcmuaf.beans.RegisterBean;
 import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.dao.UsersDao;
 import nhom55.hcmuaf.dao.daoimpl.UsersDaoImpl;
+import nhom55.hcmuaf.dao.daoimpl.VoucherDAOImpl;
 import nhom55.hcmuaf.enums.LogLevels;
 import nhom55.hcmuaf.log.AbsDAO;
 import nhom55.hcmuaf.log.Log;
@@ -75,6 +77,9 @@ public class RegisterService extends AbsDAO {
         log.setAddress(requestInfo.getAddress());
         log.setNational(requestInfo.getNation());
         super.insert(log);
+
+//        thêm 2 voucher cho User
+        createCouponForUser(newUser.getId());
       }
 
     } else {
@@ -109,5 +114,18 @@ public class RegisterService extends AbsDAO {
     } catch (Exception e) {
       System.out.println("SendEmail File Error " + e);
     }
+  }
+  public void createCouponForUser(int idUser){
+     String title1 ="GIẢM 30K";
+     String title2 ="GIẢM 20%";
+     double price1 = 300000;
+     double price2 =0.2;
+     String content1 ="Người dùng thanh toán lần đầu sẽ được giảm 30k cho 1 đơn hàng";
+     String content2 = "Đơn thanh toán trên 200k sẽ được giảm 20%";
+    LocalDate beginDate = LocalDate.now();
+    LocalDate endDate = beginDate.plusDays(30);
+    VoucherDAOImpl voucherDAO = new VoucherDAOImpl();
+    voucherDAO.insertVoucher(idUser, title1, content1, beginDate, endDate, price1);
+    voucherDAO.insertVoucher(idUser, title2, content2, beginDate, endDate, price2);
   }
 }

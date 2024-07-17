@@ -65,8 +65,8 @@ public class CheckOut extends HttpServlet {
     String cleanedString = deliveryFee.replaceAll("[₫\\s]", "");
     cleanedString = cleanedString.replace(".", "");
     double deliveryFeeDouble = Double.parseDouble(cleanedString);
-
     String note = request.getParameter("note_nguoi-dung");
+    int idVoucher = Integer.valueOf(request.getParameter("idVoucher"));
     if(checkValidate(request,response,lastName,firstName,address,city,phoneNumber,email)) {
       HttpSession session = request.getSession();
       Users users = MyUtils.getLoginedUser(session);
@@ -95,9 +95,6 @@ public class CheckOut extends HttpServlet {
         address+=address+", quận "+district+", tỉnh "+city;
 
         if(billDao.addAListProductToBills(timeNow,productNameList,"Đang giao", users.getId(), idPayment,firstName,lastName,address,city,phoneNumber,email,subTotalPrice,deliveryFeeDouble,note)) {
-
-
-
           int id_bills = billDao.getIDAListProductFromBills(timeNow, users.getId());
           for(CartProduct c: selectedProducts) {
             if( billDao.addAProductToBillDetails(c.getProducts().getId(),id_bills,c.getQuantity(),c.getQuantity()*c.getProducts().getPrice())) {

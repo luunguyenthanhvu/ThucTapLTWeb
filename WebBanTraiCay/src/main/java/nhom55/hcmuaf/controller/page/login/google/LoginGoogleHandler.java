@@ -3,6 +3,7 @@ package nhom55.hcmuaf.controller.page.login.google;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.time.LocalDate;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.beans.cart.UserCart;
 import nhom55.hcmuaf.dao.daoimpl.LoginDao;
+import nhom55.hcmuaf.dao.daoimpl.VoucherDAOImpl;
 import nhom55.hcmuaf.services.UserService;
 import nhom55.hcmuaf.util.MyUtils;
 
@@ -40,7 +42,10 @@ public class LoginGoogleHandler extends HttpServlet {
         if(username == null) {
           username = extractUsernameFromEmail(googlePojo.getEmail());
         }
-        UserService.getInstance().addNewGoogleUser(username, googlePojo.getEmail(), googlePojo.getPicture());
+        int idUser= UserService.getInstance().addNewGoogleUser(username, googlePojo.getEmail(), googlePojo.getPicture());
+        createCouponForUser(idUser);
+
+
       }
       Users user = UserService.getInstance().getUserByEmail(googlePojo.getEmail());
       MyUtils.storeLoginedUser(request.getSession(), user);
@@ -79,6 +84,20 @@ public class LoginGoogleHandler extends HttpServlet {
       System.err.println("Invalid email format");
       return null;
     }
+  }
+
+  public void createCouponForUser(int idUser){
+    String title1 ="GIẢM 30K";
+    String title2 ="GIẢM 20%";
+    double price1 = 300000;
+    double price2 =0.2;
+    String content1 ="Người dùng thanh toán lần đầu sẽ được giảm 30k cho 1 đơn hàng";
+    String content2 = "Đơn thanh toán trên 200k sẽ được giảm 20%";
+    LocalDate beginDate = LocalDate.now();
+    LocalDate endDate = beginDate.plusDays(30);
+    VoucherDAOImpl voucherDAO = new VoucherDAOImpl();
+    voucherDAO.insertVoucher(idUser, title1, content1, beginDate, endDate, price1);
+    voucherDAO.insertVoucher(idUser, title2, content2, beginDate, endDate, price2);
   }
 
 }

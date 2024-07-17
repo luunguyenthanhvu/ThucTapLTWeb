@@ -107,7 +107,7 @@ public class UserService {
   public void deleteUser(int id) {
     userDao.deleteUser(id);
   }
-  public String addNewGoogleUser(String username,String email, String img) {
+  public int addNewGoogleUser(String username,String email, String img) {
     return userDao.addNewGoogleUser(username,email, img);
   }
 

@@ -62,7 +62,7 @@ public class UsersDaoImpl implements UsersDao {
     });
   }
   @Override
-  public String addNewGoogleUser(String username, String email, String img) {
+  public int addNewGoogleUser(String username, String email, String img) {
     // check if exist
     List<Users> users = JDBIConnector.get().withHandle(h ->
         h.createQuery(
@@ -73,19 +73,24 @@ public class UsersDaoImpl implements UsersDao {
             .collect(Collectors.toList())
     );
     if (!users.isEmpty()) {
-      return "FAIL";
+      return 0;
     }
 
     // add new user
+     JDBIConnector.get().withHandle(handle -> {
+         return handle.createUpdate(
+                 "INSERT INTO users (username, email, status, img) VALUES (:username, :email, :status, :img)")
+             .bind("username", username)
+             .bind("email", email)
+             .bind("status", 1)
+             .bind("img", img)
+             .execute();
+
+    });
     return JDBIConnector.get().withHandle(handle -> {
-      handle.createUpdate(
-              "INSERT INTO users (username, email, status, img) VALUES (:username, :email, :status, :img)")
-          .bind("username", username)
-          .bind("email", email)
-          .bind("status", 1)
-          .bind("img", img)
-          .execute();
-      return "SUCCESS";
+        return  handle.createQuery("SELECT id FROM users WHERE email = :email")
+                .bind("email", email)
+                .mapTo(Integer.class).one();
     });
   }
 

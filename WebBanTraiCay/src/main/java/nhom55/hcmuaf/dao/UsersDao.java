@@ -50,7 +50,7 @@ public interface UsersDao {
 
   void deleteUser(int id);
 
-  String addNewGoogleUser(String username, String email, String img);
+  int addNewGoogleUser(String username, String email, String img);
 
   String updateTimeStampUser(String email);
 
