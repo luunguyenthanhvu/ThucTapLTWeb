@@ -43,15 +43,30 @@ $('.tab').on('click', function () {
   $('.tab').removeClass('active');
   $(this).addClass('active');
 });
-
-var tableAddNewShipment = new DataTable('#table-add-shipment', {
+var dataResponse = [];
+var tableAddNewShipment = new DataTable('#tableAddNewShipment', {
   searching: false,
   bDeferRender: true,
   ajax: {
     url: `${window.context}/api/shipments-api/list-item-shipments`,
     type: 'POST',
     data: function (d) {
+      d.searchText = $('#product-name').val();
       return JSON.stringify(d);
+    },
+    dataSrc: function (response) {
+      response.data.forEach(data => {
+            let existingItem = dataResponse.find(item => item.id === data.id);
+            if (!existingItem) {
+              data.importPrice = 0;
+              data.quantity = 0;
+              dataResponse.push(data);
+            } else {
+              existingItem.quantityStock = data.quantityStock;
+            }
+          }
+      )
+      return response.data;
     }
   },
   serverSide: true,
@@ -78,7 +93,7 @@ var tableAddNewShipment = new DataTable('#table-add-shipment', {
                     <span>${row.id}</span>
                 </div>`
       },
-      width: "5%"
+      width: "8%"
     }, {
       data: undefined,
       render: function (data, type, row) {
@@ -86,7 +101,7 @@ var tableAddNewShipment = new DataTable('#table-add-shipment', {
                    <span>${row.provider}</span>
                 </div>`
       },
-      width: "20%"
+      width: "15%"
     },
     {
       data: undefined,
@@ -95,22 +110,26 @@ var tableAddNewShipment = new DataTable('#table-add-shipment', {
                     <span>${row.quantityStock}</span>
                 </div>`
       },
-      width: "5%"
+      width: "8%"
     },
     {
       data: undefined,
       render: function (data, type, row) {
+        var item = dataResponse.find(d => d.id === row.id);
+        var value = item ? item.quantity : 0;
         return `<div style="width: 100px;" class="new-quantity-product">  
-                    <input style="width: 100px;" type="text">
+                    <input style="width: 100px" value="${value}" type="number" class="form-control" placeholder="Enter a number" min="0">
                 </div>`
       },
-      width: "5%"
+      width: "13%"
     },
     {
       data: undefined,
       render: function (data, type, row) {
-        return `<div style="width: 100px;" class="new-quantity-product">  
-                    <input style="width: 100px;" type="text">
+        var item = dataResponse.find(d => d.id === row.id);
+        var value = item ? item.importPrice : 0;
+        return `<div style="width: 100px;" class="price-product-in">  
+                    <input value="${value}" style="width: 100px;" type="text">
                 </div>`
       },
       width: "5%"
@@ -143,14 +162,36 @@ var tableAddNewShipment = new DataTable('#table-add-shipment', {
     }, 1500)
   }
 })
-
 let totalQuantity = 0;
-$('#tableAddNewShipment').on('change',
-    '.new-quantity-product input[type="text"]',
-    function () {
-      totalQuantity += $(this).val();
-      console.log(totalQuantity);
-    })
+$('#tableAddNewShipment').on('change', 'input[type="text"]', function () {
+  let value = parseFloat($(this).val()) || 0;
+  if (value < 0) {
+    value = 0;
+    $(this).val(0);
+  }
+  let trElement = $(this).closest('td').closest('tr');
+  dataResponse.forEach(d => {
+    if (d.id === parseInt(trElement.find('.sku-code span').text())) {
+      d.importPrice = value;
+    }
+  })
+})
+
+$('#tableAddNewShipment').on('change', 'input[type="number"]', function () {
+  let value = parseInt($(this).val()) || 0;
+
+  if (value < 0) {
+    value = 0;
+    $(this).val(0);
+  }
+
+  let trElement = $(this).closest('td').closest('tr');
+  dataResponse.forEach(d => {
+    if (d.id === parseInt(trElement.find('.sku-code span').text())) {
+      d.quantity = value;
+    }
+  })
+});
 
 tableAddNewShipment.on('draw.dt', function () {
   var cloudName = 'dter3mlpl';
@@ -169,3 +210,12 @@ tableAddNewShipment.on('draw.dt', function () {
     }
   })
 });
+
+$('.search-btn').on('click', function () {
+  tableAddNewShipment.ajax.reload();
+})
+
+$('.reset-btn').on('click', function () {
+  $('#product-name').val('');
+  tableAddNewShipment.ajax.reload();
+})

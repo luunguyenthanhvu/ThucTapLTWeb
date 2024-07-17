@@ -3,6 +3,7 @@ package nhom55.hcmuaf.services_remaster;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import nhom55.hcmuaf.beans_remaster.Products;
@@ -55,7 +56,11 @@ public class ProductService extends AbstractService {
 
   public List<ListProductResponseDTO> findListProductByProductId(List<Integer> listProductId) {
     List<Products> productsList = new ArrayList<>();
+    if (listProductId.isEmpty()) {
+      return new ArrayList<>();
+    }
     listProductId.forEach(id -> productsList.add(findAllById(id).get()));
+
     return ListProductsResponseDTOMapper.INSTANCE.toListDTO(handle, productsList);
   }
 }

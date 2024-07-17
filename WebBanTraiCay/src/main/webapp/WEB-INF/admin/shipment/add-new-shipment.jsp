@@ -32,6 +32,25 @@
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/css/admin-css/override-datatable.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      .new-quantity-product input {
+        padding: 5px;
+        border-radius: 4px;
+        border: solid 1px gray;
+      }
+
+      .price-product-in input {
+        padding: 5px;
+        border-radius: 4px;
+        border: solid 1px gray;
+      }
+
+      .new-quantity-product input:focus, .price-product-in input:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        outline: none;
+      }
+    </style>
 </head>
 <body onload="myFunction()" style="margin:0;">
 <div id="loader"></div>
@@ -231,7 +250,8 @@
 
     <section class="home-section">
         <div class="home-content">
-            <svg class='bx-menu' xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+            <svg class='bx-menu' xmlns="http://www.w3.org/2000/svg" height="1em"
+                 viewBox="0 0 448 512">
                 <path
                         d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
             </svg>
@@ -246,7 +266,7 @@
                 </div>
                 <div class="main-container">
                     <div class="table-wrapper">
-                        <table id="table-add-shipment">
+                        <table id="tableAddNewShipment">
                             <thead>
                             <tr>
                                 <th>Sản phẩm</th>
@@ -267,7 +287,8 @@
                 </div>
             </div>
         </div>
-        <select style="display: none; background-color: #f4f4f4; color: #0b0b0b" class="shipment-transaction-note" name="shipment-transaction-note" disabled>
+        <select style="display: none; background-color: #f4f4f4; color: #0b0b0b"
+                class="shipment-transaction-note" name="shipment-transaction-note" disabled>
             <option value="add-new-product" selected>Thêm lô hàng mới</option>
             <option value="out-date" disabled>Sản phẩm hết hạn</option>
             <option value="add-more" disabled>Thêm sản phẩm</option>
@@ -298,6 +319,6 @@
 <script src="https://kit.fontawesome.com/4c38acb8c6.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/static/js/datatable/datatables.js"></script>
 <script
-        src="${pageContext.request.contextPath}/static/js/admin-js/shipment/add-new-shipment.js?v=7"
+        src="${pageContext.request.contextPath}/static/js/admin-js/shipment/add-new-shipment.js?v=11"
         charset="utf-8"></script>
 </html>
