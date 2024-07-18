@@ -35,7 +35,7 @@ public class CheckOut extends HttpServlet {
     double subTotalPrice = 0;
     // get selected Product for buy
     List<String> selectedProductIds = (List<String>) session.getAttribute("selectedProductIds");
-    Cart cart = (Cart) session.getAttribute("cart");
+    Cart cart = new Cart();
 
     if (cart != null && selectedProductIds != null) {
       // get product list selected from cart

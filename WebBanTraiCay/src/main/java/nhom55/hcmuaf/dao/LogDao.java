@@ -7,4 +7,7 @@ public interface LogDao<T> {
   public void insertLog(Log<T> model);
   void delete(int id);
   List<Log> show();
+  int countTotalRecords();
+  int countFilteredRecords(String searchText, String logLevel);
+  List<Log> filter(int start, int length, String searchText, String logLevel);
 }

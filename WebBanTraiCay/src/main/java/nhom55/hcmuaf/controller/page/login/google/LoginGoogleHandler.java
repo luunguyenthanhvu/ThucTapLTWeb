@@ -49,7 +49,7 @@ public class LoginGoogleHandler extends HttpServlet {
       }
       Users user = UserService.getInstance().getUserByEmail(googlePojo.getEmail());
       MyUtils.storeLoginedUser(request.getSession(), user);
-      UserCart.updateCart(user.getId(), request.getSession());
+//      UserCart.updateCart(user.getId(), request.getSession());
       HttpSession session = request.getSession();
       String result = loginDao.authorizeLoginGoogle(googlePojo.getEmail());
       if (result.equals("ADMIN")) {
