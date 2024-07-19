@@ -101,12 +101,12 @@ public class CheckOut extends HttpServlet {
           int id_bills = billDao.getIDAListProductFromBills(timeNow, users.getId());
           for(CartsEntityWebSocket.CartItem itemProduct: cartItem) {
             if( billDao.addAProductToBillDetails(itemProduct.getId(),id_bills,itemProduct.getQuantity(),itemProduct.getQuantity()*itemProduct.getPrice())) {
-              billDao.degreeAmountWhenOderingSuccessfully(itemProduct.getId(),itemProduct.getQuantity());
+//              billDao.degreeAmountWhenOderingSuccessfully(itemProduct.getId(),itemProduct.getQuantity());
             }
           }
 
           // xoa san pham sau khi dat hang
-          deleteCart(session);
+//          deleteCart(session);
 
           //          Thông báo người mua đã đặt thành công
           Properties smtpProperties = MailProperties.getSMTPPro();
@@ -136,8 +136,8 @@ public class CheckOut extends HttpServlet {
             log.setCurrentValue(lastName+" "+firstName+", địa chỉ: "+address+", số điện thoại: "+phoneNumber+", email: "+email+", giá tiền đơn hàng: "+subTotalPrice+", tiền vận chuyển: "+deliveryFeeDouble+", ghi chú: "+note+", kiểu thanh toán: Thẻ tín dụng "+", ngày đặt hàng: "+timeNow+" ,tổng tiền: "+(subTotalPrice+deliveryFeeDouble));
             log.setCreateAt(timeNow);
             absDAO.insert(log);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/page/shop/shop-forward");
-            request.setAttribute("isOrderSuccessfully",isOrderSuccessfully);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/page/bill/list-bill");
+//            request.setAttribute("isOrderSuccessfully",isOrderSuccessfully);
             dispatcher.forward(request,response);
           } catch (Exception e) {
             System.out.println("SendEmail File Error " + e);
