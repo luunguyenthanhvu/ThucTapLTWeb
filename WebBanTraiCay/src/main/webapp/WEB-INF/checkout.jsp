@@ -250,6 +250,12 @@
                                       </textarea>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
@@ -279,6 +285,7 @@
                                                           value="${totalPrice}"/>
                                     </span>
                                 </p>
+                                <input type="hidden" id="idVoucher" name="idVoucher">
                             </div>
                         </div>
 
@@ -380,6 +387,24 @@
         </div>
     </section> <!-- .section -->
 </form><!-- END -->
+<div class="containerVoucher">
+    <button type="button" class="open-btn-voucher" id="openBtnVoucher">Chọn mã giảm giá</button>
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <span class="close-btn" id="closeBtn">&times;</span>
+            <h2>Chọn mã giảm giá</h2>
+            <input type="text" placeholder="Nhập mã giảm giá" id="couponCode">
+            <button class="apply-btn" id="applyBtnVoucher">Áp dụng</button>
+            <div class="coupons" id="couponsList"></div>
+            <div class="totalAfterUsingVoucher">
+                <p>Giảm: <span id="discountVoucherPrice"></span></p>
+                <p>Còn: <span id="priceAfterUseVoucher">0.000₫</span></p>
+            </div>
+            <button type="button" class="confirm-btn-voucher" id="confirmBtnVoucher">Đồng ý</button>
+        </div>
+    </div>
+
+</div>
 
 <footer class="ftco-footer ftco-section">
     <div class="container">
@@ -735,6 +760,144 @@
 
 <script> var context = "${pageContext.request.contextPath}";</script>
 <%--Js xử lý lấy dữ liệu vận chuyển--%>
-<script src="${pageContext.request.contextPath}/static/js/web-js/process-delivery-fee.js?v=1" ></script>
+<script src="${pageContext.request.contextPath}/static/js/web-js/process-delivery-fee.js?v=12" ></script>
 </body>
+<%--Css cho Popup Voucher--%>
+<style>
+    .containerVoucher {
+        position: absolute;
+        top: 1000px;
+        left: 750px;
+        padding: 50px;
+    }
+
+    .open-btn-voucher {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .popup-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        width: 550px;
+        height: 700px;
+        position: relative;
+
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+    }
+
+    h2 {
+        margin-top: 0;
+    }
+
+    .close-btn {
+        /* CSS cho nút đóng */
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+    }
+
+    .coupon {
+        /* CSS cho mỗi mã giảm giá */
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        gap: 10px;
+        max-width: 100%; /* Đảm bảo container không vượt quá chiều rộng */
+
+    }
+    .coupon svg {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
+
+    .coupon input[type="radio"] {
+        /* CSS cho nút radio */
+        margin-right: 40px;
+        justify-self: end; /* Đưa nút radio vào cuối cột */
+    }
+    .coupon-content {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        max-width: calc(100% - 70px); /* Điều chỉnh chiều rộng để vừa khít */
+        overflow: hidden; /* Đảm bảo nội dung không vượt quá chiều rộng */
+    }
+
+    .coupon-content div {
+        margin-bottom: 5px;
+        white-space: normal;
+        word-wrap: break-word; /* Cho phép xuống dòng nếu chữ quá dài */
+    }
+    .coupon-content div.title {
+        font-weight: bold;
+    }
+    .coupon-content div.content {
+        font-size: 0.8em; /* Giảm kích thước chữ của content */
+    }
+    .coupon-content div.expiry {
+        font-size: 0.8em; /* Giảm kích thước chữ của hạn sử dụng */
+        color: #605b5b;
+    }
+
+    .coupon label {
+        /* CSS cho nhãn của mã giảm giá */
+        cursor: pointer;
+    }
+
+    .coupon label:hover {
+        /* Hiệu ứng khi di chuột vào nhãn */
+        text-decoration: underline;
+    }
+    #couponsList {
+        max-height: 300px; /* Đặt chiều cao tối đa */
+        overflow-y: auto; /* Thêm cuộn dọc */
+        padding: 10px;
+    }
+
+    .totalAfterUsingVoucher {
+        display: grid;
+        justify-content: center;
+        margin: 20px 0;
+    }
+
+    .apply-btn, .confirm-btn-voucher {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin: 10px 0;
+    }
+</style>
 </html>

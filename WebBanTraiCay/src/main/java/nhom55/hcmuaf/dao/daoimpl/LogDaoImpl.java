@@ -43,4 +43,80 @@ public class LogDaoImpl<T> implements LogDao<T> {
     );
   }
 
+    @Override
+    public int countTotalRecords() {
+        return JDBIConnector.get().withHandle(h ->
+            h.createQuery("SELECT COUNT(*) FROM logs")
+                .mapTo(Integer.class)
+                .one()
+        );
+    }
+
+    @Override
+    public int countFilteredRecords(String searchText, String logLevel) {
+        StringBuilder sqlBuilder = new StringBuilder("SELECT COUNT(*) FROM logs WHERE 1=1");
+
+        if (searchText != null && !searchText.isEmpty()) {
+            sqlBuilder.append(" AND (ip LIKE :searchText OR national LIKE :searchText OR note LIKE :searchText OR address LIKE :searchText)");
+        }
+
+        if (logLevel != null && !logLevel.isEmpty()) {
+            sqlBuilder.append(" AND level LIKE :logLevel");
+        }
+
+        String sql = sqlBuilder.toString();
+
+        return JDBIConnector.get().withHandle(h -> {
+            var query = h.createQuery(sql);
+
+            if (searchText != null && !searchText.isEmpty()) {
+                query.bind("searchText", "%" + searchText + "%");
+            }
+
+            if (logLevel != null && !logLevel.isEmpty()) {
+                query.bind("logLevel", "%" + logLevel + "%");
+            }
+
+            return query.mapTo(Integer.class).one();
+        });
+    }
+
+
+
+    @Override
+    public List<Log> filter(int start, int length, String searchText, String logLevel) {
+        StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM logs WHERE 1=1");
+
+        if (searchText != null && !searchText.isEmpty()) {
+            sqlBuilder.append(" AND (ip LIKE :searchText OR national LIKE :searchText OR note LIKE :searchText OR address LIKE :searchText)");
+        }
+
+        if (logLevel != null && !logLevel.isEmpty()) {
+            sqlBuilder.append(" AND level LIKE :logLevel");
+        }
+
+        sqlBuilder.append(" LIMIT :length OFFSET :start");
+
+        String sql = sqlBuilder.toString();
+
+        return JDBIConnector.get().withHandle(h -> {
+            var query = h.createQuery(sql);
+
+            if (searchText != null && !searchText.isEmpty()) {
+                query.bind("searchText", "%" + searchText + "%");
+            }
+
+            if (logLevel != null && !logLevel.isEmpty()) {
+                query.bind("logLevel", "%" + logLevel + "%");
+            }
+
+            query.bind("start", start);
+            query.bind("length", length);
+
+            return query.mapToBean(Log.class).list();
+        });
+    }
+
+
+
 }

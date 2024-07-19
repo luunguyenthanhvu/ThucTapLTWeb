@@ -132,10 +132,7 @@
             <div class="iocn-link">
                 <a href="#">
                     <i>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="18" viewBox="0 0 576 512">
-                            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-                            <path d="M64 32C46.3 32 32 46.3 32 64V304v48 80c0 26.5 21.5 48 48 48H496c26.5 0 48-21.5 48-48V304 152.2c0-18.2-19.4-29.7-35.4-21.1L352 215.4V152.2c0-18.2-19.4-29.7-35.4-21.1L160 215.4V64c0-17.7-14.3-32-32-32H64z"/>
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="18" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M64 32C46.3 32 32 46.3 32 64V304v48 80c0 26.5 21.5 48 48 48H496c26.5 0 48-21.5 48-48V304 152.2c0-18.2-19.4-29.7-35.4-21.1L352 215.4V152.2c0-18.2-19.4-29.7-35.4-21.1L160 215.4V64c0-17.7-14.3-32-32-32H64z"/></svg>
                     </i>
                     <span class="link_name">Nhà cung cấp</span>
                 </a>
@@ -143,8 +140,7 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link_name" href="#">Nhà cung cấp</a></li>
-                <li><a href="${pageContext.request.contextPath}/admin/provider/provider-list">Danh sách nhà cung cấp</a>
-                </li>
+                <li><a href="${pageContext.request.contextPath}/admin/provider/provider-list">Danh sách nhà cung cấp</a></li>
                 <li><a href="${pageContext.request.contextPath}/admin/provider/add-provider">Thêm nhà cung cấp</a></li>
             </ul>
         </li>
@@ -153,20 +149,31 @@
             <div class="iocn-link">
                 <a href="#">
                     <i>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="18" viewBox="0 0 512 512">
-                            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                            <path d="M384 48c8.8 0 16 7.2 16 16V448c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16H384zM96 0C60.7 0 32 28.7 32 64V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H96zM240 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128zm-32 32c-44.2 0-80 35.8-80 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16c0-44.2-35.8-80-80-80H208zM512 80c0-8.8-7.2-16-16-16s-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V80zM496 192c-8.8 0-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm16 144c0-8.8-7.2-16-16-16s-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V336z"/>
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="18" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M384 48c8.8 0 16 7.2 16 16V448c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16H384zM96 0C60.7 0 32 28.7 32 64V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H96zM240 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128zm-32 32c-44.2 0-80 35.8-80 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16c0-44.2-35.8-80-80-80H208zM512 80c0-8.8-7.2-16-16-16s-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V80zM496 192c-8.8 0-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm16 144c0-8.8-7.2-16-16-16s-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V336z"/></svg>
                     </i>
                     <span class="link_name">Liên hệ</span>
                 </a>
                 <i class='bx bxs-chevron-down arrow'></i>
             </div>
             <ul class="sub-menu">
-                <li><a href="${pageContext.request.contextPath}/admin/contact-form">Danh sách liên hệ của khách hàng</a>
-                </li>
+                <li><a href="${pageContext.request.contextPath}/admin/contact-form">Danh sách liên hệ của khách hàng</a></li>
             </ul>
         </li>
+        <li>
+            <div class="iocn-link">
+                <a href="#">
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="18" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#e9ecf1" d="M320 464c8.8 0 16-7.2 16-16V160H256c-17.7 0-32-14.3-32-32V48H64c-8.8 0-16 7.2-16 16V448c0 8.8 7.2 16 16 16H320zM0 64C0 28.7 28.7 0 64 0H229.5c17 0 33.3 6.7 45.3 18.7l90.5 90.5c12 12 18.7 28.3 18.7 45.3V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64z"/></svg>
+                    </i>
+                    <span class="link_name">Quản lý log</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a href="${pageContext.request.contextPath}/admin/log/log-center">Theo dõi và điều chỉnh log</a></li>
+            </ul>
+        </li>
+
         <li>
             <div class="profile-details">
                 <div class="profile-content">
@@ -177,8 +184,7 @@
                         </c:when>
                         <c:otherwise>
                             <!-- Ảnh mặc định khi mới đăng ký -->
-                            <img src="${pageContext.request.contextPath}/static/images/accountPicture.png"
-                                 alt="profileImg">
+                            <img src="${pageContext.request.contextPath}/static/images/accountPicture.png" alt="profileImg">
                         </c:otherwise>
                     </c:choose>
                 </div>
@@ -210,6 +216,17 @@
 
 <!--code thêm ở đây-->
 <div  class="main-content">
+    <div class="containerSearchLog">
+        <input type="text" id="keyword_search" >
+        <select id="level_search">
+            <option value="">Tất cả các mức độ</option>
+            <option value="INFO">INFO</option>
+            <option value="ALERT">ALERT</option>
+            <option value="WARNING">WARNING</option>
+            <option value="DANGER">DANGER</option>
+        </select>
+        <button id="searchLog">Tìm kiếm Log</button>
+    </div>
 <table id="table-log" class="cell-border" style="width:100%">
 <thead>
 <tr>
@@ -325,15 +342,22 @@
         $(document).ready(function () {
             // Khởi tạo DataTables một lần với cấu hình ajax
             let table = $('#table-log').DataTable({
-                processing: true,
-                paging: true,
-                ordering: true,
-                searching: true,
-                serverSide: false,
+                searching: false,
+                bDeferRender: true,
                 ajax: {
-                    url: "/admin/log/manage-log",
-                    dataSrc: "data"
+                    url: `${window.context}/api/admin/log/manage-log`,
+                    contentType: 'application/json',
+                    type: "POST",
+                    dataType: "json",
+                    data: function (d) {
+                        console.log(d)
+                        d.searchText = $('#keyword_search').val();
+                        d.category = $('#level_search').val();
+                        return JSON.stringify(d);
+                    }
                 },
+                serverSide: true,
+                processing: true,
                 columns: [
                     { data: "id" },
                     { data: "ip" },
@@ -429,7 +453,11 @@
                     }
                 });
             });
+            $('#searchLog').on('click', function () {
+                table.ajax.reload();
+            })
         });
+
 
 
     </script>
@@ -450,5 +478,38 @@
         width: 200px;
 
     }
+    #keyword_search, #searchLog, #level_search {
+        padding: 10px;
+        margin: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+    }
+    #keyword_search {
+        width: 300px;
+    }
+    #searchLog {
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    #searchLog:hover {
+        background-color: #45a049;
+    }
+    #level_search {
+        width: 200px;
+    }
+    #level_search option {
+        padding: 10px;
+    }
+    .containerSearchLog {
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: #f9f9f9;
+    }
+
 </style>
     </html>
