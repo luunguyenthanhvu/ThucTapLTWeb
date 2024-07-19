@@ -44,7 +44,6 @@ public class MyUtils {
    * @param loginedUser
    */
   public static void storeLoginedUser(HttpSession session, Users loginedUser) {
-    // On the JSP can access via ${loginedUser}
     session.setAttribute("loginedUser", loginedUser);
   }
 
