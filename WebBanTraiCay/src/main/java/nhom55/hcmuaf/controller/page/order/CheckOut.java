@@ -28,6 +28,7 @@ import nhom55.hcmuaf.log.RequestInfo;
 import nhom55.hcmuaf.sendmail.MailProperties;
 import nhom55.hcmuaf.util.MyUtils;
 import nhom55.hcmuaf.util.OrderValidator;
+import nhom55.hcmuaf.websocket.entities.CartsEntityWebSocket;
 
 @WebServlet(name = "CheckOut", value = "/page/order/check-out")
 public class CheckOut extends HttpServlet {
@@ -36,19 +37,19 @@ public class CheckOut extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     HttpSession session = request.getSession();
-    double subTotalPrice = 0;
-    // get selected Product for buy
-    List<String> selectedProductIds = (List<String>) session.getAttribute("selectedProductIds");
-    Cart cart = new Cart();
+//    double subTotalPrice = 0;
+//    // get selected Product for buy
+//    List<String> selectedProductIds = (List<String>) session.getAttribute("selectedProductIds");
+//    Cart cart = new Cart();
+//
+//    if (cart != null && selectedProductIds != null) {
+//      // get product list selected from cart
+//      List<CartProduct> selectedProducts = cart.getSelectedProducts(selectedProductIds);
+//
+//      subTotalPrice = getTotalPrice(selectedProducts);
+//    }
 
-    if (cart != null && selectedProductIds != null) {
-      // get product list selected from cart
-      List<CartProduct> selectedProducts = cart.getSelectedProducts(selectedProductIds);
-
-      subTotalPrice = getTotalPrice(selectedProducts);
-    }
-
-    request.setAttribute("subTotalPrice", subTotalPrice);
+//    request.setAttribute("subTotalPrice", subTotalPrice);
     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/checkout.jsp");
     dispatcher.forward(request, response);
   }
@@ -64,45 +65,43 @@ public class CheckOut extends HttpServlet {
     String district = request.getParameter("districtName");
     String phoneNumber = request.getParameter("sdt_nguoi-dung");
     String email = request.getParameter("email_nguoi-dung");
-    String payment = request.getParameter("payment_selection");
     String deliveryFee = request.getParameter("delivery_fee");
     String cleanedString = deliveryFee.replaceAll("[₫\\s]", "");
     cleanedString = cleanedString.replace(".", "");
     double deliveryFeeDouble = Double.parseDouble(cleanedString);
     String note = request.getParameter("note_nguoi-dung");
-    int idVoucher = Integer.valueOf(request.getParameter("idVoucher"));
+    String idVoucherString = request.getParameter("idVoucher");
+    int idVoucher = 0;
+    if(idVoucherString != null && !idVoucherString.trim().isEmpty()) {
+        idVoucher = Integer.valueOf(idVoucherString);
+    }
     if(checkValidate(request,response,lastName,firstName,address,city,phoneNumber,email)) {
       HttpSession session = request.getSession();
       Users users = MyUtils.getLoginedUser(session);
       double subTotalPrice = 0;
       // get selected Product for buy
       List<String> selectedProductIds = (List<String>) session.getAttribute("selectedProductIds");
-      Cart cart = (Cart) session.getAttribute("cart");
+      CartsEntityWebSocket cart = MyUtils.getCart(session);
       if (cart != null && selectedProductIds != null) {
         // get product list selected from cart
-        List<CartProduct> selectedProducts = cart.getSelectedProducts(selectedProductIds);
-        subTotalPrice = getTotalPrice(selectedProducts);
+        List<CartsEntityWebSocket.CartItem> cartItem = cart.getCartItemList();
+        subTotalPrice = (Double) session.getAttribute("subTotalPrice");
         BillDao billDao = new BillDaoImpl();
         // biến này sẽ lưu tất cả các hóa đơn người dùng đã mua
         List<Bills> listBills = new ArrayList<>();
         LocalDateTime timeNow = LocalDateTime.now();
         String productNameList ="";
-        for(CartProduct c: selectedProducts) {
-          productNameList +=  c.getProducts().getNameOfProduct()+"\t";
+        for(CartsEntityWebSocket.CartItem itemProduct: cartItem){
+          productNameList+=itemProduct.getProductName()+", ";
         }
-        int idPayment =0;
-        if(payment.equals("Paypal")) {
-          idPayment=2;
-        } else {
-          idPayment=1;
-        }
+        int idPayment =1;
         address+=address+", quận "+district+", tỉnh "+city;
 
         if(billDao.addAListProductToBills(timeNow,productNameList,"Đang giao", users.getId(), idPayment,firstName,lastName,address,city,phoneNumber,email,subTotalPrice,deliveryFeeDouble,note)) {
           int id_bills = billDao.getIDAListProductFromBills(timeNow, users.getId());
-          for(CartProduct c: selectedProducts) {
-            if( billDao.addAProductToBillDetails(c.getProducts().getId(),id_bills,c.getQuantity(),c.getQuantity()*c.getProducts().getPrice())) {
-              billDao.degreeAmountWhenOderingSuccessfully(c.getProducts().getId(),c.getQuantity());
+          for(CartsEntityWebSocket.CartItem itemProduct: cartItem) {
+            if( billDao.addAProductToBillDetails(itemProduct.getId(),id_bills,itemProduct.getQuantity(),itemProduct.getQuantity()*itemProduct.getPrice())) {
+              billDao.degreeAmountWhenOderingSuccessfully(itemProduct.getId(),itemProduct.getQuantity());
             }
           }
 
@@ -134,7 +133,7 @@ public class CheckOut extends HttpServlet {
             log.setAddress(requestInfo.getAddress());
             log.setNational(requestInfo.getNation());
             log.setNote("Người dùng "+users.getUsername()+" vừa đặt hàng thành công");
-            log.setCurrentValue(lastName+" "+firstName+", địa chỉ: "+address+", số điện thoại: "+phoneNumber+", email: "+email+", giá tiền đơn hàng: "+subTotalPrice+", tiền vận chuyển: "+deliveryFeeDouble+", ghi chú: "+note+", kiểu thanh toán: "+payment+", ngày đặt hàng: "+timeNow+" ,tổng tiền: "+(subTotalPrice+deliveryFeeDouble));
+            log.setCurrentValue(lastName+" "+firstName+", địa chỉ: "+address+", số điện thoại: "+phoneNumber+", email: "+email+", giá tiền đơn hàng: "+subTotalPrice+", tiền vận chuyển: "+deliveryFeeDouble+", ghi chú: "+note+", kiểu thanh toán: Thẻ tín dụng "+", ngày đặt hàng: "+timeNow+" ,tổng tiền: "+(subTotalPrice+deliveryFeeDouble));
             log.setCreateAt(timeNow);
             absDAO.insert(log);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/page/shop/shop-forward");
@@ -154,13 +153,7 @@ public class CheckOut extends HttpServlet {
 
   }
 
-  private static double getTotalPrice(List<CartProduct> selectedProducts) {
-    double result = 0;
-    for (CartProduct product : selectedProducts) {
-      result += product.getPrice();
-    }
-    return result;
-  }
+
   private static boolean checkValidate(HttpServletRequest request, HttpServletResponse response,String lastName, String firstName, String address,String city, String phoneNumber, String email){
            String checkFirstName= OrderValidator.validateFirstName(firstName);
            String checkLastName= OrderValidator.validateLastName(lastName);
