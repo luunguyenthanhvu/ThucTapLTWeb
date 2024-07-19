@@ -2,6 +2,7 @@ package nhom55.hcmuaf.controller.paypal;
 
 import com.paypal.base.rest.PayPalRESTException;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -14,7 +15,10 @@ import nhom55.hcmuaf.beans.Bills;
 import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.beans.cart.Cart;
 import nhom55.hcmuaf.beans.cart.CartProduct;
+import nhom55.hcmuaf.dao.BillDao;
+import nhom55.hcmuaf.dao.daoimpl.BillDaoImpl;
 import nhom55.hcmuaf.util.MyUtils;
+import nhom55.hcmuaf.websocket.entities.CartsEntityWebSocket;
 
 @WebServlet(name = "AuthorizePayPal", value = "/paypal/authorize-payment")
 public class AuthorizePaymentServlet extends HttpServlet {
@@ -28,19 +32,22 @@ public class AuthorizePaymentServlet extends HttpServlet {
       throws ServletException, IOException {
     HttpSession session = request.getSession();
     Users users = MyUtils.getLoginedUser(session);
+    double subTotalPrice = 0;
+    String productNameList = "";
+    // get selected Product for buy
     List<String> selectedProductIds = (List<String>) session.getAttribute("selectedProductIds");
-    Cart cart = new Cart();
-    List<CartProduct> selectedProducts = new ArrayList<>();
+    CartsEntityWebSocket cart = MyUtils.getCart(session);
     if (cart != null && selectedProductIds != null) {
       // get product list selected from cart
-      selectedProducts = cart.getSelectedProducts(selectedProductIds);
-    }
-    String productName = "";
-    //        Tổng tiền trái cây mà User định thanh toán
-    double subtotal = 0;
-    for (CartProduct cp : selectedProducts) {
-      subtotal += cp.getProducts().getPrice();
-      productName += cp.getProducts().getNameOfProduct() + ",";
+      List<CartsEntityWebSocket.CartItem> cartItem = cart.getCartItemList();
+      subTotalPrice = (Double) session.getAttribute("subTotalPrice");
+      BillDao billDao = new BillDaoImpl();
+      // biến này sẽ lưu tất cả các hóa đơn người dùng đã mua
+      List<Bills> listBills = new ArrayList<>();
+      LocalDateTime timeNow = LocalDateTime.now();
+      for (CartsEntityWebSocket.CartItem itemProduct : cartItem) {
+        productNameList += itemProduct.getProductName() + ", ";
+      }
     }
     String lastName = request.getParameter("ho_nguoi-dung");
     String firstName = request.getParameter("ten_nguoi-dung");
@@ -60,7 +67,7 @@ public class AuthorizePaymentServlet extends HttpServlet {
     address += address + ", quận " + district + ", tỉnh " + city;
 
     Bills bills = new Bills();
-    bills.setProductList(productName);
+    bills.setProductList(productNameList);
     bills.setStatus("Đang giao");
     bills.setUserId(users.getId());
     bills.setPayment(idPayment);
@@ -70,9 +77,8 @@ public class AuthorizePaymentServlet extends HttpServlet {
     bills.setCity(city);
     bills.setPhoneNumber(phoneNumber);
     bills.setEmail(email);
-    bills.setTotalPrice(subtotal);
+    bills.setTotalPrice(subTotalPrice);
     bills.setDeliveryFee(deliveryFeeDouble);
-
     bills.setNote(note);
     try {
       PaymentServices paymentServices = new PaymentServices();
@@ -83,7 +89,7 @@ public class AuthorizePaymentServlet extends HttpServlet {
       session.setAttribute("city", city);
       session.setAttribute("phoneNumber", phoneNumber);
       session.setAttribute("email", email);
-      session.setAttribute("subtotal", subtotal);
+      session.setAttribute("subtotal", subTotalPrice);
       session.setAttribute("deliveryFee", deliveryFeeDouble);
 
       session.setAttribute("note", note);

@@ -36,6 +36,7 @@ import nhom55.hcmuaf.log.Log;
 import nhom55.hcmuaf.log.RequestInfo;
 import nhom55.hcmuaf.sendmail.MailProperties;
 import nhom55.hcmuaf.util.MyUtils;
+import nhom55.hcmuaf.websocket.entities.CartsEntityWebSocket;
 
 @WebServlet(name = "SummaryBill", value = "/paypal/summary-bill-paypal")
 public class SummaryBillPaypal extends HttpServlet {
@@ -71,75 +72,76 @@ public class SummaryBillPaypal extends HttpServlet {
       String city = (String) session.getAttribute("city");
       String phoneNumber = (String) session.getAttribute("phoneNumber");
       String email = (String) session.getAttribute("email");
-      String subtotal = (String) session.getAttribute("subtotal");
+      double subtotal = (Double) session.getAttribute("subtotal");
       double deliveryFee = (Double) session.getAttribute("deliveryFee");
-
       String note = (String) session.getAttribute("note");
-      double subTotalPrice = Double.valueOf(subtotal);
+      double subTotalPrice = subtotal;
       LocalDateTime timeNow = LocalDateTime.now();
+      String productNameList = "";
+      // get selected Product for buy
       List<String> selectedProductIds = (List<String>) session.getAttribute("selectedProductIds");
-      Cart cart = new Cart();
-      List<CartProduct> selectedProducts = new ArrayList<>();
+      CartsEntityWebSocket cart = MyUtils.getCart(session);
       if (cart != null && selectedProductIds != null) {
         // get product list selected from cart
-        selectedProducts = cart.getSelectedProducts(selectedProductIds);
-      }
-      String productNameList = "";
-      for (CartProduct c : selectedProducts) {
-        productNameList += c.getProducts().getNameOfProduct() + "\t";
-      }
-      BillDao billDao = new BillDaoImpl();
-
-      if (billDao.addAListProductToBills(timeNow, productNameList, "Đang giao", users.getId(), 2,
-          firstName, lastName, address, city, phoneNumber, email, subTotalPrice, deliveryFee,
-          note)) {
-
-        int id_bills = billDao.getIDAListProductFromBills(timeNow, users.getId());
-        for (CartProduct c : selectedProducts) {
-          if (billDao.addAProductToBillDetails(c.getProducts().getId(), id_bills, c.getQuantity(),
-              c.getQuantity() * c.getProducts().getPrice())) {
-            billDao.degreeAmountWhenOderingSuccessfully(c.getProducts().getId(), c.getQuantity());
-          }
+        List<CartsEntityWebSocket.CartItem> cartItem = cart.getCartItemList();
+        subTotalPrice = (Double) session.getAttribute("subTotalPrice");
+        BillDao billDao = new BillDaoImpl();
+        // biến này sẽ lưu tất cả các hóa đơn người dùng đã mua
+        List<Bills> listBills = new ArrayList<>();
+        for (CartsEntityWebSocket.CartItem itemProduct : cartItem) {
+          productNameList += itemProduct.getProductName() + ", ";
         }
-        // xoa san pham sau khi dat hang
-        deleteCart(session);
+        if (billDao.addAListProductToBills(timeNow, productNameList, "Đang giao", users.getId(), 2,
+                firstName, lastName, address, city, phoneNumber, email, subTotalPrice, deliveryFee,
+                note)) {
 
-        //          Thông báo người mua đã đặt thành công
-        Properties smtpProperties = MailProperties.getSMTPPro();
-        Session session1 = Session.getInstance(smtpProperties, new javax.mail.Authenticator() {
-          protected PasswordAuthentication getPasswordAuthentication() {
-            return new PasswordAuthentication(MailProperties.getEmail(),
-                MailProperties.getPassword());
+          int id_bills = billDao.getIDAListProductFromBills(timeNow, users.getId());
+          for (CartsEntityWebSocket.CartItem itemProduct: cartItem) {
+            if (billDao.addAProductToBillDetails(itemProduct.getId(),id_bills,itemProduct.getQuantity(),itemProduct.getQuantity()*itemProduct.getPrice())) {
+//            billDao.degreeAmountWhenOderingSuccessfully(c.getProducts().getId(), c.getQuantity());
+            }
           }
-        });
-        try {
-          Message message = new MimeMessage(session1);
-          message.addHeader("Content-type", "text/HTML; charset= UTF-8");
-          message.setFrom(new InternetAddress(MailProperties.getEmail()));
-          message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
-          message.setSubject("DAT HANG");
-          message.setText("Don dat hang cua ban thanh cong. Xem don hang ban vua moi dat tai day : "
-              + "http://localhost:8080/page/bill/detail?idBills="
-              + id_bills);
-          Transport.send(message);
-          boolean isOrderSuccessfully = true;
-          Log<Bills> log = new Log<>();
-          AbsDAO<Bills> absDAO = new AbsDAO<>();
-          RequestInfo requestInfo= new RequestInfo(request.getRemoteAddr(),"HCM", "VietNam");
-          log.setLevel(LogLevels.INFO);
-          log.setIp(requestInfo.getIp());
-          log.setAddress(requestInfo.getAddress());
-          log.setNational(requestInfo.getNation());
-          log.setNote("Người dùng "+users.getUsername()+" vừa đặt hàng thành công");
-          log.setCurrentValue(lastName+" "+firstName+", địa chỉ: "+address+", số điện thoại: "+phoneNumber+", email: "+email+", giá tiền đơn hàng: "+subTotalPrice+", tiền vận chuyển: "+deliveryFee+", ghi chú: "+note+", kiểu thanh toán: "+payment+", ngày đặt hàng: "+timeNow+" ,tổng tiền: "+(subTotalPrice+deliveryFee));
-          log.setCreateAt(timeNow);
-          absDAO.insert(log);
-          RequestDispatcher dispatcher = request.getRequestDispatcher("/page/shop/shop-forward");
-          request.setAttribute("isOrderSuccessfully", isOrderSuccessfully);
-          dispatcher.forward(request, response);
-        } catch (Exception e) {
-          System.out.println("SendEmail File Error " + e);
-        }
+          //          Thông báo người mua đã đặt thành công
+          Properties smtpProperties = MailProperties.getSMTPPro();
+          Session session1 = Session.getInstance(smtpProperties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+              return new PasswordAuthentication(MailProperties.getEmail(),
+                      MailProperties.getPassword());
+            }
+          });
+          try {
+            Message message = new MimeMessage(session1);
+            message.addHeader("Content-type", "text/HTML; charset= UTF-8");
+            message.setFrom(new InternetAddress(MailProperties.getEmail()));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+            message.setSubject("DAT HANG");
+            message.setText("Don dat hang cua ban thanh cong. Xem don hang ban vua moi dat tai day : "
+                    + "http://localhost:8080/page/bill/detail?idBills="
+                    + id_bills);
+            Transport.send(message);
+            boolean isOrderSuccessfully = true;
+            Log<Bills> log = new Log<>();
+            AbsDAO<Bills> absDAO = new AbsDAO<>();
+            RequestInfo requestInfo= new RequestInfo(request.getRemoteAddr(),"HCM", "VietNam");
+            log.setLevel(LogLevels.INFO);
+            log.setIp(requestInfo.getIp());
+            log.setAddress(requestInfo.getAddress());
+            log.setNational(requestInfo.getNation());
+            log.setNote("Người dùng "+users.getUsername()+" vừa đặt hàng thành công");
+            log.setCurrentValue(lastName+" "+firstName+", địa chỉ: "+address+", số điện thoại: "+phoneNumber+", email: "+email+", giá tiền đơn hàng: "+subTotalPrice+", tiền vận chuyển: "+deliveryFee+", ghi chú: "+note+", kiểu thanh toán: "+payment+", ngày đặt hàng: "+timeNow+" ,tổng tiền: "+(subTotalPrice+deliveryFee));
+            log.setCreateAt(timeNow);
+            absDAO.insert(log);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/page/bill/list-bill");
+            request.setAttribute("isOrderSuccessfully", isOrderSuccessfully);
+            dispatcher.forward(request, response);
+          } catch (Exception e) {
+            System.out.println("SendEmail File Error " + e);
+          }
+      }
+
+
+
+
       }
 
 
@@ -150,13 +152,6 @@ public class SummaryBillPaypal extends HttpServlet {
     }
   }
 
-  public static void deleteCart(HttpSession session) {
-    List<String> selectedProductIds = (List<String>) session.getAttribute("selectedProductIds");
-    Cart cart = (Cart) session.getAttribute("cart");
-    for (String idProduct : selectedProductIds) {
-      int id = Integer.valueOf(idProduct);
-      cart.deleteProduct(id);
-    }
-  }
+
 }
 
