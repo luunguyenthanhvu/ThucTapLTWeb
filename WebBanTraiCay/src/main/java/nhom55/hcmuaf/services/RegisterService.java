@@ -118,7 +118,7 @@ public class RegisterService extends AbsDAO {
   public void createCouponForUser(int idUser){
      String title1 ="GIẢM 30K";
      String title2 ="GIẢM 20%";
-     double price1 = 300000;
+     double price1 = 30000;
      double price2 =0.2;
      String content1 ="Người dùng thanh toán lần đầu sẽ được giảm 30k cho 1 đơn hàng";
      String content2 = "Đơn thanh toán trên 200k sẽ được giảm 20%";
