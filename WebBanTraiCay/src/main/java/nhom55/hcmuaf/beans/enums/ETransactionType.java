@@ -7,4 +7,8 @@ public enum ETransactionType {
   ETransactionType(String text) {
     this.text = text;
   }
+
+  public String getText() {
+    return text;
+  }
 }

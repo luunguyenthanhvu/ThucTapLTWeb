@@ -1,6 +1,6 @@
 package nhom55.hcmuaf.beans_remaster;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +20,6 @@ public class Shipments {
   Integer id;
   String status;
   Integer available;
-  Date dateIn;
+  LocalDateTime dateIn;
 
 }
