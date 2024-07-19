@@ -47,6 +47,35 @@ function addProductToCart(productId) {
       "action": "add"
     };
 
+    console.log(message)
+
+    if (socket.readyState === WebSocket.OPEN) {
+      socket.send(JSON.stringify(message));
+      showToast("Success");
+      console.log('Message sent:', message);
+    } else {
+      console.error('WebSocket is not open. Cannot send message.');
+      setTimeout(sendMessage, 100);
+    }
+  };
+
+  sendMessage();
+}
+
+function addProductToCartWithWeight(productId) {
+  if (!socket || socket.readyState === WebSocket.CLOSED) {
+    initializeWebSocket();
+  }
+
+  const sendMessage = () => {
+    var message = {
+      "id": productId,
+      "quantity": $('#quantity').val(),
+      "action": "add"
+    };
+
+    console.log(message)
+
     if (socket.readyState === WebSocket.OPEN) {
       socket.send(JSON.stringify(message));
       showToast("Success");
@@ -126,6 +155,14 @@ function showToast(response) {
     toast({
       title: 'Chưa đăng nhập',
       message: 'Để sử dụng chức năng này bạn cần phải đăng nhập!',
+      type: 'warning',
+      duration: 3000
+    })
+  }
+  if (response === "No quantity") {
+    toast({
+      title: 'Sản phẩm đã hết hàng',
+      message: 'Cửa hàng đã hết hàng cho mặt hàng này vui lòng quay lại sau',
       type: 'warning',
       duration: 3000
     })

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.LocalDate;
-import nhom55.hcmuaf.services_remaster.ProductService;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Event {
@@ -31,11 +30,6 @@ public class Event {
 //    } catch (IOException e) {
 //      e.printStackTrace();
 //    }
-    ProductService productService = new ProductService();
-    productService.begin();
-    System.out.println(productService.findProductShopResponseById(1));
-    ;
-
   }
 
   // Getter và Setter

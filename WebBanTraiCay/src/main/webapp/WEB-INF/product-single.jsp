@@ -218,34 +218,42 @@
 
                 <span><fmt:formatNumber pattern="#,##0 đ"
                                         value="${product.getPrice()}"/>/ ${product.getWeightDefault()} kg</span></p>
-                <div class="row mt-4">
-                    <div class="w-100"></div>
-                    <div class="input-group col-md-6 d-flex mb-3">
+                <c:if test="${product.getQuantityStock() > 0}">
+                    <div class="row mt-4">
+                        <div class="w-100"></div>
+                        <div class="input-group col-md-6 d-flex mb-3">
 	             	<span class="input-group-btn mr-2">
 	                	<button type="button" class="my-quantity-left-minus btn" data-type="minus"
                                 data-field="">
 	                   <i class="ion-ios-remove"></i>
 	                	</button>
 	            		</span>
-                        <input type="text" id="quantity" name="quantity" value="1"
-                               class="form-control input-number">
-                        <span class="input-group-btn ml-2">
+                            <input type="text" id="quantity" name="quantity" value="1"
+                                   class="form-control input-number">
+                            <span class="input-group-btn ml-2">
 	                	<button type="button" class="my-quantity-right-plus btn" data-type="plus"
                                 data-field="">
 	                     <i class="ion-ios-add"></i>
 	                 </button>
 	             	</span>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-12">
+                            <p style="color: #000;">${product.getQuantityStock()} kg hợp lệ</p>
+                            <span id="max-product"
+                                  hidden="hidden">${product.getQuantityStock()}</span>
+                        </div>
                     </div>
-                    <div class="w-100"></div>
-                    <div class="col-md-12">
-                        <p style="color: #000;">${product.getQuantityStock()} kg hợp lệ</p>
-                        <span id="max-product" hidden="hidden">${product.getQuantityStock()}</span>
-                    </div>
-                </div>
-                <p><a id="addToCartLink" href="javascript:void(0);"
-                      onclick="addToCart(${product.getId()})"
-                      class="btn btn-black py-3 px-5">Thêm vào
-                    giỏ hàng</a></p>
+                    <p><a id="addToCartLink" href="javascript:void(0);"
+                          onclick="addProductToCartWithWeight(${product.getId()})"
+                          class="btn btn-black py-3 px-5">Thêm vào
+                        giỏ hàng</a></p>
+                </c:if>
+                <c:if test="${product.getQuantityStock() ==0}">
+                    <p class="price" style="font-size: 24px">
+                        <span>Sản phẩm hiện đã hết hàng.</span>
+                    </p>
+                </c:if>
             </div>
             <c:if test="${empty showProduct}">
                 <p>Không tìm thấy sản phẩm hoặc ID không hợp lệ.</p>
@@ -473,26 +481,26 @@
         toast.classList.add('toast', `toast--${type}`);
 
         toast.innerHTML = `
-                    <div class="toast__icon">
-                        ${icon}
-                    </div>
+    <div class="toast__icon">
+    ${icon}
+    </div>
 
-                    <div class="toast__body">
-                    <h3 class="toast__title">
-                        ${title}
-                    </h3>
-                    <p class="toast__msg">
-                        ${message}
-                    </p>
-                    </div>
+    <div class="toast__body">
+    <h3 class="toast__title">
+    ${title}
+    </h3>
+    <p class="toast__msg">
+    ${message}
+    </p>
+    </div>
 
-                    <div class="toast__close">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="12" viewBox="0 0 384 512">
-                        <path
-                            d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
-                    </svg>
-                    </div>
-                `;
+    <div class="toast__close">
+    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="12" viewBox="0 0 384 512">
+    <path
+    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+    </svg>
+    </div>
+    `;
         main.appendChild(toast);
       }
     }

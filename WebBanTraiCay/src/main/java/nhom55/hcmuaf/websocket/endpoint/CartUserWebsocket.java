@@ -67,7 +67,6 @@ public class CartUserWebsocket {
       e.printStackTrace();
       throw new MyHandleException("error", 500);
     }
-
     MyUtils.storeCart(httpSession, cart);
     String totalJson = MyUtils.convertToJson(cart.getTotal());
     for (Session s : userSession.get(userId)) {
