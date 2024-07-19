@@ -1,23 +1,20 @@
 package nhom55.hcmuaf.controller.page.order;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
+import java.io.IOException;
+import java.util.Properties;
+
 import nhom55.hcmuaf.beans.Bills;
 import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.beans.cart.Cart;
@@ -68,9 +65,9 @@ public class CheckOut extends HttpServlet {
     String cleanedString = deliveryFee.replaceAll("[₫\\s]", "");
     cleanedString = cleanedString.replace(".", "");
     double deliveryFeeDouble = Double.parseDouble(cleanedString);
-
     String note = request.getParameter("note_nguoi-dung");
-    if (checkValidate(request, response, lastName, firstName, address, city, phoneNumber, email)) {
+    int idVoucher = Integer.valueOf(request.getParameter("idVoucher"));
+    if(checkValidate(request,response,lastName,firstName,address,city,phoneNumber,email)) {
       HttpSession session = request.getSession();
       Users users = MyUtils.getLoginedUser(session);
       double subTotalPrice = 0;
@@ -85,27 +82,23 @@ public class CheckOut extends HttpServlet {
         // biến này sẽ lưu tất cả các hóa đơn người dùng đã mua
         List<Bills> listBills = new ArrayList<>();
         LocalDateTime timeNow = LocalDateTime.now();
-        String productNameList = "";
-        for (CartProduct c : selectedProducts) {
-          productNameList += c.getProducts().getNameOfProduct() + "\t";
+        String productNameList ="";
+        for(CartProduct c: selectedProducts) {
+          productNameList +=  c.getProducts().getNameOfProduct()+"\t";
         }
-        int idPayment = 0;
-        if (payment.equals("Paypal")) {
-          idPayment = 2;
+        int idPayment =0;
+        if(payment.equals("Paypal")) {
+          idPayment=2;
         } else {
-          idPayment = 1;
+          idPayment=1;
         }
-        address += address + ", quận " + district + ", tỉnh " + city;
+        address+=address+", quận "+district+", tỉnh "+city;
 
-        if (billDao.addAListProductToBills(timeNow, productNameList, "Đang giao", users.getId(),
-            idPayment, firstName, lastName, address, city, phoneNumber, email, subTotalPrice,
-            deliveryFeeDouble, note)) {
-
+        if(billDao.addAListProductToBills(timeNow,productNameList,"Đang giao", users.getId(), idPayment,firstName,lastName,address,city,phoneNumber,email,subTotalPrice,deliveryFeeDouble,note)) {
           int id_bills = billDao.getIDAListProductFromBills(timeNow, users.getId());
-          for (CartProduct c : selectedProducts) {
-            if (billDao.addAProductToBillDetails(c.getProducts().getId(), id_bills, c.getQuantity(),
-                c.getQuantity() * c.getProducts().getPrice())) {
-              billDao.degreeAmountWhenOderingSuccessfully(c.getProducts().getId(), c.getQuantity());
+          for(CartProduct c: selectedProducts) {
+            if( billDao.addAProductToBillDetails(c.getProducts().getId(),id_bills,c.getQuantity(),c.getQuantity()*c.getProducts().getPrice())) {
+              billDao.degreeAmountWhenOderingSuccessfully(c.getProducts().getId(),c.getQuantity());
             }
           }
 
@@ -116,8 +109,7 @@ public class CheckOut extends HttpServlet {
           Properties smtpProperties = MailProperties.getSMTPPro();
           Session session1 = Session.getInstance(smtpProperties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-              return new PasswordAuthentication(MailProperties.getEmail(),
-                  MailProperties.getPassword());
+              return new PasswordAuthentication(MailProperties.getEmail(), MailProperties.getPassword());
             }
           });
           try {
@@ -126,15 +118,13 @@ public class CheckOut extends HttpServlet {
             message.setFrom(new InternetAddress(MailProperties.getEmail()));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
             message.setSubject("DAT HANG");
-            message.setText(
-                "Don dat hang cua ban thanh cong. Xem don hang ban vua moi dat tai day : "
-                    + "http://localhost:8080/page/bill/detail?idBills="
-                    + id_bills);
+            message.setText("Don dat hang cua ban thanh cong. Xem don hang ban vua moi dat tai day : " + "http://localhost:8080/page/bill/detail?idBills="
+                    +id_bills);
             Transport.send(message);
-            boolean isOrderSuccessfully = true;
+            boolean  isOrderSuccessfully = true;
             RequestDispatcher dispatcher = request.getRequestDispatcher("/page/shop/shop-forward");
-            request.setAttribute("isOrderSuccessfully", isOrderSuccessfully);
-            dispatcher.forward(request, response);
+            request.setAttribute("isOrderSuccessfully",isOrderSuccessfully);
+            dispatcher.forward(request,response);
           } catch (Exception e) {
             System.out.println("SendEmail File Error " + e);
           }
@@ -144,7 +134,7 @@ public class CheckOut extends HttpServlet {
       }
 
     } else {
-      doGet(request, response);
+      doGet(request,response);
     }
 
   }
@@ -156,64 +146,60 @@ public class CheckOut extends HttpServlet {
     }
     return result;
   }
-
-  private static boolean checkValidate(HttpServletRequest request, HttpServletResponse response,
-      String lastName, String firstName, String address, String city, String phoneNumber,
-      String email) {
-    String checkFirstName = OrderValidator.validateFirstName(firstName);
-    String checkLastName = OrderValidator.validateLastName(lastName);
-    String checkAddress = OrderValidator.validateAddress(address);
-    String checkCity = OrderValidator.validateCity(city);
-    String checkPhone = OrderValidator.validatePhoneNumber(phoneNumber);
-    String checkEmail = OrderValidator.validateEmail(email);
-    int count = 0;
-    if (!checkFirstName.isEmpty()) {
+  private static boolean checkValidate(HttpServletRequest request, HttpServletResponse response,String lastName, String firstName, String address,String city, String phoneNumber, String email){
+           String checkFirstName= OrderValidator.validateFirstName(firstName);
+           String checkLastName= OrderValidator.validateLastName(lastName);
+           String checkAddress= OrderValidator.validateAddress(address);
+           String checkCity = OrderValidator.validateCity(city);
+           String checkPhone = OrderValidator.validatePhoneNumber(phoneNumber);
+           String checkEmail = OrderValidator.validateEmail(email);
+           int count =0;
+           if(!checkFirstName.isEmpty()) {
+              count++;
+              request.setAttribute("firstNameError",checkFirstName);
+           } else {
+             request.setAttribute("firstName",firstName);
+           }
+           if(!checkLastName.isEmpty()) {
+             count++;
+             request.setAttribute("lastNameError",checkLastName);
+           } else {
+             request.setAttribute("lastName",lastName);
+           }
+           if(!checkAddress.isEmpty()) {
+             count++;
+             request.setAttribute("addressError",checkAddress);
+           } else {
+             request.setAttribute("address",address);
+           }
+           if(!checkCity.isEmpty()) {
+             count++;
+             request.setAttribute("cityError",checkCity);
+           } else {
+             request.setAttribute("city",city);
+           }
+    if(!checkPhone.isEmpty()) {
       count++;
-      request.setAttribute("firstNameError", checkFirstName);
+      request.setAttribute("phoneError",checkPhone);
     } else {
-      request.setAttribute("firstName", firstName);
+      request.setAttribute("phone",phoneNumber);
     }
-    if (!checkLastName.isEmpty()) {
+    if(!checkEmail.isEmpty()) {
       count++;
-      request.setAttribute("lastNameError", checkLastName);
+      request.setAttribute("emailError",checkEmail);
     } else {
-      request.setAttribute("lastName", lastName);
+      request.setAttribute("email",city);
     }
-    if (!checkAddress.isEmpty()) {
-      count++;
-      request.setAttribute("addressError", checkAddress);
-    } else {
-      request.setAttribute("address", address);
-    }
-    if (!checkCity.isEmpty()) {
-      count++;
-      request.setAttribute("cityError", checkCity);
-    } else {
-      request.setAttribute("city", city);
-    }
-    if (!checkPhone.isEmpty()) {
-      count++;
-      request.setAttribute("phoneError", checkPhone);
-    } else {
-      request.setAttribute("phone", phoneNumber);
-    }
-    if (!checkEmail.isEmpty()) {
-      count++;
-      request.setAttribute("emailError", checkEmail);
-    } else {
-      request.setAttribute("email", city);
-    }
-    if (count > 0) {
+    if(count >0) {
       return false;
     } else {
       return true;
     }
   }
-
   public static void deleteCart(HttpSession session) {
     List<String> selectedProductIds = (List<String>) session.getAttribute("selectedProductIds");
     Cart cart = (Cart) session.getAttribute("cart");
-    for (String idProduct : selectedProductIds) {
+    for(String idProduct : selectedProductIds) {
       int id = Integer.valueOf(idProduct);
       cart.deleteProduct(id);
     }

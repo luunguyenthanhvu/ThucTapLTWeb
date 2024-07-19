@@ -173,4 +173,407 @@ selectElement.addEventListener('change', async function() {
     }
 });
 
+// Js xử lý cho Popup Voucher
+
+    var openBtn = document.getElementById('openBtnVoucher');
+    var closeBtn = document.getElementById('closeBtn');
+    var popup = document.getElementById('popup');
+    var applyBtn = document.getElementById('applyBtnVoucher');
+    var couponsList = document.getElementById('couponsList');
+
+openBtn.addEventListener('click', async function () {
+    popup.style.display = 'flex';
+    await fetchCoupons(); // Chờ cho hàm fetchCoupons() hoàn thành
+
+    var couponsList = document.getElementById('couponsList');
+    var coupons = couponsList.querySelectorAll('.coupon');
+
+    let tongTienSauKhiXaiVoucher = 0;
+
+    for (let i = 0; i < coupons.length; i++) {
+        coupons[i].addEventListener('click', function () {
+            var tongTienBanDau = document.querySelector('.tong_cong').textContent;
+            tongTienBanDau = parseInt(tongTienBanDau.replace(/[^\d]/g, ''), 10);
+            const tongTien = tongTienBanDau;
+            document.querySelector('#idVoucher').value = this.querySelector('input[type="radio"]').value;
+
+            if (this.querySelector('input[type="radio"]').checked) {
+                var tongTienTemp =tongTien;
+                var tienGiam = coupons[i].value; // Sử dụng i để lấy giá trị tương ứng
+                if (tienGiam < 1) {
+                    tongTienTemp = tongTienTemp - tongTienBanDau * tienGiam;
+                    tongTienSauKhiXaiVoucher= tongTienTemp;
+                    document.querySelector('#discountVoucherPrice').innerHTML = (tienGiam * 100).toLocaleString('vi-VN') + ' %';
+                } else {
+                    tongTienTemp = tongTienTemp - tienGiam;
+                    tongTienSauKhiXaiVoucher= tongTienTemp;
+                    document.querySelector('#discountVoucherPrice').innerHTML = (tienGiam).toLocaleString('vi-VN') + ' đ';
+                }
+                document.querySelector('#priceAfterUseVoucher').innerHTML = tongTienTemp.toLocaleString('vi-VN') + ' ₫';
+                tongTienTemp = tongTien;
+            }
+        });
+    }
+
+    document.querySelector('#confirmBtnVoucher').addEventListener('click', function () {
+        popup.style.display = 'none';
+        document.querySelector('.tong_cong').innerHTML = tongTienSauKhiXaiVoucher.toLocaleString('vi-VN') + ' ₫';
+    });
+
+});
+
+// Js xử lý cho Popup Voucher
+
+    var openBtn = document.getElementById('openBtnVoucher');
+    var closeBtn = document.getElementById('closeBtn');
+    var popup = document.getElementById('popup');
+    var applyBtn = document.getElementById('applyBtnVoucher');
+    var couponsList = document.getElementById('couponsList');
+
+openBtn.addEventListener('click', async function () {
+    popup.style.display = 'flex';
+    await fetchCoupons(); // Chờ cho hàm fetchCoupons() hoàn thành
+
+    var couponsList = document.getElementById('couponsList');
+    var coupons = couponsList.querySelectorAll('.coupon');
+
+    let tongTienSauKhiXaiVoucher = 0;
+
+    for (let i = 0; i < coupons.length; i++) {
+        coupons[i].addEventListener('click', function () {
+            var tongTienBanDau = document.querySelector('.tong_cong').textContent;
+            tongTienBanDau = parseInt(tongTienBanDau.replace(/[^\d]/g, ''), 10);
+            const tongTien = tongTienBanDau;
+            document.querySelector('#idVoucher').value = this.querySelector('input[type="radio"]').value;
+
+            if (this.querySelector('input[type="radio"]').checked) {
+                var tongTienTemp =tongTien;
+                var tienGiam = coupons[i].value; // Sử dụng i để lấy giá trị tương ứng
+                if (tienGiam < 1) {
+                    tongTienTemp = tongTienTemp - tongTienBanDau * tienGiam;
+                    tongTienSauKhiXaiVoucher= tongTienTemp;
+                    document.querySelector('#discountVoucherPrice').innerHTML = (tienGiam * 100).toLocaleString('vi-VN') + ' %';
+                } else {
+                    tongTienTemp = tongTienTemp - tienGiam;
+                    tongTienSauKhiXaiVoucher= tongTienTemp;
+                    document.querySelector('#discountVoucherPrice').innerHTML = (tienGiam).toLocaleString('vi-VN') + ' đ';
+                }
+                document.querySelector('#priceAfterUseVoucher').innerHTML = tongTienTemp.toLocaleString('vi-VN') + ' ₫';
+                tongTienTemp = tongTien;
+            }
+        });
+    }
+
+    document.querySelector('#confirmBtnVoucher').addEventListener('click', function () {
+        popup.style.display = 'none';
+        document.querySelector('.tong_cong').innerHTML = tongTienSauKhiXaiVoucher.toLocaleString('vi-VN') + ' ₫';
+    });
+
+});
+
+// Js xử lý cho Popup Voucher
+
+    var openBtn = document.getElementById('openBtnVoucher');
+    var closeBtn = document.getElementById('closeBtn');
+    var popup = document.getElementById('popup');
+    var applyBtn = document.getElementById('applyBtnVoucher');
+    var couponsList = document.getElementById('couponsList');
+
+openBtn.addEventListener('click', async function () {
+    popup.style.display = 'flex';
+    await fetchCoupons(); // Chờ cho hàm fetchCoupons() hoàn thành
+
+    var couponsList = document.getElementById('couponsList');
+    var coupons = couponsList.querySelectorAll('.coupon');
+
+    let tongTienSauKhiXaiVoucher = 0;
+
+    for (let i = 0; i < coupons.length; i++) {
+        coupons[i].addEventListener('click', function () {
+            var tongTienBanDau = document.querySelector('.tong_cong').textContent;
+            tongTienBanDau = parseInt(tongTienBanDau.replace(/[^\d]/g, ''), 10);
+            const tongTien = tongTienBanDau;
+            document.querySelector('#idVoucher').value = this.querySelector('input[type="radio"]').value;
+
+            if (this.querySelector('input[type="radio"]').checked) {
+                var tongTienTemp =tongTien;
+                var tienGiam = coupons[i].value; // Sử dụng i để lấy giá trị tương ứng
+                if (tienGiam < 1) {
+                    tongTienTemp = tongTienTemp - tongTienBanDau * tienGiam;
+                    tongTienSauKhiXaiVoucher= tongTienTemp;
+                    document.querySelector('#discountVoucherPrice').innerHTML = (tienGiam * 100).toLocaleString('vi-VN') + ' %';
+                }
+                else {
+                    tongTienTemp = tongTienTemp - tienGiam;
+                    tongTienSauKhiXaiVoucher= tongTienTemp;
+                    document.querySelector('#discountVoucherPrice').innerHTML = (tienGiam).toLocaleString('vi-VN') + ' đ';
+                }
+                document.querySelector('#priceAfterUseVoucher').innerHTML = tongTienTemp.toLocaleString('vi-VN') + ' ₫';
+                tongTienTemp = tongTien;
+            }
+        });
+    }
+
+    document.querySelector('#confirmBtnVoucher').addEventListener('click', function () {
+        popup.style.display = 'none';
+        document.querySelector('.tong_cong').innerHTML = tongTienSauKhiXaiVoucher.toLocaleString('vi-VN') + ' ₫';
+    });
+
+});
+
+
+
+
+closeBtn.addEventListener('click', function () {
+        popup.style.display = 'none';
+    });
+
+    window.addEventListener('click', function (event) {
+        if (event.target === popup) {
+            popup.style.display = 'none';
+        }
+    });
+
+    async function fetchCoupons() {
+        try{
+            const response = await fetch("http://localhost:8080/voucher/get-voucher", {
+                method: 'GET',
+
+            });
+            if(!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log(data);
+            renderCoupons(data)
+
+
+        }catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+function renderCoupons(coupons) {
+    couponsList.innerHTML = ''; // Xóa các mã giảm giá trước đó
+
+    coupons.forEach(function (coupon) {
+        // Tạo container cho từng mã giảm giá
+        var couponDiv = document.createElement('div');
+        couponDiv.className = 'coupon';
+
+        // Tạo đối tượng SVG ảnh
+        var couponSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        couponSVG.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+        couponSVG.setAttribute('viewBox', '0 0 512 512');
+        couponSVG.innerHTML = '<path d="M190.5 68.8L225.3 128H224 152c-22.1 0-40-17.9-40-40s17.9-40 40-40h2.2c14.9 0 28.8 7.9 36.3 20.8zM64 88c0 14.4 3.5 28 9.6 40H32c-17.7 0-32 14.3-32 32v64c0 17.7 14.3 32 32 32H480c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32H438.4c6.1-12 9.6-25.6 9.6-40c0-48.6-39.4-88-88-88h-2.2c-31.9 0-61.5 16.9-77.7 44.4L256 85.5l-24.1-41C215.7 16.9 186.1 0 154.2 0H152C103.4 0 64 39.4 64 88zm336 0c0 22.1-17.9 40-40 40H288h-1.3l34.8-59.2C329.1 55.9 342.9 48 357.8 48H360c22.1 0 40 17.9 40 40zM32 288V464c0 26.5 21.5 48 48 48H224V288H32zM288 512H432c26.5 0 48-21.5 48-48V288H288V512z"/>';
+
+        // Tạo container cho nội dung của coupon
+        var couponContentDiv = document.createElement('div');
+        couponContentDiv.className = 'coupon-content';
+
+        var couponTitle = document.createElement('div');
+        couponTitle.className = 'title';
+        couponTitle.textContent = coupon.title;
+        var couponContent = document.createElement('div');
+        couponContent.textContent = coupon.content;
+        var couponExpiry = document.createElement('div');
+        couponExpiry.className = 'expiry';
+        couponExpiry.textContent = `Hạn sử dụng: ${coupon.beginDate} - ${coupon.endDate}`;
+
+        couponContentDiv.appendChild(couponTitle);
+        couponContentDiv.appendChild(couponContent);
+        couponContentDiv.appendChild(couponExpiry);
+
+        // Tạo nút radio
+        var couponInput = document.createElement('input');
+        couponInput.type = 'radio';
+        couponInput.name = 'coupon';
+        couponInput.id = 'coupon' + coupon.id;
+        couponInput.value=coupon.id;
+
+        // Đưa các phần tử vào trong container của mã giảm giá
+        couponDiv.appendChild(couponSVG);        // Cột 1
+        couponDiv.appendChild(couponContentDiv); // Cột 2
+        couponDiv.appendChild(couponInput);      // Cột 3
+        couponDiv.value= coupon.price;
+
+        // Đưa container của mã giảm giá vào danh sách mã giảm giá
+        couponsList.appendChild(couponDiv);
+    });
+}
+
+
+
+
+
+
+
+closeBtn.addEventListener('click', function () {
+        popup.style.display = 'none';
+    });
+
+    window.addEventListener('click', function (event) {
+        if (event.target === popup) {
+            popup.style.display = 'none';
+        }
+    });
+
+    async function fetchCoupons() {
+        try{
+            const response = await fetch("http://localhost:8080/voucher/get-voucher", {
+                method: 'GET',
+
+            });
+            if(!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log(data);
+            renderCoupons(data)
+
+
+        }catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+function renderCoupons(coupons) {
+    couponsList.innerHTML = ''; // Xóa các mã giảm giá trước đó
+
+    coupons.forEach(function (coupon) {
+        // Tạo container cho từng mã giảm giá
+        var couponDiv = document.createElement('div');
+        couponDiv.className = 'coupon';
+
+        // Tạo đối tượng SVG ảnh
+        var couponSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        couponSVG.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+        couponSVG.setAttribute('viewBox', '0 0 512 512');
+        couponSVG.innerHTML = '<path d="M190.5 68.8L225.3 128H224 152c-22.1 0-40-17.9-40-40s17.9-40 40-40h2.2c14.9 0 28.8 7.9 36.3 20.8zM64 88c0 14.4 3.5 28 9.6 40H32c-17.7 0-32 14.3-32 32v64c0 17.7 14.3 32 32 32H480c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32H438.4c6.1-12 9.6-25.6 9.6-40c0-48.6-39.4-88-88-88h-2.2c-31.9 0-61.5 16.9-77.7 44.4L256 85.5l-24.1-41C215.7 16.9 186.1 0 154.2 0H152C103.4 0 64 39.4 64 88zm336 0c0 22.1-17.9 40-40 40H288h-1.3l34.8-59.2C329.1 55.9 342.9 48 357.8 48H360c22.1 0 40 17.9 40 40zM32 288V464c0 26.5 21.5 48 48 48H224V288H32zM288 512H432c26.5 0 48-21.5 48-48V288H288V512z"/>';
+
+        // Tạo container cho nội dung của coupon
+        var couponContentDiv = document.createElement('div');
+        couponContentDiv.className = 'coupon-content';
+
+        var couponTitle = document.createElement('div');
+        couponTitle.className = 'title';
+        couponTitle.textContent = coupon.title;
+        var couponContent = document.createElement('div');
+        couponContent.textContent = coupon.content;
+        var couponExpiry = document.createElement('div');
+        couponExpiry.className = 'expiry';
+        couponExpiry.textContent = `Hạn sử dụng: ${coupon.beginDate} - ${coupon.endDate}`;
+
+        couponContentDiv.appendChild(couponTitle);
+        couponContentDiv.appendChild(couponContent);
+        couponContentDiv.appendChild(couponExpiry);
+
+        // Tạo nút radio
+        var couponInput = document.createElement('input');
+        couponInput.type = 'radio';
+        couponInput.name = 'coupon';
+        couponInput.id = 'coupon' + coupon.id;
+        couponInput.value=coupon.id;
+
+        // Đưa các phần tử vào trong container của mã giảm giá
+        couponDiv.appendChild(couponSVG);        // Cột 1
+        couponDiv.appendChild(couponContentDiv); // Cột 2
+        couponDiv.appendChild(couponInput);      // Cột 3
+        couponDiv.value= coupon.price;
+
+        // Đưa container của mã giảm giá vào danh sách mã giảm giá
+        couponsList.appendChild(couponDiv);
+    });
+}
+
+
+
+
+
+
+
+closeBtn.addEventListener('click', function () {
+        popup.style.display = 'none';
+    });
+
+    window.addEventListener('click', function (event) {
+        if (event.target === popup) {
+            popup.style.display = 'none';
+        }
+    });
+
+    async function fetchCoupons() {
+        try{
+            const response = await fetch("http://localhost:8080/voucher/get-voucher", {
+                method: 'GET',
+
+            });
+            if(!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log(data);
+            renderCoupons(data)
+
+
+        }catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+function renderCoupons(coupons) {
+    couponsList.innerHTML = ''; // Xóa các mã giảm giá trước đó
+
+    coupons.forEach(function (coupon) {
+        // Tạo container cho từng mã giảm giá
+        var couponDiv = document.createElement('div');
+        couponDiv.className = 'coupon';
+
+        // Tạo đối tượng SVG ảnh
+        var couponSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        couponSVG.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+        couponSVG.setAttribute('viewBox', '0 0 512 512');
+        couponSVG.innerHTML = '<path d="M190.5 68.8L225.3 128H224 152c-22.1 0-40-17.9-40-40s17.9-40 40-40h2.2c14.9 0 28.8 7.9 36.3 20.8zM64 88c0 14.4 3.5 28 9.6 40H32c-17.7 0-32 14.3-32 32v64c0 17.7 14.3 32 32 32H480c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32H438.4c6.1-12 9.6-25.6 9.6-40c0-48.6-39.4-88-88-88h-2.2c-31.9 0-61.5 16.9-77.7 44.4L256 85.5l-24.1-41C215.7 16.9 186.1 0 154.2 0H152C103.4 0 64 39.4 64 88zm336 0c0 22.1-17.9 40-40 40H288h-1.3l34.8-59.2C329.1 55.9 342.9 48 357.8 48H360c22.1 0 40 17.9 40 40zM32 288V464c0 26.5 21.5 48 48 48H224V288H32zM288 512H432c26.5 0 48-21.5 48-48V288H288V512z"/>';
+
+        // Tạo container cho nội dung của coupon
+        var couponContentDiv = document.createElement('div');
+        couponContentDiv.className = 'coupon-content';
+
+        var couponTitle = document.createElement('div');
+        couponTitle.className = 'title';
+        couponTitle.textContent = coupon.title;
+        var couponContent = document.createElement('div');
+        couponContent.textContent = coupon.content;
+        var couponExpiry = document.createElement('div');
+        couponExpiry.className = 'expiry';
+        couponExpiry.textContent = `Hạn sử dụng: ${coupon.beginDate} - ${coupon.endDate}`;
+
+        couponContentDiv.appendChild(couponTitle);
+        couponContentDiv.appendChild(couponContent);
+        couponContentDiv.appendChild(couponExpiry);
+
+        // Tạo nút radio
+        var couponInput = document.createElement('input');
+        couponInput.type = 'radio';
+        couponInput.name = 'coupon';
+        couponInput.id = 'coupon' + coupon.id;
+        couponInput.value=coupon.id;
+
+        // Đưa các phần tử vào trong container của mã giảm giá
+        couponDiv.appendChild(couponSVG);        // Cột 1
+        couponDiv.appendChild(couponContentDiv); // Cột 2
+        couponDiv.appendChild(couponInput);      // Cột 3
+        couponDiv.value= coupon.price;
+
+        // Đưa container của mã giảm giá vào danh sách mã giảm giá
+        couponsList.appendChild(couponDiv);
+    });
+}
+
+
+
+
 
