@@ -57,7 +57,7 @@ public class LogDaoImpl<T> implements LogDao<T> {
         StringBuilder sqlBuilder = new StringBuilder("SELECT COUNT(*) FROM logs WHERE 1=1");
 
         if (searchText != null && !searchText.isEmpty()) {
-            sqlBuilder.append(" AND (ip LIKE :searchText OR national LIKE :searchText OR note LIKE :searchText OR address LIKE :searchText)");
+            sqlBuilder.append(" AND (id LIKE :searchText OR ip LIKE :searchText OR national LIKE :searchText OR note LIKE :searchText OR address LIKE :searchText)");
         }
 
         if (logLevel != null && !logLevel.isEmpty()) {
@@ -88,7 +88,7 @@ public class LogDaoImpl<T> implements LogDao<T> {
         StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM logs WHERE 1=1");
 
         if (searchText != null && !searchText.isEmpty()) {
-            sqlBuilder.append(" AND (ip LIKE :searchText OR national LIKE :searchText OR note LIKE :searchText OR address LIKE :searchText)");
+            sqlBuilder.append(" AND (id LIKE :searchText OR ip LIKE :searchText OR national LIKE :searchText OR note LIKE :searchText OR address LIKE :searchText)");
         }
 
         if (logLevel != null && !logLevel.isEmpty()) {

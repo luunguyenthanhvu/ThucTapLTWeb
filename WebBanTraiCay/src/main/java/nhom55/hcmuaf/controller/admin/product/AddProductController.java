@@ -20,6 +20,10 @@ import nhom55.hcmuaf.beans.Products;
 import nhom55.hcmuaf.beans.Providers;
 import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.dto.response.AddProductResponseDTO;
+import nhom55.hcmuaf.enums.LogLevels;
+import nhom55.hcmuaf.log.AbsDAO;
+import nhom55.hcmuaf.log.Log;
+import nhom55.hcmuaf.log.RequestInfo;
 import nhom55.hcmuaf.services.ProductService;
 import nhom55.hcmuaf.services.ProviderService;
 import nhom55.hcmuaf.util.MyUtils;
@@ -115,6 +119,21 @@ public class AddProductController extends HttpServlet {
         products.setAdminCreate(admin.getId());
         products.setImgPublicId(mainImgPublicId);
         products.setImgAssetId(mainImgAssetId);
+
+//        Ghi log lại việc Thêm sản phẩm
+        Log<Products> productsLog = new Log<>();
+        AbsDAO<Products> absDAO= AbsDAO.getInstance();
+        RequestInfo requestInfo = new RequestInfo(request.getRemoteAddr(), "HCM", "VietNam");
+        productsLog.setIp(requestInfo.getIp());
+        productsLog.setNational(requestInfo.getNation());
+        productsLog.setAddress(requestInfo.getAddress());
+        productsLog.setLevel(LogLevels.ALERT);
+        productsLog.setNote("Người dùng "+admin.getUsername()+" đã thêm sản phẩm");
+        productsLog.setPreValue("Không có dữ liệu");
+        productsLog.setCurrentValue(products.toString());
+        productsLog.setCreateAt(LocalDateTime.now());
+        absDAO.insert(productsLog);
+
         ProductService.getInstance()
             .addNewProduct(products, imageList, listImgPublicId, listImgAssetId);
 

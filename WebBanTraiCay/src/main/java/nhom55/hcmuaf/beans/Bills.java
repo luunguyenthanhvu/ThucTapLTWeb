@@ -1,10 +1,13 @@
 package nhom55.hcmuaf.beans;
 
+import nhom55.hcmuaf.log.IModel;
+import nhom55.hcmuaf.log.Log;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Bills implements Serializable {
+public class Bills extends Log<Users> implements Serializable, IModel {
     private int id;
     private LocalDateTime orderedDate;
     private  String productList;
@@ -22,9 +25,11 @@ public class Bills implements Serializable {
 
     private String note;
 
+    private LocalDateTime creationTime;
 
 
-    public Bills(int id, LocalDateTime orderedDate, String productList, String status, int userId, int payment, String firstName, String lastName, String streetAddress, String city, String phoneNumber, String email, double totalPrice,double deliveryFee) {
+
+    public Bills(int id, LocalDateTime orderedDate, String productList, String status, int userId, int payment, String firstName, String lastName, String streetAddress, String city, String phoneNumber, String email, double totalPrice,double deliveryFee,String note,LocalDateTime creationTime) {
 
         this.id = id;
         this.orderedDate = orderedDate;
@@ -40,8 +45,8 @@ public class Bills implements Serializable {
         this.email = email;
         this.totalPrice=totalPrice;
         this.deliveryFee =deliveryFee;
-
         this.note = note;
+        this.creationTime = creationTime;
 
     }
     public Bills() {
@@ -63,6 +68,10 @@ public class Bills implements Serializable {
                 ", city='" + city + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
+                ", totalPrice=" + totalPrice +
+                ", deliveryFee=" + deliveryFee +
+                ", note='" + note + '\'' +
+                ", creationTime=" + creationTime +
                 '}';
     }
 
@@ -183,8 +192,30 @@ public class Bills implements Serializable {
         return note;
     }
 
+    public LocalDateTime getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(LocalDateTime creationTime) {
+        this.creationTime = creationTime;
+    }
+
     public void setNote(String note) {
         this.note = note;
     }
 
+    @Override
+    public String getTable() {
+        return "Bills";
+    }
+
+    @Override
+    public String getBeforeData() {
+        return super.getPreValue();
+    }
+
+    @Override
+    public String GetAfterData() {
+        return super.getCurrentValue();
+    }
 }

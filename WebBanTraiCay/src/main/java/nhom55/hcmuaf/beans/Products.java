@@ -1,12 +1,15 @@
 package nhom55.hcmuaf.beans;
 
+import nhom55.hcmuaf.log.IModel;
+import nhom55.hcmuaf.log.Log;
+
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 import lombok.Data;
 
 @Data
-public class Products implements Serializable {
+public class Products extends Log<Products> implements Serializable, IModel {
 
   private int id;
   private String nameOfProduct;
@@ -197,18 +200,35 @@ public class Products implements Serializable {
   @Override
   public String toString() {
     return "Products{" +
-        "id=" + id +
-        ", nameOfProduct='" + nameOfProduct + '\'' +
-        ", description='" + description + '\'' +
-        ", price=" + price +
-        ", weightDefault=" + weightDefault +
-        ", dateOfImporting=" + dateOfImporting +
-        ", expriredDay=" + expriredDay +
-        ", imageList=" + imageList +
-        ", adminCreate=" + adminCreate +
-        ", provider=" + provider +
-        ", seasonalFruit='" + category + '\'' +
-        ", importedFruit='" + importedFruit + '\'' +
-        '}';
+            "id=" + id +
+            ", nameOfProduct='" + nameOfProduct + '\'' +
+            ", description='" + description + '\'' +
+            ", price=" + price +
+            ", weightDefault=" + weightDefault +
+            ", dateOfImporting=" + dateOfImporting +
+            ", expriredDay=" + expriredDay +
+            ", imageList=" + imageList +
+            ", adminCreate=" + adminCreate +
+            ", provider=" + provider +
+            ", category='" + category + '\'' +
+            ", importedFruit='" + importedFruit + '\'' +
+            ", imgPublicId='" + imgPublicId + '\'' +
+            ", imgAssetId='" + imgAssetId + '\'' +
+            '}';
+  }
+
+  @Override
+  public String getTable() {
+    return "Products";
+  }
+
+  @Override
+  public String getBeforeData() {
+    return super.getPreValue();
+  }
+
+  @Override
+  public String GetAfterData() {
+    return super.getCurrentValue();
   }
 }

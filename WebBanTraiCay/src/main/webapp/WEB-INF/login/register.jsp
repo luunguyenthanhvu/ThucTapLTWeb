@@ -34,28 +34,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <h2 class="login-header w3_header">Đăng ký</h2>
         <div class="w3l_grid">
             <form class="login-container" action="${pageContext.request.contextPath}/page/login/register" method="post">
-                <input id="nameUser" type="text" placeholder="Tên người dùng" name="username" value="${name_user}">
+                <input style="color: black" id="nameUser" type="text" placeholder="Tên người dùng" name="username" value="${name_user}">
                 <span class="error" id="error_name" style="display: none;color: red; font-size: 14px;"></span>
                 <c:if test="${not empty error_name}">
                     <p style="color: red; padding: 10px; text-align: center"> ${error_name}</p>
                 </c:if>
-                <input id="phoneUser" type="text" placeholder="Số điện thoại" name="phoneNum" value="${phone_user}">
+                <input style="color: black" id="phoneUser" type="text" placeholder="Số điện thoại" name="phoneNum" value="${phone_user}">
                 <span class="error" id="error_phone" style="display: none;color: red; font-size: 14px;"></span>
                 <c:if test="${not empty error_phone}">
                     <p style="color: red; padding: 10px; text-align: center"> ${error_phone}</p>
                 </c:if>
-                <input id="addressUser"  type="text" placeholder="Địa chỉ" name="address" value="${address_user}">
+                <input style="color: black" id="addressUser"  type="text" placeholder="Địa chỉ" name="address" value="${address_user}">
                 <span class="error" id="error_address" style="display: none;color: red; font-size: 14px;"></span>
                 <c:if test="${not empty error_address}">
                     <p style="color: red; padding: 10px; text-align: center"> ${error_address}</p>
                 </c:if>
-                <input type="email" placeholder="Email" name="email" id="email_nd" value="${email_user}">
+                <input style="color: black" type="email" placeholder="Email" name="email" id="email_nd" value="${email_user}">
                 <span class="error" id="email-error" style="display: none;color: red; font-size: 14px;"></span>
                 <c:if test="${not empty error_email}">
                     <p style="color: red; padding: 10px; text-align: center"> ${error_email}</p>
                 </c:if>
 
-                <input type="password" placeholder="Mật khẩu" name="password" id="password_nd" value="${pass_user}">
+                <input style="color: black" type="password" placeholder="Mật khẩu" name="password" id="password_nd" value="${pass_user}">
                 <span class="error" id="password-error"
                       style="display: none;color: red; font-size: 14px"></span>
                 <c:if test="${not empty error_password}">

@@ -49,6 +49,10 @@ public class CartsEntityWebSocket {
     }
   }
 
+  public List<CartItem> getCartItemList() {
+    return cartItemList;
+  }
+
   public void removeCartItem(CartItem cartItem) {
     cartItemList.remove(cartItem);
   }
@@ -81,6 +85,46 @@ public class CartsEntityWebSocket {
     @Override
     public int hashCode() {
       return id != null ? id.hashCode() : 0;
+    }
+
+    public Integer getId() {
+      return id;
+    }
+
+    public void setId(Integer id) {
+      this.id = id;
+    }
+
+    public String getImgPublicId() {
+      return imgPublicId;
+    }
+
+    public void setImgPublicId(String imgPublicId) {
+      this.imgPublicId = imgPublicId;
+    }
+
+    public String getProductName() {
+      return productName;
+    }
+
+    public void setProductName(String productName) {
+      this.productName = productName;
+    }
+
+    public Double getPrice() {
+      return price;
+    }
+
+    public void setPrice(Double price) {
+      this.price = price;
+    }
+
+    public Integer getQuantity() {
+      return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+      this.quantity = quantity;
     }
   }
 }
