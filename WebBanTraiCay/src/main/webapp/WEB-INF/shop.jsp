@@ -209,11 +209,14 @@
                             <c:forEach items="${productList}" var="product">
                                 <div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
                                     <div class="product">
-                                        <a href="" class="img-prod"><img
-                                                style="width: 205px; height: 164px; object-fit: cover"
-                                                class="img-fluid"
-                                                src="${window.context}/static/images/loading-cat.gif"
-                                                alt="Colorlib Template">
+                                        <a href="${pageContext.request.contextPath}/page/product/product-detail?id=${product.getId()}"
+                                           class="img-prod"
+                                           data-assets="${product.getImgPublicId()}">
+                                            <img
+                                                    style="width: 205px; height: 164px; object-fit: cover"
+                                                    class="img-fluid"
+                                                    src="${window.context}/static/images/loading-cat.gif"
+                                                    alt="Colorlib Template">
                                         </a>
                                         <div class="text py-3 pb-4 px-3 text-center">
                                             <h3 class="product-name">${product.getProductName()}</h3>
@@ -418,8 +421,9 @@ var category = "${requestScope.category}";
 <script src="${pageContext.request.contextPath}/https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.11.2/cloudinary-core-shrinkwrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/web-js/index-page.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/web-js/shop.js?v=4"></script>
+<script src="${pageContext.request.contextPath}/static/js/web-js/shop.js?v=7"></script>
 
 
 </body>

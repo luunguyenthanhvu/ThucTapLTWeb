@@ -23,3 +23,19 @@ $('#reset-btn-category').on('click', function () {
   $('#product-category').prop('selectedIndex', 0);
   handleSearchAndPagination(1); // Reset and navigate to page 1
 });
+
+var cloudName = 'dter3mlpl';
+var apiKey = '899244476586798';
+var cl = cloudinary.Cloudinary.new({cloud_name: cloudName});
+
+$('.product .img-prod').each(
+    (_, elements) => {
+      const publicId = $(elements).data('assets');
+      const imageUrl = publicId ? cl.url(publicId) : null;
+      const imgDefault = `${window.context}/static/images/default-fruit.jpg`;
+      if (imageUrl !== null) {
+        $(elements).find('img').prop('src', imageUrl);
+      } else {
+        $(elements).find('img').prop('src', imgDefault);
+      }
+    });
