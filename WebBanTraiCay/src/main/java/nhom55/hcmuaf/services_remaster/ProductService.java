@@ -10,6 +10,7 @@ import nhom55.hcmuaf.dao_remaster.ProductsDAO;
 import nhom55.hcmuaf.dto.data_table.DataTableRequestDTO;
 import nhom55.hcmuaf.dto.response.ListProductResponseDTO;
 import nhom55.hcmuaf.dto.response.ListProductShopResponseDTO;
+import nhom55.hcmuaf.dto.response.ShipmentDetailsResponseDTO;
 import nhom55.hcmuaf.mapper.response.ListProductShopResponseDTOMapper;
 import nhom55.hcmuaf.mapper.response.ListProductsResponseDTOMapper;
 import org.jdbi.v3.core.Handle;
@@ -84,5 +85,9 @@ public class ProductService extends AbstractService {
     listProductId.forEach(id -> productsList.add(findAllById(id).get()));
 
     return ListProductsResponseDTOMapper.INSTANCE.toListDTO(handle, productsList);
+  }
+
+  public List<ShipmentDetailsResponseDTO> getShipmentDetails(Integer id) {
+    return handle.attach(ProductsDAO.class).getShipmentDetails(id);
   }
 }

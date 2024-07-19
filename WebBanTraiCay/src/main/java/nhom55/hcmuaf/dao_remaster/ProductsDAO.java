@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 import nhom55.hcmuaf.beans_remaster.Products;
 import nhom55.hcmuaf.dto.data_table.DataTableRequestDTO;
+import nhom55.hcmuaf.dto.response.ShipmentDetailsResponseDTO;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMappers;
 import org.jdbi.v3.sqlobject.customizer.Bind;
@@ -95,4 +96,14 @@ public interface ProductsDAO {
       + "FROM products p "
       + "WHERE p.id = :id ")
   Products findProductDetailsResponseDTO(@Bind("id") Integer id);
+
+  @SqlQuery(
+      "SELECT sd.id AS shipmentDetailsId, sd.productId, p.nameOfProduct AS productName, s.id AS shipmentId, sd.quantity, sd.available, s.dateIn AS dateIn "
+          + "FROM shipment_details sd "
+          + "JOIN shipments s ON sd.shipmentsId = s.id "
+          + "JOIN products p ON sd.productId = p.id "
+          + "WHERE p.id = :productId")
+  @RegisterBeanMapper(ShipmentDetailsResponseDTO.class)
+  List<ShipmentDetailsResponseDTO> getShipmentDetails(
+      @Bind("productId") Integer productId);
 }

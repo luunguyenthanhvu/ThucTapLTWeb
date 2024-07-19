@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
+import nhom55.hcmuaf.services_remaster.ProductService;
 
 @Data
 @AllArgsConstructor
@@ -30,4 +31,10 @@ public class Products {
   Integer adminCreate;
   Integer provider;
   Integer status;
+
+  public static void main(String[] args) {
+    ProductService productService = new ProductService();
+    productService.begin();
+    System.out.println(productService.getShipmentDetails(1));
+  }
 }

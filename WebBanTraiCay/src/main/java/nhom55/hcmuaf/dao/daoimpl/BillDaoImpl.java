@@ -126,7 +126,7 @@ public class BillDaoImpl implements BillDao {
     return JDBIConnector.get().withHandle(handle -> {
 
       String sql =
-          "SELECT bd.id, bd.quantity, bd.totalPrice, p.id as idProduct, p.nameOfProduct, p.description, p.price,p.imgPublicId,p.dateOfImporting,p.expriredDay "
+          "SELECT bd.id, bd.quantity, bd.totalPrice, p.id as idProduct, p.nameOfProduct, p.description, p.price,p.imgPublicId,p.dateOfImporting,p.category "
               +
               "FROM bill_details bd " +
               "JOIN products p ON bd.idProduct = p.id " +
@@ -148,7 +148,7 @@ public class BillDaoImpl implements BillDao {
             p.setPrice(rs.getDouble("price"));
             p.setImgPublicId(rs.getString("imgPublicId"));
             p.setDateOfImporting(rs.getDate("dateOfImporting"));
-            p.setExpriredDay(rs.getInt("expriredDay"));
+            p.setCategory(rs.getString("category"));
             bd.setProducts(p);
 
             return bd;
