@@ -3,13 +3,14 @@ package nhom55.hcmuaf.services_remaster;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import nhom55.hcmuaf.beans_remaster.Products;
 import nhom55.hcmuaf.dao_remaster.ProductsDAO;
 import nhom55.hcmuaf.dto.data_table.DataTableRequestDTO;
 import nhom55.hcmuaf.dto.response.ListProductResponseDTO;
+import nhom55.hcmuaf.dto.response.ListProductShopResponseDTO;
+import nhom55.hcmuaf.mapper.response.ListProductShopResponseDTOMapper;
 import nhom55.hcmuaf.mapper.response.ListProductsResponseDTOMapper;
 import org.jdbi.v3.core.Handle;
 
@@ -36,9 +37,21 @@ public class ProductService extends AbstractService {
     return ListProductsResponseDTOMapper.INSTANCE.toListDTO(handle, productsList);
   }
 
+  public List<ListProductShopResponseDTO> findAllBy(int start, int length, String searchText,
+      String category) {
+    ProductsDAO productsDAO = handle.attach(ProductsDAO.class);
+    List<Products> productsList = productsDAO.findAllBy(start, length, "%" + searchText + "%",
+        "%" + category + "%", "");
+    return ListProductShopResponseDTOMapper.INSTANCE.toListDto(handle, productsList);
+  }
+
 
   public Integer countTotalRecords() {
     return handle.attach(ProductsDAO.class).countTotalRecords();
+  }
+
+  public Integer countTotalRecords(String searchText, String category) {
+    return handle.attach(ProductsDAO.class).countFilteredRecords(searchText, category);
   }
 
   public Integer countFilteredRecords(String searchText, String category) {

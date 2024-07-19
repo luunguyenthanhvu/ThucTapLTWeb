@@ -19,7 +19,9 @@ public class ShipmentDetails {
   Integer id;
   Integer productId;
   Integer shipmentsId;
+  Double price;
   Integer quantity;
   Integer available;
+  String note;
 
 }

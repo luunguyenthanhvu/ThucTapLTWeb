@@ -271,56 +271,105 @@
 
     <section class="home-section">
         <div class="home-content">
-            <svg class='bx-menu' xmlns="http://www.w3.org/2000/svg" height="1em"
-                 viewBox="0 0 448 512">
+            <svg class='bx-menu' xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
                 <path
                         d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
             </svg>
-            <span class="text">Thêm lô hàng mới</span>
+            <span class="text">Doanh số sản phẩm</span>
         </div>
         <div class="container">
             <div class="container-child">
-                <div class="search">
-                    <input type="text" placeholder="Tên sản phẩm" id="product-name">
-                    <button class="search-btn">Tìm kiếm</button>
-                    <button class="reset-btn">Cài đặt lại</button>
-                </div>
-                <div class="main-container">
-                    <div class="table-wrapper">
-                        <table id="tableAddNewShipment">
-                            <thead>
-                            <tr>
-                                <th>Sản phẩm</th>
-                                <th>Mã SKU</th>
-                                <th>Nhà cung cấp</th>
-                                <th>Tồn kho</th>
-                                <th>Số lượng mới</th>
-                                <th>Giá nhập</th>
-                                <th>Lý do điều chỉnh</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                        </table>
+                <div class="inventory-manage">
+                    <div class="header">
+                        <h1>Tổng quan tồn kho</h1>
+                        <p>(Cập nhật lúc GMT+7 10:38)</p>
+                        <div class="stats">
+                            <div class="stat">
+                                <span>27</span>
+                                <p>Phân loại còn hàng</p>
+                            </div>
+                            <div class="stat">
+                                <span>53</span>
+                                <p>Phân loại đã ẩn & Đã bị khóa</p>
+                            </div>
+                            <div class="stat">
+                                <span>1</span>
+                                <p>Phân loại hết hàng</p>
+                            </div>
+                            <div class="stat">
+                                <span>1</span>
+                                <p>Phân loại sắp hết hàng</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="management">
+                        <h2>Quản lý tồn kho</h2>
+                        <div class="toolbar">
+                            <button class="download">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path
+                                            d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
+                                </svg>
+                                Tải xuống toàn bộ
+                            </button>
+                            <button class="bulk-update">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                            d="M448 96c0-35.3-28.7-64-64-64L64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320zM256 160c0 17.7-14.3 32-32 32l-96 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l96 0c17.7 0 32 14.3 32 32zm64 64c17.7 0 32 14.3 32 32s-14.3 32-32 32l-192 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l192 0zM192 352c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l32 0c17.7 0 32 14.3 32 32z"/>
+                                </svg>
+                                Cập nhật hàng loạt
+                            </button>
+                        </div>
+                        <div class="tabs">
+                            <button class="tab active" data-tab="con-hang">Còn hàng</button>
+                            <button class="tab" data-tab="an-khoa">Đã ẩn & Đã bị khóa</button>
+                            <button class="tab" data-tab="het-hang">Hết hàng</button>
+                            <button class="tab" data-tab="sap-het-hang">Sắp hết hàng</button>
+                        </div>
+                        <div class="search">
+                            <input type="text" placeholder="Tên sản phẩm" id="product-name">
+                            <input type="text" placeholder="Vị trí kho" id="warehouse-location">
+                            <button class="search-btn">Tìm kiếm</button>
+                            <button class="reset-btn">Cài đặt lại</button>
+                        </div>
+                        <div class="table-wrapper">
+                            <table id="inventory-table" class="display">
+                                <thead>
+                                <tr>
+                                    <th>Thông tin lô hàng</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <label for="note-text">Ghi chú của bạn:</label>
-                    <textarea id="note-text" name="note-text" rows="5" cols="33">
 
-                    </textarea>
+                <div class="inventory-history">
+                    <h2>Lịch sử biến động tồn kho</h2>
+                    <div class="tabs-date">
+                        <button class="tab-date" data-date="04/2024">04/2024</button>
+                        <button class="tab-date" data-date="03/2024">03/2024</button>
+                        <button class="tab-date" data-date="02/2024">02/2024</button>
+                        <button class="tab-date" data-date="01/2024">01/2024</button>
+                        <button class="tab-date" data-date="12/2023">12/2023</button>
+                    </div>
 
-                </div>
-                <div class="save-shipment">
-                    <button id="btn-add-shipment" class="save-button">Lưu</button>
+                    <table id="inventory-history-table">
+                        <thead>
+                        <tr>
+                            <th>Mã lô hàng</th>
+                            <th>Biến động tồn kho</th>
+                            <th>Loại biến động</th>
+                            <th>Thời gian</th>
+                            <th>Ghi chú</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        <select style="display: none; background-color: #f4f4f4; color: #0b0b0b"
-                class="shipment-transaction-note" name="shipment-transaction-note" disabled>
-            <option value="add-new-product" selected>Thêm lô hàng mới</option>
-            <option value="out-date" disabled>Sản phẩm hết hạn</option>
-            <option value="add-more" disabled>Thêm sản phẩm</option>
-        </select>
     </section>
 </div>
 <script>
@@ -347,6 +396,6 @@
 <script src="https://kit.fontawesome.com/4c38acb8c6.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/static/js/datatable/datatables.js"></script>
 <script
-        src="${pageContext.request.contextPath}/static/js/admin-js/shipment/add-new-shipment.js?v=14"
+        src="${pageContext.request.contextPath}/static/js/admin-js/shipment/shipment.js?v=14"
         charset="utf-8"></script>
 </html>

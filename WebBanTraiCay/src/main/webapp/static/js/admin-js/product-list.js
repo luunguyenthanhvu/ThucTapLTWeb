@@ -49,7 +49,7 @@ let tableAddNewShipment = new DataTable('#table-add-shipment', {
   searching: false,
   bDeferRender: true,
   ajax: {
-    url: `${window.context}/api/get-product-list`,
+    url: `${window.context}/api/product-list/get-data-table`,
     contentType: 'application/json',
     type: "POST",
     dataType: "json",

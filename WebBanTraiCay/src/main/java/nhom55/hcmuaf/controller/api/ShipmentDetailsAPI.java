@@ -15,11 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 import nhom55.hcmuaf.dto.data_table.DataTableRequestDTO;
 import nhom55.hcmuaf.dto.data_table.DataTableRequestDTO.OrderDTO;
 import nhom55.hcmuaf.dto.data_table.DataTableResponseDTO;
+import nhom55.hcmuaf.dto.request.AddNewShipmentRequestDTO;
 import nhom55.hcmuaf.dto.request.ProductDetailsRequestDTO;
 import nhom55.hcmuaf.dto.response.ListProductResponseDTO;
 import nhom55.hcmuaf.dto.response.MessageResponseDTO;
 import nhom55.hcmuaf.my_handle_exception.MyHandleException;
 import nhom55.hcmuaf.services_remaster.ProductService;
+import nhom55.hcmuaf.services_remaster.ShipmentService;
 import nhom55.hcmuaf.util.MyUtils;
 
 @WebServlet(name = "ShipmentDetailsAPIServlet", value = "/api/shipments-api/*")
@@ -38,6 +40,7 @@ public class ShipmentDetailsAPI extends HttpServlet {
 
   private final String REQUEST_BODY = "request-body";
   private ProductService productService;
+  private ShipmentService shipmentService;
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -74,6 +77,17 @@ public class ShipmentDetailsAPI extends HttpServlet {
 
           productList.removeIf(i -> productDetailsRequestDTO.getId().equals(i));
           request.setAttribute("listProductShipments", productList);
+          out.println(MyUtils.convertToJson(MessageResponseDTO.builder().message("Tuan ga vkl")));
+          break;
+        case "/create-new-shipment":
+          productService = new ProductService();
+          productService.begin();
+          shipmentService = new ShipmentService(productService.getHandle());
+          System.out.println("đã handle");
+          shipmentService.addNewShipment(MyUtils.convertJsonToObject(requestDTO,
+                  AddNewShipmentRequestDTO.class),
+              MyUtils.getLoginedUser(request.getSession()).getId());
+          productService.save();
           out.println(MyUtils.convertToJson(MessageResponseDTO.builder().message("Tuan ga vkl")));
           break;
       }

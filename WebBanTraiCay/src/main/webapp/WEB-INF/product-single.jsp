@@ -357,7 +357,6 @@
 </div>
 
 <script> var context = "${pageContext.request.contextPath}";</script>
-<script src="${pageContext.request.contextPath}/static/js/web-js/product-single-page.js?v=1"></script>
 <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/jquery-migrate-3.0.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/popper.min.js"></script>
