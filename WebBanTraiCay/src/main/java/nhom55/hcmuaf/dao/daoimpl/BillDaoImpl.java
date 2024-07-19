@@ -29,8 +29,8 @@ public class BillDaoImpl implements BillDao {
         } else {
             JDBIConnector.get().withHandle(h -> {
 
-                return h.createUpdate("INSERT INTO bills(orderedDate, productList, status, userId, payment, firstName, lastName, streetAddress, city, phoneNumber, email,totalPrice,deliveryFee,note) " +
-                                "VALUES (:orderedDate, :productList, :status, :userId, :payment, :firstName, :lastName, :streetAddress, :city, :phoneNumber, :email, :totalPrice, :deliveryFee, :note)")
+                return h.createUpdate("INSERT INTO bills(orderedDate, productList, status, userId, payment, firstName, lastName, streetAddress, city, phoneNumber, email,totalPrice,deliveryFee,note,creationTime) " +
+                                "VALUES (:orderedDate, :productList, :status, :userId, :payment, :firstName, :lastName, :streetAddress, :city, :phoneNumber, :email, :totalPrice, :deliveryFee, :note, :creationTime)")
 
                         .bind("orderedDate", orderedDate)
                         .bind("productList", productList)
@@ -46,7 +46,7 @@ public class BillDaoImpl implements BillDao {
                         .bind("totalPrice", totalPrice)
                         .bind("deliveryFee", deliveryFee)
                         .bind("note",note)
-
+                        .bind("creationTime", LocalDateTime.now())
                         .execute();
             });
 

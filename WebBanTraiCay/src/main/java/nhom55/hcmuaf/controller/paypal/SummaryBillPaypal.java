@@ -23,11 +23,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import nhom55.hcmuaf.beans.Bills;
 import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.beans.cart.Cart;
 import nhom55.hcmuaf.beans.cart.CartProduct;
 import nhom55.hcmuaf.dao.BillDao;
 import nhom55.hcmuaf.dao.daoimpl.BillDaoImpl;
+import nhom55.hcmuaf.enums.LogLevels;
+import nhom55.hcmuaf.log.AbsDAO;
+import nhom55.hcmuaf.log.Log;
+import nhom55.hcmuaf.log.RequestInfo;
 import nhom55.hcmuaf.sendmail.MailProperties;
 import nhom55.hcmuaf.util.MyUtils;
 
@@ -117,6 +123,17 @@ public class SummaryBillPaypal extends HttpServlet {
               + id_bills);
           Transport.send(message);
           boolean isOrderSuccessfully = true;
+          Log<Bills> log = new Log<>();
+          AbsDAO<Bills> absDAO = new AbsDAO<>();
+          RequestInfo requestInfo= new RequestInfo(request.getRemoteAddr(),"HCM", "VietNam");
+          log.setLevel(LogLevels.INFO);
+          log.setIp(requestInfo.getIp());
+          log.setAddress(requestInfo.getAddress());
+          log.setNational(requestInfo.getNation());
+          log.setNote("Người dùng "+users.getUsername()+" vừa đặt hàng thành công");
+          log.setCurrentValue(lastName+" "+firstName+", địa chỉ: "+address+", số điện thoại: "+phoneNumber+", email: "+email+", giá tiền đơn hàng: "+subTotalPrice+", tiền vận chuyển: "+deliveryFee+", ghi chú: "+note+", kiểu thanh toán: "+payment+", ngày đặt hàng: "+timeNow+" ,tổng tiền: "+(subTotalPrice+deliveryFee));
+          log.setCreateAt(timeNow);
+          absDAO.insert(log);
           RequestDispatcher dispatcher = request.getRequestDispatcher("/page/shop/shop-forward");
           request.setAttribute("isOrderSuccessfully", isOrderSuccessfully);
           dispatcher.forward(request, response);
