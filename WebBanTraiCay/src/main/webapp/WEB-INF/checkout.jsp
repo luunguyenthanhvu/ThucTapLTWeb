@@ -273,7 +273,7 @@
                                     <span>Giá tiền</span>
                                     <span class="tong_phu">
                                         <fmt:formatNumber pattern="#,##0 ₫"
-                                                          value="${subTotalPrice}"/>
+                                                          value="${sessionScope.subTotalPrice}"/>
                                     </span>
                                 </p>
 

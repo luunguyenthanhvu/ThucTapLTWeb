@@ -38,7 +38,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <h2 class="login-header w3_header">Quên mật khẩu</h2>
     <div class="w3l_grid">
       <form class="login-container" action="${pageContext.request.contextPath}/page/login/forget-password" method="post">
-        <input type="email" placeholder="email" Name="email" id="email_nd" value="${email_user}" >
+        <input style="color: black" type="email" placeholder="email" Name="email" id="email_nd" value="${email_user}" >
         <span class="error" id="email-error" style="display: none;color: red; font-size: 14px"></span>
         <c:if test="${not empty error_email}">
           <p style="color: red; padding: 10px; text-align: center"> ${error_email}</p>

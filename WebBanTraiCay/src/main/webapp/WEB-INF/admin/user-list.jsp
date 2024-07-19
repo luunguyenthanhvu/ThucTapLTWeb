@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>Quản lý cửa hàng</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin-css/style.css?v=2">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin-css/dssp.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin-css/dssp.css?v=3">
 
     <!-- Boxiocns CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>

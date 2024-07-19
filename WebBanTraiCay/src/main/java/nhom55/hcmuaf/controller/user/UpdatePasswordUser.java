@@ -1,6 +1,10 @@
 package nhom55.hcmuaf.controller.user;
 
 import nhom55.hcmuaf.beans.Users;
+import nhom55.hcmuaf.enums.LogLevels;
+import nhom55.hcmuaf.log.AbsDAO;
+import nhom55.hcmuaf.log.Log;
+import nhom55.hcmuaf.log.RequestInfo;
 import nhom55.hcmuaf.services.UserService;
 import nhom55.hcmuaf.util.MyUtils;
 import nhom55.hcmuaf.util.UserValidator;
@@ -9,6 +13,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @WebServlet(name = "updatePasswordUser", value = "/page/user/update-pass")
@@ -41,7 +46,19 @@ public class UpdatePasswordUser extends HttpServlet {
           // xoa session hien tai
           MyUtils.removeLoginedUser(session);
           MyUtils.removeCart(session);
-
+          Log<Users> log = new Log<>();
+          AbsDAO<Users> absDAO = new AbsDAO<>();
+          RequestInfo requestInfo= new RequestInfo(request.getRemoteAddr(),"HCM", "VietNam");
+          log.setLevel(LogLevels.INFO);
+          log.setIp(requestInfo.getIp());
+          log.setAddress(requestInfo.getAddress());
+          log.setNational(requestInfo.getNation());
+          log.setNote("Người dùng "+user.getUsername()+" đổi mật khẩu mới");
+          log.setPreValue(user.getPassword());
+          log.setCurrentValue(MyUtils.encodePass(newPassword));
+          log.setCreateAt(user.getCreationTime());
+          log.setUpdateAt(LocalDateTime.now());
+          absDAO.insert(log);
           RequestDispatcher dispatcher = this.getServletContext()
                   .getRequestDispatcher("/WEB-INF/login/login.jsp");
           dispatcher.forward(request, response);

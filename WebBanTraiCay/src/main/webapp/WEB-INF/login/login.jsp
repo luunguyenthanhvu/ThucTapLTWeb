@@ -40,7 +40,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <h2 class="login-header w3_header">Đăng nhập</h2>
         <div class="w3l_grid">
             <form class="login-container" action="${pageContext.request.contextPath}/page/login" method="post">
-                <input type="email" placeholder="Email" name="email" id="email_nd"
+                <input style="color: black" type="email" placeholder="Email" name="email" id="email_nd"
                        value="${email_user}">
                 <span class="error" id="email-error"
                       style="display: none;color: red; font-size: 14px"></span>
@@ -48,7 +48,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <p style="color: red; padding: 10px; text-align: center"> ${error_email}</p>
                 </c:if>
 
-                <input type="password" placeholder="Mật khẩu" name="password" id="password_nd"
+                <input style="color: black" type="password" placeholder="Mật khẩu" name="password" id="password_nd"
                        value="${pass_user}">
                 <span class="error" id="password-error"
                       style="display: none;color: red; font-size: 14px"></span>
