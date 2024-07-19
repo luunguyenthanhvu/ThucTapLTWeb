@@ -215,7 +215,7 @@
                                             <img
                                                     style="width: 205px; height: 164px; object-fit: cover"
                                                     class="img-fluid"
-                                                    src="${window.context}/static/images/loading-cat.gif"
+                                                    src="${pageContext.request.contextPath}/static/images/loading-cat.gif"
                                                     alt="Colorlib Template">
                                         </a>
                                         <div class="text py-3 pb-4 px-3 text-center">
