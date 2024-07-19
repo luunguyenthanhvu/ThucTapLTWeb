@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -10,7 +9,8 @@
     <title>Cửa hàng trái cây</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="${pageContext.request.contextPath}/static/css/read-more/normal/jquery.readall.css"rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/static/css/read-more/normal/jquery.readall.css"
+          rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
@@ -65,7 +65,8 @@
      id="ftco-navbar">
     <div class="container navbar-container">
         <div class="navbar-brand">
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/page/home">Cửa Hàng Trái Cây</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/page/home">Cửa Hàng
+                Trái Cây</a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,7 +88,7 @@
                     <a href="${pageContext.request.contextPath}/page/cart"
                        class="nav-link cart-info-container">
                         <span class="icon-shopping_cart"></span>
-                        [<span class="cart-total-amount">${cart.getTotal()}</span>]
+                        [<span class="cart-total-amount"></span>]
                     </a>
                 </li>
 
@@ -237,8 +238,8 @@
                     </div>
                     <div class="w-100"></div>
                     <div class="col-md-12">
-<%--                        <p style="color: #000;">${product.getWeight()} kg hợp lệ</p>--%>
-<%--                        <span id="max-product" hidden="hidden">${product.getWeight()}</span>--%>
+                        <%--                        <p style="color: #000;">${product.getWeight()} kg hợp lệ</p>--%>
+                        <%--                        <span id="max-product" hidden="hidden">${product.getWeight()}</span>--%>
                     </div>
                 </div>
                 <p><a id="addToCartLink" href="javascript:void(0);"
@@ -375,6 +376,7 @@
 <script src="${pageContext.request.contextPath}/static/js/main.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.11.2/cloudinary-core-shrinkwrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/web-js/product-single.js?v=5"></script>
+<script src="${pageContext.request.contextPath}/static/js/web-js/index-page.js?v=8"></script>
 <script src="${pageContext.request.contextPath}/static/js/read-more/jquery.readall.js"></script>
 <script>
   $(document).ready(function () {

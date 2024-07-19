@@ -119,7 +119,7 @@
                     <a href="${pageContext.request.contextPath}/page/cart"
                        class="nav-link cart-info-container">
                         <span class="icon-shopping_cart"></span>
-                        [<span class="cart-total-amount">${cart.getTotal()}</span>]
+                        [<span class="cart-total-amount"></span>]
                     </a>
                 </li>
 
@@ -234,7 +234,7 @@
                                                         <span><i class="ion-ios-menu"></i></span>
                                                     </a>
                                                     <a href="javascript:void(0);"
-                                                       onclick="addToCart(${product.getId()})"
+                                                       onclick="addProductToCart(${product.getId()})"
                                                        class="buy-now d-flex justify-content-center align-items-center mx-1">
                                                         <span><i class="ion-ios-cart"></i></span>
                                                     </a>
@@ -422,7 +422,7 @@ var category = "${requestScope.category}";
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.11.2/cloudinary-core-shrinkwrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/web-js/index-page.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/web-js/index-page.js?v=8"></script>
 <script src="${pageContext.request.contextPath}/static/js/web-js/shop.js?v=7"></script>
 
 

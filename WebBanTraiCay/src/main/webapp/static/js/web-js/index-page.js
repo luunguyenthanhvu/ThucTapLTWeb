@@ -1,111 +1,63 @@
-// ajax add to cart
-function addToCart(productId) {
-  $.ajax({
-    type: 'POST',
-    url: `${window.context}/page/cart/add-cart`,
-    // value mặc định là 1
-    data: {
-      productId: productId,
-      quantity: 1
-    },
-    success: function (response) {
-
-      showToast(response.message);
-      // cập nhập giỏ hàng
-      updateCartAmount();
-    },
-    error: function (error) {
-      console.log(error); // Xem nội dung của error object trong console
-
-      // Kiểm tra xem có thuộc tính message hay không
-      if (error.hasOwnProperty('message')) {
-        alert(error.message);
-      } else {
-        alert("Lỗi không xác định");
-      }
-    }
-
-  });
-
-  return false;
-}
-
-function updateCartAmount() {
-  $.ajax({
-    type: 'GET',
-    url: `${window.context}/page/cart/get-cart-amount`,
-    data: {},
-    success: function (response) {
-      $(".cart-total-amount").html(response);
-    },
-    error: function (error) {
-      // Xử lý khi có lỗi
-      console.log('Đã xảy ra lỗi khi thêm vào giỏ hàng');
-    }
-  })
-}
+'use strict';
 
 $('.cart-total-amount').text("0");
 // Global WebSocket instance
 let socket = null;
+initializeWebSocket();
 
 function initializeWebSocket() {
-  if (socket) {
+  if (socket && socket.readyState !== WebSocket.CLOSED) {
     console.log('WebSocket connection already established.');
     return;
   }
-  // Create WebSocket connection.
   socket = new WebSocket('ws://localhost:8080/websocket/cart-socket');
 
-  // Connection opened
   socket.onopen = () => {
-    console.log('WebConnected');
+    console.log('WebSocket connected');
   };
 
-  // Listen for messages
   socket.onmessage = (event) => {
     console.log(event.data)
     try {
       $('.cart-total-amount').text(event.data);
-      showToast("Success");
     } catch (e) {
       console.error('Failed to parse message', e);
     }
   };
 
-  // Handle errors
   socket.onerror = (error) => {
     console.error('WebSocket error observed:', error);
   };
 
-  // Connection closed
   socket.onclose = () => {
     console.log('WebSocket connection closed.');
-    // Clean up WebSocket instance
     socket = null;
   };
 }
 
 function addProductToCart(productId) {
-  // Ensure WebSocket is initialized
-  if (!socket) {
+  if (!socket || socket.readyState === WebSocket.CLOSED) {
     initializeWebSocket();
   }
 
-  var message = {
-    "userId": window.userId,  // Ensure window.userId is properly defined
-    "productId": productId,
-    "quantity": 1,
-    "action": "add"
+  const sendMessage = () => {
+    var message = {
+      "id": productId,
+      "quantity": 1,
+      "action": "add"
+    };
+
+    if (socket.readyState === WebSocket.OPEN) {
+      socket.send(JSON.stringify(message));
+      showToast("Success");
+      console.log('Message sent:', message);
+    } else {
+      console.error('WebSocket is not open. Cannot send message.');
+      setTimeout(sendMessage, 100);
+    }
   };
 
-  // Ensure WebSocket is open before sending
-  if (socket.readyState === WebSocket.OPEN) {
-    socket.send(JSON.stringify(message));
-    console.log('Message sent:', message);
-  } else {
-    console.error('WebSocket is not open. Cannot send message.');
-  }
+  sendMessage();
 }
 
 // toast function

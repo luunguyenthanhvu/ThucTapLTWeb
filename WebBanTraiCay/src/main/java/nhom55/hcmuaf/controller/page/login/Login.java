@@ -23,15 +23,22 @@ import nhom55.hcmuaf.log.RequestInfo;
 import nhom55.hcmuaf.services.UserService;
 import nhom55.hcmuaf.util.MyUtils;
 import nhom55.hcmuaf.util.UserValidator;
+import nhom55.hcmuaf.websocket.endpoint.CartUserWebsocket;
 
 @WebServlet(name = "login", value = "/page/login")
 public class Login extends HttpServlet {
 
   private LoginDao loginDao = new LoginDao();
+  private CartUserWebsocket cartUserWebsocket;
   private UsersDao usersDao = new UsersDaoImpl();
 
   public Login() {
     super();
+  }
+
+  @Override
+  public void init() throws ServletException {
+    cartUserWebsocket = new CartUserWebsocket();
   }
 
   /**
@@ -112,6 +119,7 @@ public class Login extends HttpServlet {
         Users user = UserService.getInstance().getUserByEmail(email);
         System.out.println("luu thong tin user");
         MyUtils.storeLoginedUser(session, user);
+        cartUserWebsocket.transferCart(session);
         {
           if (result.equals("ADMIN")) {
             usersLog.setNote("Admin: " + user.getUsername() + " đăng nhập vào hệ thống");

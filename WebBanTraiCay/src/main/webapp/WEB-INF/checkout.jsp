@@ -56,7 +56,8 @@
      id="ftco-navbar">
     <div class="container navbar-container">
         <div class="navbar-brand">
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/page/home">Cửa Hàng Trái
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/page/home">Cửa Hàng
+                Trái
                 Cây</a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
@@ -68,8 +69,9 @@
             <ul class="navbar-nav">
                 <li class="nav-item active"><a href="${pageContext.request.contextPath}/page/home"
                                                class="nav-link">Trang Chủ</a></li>
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/page/shop/shop-forward"
-                                        class="nav-link">Cửa Hàng</a></li>
+                <li class="nav-item"><a
+                        href="${pageContext.request.contextPath}/page/shop/shop-forward"
+                        class="nav-link">Cửa Hàng</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/page/about"
                                         class="nav-link">Về Chúng Tôi</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/page/contact"
@@ -78,7 +80,7 @@
                     <a href="${pageContext.request.contextPath}/page/cart"
                        class="nav-link cart-info-container">
                         <span class="icon-shopping_cart"></span>
-                        [<span class="cart-total-amount">${cart.getTotal()}</span>]
+                        [<span class="cart-total-amount"></span>]
                     </a>
                 </li>
 
@@ -158,7 +160,7 @@
                                        id="lastname" type="text" class="form-control"
                                        placeholder="Họ" value="${lastName}">
                                 <p style="color: red; display: none" id="lastname_error"></p>
-                                <c:if test="${not empty lastNameError}" >
+                                <c:if test="${not empty lastNameError}">
                                     <p style="color: red">${lastNameError}</p>
                                 </c:if>
                             </div>
@@ -170,7 +172,7 @@
                                        id="firstname" type="text" class="form-control"
                                        placeholder="Tên" value="${firstName}">
                                 <p style="color: red; display: none" id="firstname_error"></p>
-                                <c:if test="${not empty firstNameError}" >
+                                <c:if test="${not empty firstNameError}">
                                     <p style="color: red">${firstNameError}</p>
                                 </c:if>
                             </div>
@@ -179,20 +181,22 @@
                         <div class="w-100"></div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label >Tỉnh / Thành phố <span
+                                <label>Tỉnh / Thành phố <span
                                         style="color: red">*</span></label>
                                 <div class="w-100"></div>
-                                <select name="thanh-pho" id="provinces"class="form-control" style="color: black !important;">
+                                <select name="thanh-pho" id="provinces" class="form-control"
+                                        style="color: black !important;">
 
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label >Quận / Huyện <span
+                                <label>Quận / Huyện <span
                                         style="color: red">*</span></label>
                                 <div class="w-100"></div>
-                                <select name="quan-huyen" id="districts" class="form-control" style="color: black !important;" >
+                                <select name="quan-huyen" id="districts" class="form-control"
+                                        style="color: black !important;">
 
                                 </select>
 
@@ -208,7 +212,7 @@
                                        id="street-address" type="text" class="form-control"
                                        placeholder="Tên đường và số nhà" value="${address}">
                                 <p style="color: red; display: none" id="address_error"></p>
-                                <c:if test="${not empty addressError}" >
+                                <c:if test="${not empty addressError}">
                                     <p style="color: red">${addressError}</p>
                                 </c:if>
                             </div>
@@ -223,7 +227,7 @@
                                        id="phone" type="text" class="form-control"
                                        placeholder="Số điện thoại" value="${phone}">
                                 <p style="color: red; display: none" id="phone_error"></p>
-                                <c:if test="${not empty phoneError}" >
+                                <c:if test="${not empty phoneError}">
                                     <p style="color: red">${phoneError}</p>
                                 </c:if>
                             </div>
@@ -235,7 +239,7 @@
                                        id="email" type="text" class="form-control"
                                        placeholder="email" value="${email}">
                                 <p style="color: red; display: none" id="email_error"></p>
-                                <c:if test="${not empty emailError}" >
+                                <c:if test="${not empty emailError}">
                                     <p style="color: red">${emailError}</p>
                                 </c:if>
                             </div>
@@ -246,7 +250,8 @@
                                 <label for="note_user">Ghi chú </label>
                                 <textarea name="note_nguoi-dung" style="color: black !important;"
                                           id="note_user" type="text" class="form-control"
-                                          placeholder="Ghi chú" value="${noteUser}" rows="8" cols="10">
+                                          placeholder="Ghi chú" value="${noteUser}" rows="8"
+                                          cols="10">
                                       </textarea>
                             </div>
                         </div>
@@ -274,8 +279,9 @@
 
                                 <p class="d-flex">
                                     <span>Phí vận chuyển</span>
-                                    <span  id="delivery_fee"></span>
-                                    <input type="hidden" name="delivery_fee" id="hidden_delivery_fee" value="">
+                                    <span id="delivery_fee"></span>
+                                    <input type="hidden" name="delivery_fee"
+                                           id="hidden_delivery_fee" value="">
                                 </p>
                                 <hr>
                                 <p class="d-flex total-price">
@@ -298,7 +304,8 @@
                                     <div class="payment__choices-cd selected"
                                          id="payment__by-creditCard">
                                         <label for="credit_card">
-                                            <svg style="position:relative;top:-10px;" xmlns="http://www.w3.org/2000/svg" height="2em"
+                                            <svg style="position:relative;top:-10px;"
+                                                 xmlns="http://www.w3.org/2000/svg" height="2em"
                                                  viewBox="0 0 576 512">
                                                 <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                                                 <path
@@ -310,10 +317,10 @@
                                     </div>
 
 
-
                                     <div class="payment__choices-pp" id="payment__by-paypal">
                                         <label for="paypal">
-                                            <svg style="position:relative;top:-10px;" xmlns="http://www.w3.org/2000/svg" height="2em"
+                                            <svg style="position:relative;top:-10px;"
+                                                 xmlns="http://www.w3.org/2000/svg" height="2em"
                                                  viewBox="0 0 576 512">
                                                 <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                                                 <path
@@ -369,12 +376,14 @@
                                 </div>
 
                                 <p>
-                                    <button  type="submit" id="submit-btn" class="btn btn-primary py-3 px-4">
+                                    <button type="submit" id="submit-btn"
+                                            class="btn btn-primary py-3 px-4">
                                         Đặt hàng
                                     </button>
                                 </p>
 
-                                <button style="display: none" type="button" id="paypal-btn" class="btn btn-primary py-3 px-4">
+                                <button style="display: none" type="button" id="paypal-btn"
+                                        class="btn btn-primary py-3 px-4">
                                     Thanh Toán bằng Paypal
                                 </button>
 
@@ -434,9 +443,12 @@
                 <div class="ftco-footer-widget mb-4 ml-md-5">
                     <h2 class="ftco-heading-2">Menu</h2>
                     <ul class="list-unstyled">
-                        <li><a href="${pageContext.request.contextPath}/page/shop/shop-forward" class="py-2 d-block">Cửa hàng chúng tôi</a></li>
-                        <li><a href="${pageContext.request.contextPath}/page/about" class="py-2 d-block">Về chúng tôi</a></li>
-                        <li><a  href="${pageContext.request.contextPath}/page/contact" class="py-2 d-block">Liên hệ với chúng tôi</a></li>
+                        <li><a href="${pageContext.request.contextPath}/page/shop/shop-forward"
+                               class="py-2 d-block">Cửa hàng chúng tôi</a></li>
+                        <li><a href="${pageContext.request.contextPath}/page/about"
+                               class="py-2 d-block">Về chúng tôi</a></li>
+                        <li><a href="${pageContext.request.contextPath}/page/contact"
+                               class="py-2 d-block">Liên hệ với chúng tôi</a></li>
                     </ul>
                 </div>
             </div>
@@ -504,190 +516,192 @@
     </svg>
 </div>
 <script>
-    // validate for form order
-    var ho = document.getElementById("lastname");
-    var ten = document.getElementById("firstname");
-    var diaChi = document.getElementById("street-address");
+  // validate for form order
+  var ho = document.getElementById("lastname");
+  var ten = document.getElementById("firstname");
+  var diaChi = document.getElementById("street-address");
 
-    var sdt = document.getElementById("phone");
-    var email = document.getElementById("email");
-    var soThe = document.getElementById("cardNumberInput");
-    var theCVC = document.getElementById("cardCVCInput");
+  var sdt = document.getElementById("phone");
+  var email = document.getElementById("email");
+  var soThe = document.getElementById("cardNumberInput");
+  var theCVC = document.getElementById("cardCVCInput");
 
-    function validateHo() {
-        var text = ho.value;
-        var kyTuHopLe = /^[a-zA-ZÀ-ỹ ]+$/;
-        var error = document.getElementById("lastname_error");
-        if (text.length == 0 || text == null) {
-            error.textContent = "Vui lòng nhập dữ liệu";
-            error.style.display = "block";
-            return false;
-        } else if (!kyTuHopLe.test(text)) {
-            error.textContent = "Họ chỉ chứa ký tự chữ cái, khoảng trắng.";
-            error.style.display = "block";
-            return false;
-        } else {
-            error.style.display = "none";
-            return true;
-        }
+  function validateHo() {
+    var text = ho.value;
+    var kyTuHopLe = /^[a-zA-ZÀ-ỹ ]+$/;
+    var error = document.getElementById("lastname_error");
+    if (text.length == 0 || text == null) {
+      error.textContent = "Vui lòng nhập dữ liệu";
+      error.style.display = "block";
+      return false;
+    } else if (!kyTuHopLe.test(text)) {
+      error.textContent = "Họ chỉ chứa ký tự chữ cái, khoảng trắng.";
+      error.style.display = "block";
+      return false;
+    } else {
+      error.style.display = "none";
+      return true;
     }
+  }
 
-    function validateTen() {
-        var text = ten.value;
-        var kyTuHopLe = /^[a-zA-ZÀ-ỹ ]+$/;
-        var error = document.getElementById("firstname_error");
-        if (text.length == 0 || text == null) {
-            error.textContent = "Vui lòng nhập dữ liệu";
-            error.style.display = "block";
-            return false;
-        } else if (!kyTuHopLe.test(text)) {
-            error.textContent = "Tên chỉ chứa ký tự chữ cái, khoảng trắng.";
-            error.style.display = "block";
-            return false;
-        } else {
-            error.style.display = "none";
-            return true;
-        }
+  function validateTen() {
+    var text = ten.value;
+    var kyTuHopLe = /^[a-zA-ZÀ-ỹ ]+$/;
+    var error = document.getElementById("firstname_error");
+    if (text.length == 0 || text == null) {
+      error.textContent = "Vui lòng nhập dữ liệu";
+      error.style.display = "block";
+      return false;
+    } else if (!kyTuHopLe.test(text)) {
+      error.textContent = "Tên chỉ chứa ký tự chữ cái, khoảng trắng.";
+      error.style.display = "block";
+      return false;
+    } else {
+      error.style.display = "none";
+      return true;
     }
+  }
 
-    function validateAddress() {
-        var text = diaChi.value;
-        var error = document.getElementById("address_error");
-        if (text.length == 0 || text == null) {
-            error.textContent = "Vui lòng nhập dữ liệu";
-            error.style.display = "block";
-            return false;
-        } else {
-            error.style.display = "none";
-            return true;
-        }
+  function validateAddress() {
+    var text = diaChi.value;
+    var error = document.getElementById("address_error");
+    if (text.length == 0 || text == null) {
+      error.textContent = "Vui lòng nhập dữ liệu";
+      error.style.display = "block";
+      return false;
+    } else {
+      error.style.display = "none";
+      return true;
     }
+  }
 
-    function validateSDT() {
-        var text = sdt.value;
-        var kyTuHopLe = /^(?:\+|0)[0-9]{6,14}[0-9]$/;
-        var error = document.getElementById("phone_error");
-        if (text.length == 0 || text == null) {
-            error.textContent = "Vui lòng nhập dữ liệu";
-            error.style.display = "block";
-            return false;
-        } else if (!kyTuHopLe.test(text)) {
-            error.textContent = "Số điện thoại chỉ chứa số từ 0 - 9";
-            error.style.display = "block";
-            return false;
-        } else {
-            error.style.display = "none";
-            return true;
-        }
+  function validateSDT() {
+    var text = sdt.value;
+    var kyTuHopLe = /^(?:\+|0)[0-9]{6,14}[0-9]$/;
+    var error = document.getElementById("phone_error");
+    if (text.length == 0 || text == null) {
+      error.textContent = "Vui lòng nhập dữ liệu";
+      error.style.display = "block";
+      return false;
+    } else if (!kyTuHopLe.test(text)) {
+      error.textContent = "Số điện thoại chỉ chứa số từ 0 - 9";
+      error.style.display = "block";
+      return false;
+    } else {
+      error.style.display = "none";
+      return true;
     }
+  }
 
-    function validateEmail() {
-        var text = email.value;
-        var kyTuHopLe = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-        var error = document.getElementById("email_error");
-        if (text.length == 0 || text == null) {
-            error.textContent = "Vui lòng nhập dữ liệu";
-            error.style.display = "block";
-            return false;
-        } else if (!kyTuHopLe.test(text)) {
-            error.textContent = "Địa chỉ email không hợp lệ.";
-            error.style.display = "block";
-            return false;
-        } else {
-            error.style.display = "none";
-            return true;
-        }
+  function validateEmail() {
+    var text = email.value;
+    var kyTuHopLe = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    var error = document.getElementById("email_error");
+    if (text.length == 0 || text == null) {
+      error.textContent = "Vui lòng nhập dữ liệu";
+      error.style.display = "block";
+      return false;
+    } else if (!kyTuHopLe.test(text)) {
+      error.textContent = "Địa chỉ email không hợp lệ.";
+      error.style.display = "block";
+      return false;
+    } else {
+      error.style.display = "none";
+      return true;
     }
+  }
 
-    function validateSoThe() {
-        var text = soThe.value;
-        var kyTuHopLe =  /^\d{16}$/;
-        var error = document.getElementById("cardNum_error");
-        if (text.length == 0 || text == null) {
-            error.textContent = "Vui lòng nhập dữ liệu";
-            error.style.display = "block";
-            return false;
-        } else if (!kyTuHopLe.test(text)) {
-            error.textContent =  "Số thẻ ngân hàng không hợp lệ. Vui lòng nhập 16 chữ số.";
-            error.style.display = "block";
-            return false;
-        } else {
-            error.style.display = "none";
-            return true;
-        }
+  function validateSoThe() {
+    var text = soThe.value;
+    var kyTuHopLe = /^\d{16}$/;
+    var error = document.getElementById("cardNum_error");
+    if (text.length == 0 || text == null) {
+      error.textContent = "Vui lòng nhập dữ liệu";
+      error.style.display = "block";
+      return false;
+    } else if (!kyTuHopLe.test(text)) {
+      error.textContent = "Số thẻ ngân hàng không hợp lệ. Vui lòng nhập 16 chữ số.";
+      error.style.display = "block";
+      return false;
+    } else {
+      error.style.display = "none";
+      return true;
     }
+  }
 
-    function validateTheCVC() {
-        var text = theCVC.value;
-        var cvcPattern = /^\d{3}$/;
-        var error = document.getElementById("cardCVC_error");
-        if (text.length == 0 || text == null) {
-            error.textContent = "Vui lòng nhập dữ liệu";
-            error.style.display = "block";
-            return false;
-        } else if (!cvcPattern.test(text)) {
-            error.textContent = "Mã CVC không hợp lệ. Vui lòng nhập 3 chữ số.";
-            error.style.display = "block";
-            return false;
-        } else {
-            error.style.display = "none";
-            return true;
-        }
+  function validateTheCVC() {
+    var text = theCVC.value;
+    var cvcPattern = /^\d{3}$/;
+    var error = document.getElementById("cardCVC_error");
+    if (text.length == 0 || text == null) {
+      error.textContent = "Vui lòng nhập dữ liệu";
+      error.style.display = "block";
+      return false;
+    } else if (!cvcPattern.test(text)) {
+      error.textContent = "Mã CVC không hợp lệ. Vui lòng nhập 3 chữ số.";
+      error.style.display = "block";
+      return false;
+    } else {
+      error.style.display = "none";
+      return true;
     }
+  }
 
-    // add validate for form
-    ho.addEventListener("blur", validateHo);
-    ten.addEventListener("blur", validateTen);
-    diaChi.addEventListener("blur", validateAddress);
-    sdt.addEventListener("blur", validateSDT);
-    email.addEventListener("blur", validateEmail);
-    soThe.addEventListener("blur", validateSoThe);
-    theCVC.addEventListener("blur", validateTheCVC);
+  // add validate for form
+  ho.addEventListener("blur", validateHo);
+  ten.addEventListener("blur", validateTen);
+  diaChi.addEventListener("blur", validateAddress);
+  sdt.addEventListener("blur", validateSDT);
+  email.addEventListener("blur", validateEmail);
+  soThe.addEventListener("blur", validateSoThe);
+  theCVC.addEventListener("blur", validateTheCVC);
 
-    ho.addEventListener("input", validateHo);
-    ten.addEventListener("input", validateTen);
-    diaChi.addEventListener("input", validateAddress);
-    sdt.addEventListener("input", validateSDT);
-    email.addEventListener("input", validateEmail);
-    soThe.addEventListener("input", validateSoThe);
-    theCVC.addEventListener("input", validateTheCVC);
+  ho.addEventListener("input", validateHo);
+  ten.addEventListener("input", validateTen);
+  diaChi.addEventListener("input", validateAddress);
+  sdt.addEventListener("input", validateSDT);
+  email.addEventListener("input", validateEmail);
+  soThe.addEventListener("input", validateSoThe);
+  theCVC.addEventListener("input", validateTheCVC);
 
-    var form = document.querySelector('.billing-form');
-    var submitBtn = document.getElementById("submit-btn");
+  var form = document.querySelector('.billing-form');
+  var submitBtn = document.getElementById("submit-btn");
 
-    submitBtn.addEventListener("click", function (event) {
-        var isHoValid = validateHo();
-        var isTenValid = validateTen();
-        var isDiaChiValid  = validateAddress();
-        var isSdtValid = validateSDT();
-        var isEmailValid = validateEmail();
-        var isSoTheValid = validateSoThe();
-        var isTheCVCValid = validateTheCVC();
-        var checkedButton =  document.querySelector(".check");
-        if (!isHoValid || !isTenValid || !isDiaChiValid ||  !isSdtValid  || !isEmailValid || ! isSoTheValid || !isTheCVCValid || !checkedButton.checked) {
-            event.preventDefault();
-        } else {
-            form.action ='/page/order/check-out';
-            form.submit();
-        }
-    });
+  submitBtn.addEventListener("click", function (event) {
+    var isHoValid = validateHo();
+    var isTenValid = validateTen();
+    var isDiaChiValid = validateAddress();
+    var isSdtValid = validateSDT();
+    var isEmailValid = validateEmail();
+    var isSoTheValid = validateSoThe();
+    var isTheCVCValid = validateTheCVC();
+    var checkedButton = document.querySelector(".check");
+    if (!isHoValid || !isTenValid || !isDiaChiValid || !isSdtValid || !isEmailValid || !isSoTheValid
+        || !isTheCVCValid || !checkedButton.checked) {
+      event.preventDefault();
+    } else {
+      form.action = '/page/order/check-out';
+      form.submit();
+    }
+  });
 
-    var paypalBtn = document.getElementById('paypal-btn');
-    paypalBtn.addEventListener('click', function (event) {
-        var isHoValid = validateHo();
-        var isTenValid = validateTen();
-        var isDiaChiValid = validateAddress();
-        var isSdtValid = validateSDT();
-        var isEmailValid = validateEmail();
-        var checkedButton = document.querySelector(".check");
+  var paypalBtn = document.getElementById('paypal-btn');
+  paypalBtn.addEventListener('click', function (event) {
+    var isHoValid = validateHo();
+    var isTenValid = validateTen();
+    var isDiaChiValid = validateAddress();
+    var isSdtValid = validateSDT();
+    var isEmailValid = validateEmail();
+    var checkedButton = document.querySelector(".check");
 
-        if (!isHoValid || !isTenValid || !isDiaChiValid || !isSdtValid || !isEmailValid || !checkedButton.checked) {
-            event.preventDefault();
-        } else {
-            form.action = '/paypal/authorize-payment';
-            form.submit();
-        }
-    });
+    if (!isHoValid || !isTenValid || !isDiaChiValid || !isSdtValid || !isEmailValid
+        || !checkedButton.checked) {
+      event.preventDefault();
+    } else {
+      form.action = '/paypal/authorize-payment';
+      form.submit();
+    }
+  });
 
 
 </script>
@@ -707,50 +721,43 @@
 <script src="${pageContext.request.contextPath}/static/js/scrollax.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/main.js"></script>
 <script>
-    // action for payment
-    var creditCardLabel = document.querySelector("label[for='credit_card']");
-    var paypalLabel = document.querySelector("label[for='paypal']");
-    var paymentChoiceCreditCard = document.getElementById("payment__by-creditCard");
-    var paymentChoicePayPal = document.getElementById("payment__by-paypal");
+  // action for payment
+  var creditCardLabel = document.querySelector("label[for='credit_card']");
+  var paypalLabel = document.querySelector("label[for='paypal']");
+  var paymentChoiceCreditCard = document.getElementById("payment__by-creditCard");
+  var paymentChoicePayPal = document.getElementById("payment__by-paypal");
 
+  // Khi người dùng click vào label Credit Card
+  creditCardLabel.addEventListener("click", function () {
+    paymentChoiceCreditCard.classList.add("selected");
+    paymentChoicePayPal.classList.remove("selected");
+    document.getElementById("paypal-btn").style.display = "none";
+    document.getElementById("submit-btn").style.display = "block";
+    document.getElementById("component_soThe").style.display = "block";
+    document.getElementById("component_tenNganHang").style.display = "block";
+  });
 
-    // Khi người dùng click vào label Credit Card
-    creditCardLabel.addEventListener("click", function () {
-        paymentChoiceCreditCard.classList.add("selected");
-        paymentChoicePayPal.classList.remove("selected");
-        document.getElementById("paypal-btn").style.display = "none";
-        document.getElementById("submit-btn").style.display = "block";
-        document.getElementById("component_soThe").style.display = "block";
-        document.getElementById("component_tenNganHang").style.display = "block";
-    });
+  // Khi người dùng click vào label PayPal
+  paypalLabel.addEventListener("click", function () {
+    paymentChoiceCreditCard.classList.remove("selected");
+    paymentChoicePayPal.classList.add("selected");
+    document.getElementById("paypal-btn").style.display = "block";
+    document.getElementById("submit-btn").style.display = "none";
+    document.getElementById("component_soThe").style.display = "none";
+    document.getElementById("component_tenNganHang").style.display = "none";
+  });
 
-    // Khi người dùng click vào label PayPal
-    paypalLabel.addEventListener("click", function () {
-        paymentChoiceCreditCard.classList.remove("selected");
-        paymentChoicePayPal.classList.add("selected");
-        document.getElementById("paypal-btn").style.display = "block";
-        document.getElementById("submit-btn").style.display = "none";
-        document.getElementById("component_soThe").style.display = "none";
-        document.getElementById("component_tenNganHang").style.display = "none";
-    });
+  // validation for form
 
+  function cardNumber() {
+    var num = document.getElementById('input');
+    var card_number = arr[0].value;
+    var card_cvc = arr[1].value;
+  }
 
-
-
-
-
-
-    // validation for form
-
-    function cardNumber() {
-        var num = document.getElementById('input');
-        var card_number = arr[0].value;
-        var card_cvc = arr[1].value;
-    }
-
-    function resetForm() {
-        document.getElementById('input')[0].reset
-    }
+  function resetForm() {
+    document.getElementById('input')[0].reset
+  }
 
 
 </script>
@@ -760,144 +767,151 @@
 
 <script> var context = "${pageContext.request.contextPath}";</script>
 <%--Js xử lý lấy dữ liệu vận chuyển--%>
-<script src="${pageContext.request.contextPath}/static/js/web-js/process-delivery-fee.js?v=12" ></script>
+<script src="${pageContext.request.contextPath}/static/js/web-js/process-delivery-fee.js?v=12"></script>
+<script src="${pageContext.request.contextPath}/static/js/web-js/index-page.js?v=8"></script>
 </body>
 <%--Css cho Popup Voucher--%>
 <style>
-    .containerVoucher {
-        position: absolute;
-        top: 1000px;
-        left: 750px;
-        padding: 50px;
-    }
+  .containerVoucher {
+    position: absolute;
+    top: 1000px;
+    left: 750px;
+    padding: 50px;
+  }
 
-    .open-btn-voucher {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        cursor: pointer;
-    }
+  .open-btn-voucher {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
 
-    .popup {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        justify-content: center;
-        align-items: center;
-    }
+  .popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+  }
 
-    .popup-content {
-        background-color: white;
-        padding: 20px;
-        border-radius: 5px;
-        width: 550px;
-        height: 700px;
-        position: relative;
+  .popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 550px;
+    height: 700px;
+    position: relative;
 
-    }
+  }
 
-    .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        cursor: pointer;
-    }
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
 
-    h2 {
-        margin-top: 0;
-    }
+  h2 {
+    margin-top: 0;
+  }
 
-    .close-btn {
-        /* CSS cho nút đóng */
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        cursor: pointer;
-    }
+  .close-btn {
+    /* CSS cho nút đóng */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
 
-    .coupon {
-        /* CSS cho mỗi mã giảm giá */
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        align-items: center;
-        margin-bottom: 10px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-        gap: 10px;
-        max-width: 100%; /* Đảm bảo container không vượt quá chiều rộng */
+  .coupon {
+    /* CSS cho mỗi mã giảm giá */
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    gap: 10px;
+    max-width: 100%; /* Đảm bảo container không vượt quá chiều rộng */
 
-    }
-    .coupon svg {
-        width: 50px;
-        height: 50px;
-        margin-right: 10px;
-    }
+  }
 
-    .coupon input[type="radio"] {
-        /* CSS cho nút radio */
-        margin-right: 40px;
-        justify-self: end; /* Đưa nút radio vào cuối cột */
-    }
-    .coupon-content {
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        max-width: calc(100% - 70px); /* Điều chỉnh chiều rộng để vừa khít */
-        overflow: hidden; /* Đảm bảo nội dung không vượt quá chiều rộng */
-    }
+  .coupon svg {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
 
-    .coupon-content div {
-        margin-bottom: 5px;
-        white-space: normal;
-        word-wrap: break-word; /* Cho phép xuống dòng nếu chữ quá dài */
-    }
-    .coupon-content div.title {
-        font-weight: bold;
-    }
-    .coupon-content div.content {
-        font-size: 0.8em; /* Giảm kích thước chữ của content */
-    }
-    .coupon-content div.expiry {
-        font-size: 0.8em; /* Giảm kích thước chữ của hạn sử dụng */
-        color: #605b5b;
-    }
+  .coupon input[type="radio"] {
+    /* CSS cho nút radio */
+    margin-right: 40px;
+    justify-self: end; /* Đưa nút radio vào cuối cột */
+  }
 
-    .coupon label {
-        /* CSS cho nhãn của mã giảm giá */
-        cursor: pointer;
-    }
+  .coupon-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    max-width: calc(100% - 70px); /* Điều chỉnh chiều rộng để vừa khít */
+    overflow: hidden; /* Đảm bảo nội dung không vượt quá chiều rộng */
+  }
 
-    .coupon label:hover {
-        /* Hiệu ứng khi di chuột vào nhãn */
-        text-decoration: underline;
-    }
-    #couponsList {
-        max-height: 300px; /* Đặt chiều cao tối đa */
-        overflow-y: auto; /* Thêm cuộn dọc */
-        padding: 10px;
-    }
+  .coupon-content div {
+    margin-bottom: 5px;
+    white-space: normal;
+    word-wrap: break-word; /* Cho phép xuống dòng nếu chữ quá dài */
+  }
 
-    .totalAfterUsingVoucher {
-        display: grid;
-        justify-content: center;
-        margin: 20px 0;
-    }
+  .coupon-content div.title {
+    font-weight: bold;
+  }
 
-    .apply-btn, .confirm-btn-voucher {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        cursor: pointer;
-        width: 100%;
-        margin: 10px 0;
-    }
+  .coupon-content div.content {
+    font-size: 0.8em; /* Giảm kích thước chữ của content */
+  }
+
+  .coupon-content div.expiry {
+    font-size: 0.8em; /* Giảm kích thước chữ của hạn sử dụng */
+    color: #605b5b;
+  }
+
+  .coupon label {
+    /* CSS cho nhãn của mã giảm giá */
+    cursor: pointer;
+  }
+
+  .coupon label:hover {
+    /* Hiệu ứng khi di chuột vào nhãn */
+    text-decoration: underline;
+  }
+
+  #couponsList {
+    max-height: 300px; /* Đặt chiều cao tối đa */
+    overflow-y: auto; /* Thêm cuộn dọc */
+    padding: 10px;
+  }
+
+  .totalAfterUsingVoucher {
+    display: grid;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .apply-btn, .confirm-btn-voucher {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin: 10px 0;
+  }
 </style>
 </html>

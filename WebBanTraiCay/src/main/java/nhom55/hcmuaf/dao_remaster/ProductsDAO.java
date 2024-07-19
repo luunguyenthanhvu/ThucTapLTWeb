@@ -51,6 +51,12 @@ public interface ProductsDAO {
       @Bind("searchText") String searchText, @Bind("category") String category,
       @Define("order") String orderBy);
 
+  @SqlQuery("SELECT p.*, "
+      + "(SELECT SUM(sd.quantity) FROM shipment_details sd WHERE sd.productId = p.id AND sd.available = 1) as quantityStock "
+      + "FROM products p "
+      + "WHERE p.id = :id ")
+  Products findProductShopResponseDTO(@Bind("id") Integer id);
+
   default String buildOrderByClause(List<DataTableRequestDTO.OrderDTO> orders) {
     StringBuilder orderByClause = new StringBuilder();
     boolean first = true;

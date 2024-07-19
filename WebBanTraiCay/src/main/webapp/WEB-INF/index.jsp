@@ -52,6 +52,21 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/fix.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/toast.css">
 </head>
+<style>
+  .product {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  .product-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 100%;
+  }
+</style>
 <body class="goto-here">
 <nav class="navbar-container navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
      id="ftco-navbar">
@@ -253,7 +268,7 @@
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
                             <span name="quantity-product" hidden data-value="1"> </span>
-                            <h3><a href="">${product.getNameOfProduct()} </a></h3>
+                            <h3 class="product-name">${product.getProductName()}</h3>
                             <div class="d-flex">
                                 <div class="pricing">
                                     <p class="price"><span
@@ -264,8 +279,6 @@
                             </div>
                             <div class="bottom-area d-flex px-3">
                                 <div class="m-auto d-flex">
-
-                                        <%--  Tìm kiếm id mà người dùng chọn => trang chi tiết sản phẩm--%>
                                     <a href="${pageContext.request.contextPath}/page/product/product-detail?id=${product.getId()}"
                                        class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                         <span><i class="ion-ios-menu"></i></span>
@@ -275,7 +288,6 @@
                                        class="buy-now d-flex justify-content-center align-items-center mx-1">
                                         <span><i class="ion-ios-cart"></i></span>
                                     </a>
-
                                 </div>
                             </div>
                         </div>
@@ -412,7 +424,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 <script src="${pageContext.request.contextPath}/static/js/google-map.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.11.2/cloudinary-core-shrinkwrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/main.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/web-js/index-page.js?v=4"></script>
+<script src="${pageContext.request.contextPath}/static/js/web-js/index-page.js?v=8"></script>
 <script src="${pageContext.request.contextPath}/static/js/web-js/load-image.js?v=3"
         charset="UTF-8"></script>
 </body>

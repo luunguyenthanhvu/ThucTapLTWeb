@@ -27,6 +27,16 @@ public class ProductService extends AbstractService {
     return ListProductsResponseDTOMapper.INSTANCE.toListDTO(handle, productsList);
   }
 
+  public List<ListProductShopResponseDTO> findAllProductShop() {
+    List<Products> productsList = handle.attach(ProductsDAO.class).findAllBy();
+    return ListProductShopResponseDTOMapper.INSTANCE.toListDto(handle, productsList);
+  }
+
+  public ListProductShopResponseDTO findProductShopResponseById(Integer id) {
+    Products products = handle.attach(ProductsDAO.class).findProductShopResponseDTO(id);
+    return ListProductShopResponseDTOMapper.INSTANCE.toDto(handle, products);
+  }
+
   public List<ListProductResponseDTO> findAllBy(int start, int length, String searchText,
       String category, List<DataTableRequestDTO.OrderDTO> orderDTOS) {
     ProductsDAO productsDAO = handle.attach(ProductsDAO.class);
