@@ -59,12 +59,12 @@ public class PaymentServices {
     }
     private List<Transaction> getTransactionInformation(Bills bill) {
         Details details = new Details();
-        details.setShipping(String.format("%.3f", 25000.0 / 25000.0));  // Trả về 1.00
-        details.setSubtotal(String.format("%.3f", 100000.0 / 25000.0));  // Trả về 4.00
+        details.setShipping(String.format("%.3f", bill.getDeliveryFee() / 25000.0));  // Trả về 1.00
+        details.setSubtotal(String.format("%.3f", bill.getTotalPrice() / 25000.0));  // Trả về 4.00
 
         Amount amount = new Amount();
         amount.setCurrency("USD");
-        amount.setTotal(String.format("%.3f", (100000.0 / 25000.0)+(25000.0 / 25000.0)));
+        amount.setTotal(String.format("%.3f", (bill.getDeliveryFee()+bill.getTotalPrice()) / 25000.0));
         amount.setDetails(details);
 
         Transaction transaction = new Transaction();
@@ -77,7 +77,7 @@ public class PaymentServices {
         Item item = new Item();
         item.setCurrency("USD");
         item.setName(bill.getProductList());
-        item.setPrice(String.format("%.3f", 1000000.0 / 250000.0));  // Trả về 4.00
+        item.setPrice(String.format("%.3f", bill.getTotalPrice() / 25000.0));  // Trả về 4.00
         item.setQuantity("1");
 
         items.add(item);
@@ -88,8 +88,8 @@ public class PaymentServices {
         listTransaction.add(transaction);
 
         return listTransaction;
-
     }
+
     private RedirectUrls getRedirectURLs() {
         RedirectUrls redirectUrls = new RedirectUrls();
         redirectUrls.setCancelUrl("http://localhost:8080/page/shop/shop-forward");
