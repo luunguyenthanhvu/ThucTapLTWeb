@@ -323,17 +323,17 @@
     }
 
     .ALERT {
-    background-color: darkorange;
+    background-color: #ffff72;
     padding: 10px 20px;
     }
 
     .DANGER {
-    background-color: orangered;
+    background-color: rgba(249, 0, 0, 0.7);
     padding: 10px 20px;
     }
 
     .WARNING {
-    background-color: peachpuff;
+    background-color: #eb750a;
     padding: 10px 20px;
 
     }

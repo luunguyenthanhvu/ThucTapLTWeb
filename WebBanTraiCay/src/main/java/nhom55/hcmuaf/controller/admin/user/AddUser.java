@@ -4,6 +4,11 @@ import nhom55.hcmuaf.beans.Role;
 import nhom55.hcmuaf.beans.Users;
 import nhom55.hcmuaf.dao.RoleDAO;
 import nhom55.hcmuaf.dao.daoimpl.RoleDAOImpl;
+import nhom55.hcmuaf.dao.daoimpl.UsersDaoImpl;
+import nhom55.hcmuaf.enums.LogLevels;
+import nhom55.hcmuaf.log.AbsDAO;
+import nhom55.hcmuaf.log.Log;
+import nhom55.hcmuaf.log.RequestInfo;
 import nhom55.hcmuaf.services.RegisterAccountServiceForAdmin;
 import nhom55.hcmuaf.util.MyUtils;
 import nhom55.hcmuaf.util.UserValidator;
@@ -13,6 +18,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @WebServlet(name = "AddUser", value = "/admin/user/add-user")
@@ -33,7 +39,8 @@ public class AddUser extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+         HttpSession session = request.getSession();
+         Users admin = MyUtils.getLoginedUser(session);
          String tenNguoiDung = request.getParameter("ten_nguoi_dung");
          String matKhau =  request.getParameter("mat_khau_nguoi_dung");
          String nhapLaiMK = request.getParameter("nhap_lai_mat_khau_nguoi_dung");
@@ -61,6 +68,19 @@ public class AddUser extends HttpServlet {
             String result = RegisterAccountServiceForAdmin.getInstance().RegisterUser(tenNguoiDung,hash,encodePass,email,diaChi,sdt,avatarUser,ngaySinh,gioiTinh,role);
             System.out.println(result);
             if(result.equals("SUCCESS")) {
+                Log<Users> log = new Log<>();
+                AbsDAO<Users> absDAO = new AbsDAO<>();
+                RequestInfo requestInfo = new RequestInfo(request.getRemoteAddr(), "HCM", "VietNam");
+                log.setLevel(LogLevels.ALERT);
+                log.setIp(requestInfo.getIp());
+                log.setAddress(requestInfo.getAddress());
+                log.setNational(requestInfo.getNation());
+                log.setNote("Người dùng "+admin.getUsername()+" đã thêm 1 tài khoản mới");
+                Users newUser = new UsersDaoImpl().getUserByEmail(email);
+                log.setPreValue("Không có dữ liệu");
+                log.setCurrentValue(newUser.toString());
+                log.setCreateAt(LocalDateTime.now());
+                absDAO.insert(log);
                 request.setAttribute("notify", "Đăng ký tài khoản thành công.");
                 doGet(request,response);
             } else {

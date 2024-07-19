@@ -2,6 +2,11 @@ package nhom55.hcmuaf.controller.admin.user;
 
 import nhom55.hcmuaf.beans.Role;
 import nhom55.hcmuaf.beans.Users;
+import nhom55.hcmuaf.dao.daoimpl.UsersDaoImpl;
+import nhom55.hcmuaf.enums.LogLevels;
+import nhom55.hcmuaf.log.AbsDAO;
+import nhom55.hcmuaf.log.Log;
+import nhom55.hcmuaf.log.RequestInfo;
 import nhom55.hcmuaf.services.UserService;
 import nhom55.hcmuaf.util.MyUtils;
 import nhom55.hcmuaf.util.UserValidator;
@@ -14,6 +19,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +54,6 @@ public class UpdateUser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Users admin = MyUtils.getLoginedUser(session);
-
         String parameterValue = request.getParameter("id_nguoi_dung");
         String username = request.getParameter("username");
         String email = request.getParameter("email");
@@ -61,7 +66,7 @@ public class UpdateUser extends HttpServlet {
 
         if (parameterValue != null && !parameterValue.isEmpty()) { // Kiểm tra xem giá trị có null không
             int id = Integer.parseInt(parameterValue);
-
+            Users oldUserData = new UsersDaoImpl().getUserById(id);
             if (checkValidate(request, response, username, email, address, phoneNumber, dateOfBirth,gender)) {
                 int status = Integer.parseInt(statusParam);
                 int role = Integer.parseInt(roleParam);
@@ -75,9 +80,21 @@ public class UpdateUser extends HttpServlet {
                 }
 
                 UserService.getInstance().updateProfile(id, username, email, address, phoneNumber, myBirthDay, gender, status, role);
-
+                Log<Users> log = new Log<>();
+                AbsDAO<Users> absDAO = new AbsDAO<>();
+                RequestInfo requestInfo = new RequestInfo(request.getRemoteAddr(), "HCM", "VietNam");
+                log.setIp(requestInfo.getIp());
+                log.setNational(requestInfo.getNation());
+                log.setAddress(requestInfo.getAddress());
                 // Nếu thay đổi email
-                if (admin.getId()==id && !admin.getEmail().equals(email)) {
+                if (!oldUserData.getEmail().equals(email)) {
+                    log.setLevel(LogLevels.ALERT);
+                    log.setNote("Người dùng "+admin.getUsername()+" thay đổi email của "+oldUserData.getUsername());
+                    log.setPreValue(oldUserData.toString());
+                    log.setCreateAt(oldUserData.getCreationTime());
+                    log.setCurrentValue(username+", "+email+", "+address+", "+phoneNumber+", "+myBirthDay+", "+gender+", "+status+", "+role);
+                    log.setUpdateAt(LocalDateTime.now());
+                    absDAO.insert(log);
                     request.setAttribute("result", "Đổi email thành công. Vui lòng đăng nhập lại!");
                     // xoa session hien tai
                     MyUtils.removeLoginedUser(session);
@@ -88,7 +105,14 @@ public class UpdateUser extends HttpServlet {
                 }
 
                 // Nếu thay đổi role (vai trò)
-                if (admin.getId()==id && admin.getRole() != role) {
+                if (oldUserData.getRole() != role) {
+                    log.setLevel(LogLevels.WARNING);
+                    log.setNote("Người dùng "+admin.getUsername()+" thay đổi vai trò của "+oldUserData.getUsername());
+                    log.setPreValue(oldUserData.toString());
+                    log.setCreateAt(oldUserData.getCreationTime());
+                    log.setCurrentValue(username+", "+email+", "+address+", "+phoneNumber+", "+myBirthDay+", "+gender+", "+status+", "+role);
+                    log.setUpdateAt(LocalDateTime.now());
+                    absDAO.insert(log);
                     request.setAttribute("result", "Đổi vai trò thành công. Vui lòng đăng nhập lại!");
                     // xoa session hien tai
                     MyUtils.removeLoginedUser(session);
