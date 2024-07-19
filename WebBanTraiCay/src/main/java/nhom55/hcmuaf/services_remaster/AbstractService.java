@@ -19,8 +19,13 @@ public abstract class AbstractService {
   }
 
   public void begin() {
-    if (this.handle != null && this.flag) {
-      this.handle.begin();
+    try {
+      if (this.handle != null && this.flag) {
+        this.handle.getConnection().setAutoCommit(false);
+        this.handle.begin();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 

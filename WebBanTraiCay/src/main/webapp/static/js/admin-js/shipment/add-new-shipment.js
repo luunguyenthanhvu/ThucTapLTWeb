@@ -251,3 +251,56 @@ $('.reset-btn').on('click', function () {
   $('#product-name').val('');
   tableAddNewShipment.ajax.reload();
 })
+
+$('#btn-add-shipment').on('click', function () {
+  dataResponse.forEach(item => {
+    if (item.importPrice === 0 || item.quantity === 0) {
+      return Swal.fire({
+        title: "Nhap thieu thong tin?",
+        text: "Vui long nhap day du cac thong tin",
+        icon: "question"
+      });
+    } else {
+      Swal.fire({
+        title: "Them lo hang",
+        text: "Ban chac chan them lo hang nay?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Co!",
+        denyButtonText: "Khong!",
+      }).then((result) => {
+        console.log(result)
+        console.log($(this).val())
+        if (result.isConfirmed) {
+          const swalLoading = Swal.fire({
+            title: 'Loading...',
+            text: 'Please wait while we process your request.',
+            allowOutsideClick: false, // Ngăn người dùng đóng modal bằng cách nhấp ra ngoài
+            didOpen: () => {
+              Swal.showLoading(); // Hiển thị spinner loading
+            }
+          });
+          const note = $('#note-text').val();
+          $.ajax({
+            url: `${window.context}/api/shipments-api/create-new-shipment`,
+            type: 'POST',
+            data: JSON.stringify({
+              noteText: note,
+              data: dataResponse
+            }),
+            success: function (response) {
+              setTimeout(() => {
+                // Ẩn modal loading
+                swalLoading.close();
+
+                // Chuyển hướng sau khi thành công
+                window.location.href = `${window.context}/admin/product/product-list`;
+              }, 1000)
+            },
+          })
+        } else if (result.isDenied) {
+        }
+      });
+    }
+  })
+})

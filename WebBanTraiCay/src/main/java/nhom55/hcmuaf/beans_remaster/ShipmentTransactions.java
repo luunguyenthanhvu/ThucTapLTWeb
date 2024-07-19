@@ -1,6 +1,6 @@
 package nhom55.hcmuaf.beans_remaster;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +21,7 @@ public class ShipmentTransactions {
   Integer shipmentDetailId;
   String transactionType;
   Integer quantity;
-  Date transactionDate;
+  LocalDateTime transactionDate;
   Integer createdBy;
   String note;
 }
