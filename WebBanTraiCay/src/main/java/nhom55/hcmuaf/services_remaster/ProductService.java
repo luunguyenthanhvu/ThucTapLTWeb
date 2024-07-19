@@ -55,7 +55,6 @@ public class ProductService extends AbstractService {
     return ListProductShopResponseDTOMapper.INSTANCE.toListDto(handle, productsList);
   }
 
-
   public Integer countTotalRecords() {
     return handle.attach(ProductsDAO.class).countTotalRecords();
   }

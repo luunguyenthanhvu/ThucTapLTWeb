@@ -39,7 +39,7 @@ public class CartUserWebsocket {
     // Send current cart data
     CartsEntityWebSocket cart = userCart.get(userId);
     if (cart != null) {
-      String cartData = MyUtils.convertToJson(cart.getTotal());
+      String cartData = MyUtils.convertToJson(cart);
       sendMessage(session, cartData);
     }
   }
@@ -62,14 +62,15 @@ public class CartUserWebsocket {
             requestDTO.getId());
         cart.addToCart(data, requestDTO);
         productService.save();
+      } else if ("delete".equals(requestDTO.getAction())) {
+        cart.deleteItem(requestDTO.getId());
       }
     } catch (Exception e) {
       e.printStackTrace();
       throw new MyHandleException("error", 500);
     }
-
     MyUtils.storeCart(httpSession, cart);
-    String totalJson = MyUtils.convertToJson(cart.getTotal());
+    String totalJson = MyUtils.convertToJson(cart);
     for (Session s : userSession.get(userId)) {
       sendMessage(s, totalJson);
     }

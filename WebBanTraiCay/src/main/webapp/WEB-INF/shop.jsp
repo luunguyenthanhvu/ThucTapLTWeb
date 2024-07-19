@@ -233,11 +233,21 @@
                                                        class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                                         <span><i class="ion-ios-menu"></i></span>
                                                     </a>
+                                                    <c:if test="${product.getQuantityStock() > 0}">
                                                     <a href="javascript:void(0);"
                                                        onclick="addProductToCart(${product.getId()})"
                                                        class="buy-now d-flex justify-content-center align-items-center mx-1">
                                                         <span><i class="ion-ios-cart"></i></span>
-                                                    </a>
+                                                        </c:if>
+                                                        <c:if test="${product.getQuantityStock() == 0}">
+                                                        <a href="javascript:void(0);"
+                                                           onclick="showToast('No quantity')"
+                                                           style="background-color: gray; color: #fff;"
+                                                           class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                                            <span><i
+                                                                    class="ion-ios-cart"></i></span>
+                                                            </c:if>
+                                                        </a>
                                                 </div>
                                             </div>
                                         </div>

@@ -283,11 +283,21 @@
                                        class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                         <span><i class="ion-ios-menu"></i></span>
                                     </a>
+                                    <c:if test="${product.getQuantityStock() > 0}">
                                     <a href="javascript:void(0);"
                                        onclick="addProductToCart(${product.getId()})"
                                        class="buy-now d-flex justify-content-center align-items-center mx-1">
                                         <span><i class="ion-ios-cart"></i></span>
-                                    </a>
+                                        </c:if>
+                                        <c:if test="${product.getQuantityStock() == 0}">
+                                        <a href="javascript:void(0);"
+                                           onclick="showToast('No quantity')"
+                                           style="background-color: gray; color: #fff;"
+                                           class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                                            <span><i
+                                                                    class="ion-ios-cart"></i></span>
+                                            </c:if>
+                                        </a>
                                 </div>
                             </div>
                         </div>
@@ -379,12 +389,10 @@
             <div class="col-md-12 text-center">
 
                 <p>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     Copyright &copy;<script>document.write(new Date().getFullYear());</script>
                     All rights reserved | Mẫu thiết kế của <i class="icon-heart color-danger"
                                                               aria-hidden="true"></i> <a
                         href="https://colorlib.com" target="_blank">Colorlib</a>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 </p>
             </div>
         </div>

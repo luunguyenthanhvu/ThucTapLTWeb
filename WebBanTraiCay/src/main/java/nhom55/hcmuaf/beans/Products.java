@@ -6,7 +6,9 @@ import nhom55.hcmuaf.log.Log;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
+import lombok.Data;
 
+@Data
 public class Products extends Log<Products> implements Serializable, IModel {
 
   private int id;
@@ -23,13 +25,14 @@ public class Products extends Log<Products> implements Serializable, IModel {
   private String importedFruit;
   private String imgPublicId;
   private String imgAssetId;
+  private Integer quantityStock;
 
   public Products() {
 
   }
 
   public Products(String nameOfProduct, String description, double price,
-      double weightDefault, int provider,int expriredDay, List<Image> imageList) {
+      double weightDefault, int provider, int expriredDay, List<Image> imageList) {
     this.nameOfProduct = nameOfProduct;
     this.description = description;
     this.price = price;

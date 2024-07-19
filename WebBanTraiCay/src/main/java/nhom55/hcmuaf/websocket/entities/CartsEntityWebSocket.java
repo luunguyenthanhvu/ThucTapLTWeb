@@ -36,10 +36,15 @@ public class CartsEntityWebSocket {
     CartItem cartItem = new CartItem(data.getId(), data.getImgPublicId(), data.getProductName(),
         data.getPrice(), requestDTO.getQuantity());
     if (cartItemList.contains(cartItem)) {
-      cartItemList.stream().filter(i -> i.getId().equals(cartItem.getId()))
-          .findFirst().ifPresent(i -> {
-            if (i.getQuantity() + cartItem.getQuantity() <= data.getQuantityStock()) {
-              i.setQuantity(i.getQuantity() + cartItem.getQuantity());
+      cartItemList.stream()
+          .filter(i -> i.getId().equals(cartItem.getId()))
+          .findFirst()
+          .ifPresent(i -> {
+            int newQuantity = i.getQuantity() + cartItem.getQuantity();
+            if (newQuantity == 0) {
+              cartItemList.remove(i);
+            } else if (newQuantity <= data.getQuantityStock()) {
+              i.setQuantity(newQuantity);
             } else {
               i.setQuantity(data.getQuantityStock());
             }
@@ -55,6 +60,10 @@ public class CartsEntityWebSocket {
 
   public void removeCartItem(CartItem cartItem) {
     cartItemList.remove(cartItem);
+  }
+
+  public void deleteItem(Integer id) {
+    cartItemList.removeIf(item -> item.getId().equals(id));
   }
 
   @Data

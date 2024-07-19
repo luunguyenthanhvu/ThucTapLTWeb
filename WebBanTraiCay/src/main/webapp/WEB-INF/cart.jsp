@@ -176,7 +176,7 @@
                                                style="cursor: pointer; margin-top:  10px; width: 25px; height: 25px"
                                                type="checkbox"></td>
                                     <td class="image-prod">
-                                        <div class="img">
+                                        <div class="img" data-assets="${item.getImgPublicId()}">
                                             <img
                                                     style="width: 100px; height: 100px; object-fit: cover"
                                                     class="img-fluid"
@@ -198,7 +198,7 @@
                                         <div class="input-group mb-3">
                                 <span class="input-group-btn mr-2">
                                     <a href="javascript:void(0);"
-                                       onclick="decProduct(${item.getId()})"
+                                       onclick="decreProduct(${item.getId()})"
                                        class="btn-plus-indre"
                                        data-type="minus" data-field="">
                                         <i class="ion-ios-remove"></i>
@@ -209,7 +209,7 @@
                                                    value="${item.getQuantity()}" min="1">
                                             <span class="input-group-btn ml-2">
                                     <a href="javascript:void(0);"
-                                       onclick="incProduct(${item.getId()})"
+                                       onclick="addProductToCart(${item.getId()})"
                                        class="btn-plus-indre"
                                        data-type="plus" data-field="">
                                         <i class="ion-ios-add"></i>
@@ -220,7 +220,7 @@
                                     </td>
                                     <td class="total">
                                         <fmt:formatNumber pattern="#,##0 ₫"
-                                                          value="${item.getPrice()}"/>
+                                                          value="${item.getPrice() * item.getQuantity()}"/>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -374,7 +374,7 @@
   });
 
 </script>
-<script src="${pageContext.request.contextPath}/static/js/web-js/page-cart.js"></script>
+<script> var context = "${pageContext.request.contextPath}";</script>
 <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/jquery-migrate-3.0.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/popper.min.js"></script>
@@ -391,7 +391,8 @@
 <script src="${pageContext.request.contextPath}/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="${pageContext.request.contextPath}/static/js/google-map.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/main.js"></script>
-<script> var context = "${pageContext.request.contextPath}";</script>
-<script src="${pageContext.request.contextPath}/static/js/web-js/index-page.js?v=8"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.11.2/cloudinary-core-shrinkwrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/web-js/page-cart.js?v=11"></script>
 </body>
 </html>
