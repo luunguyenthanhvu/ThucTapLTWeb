@@ -251,6 +251,7 @@
                 </c:if>
                 <c:if test="${product.getQuantityStock() ==0}">
                     <p class="price" style="font-size: 24px">
+                        <span style="color: red" class="icon-shopping_cart"></span>
                         <span>Sản phẩm hiện đã hết hàng.</span>
                     </p>
                 </c:if>

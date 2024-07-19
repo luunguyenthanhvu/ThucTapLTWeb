@@ -8,6 +8,11 @@ $('.ftco-animate.fadeInUp.ftco-animated .product .img-prod').each(
     (_, elements) => {
       const publicId = $(elements).data('assets');
       const imageUrl = cl.url(publicId);
-      $(elements).find('img').prop('src', imageUrl);
+      const imgDefault = `${window.context}/static/images/default-fruit.jpg`;
+      if (imageUrl !== null) {
+        $(elements).find('img').prop('src', imageUrl);
+      } else {
+        $(elements).find('img').prop('src', imgDefault);
+      }
     });
 

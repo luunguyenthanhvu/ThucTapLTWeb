@@ -19,7 +19,9 @@ function initializeWebSocket() {
   socket.onmessage = (event) => {
     console.log(event.data)
     try {
-      $('.cart-total-amount').text(event.data);
+      const data = JSON.parse(event.data);
+      const cartItemListSize = data.cartItemList.length;
+      $('.cart-total-amount').text(cartItemListSize);
     } catch (e) {
       console.error('Failed to parse message', e);
     }
@@ -71,6 +73,33 @@ function addProductToCartWithWeight(productId) {
     var message = {
       "id": productId,
       "quantity": $('#quantity').val(),
+      "action": "add"
+    };
+
+    console.log(message)
+
+    if (socket.readyState === WebSocket.OPEN) {
+      socket.send(JSON.stringify(message));
+      showToast("Success");
+      console.log('Message sent:', message);
+    } else {
+      console.error('WebSocket is not open. Cannot send message.');
+      setTimeout(sendMessage, 100);
+    }
+  };
+
+  sendMessage();
+}
+
+function decreProduct(productId) {
+  if (!socket || socket.readyState === WebSocket.CLOSED) {
+    initializeWebSocket();
+  }
+
+  const sendMessage = () => {
+    var message = {
+      "id": productId,
+      "quantity": -1,
       "action": "add"
     };
 

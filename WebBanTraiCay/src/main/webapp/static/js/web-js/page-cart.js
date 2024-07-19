@@ -1,81 +1,180 @@
-// delete product
+'use strict';
+
+var cloudName = 'dter3mlpl';
+var apiKey = '899244476586798';
+var cl = cloudinary.Cloudinary.new({cloud_name: cloudName});
+
+$('#mainContent .text-center .image-prod .img').each(
+    (_, elements) => {
+      const publicId = $(elements).data('assets');
+      const imageUrl = cl.url(publicId);
+      const baseUrl = `${window.context}/static/images/loading-cat.gif"`;
+      $(elements).find('img').prop('src', imageUrl);
+      if (imageUrl) {
+        $(elements).find('img').prop('src', imageUrl);
+      } else {
+        $(elements).find('img').prop('src', baseUrl);
+      }
+    });
+
 function deleteProduct(productId) {
-  var isRemoved = confirm('Bạn có muốn xóa sản phẩm ra khỏi giỏ hàng không?');
-  if(isRemoved) {
-    $.ajax({
-      type: 'POST',
-      url: `${window.context}/page/cart/remove-product-cart`,
-      data: {
-        productId: productId
-      },
-      success: function (response) {
-        showToast(response.message);
-        reloadCartProduct();
-        if(response.message === "Removed from cart") {
-          updateCartAmount();
+  Swal.fire({
+    title: "Ban muon xoa san pham khoi gio hang?",
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: "Xoa",
+    denyButtonText: `Khong xoa!`
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      Swal.fire("Saved!", "", "success");
+      if (!socket || socket.readyState === WebSocket.CLOSED) {
+        initializeWebSocket();
+      }
+
+      const sendMessage = () => {
+        var message = {
+          "id": productId,
+          "quantity": 0,
+          "action": "delete"
+        };
+
+        console.log(message)
+
+        if (socket.readyState === WebSocket.OPEN) {
+          socket.send(JSON.stringify(message));
+          showToast("Success");
+          console.log('Message sent:', message);
+        } else {
+          console.error('WebSocket is not open. Cannot send message.');
+          setTimeout(sendMessage, 100);
         }
-      },
-      error: function (error) {
-        console.log(error);
-      }
-    })
-  }
-}
-// inc product
-function incProduct(productId) {
-  $.ajax({
-    type: 'POST',
-    url: `${window.context}/page/cart/quantity-inc-dec`,
-    data: {
-      productId: productId,
-      actionType: 'inc'
-    },
-    success: function (response) {
-      showToast(response.message);
-      reloadCartProduct();
-    },
-    error: function (error) {
-      alert(error);
-    }
-  })
-}
+      };
 
-// dec product
-function decProduct(productId) {
-  $.ajax({
-    type: 'POST',
-    url: `${window.context}/page/cart/quantity-inc-dec`,
-    data: {
-      productId: productId,
-      actionType: 'dec'
-    },
-    success: function (response) {
-      showToast(response.message);
-      reloadCartProduct();
-      if(response.message === "Removed from cart") {
-        updateCartAmount();
-      }
-    },
-    error: function (error) {
-      alert(error);
+      sendMessage();
+    } else if (result.isDenied) {
+      Swal.fire("Changes are not saved", "", "info");
     }
-  })
-}
-
-// reload page with new amount
-function reloadCartProduct() {
-  $.ajax({
-    type: 'POST',
-    url: `${window.context}/page/cart`,
-    data: {},
-    success: function (updateHTML) {
-      $('#mainContent').html(updateHTML);
-    },
-    error: function (error) {
-      console.log(error);
-    }
-
   });
+}
+
+$('.cart-total-amount').text("0");
+// Global WebSocket instance
+let socket = null;
+initializeWebSocket();
+
+function initializeWebSocket() {
+  if (socket && socket.readyState !== WebSocket.CLOSED) {
+    console.log('WebSocket connection already established.');
+    return;
+  }
+  socket = new WebSocket('ws://localhost:8080/websocket/cart-socket');
+
+  socket.onopen = () => {
+    console.log('WebSocket connected');
+  };
+
+  socket.onmessage = (event) => {
+    console.log(event.data)
+    try {
+      const data = JSON.parse(event.data);
+      const cartItemListSize = data.cartItemList.length;
+      renderCart(data);
+      $('.cart-total-amount').text(cartItemListSize);
+    } catch (e) {
+      console.error('Failed to parse message', e);
+    }
+  };
+
+  socket.onerror = (error) => {
+    console.error('WebSocket error observed:', error);
+  };
+
+  socket.onclose = () => {
+    console.log('WebSocket connection closed.');
+    socket = null;
+  };
+}
+
+function addProductToCart(productId) {
+  if (!socket || socket.readyState === WebSocket.CLOSED) {
+    initializeWebSocket();
+  }
+
+  const sendMessage = () => {
+    var message = {
+      "id": productId,
+      "quantity": 1,
+      "action": "add"
+    };
+
+    console.log(message)
+
+    if (socket.readyState === WebSocket.OPEN) {
+      socket.send(JSON.stringify(message));
+      showToast("Success");
+      console.log('Message sent:', message);
+    } else {
+      console.error('WebSocket is not open. Cannot send message.');
+      setTimeout(sendMessage, 100);
+    }
+  };
+
+  sendMessage();
+}
+
+function addProductToCartWithWeight(productId) {
+  if (!socket || socket.readyState === WebSocket.CLOSED) {
+    initializeWebSocket();
+  }
+
+  const sendMessage = () => {
+    var message = {
+      "id": productId,
+      "quantity": $('#quantity').val(),
+      "action": "add"
+    };
+
+    console.log(message)
+
+    if (socket.readyState === WebSocket.OPEN) {
+      socket.send(JSON.stringify(message));
+      showToast("Success");
+      console.log('Message sent:', message);
+    } else {
+      console.error('WebSocket is not open. Cannot send message.');
+      setTimeout(sendMessage, 100);
+    }
+  };
+
+  sendMessage();
+}
+
+function decreProduct(productId) {
+  if (!socket || socket.readyState === WebSocket.CLOSED) {
+    initializeWebSocket();
+  }
+
+  const sendMessage = () => {
+    var message = {
+      "id": productId,
+      "quantity": -1,
+      "action": "add"
+    };
+
+    console.log(message)
+
+    if (socket.readyState === WebSocket.OPEN) {
+      socket.send(JSON.stringify(message));
+      showToast("Success");
+      console.log('Message sent:', message);
+    } else {
+      console.error('WebSocket is not open. Cannot send message.');
+      setTimeout(sendMessage, 100);
+    }
+  };
+
+  sendMessage();
 }
 
 // toast function
@@ -154,7 +253,7 @@ function showToast(response) {
       type: 'info',
       duration: 3000
     })
-  }else if (response === "Product does not exist") {
+  } else if (response === "Product does not exist") {
     toast({
       title: 'Lỗi',
       message: 'Sản phẩm không tồn tại!',
@@ -178,4 +277,78 @@ function updateCartAmount() {
       console.log('Đã xảy ra lỗi khi thêm vào giỏ hàng');
     }
   })
+}
+
+function renderCartItem(item) {
+  return ` <tr class="text-center">
+            <td class="product-remove"><a
+                    href="javascript:void(0);"
+                    onclick="deleteProduct(${item.id})"><span
+                    class="ion-ios-close"></span></a></td>
+            <td><input name="selectedProducts"
+                       value="${item.id}"
+                       style="cursor: pointer; margin-top: 10px; width: 25px; height: 25px"
+                       type="checkbox"></td>
+            <td class="image-prod">
+                <div class="img" data-assets="${item.imgPublicId}">
+                    <img style="width: 100px; height: 100px; object-fit: cover"
+                         class="img-fluid"
+                         src="${window.context}/static/images/loading-cat.gif"
+                         alt="Colorlib Template">
+                </div>
+            </td>
+            <td class="product-name">
+                <h3>${item.productName}</h3>
+            </td>
+            <td class="price">
+                ${new Intl.NumberFormat('vi-VN',
+      {style: 'currency', currency: 'VND'}).format(item.price)}
+            </td>
+            <td class="quantity">
+                <div class="input-group mb-3">
+                    <span class="input-group-btn mr-2">
+                        <a href="javascript:void(0);"
+                           onclick="decreProduct(${item.id})"
+                           class="btn-plus-indre"
+                           data-type="minus" data-field="">
+                            <i class="ion-ios-remove"></i>
+                        </a>
+                    </span>
+                    <input type="text" name="quantity"
+                           class="form-control input-number"
+                           value="${item.quantity}" min="1">
+                    <span class="input-group-btn ml-2">
+                        <a href="javascript:void(0);"
+                           onclick="addProductToCart(${item.id})"
+                           class="btn-plus-indre"
+                           data-type="plus" data-field="">
+                            <i class="ion-ios-add"></i>
+                        </a>
+                    </span>
+                </div>
+            </td>
+            <td class="total">
+                ${new Intl.NumberFormat('vi-VN',
+      {style: 'currency', currency: 'VND'}).format(item.price * item.quantity)}
+            </td>
+        </tr>`;
+}
+
+function renderCart(cartData) {
+  const cartItemsHtml = cartData.cartItemList.map(renderCartItem).join('');
+  document.querySelector('#mainContent').innerHTML = cartItemsHtml;
+  document.querySelector(
+      '.cart-total-amount').textContent = cartData.cartItemList.length;
+  $('#mainContent .text-center .image-prod .img').each(
+      (_, elements) => {
+        const publicId = $(elements).data('assets');
+        const imageUrl = cl.url(publicId);
+        const baseUrl = `${window.context}/static/images/loading-cat.gif"`;
+        $(elements).find('img').prop('src', imageUrl);
+        if (imageUrl) {
+          $(elements).find('img').prop('src', imageUrl);
+        } else {
+          $(elements).find('img').prop('src', baseUrl);
+        }
+      });
 }
