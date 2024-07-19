@@ -3,7 +3,9 @@ package nhom55.hcmuaf.beans;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
+import lombok.Data;
 
+@Data
 public class Products implements Serializable {
 
   private int id;
@@ -20,13 +22,14 @@ public class Products implements Serializable {
   private String importedFruit;
   private String imgPublicId;
   private String imgAssetId;
+  private Integer quantityStock;
 
   public Products() {
 
   }
 
   public Products(String nameOfProduct, String description, double price,
-      double weightDefault, int provider,int expriredDay, List<Image> imageList) {
+      double weightDefault, int provider, int expriredDay, List<Image> imageList) {
     this.nameOfProduct = nameOfProduct;
     this.description = description;
     this.price = price;

@@ -45,13 +45,24 @@ public class ProductDaoImpl implements ProductDao {
   @Override
   public Products showProductDetails(int productId) {
     return JDBIConnector.get().withHandle(h ->
-        // hiển thị sản phẩm vs id được truyền vào
         h.createQuery(
-                "SELECT id, nameOfProduct, description, price, imgPublicId, weightDefault  FROM Products WHERE id = :id")
+                "SELECT p.id, p.nameOfProduct, p.description, p.price, p.imgPublicId, p.weightDefault, "
+                    + "(SELECT SUM(sd.quantity) FROM shipment_details sd WHERE sd.productId = p.id AND sd.available = 1) as quantityStock "
+                    + "FROM products p WHERE p.id = :id")
             .bind("id", productId)
-            .mapToBean(Products.class)
+            .map((rs, ctx) -> {
+              Products product = new Products();
+              product.setId(rs.getInt("id"));
+              product.setNameOfProduct(rs.getString("nameOfProduct"));
+              product.setDescription(rs.getString("description"));
+              product.setPrice(rs.getDouble("price"));
+              product.setImgPublicId(rs.getString("imgPublicId"));
+              product.setWeightDefault(rs.getDouble("weightDefault"));
+              product.setQuantityStock(rs.getInt("quantityStock")); // set thêm quantityStock
+              return product;
+            })
             .findFirst()
-            .orElse(null)); // không tìm thấy id trả về null
+            .orElse(null));
   }
 
 

@@ -238,8 +238,8 @@
                     </div>
                     <div class="w-100"></div>
                     <div class="col-md-12">
-                        <%--                        <p style="color: #000;">${product.getWeight()} kg hợp lệ</p>--%>
-                        <%--                        <span id="max-product" hidden="hidden">${product.getWeight()}</span>--%>
+                        <p style="color: #000;">${product.getQuantityStock()} kg hợp lệ</p>
+                        <span id="max-product" hidden="hidden">${product.getQuantityStock()}</span>
                     </div>
                 </div>
                 <p><a id="addToCartLink" href="javascript:void(0);"

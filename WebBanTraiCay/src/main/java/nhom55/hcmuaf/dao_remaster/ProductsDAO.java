@@ -89,4 +89,10 @@ public interface ProductsDAO {
 
   @SqlUpdate("UPDATE products set status = :status WHERE id = :id")
   void updateProductStatus(@Bind("status") Integer status, @Bind("id") Integer id);
+
+  @SqlQuery("SELECT p.*, "
+      + "(SELECT SUM(sd.quantity) FROM shipment_details sd WHERE sd.productId = p.id AND sd.available = 1) as quantityStock "
+      + "FROM products p "
+      + "WHERE p.id = :id ")
+  Products findProductDetailsResponseDTO(@Bind("id") Integer id);
 }
