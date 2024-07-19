@@ -66,6 +66,10 @@ public class CartsEntityWebSocket {
     cartItemList.removeIf(item -> item.getId().equals(id));
   }
 
+  public void deleteItems(List<Integer> ids) {
+    cartItemList.removeIf(item -> ids.contains(item.getId()));
+  }
+
   @Data
   @AllArgsConstructor
   @NoArgsConstructor
