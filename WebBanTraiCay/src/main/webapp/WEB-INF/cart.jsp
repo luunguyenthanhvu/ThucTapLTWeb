@@ -57,7 +57,8 @@
      id="ftco-navbar">
     <div class="container navbar-container">
         <div class="navbar-brand">
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/page/home">Cửa Hàng Trái
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/page/home">Cửa Hàng
+                Trái
                 Cây</a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
@@ -69,8 +70,9 @@
             <ul class="navbar-nav">
                 <li class="nav-item active"><a href="${pageContext.request.contextPath}/page/home"
                                                class="nav-link">Trang Chủ</a></li>
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/page/shop/shop-forward"
-                                        class="nav-link">Cửa Hàng</a></li>
+                <li class="nav-item"><a
+                        href="${pageContext.request.contextPath}/page/shop/shop-forward"
+                        class="nav-link">Cửa Hàng</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/page/about"
                                         class="nav-link">Về Chúng Tôi</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/page/contact"
@@ -143,7 +145,8 @@
 </div>
 <section class="ftco-section ftco-cart">
     <input id="isUserLogined" type="hidden" value="${loginedUser}">
-    <form action="${pageContext.request.contextPath}/page/order/submit-selected-products" method="post">
+    <form action="${pageContext.request.contextPath}/page/order/submit-selected-products"
+          method="post">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 ftco-animate">
@@ -161,14 +164,15 @@
                             </tr>
                             </thead>
                             <tbody id="mainContent">
-                            <c:forEach items="${cart.getCartProduct()}" var="item" varStatus="loop">
+                            <c:forEach items="${cart.getCartItemList()}" var="item"
+                                       varStatus="loop">
                                 <tr class="text-center">
                                     <td class="product-remove"><a
                                             href="javascript:void(0);"
-                                            onclick="deleteProduct(${item.getProducts().getId()})"><span
+                                            onclick="deleteProduct(${item.getId()})"><span
                                             class="ion-ios-close"></span></a></td>
                                     <td><input name="selectedProducts"
-                                               value="${item.getProducts().getId()}"
+                                               value="${item.getId()}"
                                                style="cursor: pointer; margin-top:  10px; width: 25px; height: 25px"
                                                type="checkbox"></td>
                                     <td class="image-prod">
@@ -176,26 +180,25 @@
                                             <img
                                                     style="width: 100px; height: 100px; object-fit: cover"
                                                     class="img-fluid"
-                                                    src="${item.getProducts().getImg()}"
+                                                    src="${pageContext.request.contextPath}/static/images/loading-cat.gif"
                                                     alt="Colorlib Template">
                                         </div>
                                     </td>
 
                                     <td class="product-name">
-                                        <h3>${item.getProducts().getNameOfProduct()}</h3>
-                                        <p>${item.getProducts().getDescription()}</p>
+                                        <h3>${item.getProductName()}</h3>
                                     </td>
 
                                     <td class="price">
                                         <fmt:formatNumber pattern="#,##0 ₫"
-                                                          value="${item.getProducts().getPrice()}"/>
+                                                          value="${item.getPrice()}"/>
                                     </td>
 
                                     <td class="quantity">
                                         <div class="input-group mb-3">
                                 <span class="input-group-btn mr-2">
                                     <a href="javascript:void(0);"
-                                       onclick="decProduct(${item.getProducts().getId()})"
+                                       onclick="decProduct(${item.getId()})"
                                        class="btn-plus-indre"
                                        data-type="minus" data-field="">
                                         <i class="ion-ios-remove"></i>
@@ -206,7 +209,7 @@
                                                    value="${item.getQuantity()}" min="1">
                                             <span class="input-group-btn ml-2">
                                     <a href="javascript:void(0);"
-                                       onclick="incProduct(${item.getProducts().getId()})"
+                                       onclick="incProduct(${item.getId()})"
                                        class="btn-plus-indre"
                                        data-type="plus" data-field="">
                                         <i class="ion-ios-add"></i>
@@ -266,9 +269,12 @@
                 <div class="ftco-footer-widget mb-4 ml-md-5">
                     <h2 class="ftco-heading-2">Menu</h2>
                     <ul class="list-unstyled">
-                        <li><a href="${pageContext.request.contextPath}/page/shop/shop-forward" class="py-2 d-block">Cửa hàng chúng tôi</a></li>
-                        <li><a href="${pageContext.request.contextPath}/page/about" class="py-2 d-block">Về chúng tôi</a></li>
-                        <li><a  href="${pageContext.request.contextPath}/page/contact" class="py-2 d-block">Liên hệ với chúng tôi</a></li>
+                        <li><a href="${pageContext.request.contextPath}/page/shop/shop-forward"
+                               class="py-2 d-block">Cửa hàng chúng tôi</a></li>
+                        <li><a href="${pageContext.request.contextPath}/page/about"
+                               class="py-2 d-block">Về chúng tôi</a></li>
+                        <li><a href="${pageContext.request.contextPath}/page/contact"
+                               class="py-2 d-block">Liên hệ với chúng tôi</a></li>
                     </ul>
                 </div>
             </div>
@@ -348,7 +354,7 @@
         selectedProductIds.push(checkbox.value);
       });
       const isLogin = document.getElementById("isUserLogined").value;
-      if (isLogin === null || isLogin.length <= 0){
+      if (isLogin === null || isLogin.length <= 0) {
         confirm("Để đặt đơn hàng vui lòng đăng nhập.");
       }
       // Kiểm tra nếu có sản phẩm được chọn
@@ -386,5 +392,6 @@
 <script src="${pageContext.request.contextPath}/static/js/google-map.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/main.js"></script>
 <script> var context = "${pageContext.request.contextPath}";</script>
+<script src="${pageContext.request.contextPath}/static/js/web-js/index-page.js?v=8"></script>
 </body>
 </html>

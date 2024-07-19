@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CartWebSocketRequestDTO {
 
-  Integer productId;
+  Integer id;
   Integer quantity;
   String action;
 }

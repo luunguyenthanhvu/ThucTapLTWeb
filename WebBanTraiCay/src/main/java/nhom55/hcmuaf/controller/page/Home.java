@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import nhom55.hcmuaf.beans.Products;
 import nhom55.hcmuaf.beans.Users;
-import nhom55.hcmuaf.services.ProductService;
+import nhom55.hcmuaf.dto.response.ListProductShopResponseDTO;
+import nhom55.hcmuaf.services_remaster.ProductService;
 import nhom55.hcmuaf.util.MyUtils;
 import nhom55.hcmuaf.websocket.entities.CartsEntityWebSocket;
 
@@ -19,6 +19,7 @@ import nhom55.hcmuaf.websocket.entities.CartsEntityWebSocket;
 public class Home extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
+  private ProductService productService;
 
   public Home() {
     super();
@@ -27,9 +28,10 @@ public class Home extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
+    productService = new ProductService();
+    productService.begin();
     // Dẫn đến đường link trang chủ hiển thị ra 8 sản phẩm
-    List<Products> products = ProductService.getInstance().getProduct();
+    List<ListProductShopResponseDTO> products = productService.findAllBy(0, 20, "", "");
     request.setAttribute("listProducts", products);
 
     HttpSession session = request.getSession();

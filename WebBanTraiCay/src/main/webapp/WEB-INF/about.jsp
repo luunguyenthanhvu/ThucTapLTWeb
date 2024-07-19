@@ -18,27 +18,38 @@
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
           rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
+          rel="stylesheet">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/static/css/web-css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/animate.css">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/owl.carousel.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/magnific-popup.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/static/css/web-css/owl.carousel.min.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/static/css/web-css/owl.theme.default.min.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/static/css/web-css/magnific-popup.css">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/aos.css">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/ionicons.min.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/static/css/web-css/ionicons.min.css">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/jquery.timepicker.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/static/css/web-css/bootstrap-datepicker.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/static/css/web-css/jquery.timepicker.css">
 
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/flaticon.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/static/css/web-css/flaticon.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/icomoon.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/web-css/style.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/static/css/web-css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/web-css/fix.css">
 
 
@@ -48,7 +59,8 @@
      id="ftco-navbar">
     <div class="container navbar-container">
         <div class="navbar-brand">
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/page/home">Cửa Hàng Trái
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/page/home">Cửa Hàng
+                Trái
                 Cây</a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
@@ -60,8 +72,9 @@
             <ul class="navbar-nav">
                 <li class="nav-item active"><a href="${pageContext.request.contextPath}/page/home"
                                                class="nav-link">Trang Chủ</a></li>
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/page/shop/shop-forward"
-                                        class="nav-link">Cửa Hàng</a></li>
+                <li class="nav-item"><a
+                        href="${pageContext.request.contextPath}/page/shop/shop-forward"
+                        class="nav-link">Cửa Hàng</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/page/about"
                                         class="nav-link">Về Chúng Tôi</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/page/contact"
@@ -70,7 +83,7 @@
                     <a href="${pageContext.request.contextPath}/page/cart"
                        class="nav-link cart-info-container">
                         <span class="icon-shopping_cart"></span>
-                        [<span class="cart-total-amount">${cart.getTotal()}</span>]
+                        [<span class="cart-total-amount"></span>]
                     </a>
                 </li>
 
@@ -124,11 +137,14 @@
 </div>
 <!-- END nav -->
 
-<div class="hero-wrap hero-bread" style="background-image: url(/static/images/bg1.jpg);filter: brightness(0.8);">
+<div class="hero-wrap hero-bread"
+     style="background-image: url(/static/images/bg1.jpg);filter: brightness(0.8);">
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs"><span class="mr-2"><a href="${pageContext.request.contextPath}/page/home">Trang chủ</a></span> <span>Về chúng tôi</span></p>
+                <p class="breadcrumbs"><span class="mr-2"><a
+                        href="${pageContext.request.contextPath}/page/home">Trang chủ</a></span>
+                    <span>Về chúng tôi</span></p>
                 <h1 class="mb-0 bread">Về chúng tôi</h1>
             </div>
         </div>
@@ -148,20 +164,27 @@
             <div class="col-md-7 py-5 wrap-about pb-md-5 ftco-animate">
                 <div class="heading-section-bold mb-4 mt-md-5">
                     <div class="ml-md-0">
-                        <h2 class="mb-4">Chào mừng bạn đến với cửa hàng trái cây online, trang web của chúng tôi</h2>
+                        <h2 class="mb-4">Chào mừng bạn đến với cửa hàng trái cây online, trang web
+                            của chúng tôi</h2>
                     </div>
                 </div>
                 <div class="pb-md-5">
-                    <p>Dù Việt Nam có một nền kinh tế nông nghiệp phát triển, nhưng việc tiếp cận và mua,
-                        sắm trái cây tươi sạch và chất lượng không phải lúc nào cũng dễ dàng đối với người tiêu dùng.
-                        Để đáp ứng nhu cầu ngày càng cao của khách hàng về sự thuận tiện và đảm bảo chất lượng,
+                    <p>Dù Việt Nam có một nền kinh tế nông nghiệp phát triển, nhưng việc tiếp cận và
+                        mua,
+                        sắm trái cây tươi sạch và chất lượng không phải lúc nào cũng dễ dàng đối với
+                        người tiêu dùng.
+                        Để đáp ứng nhu cầu ngày càng cao của khách hàng về sự thuận tiện và đảm bảo
+                        chất lượng,
                         trang web của chúng tôi xuất hiện để phục vụ nhu cầu cho bạn.
                     </p>
                     <p>Bạn có thể dễ dàng chọn lựa sản phẩm mà họ muốn, đặt hàng trực tuyến và
-                        nhận được những quả trái cây tươi sức sống được giao hàng tận nơi. Ngoài ra, chúng tôi
+                        nhận được những quả trái cây tươi sức sống được giao hàng tận nơi. Ngoài ra,
+                        chúng tôi
                         thường xuyên cập nhật các ưu đãi, khuyến mãi và chính sách hỗ trợ
-                        khách hàng, tạo ra một trải nghiệm mua sắm trực tuyến an tâm và tiện lợi.</p>
-                    <p><a href="${pageContext.request.contextPath}/page/shop/shop-forward" class="btn btn-primary">Xem cửa hàng</a></p>
+                        khách hàng, tạo ra một trải nghiệm mua sắm trực tuyến an tâm và tiện
+                        lợi.</p>
+                    <p><a href="${pageContext.request.contextPath}/page/shop/shop-forward"
+                          class="btn btn-primary">Xem cửa hàng</a></p>
                 </div>
             </div>
         </div>
@@ -181,16 +204,22 @@
                 <div class="carousel-testimony owl-carousel">
                     <div class="item">
                         <div class="testimony-wrap p-4 pb-5">
-                            <div class="user-img mb-5" style="background-image: url(/static/images/person_1.jpg)">
+                            <div class="user-img mb-5"
+                                 style="background-image: url(/static/images/person_1.jpg)">
                     <span class="quote d-flex align-items-center justify-content-center">
                       <i class="icon-quote-left"></i>
                     </span>
                             </div>
                             <div class="text text-center">
-                                <p class="mb-5 pl-4 line">Tôi đã có trải nghiệm mua trái cây qua một trang web ở Việt Nam và rất hài lòng với
-                                    chất lượng sản phẩm. Trang web cung cấp thông tin chi tiết về nguồn gốc và quy trình chăm sóc trái cây,
-                                    giúp tôi chọn lựa được những sản phẩm tươi ngon và an toàn. Quá trình đặt hàng và thanh toán đơn giản, và tôi nhận được giao hàng đúng
-                                    hẹn. Sự chuyên nghiệp và chất lượng của dịch vụ này khiến tôi muốn quay lại mua sắm nhiều hơn.</p>
+                                <p class="mb-5 pl-4 line">Tôi đã có trải nghiệm mua trái cây qua một
+                                    trang web ở Việt Nam và rất hài lòng với
+                                    chất lượng sản phẩm. Trang web cung cấp thông tin chi tiết về
+                                    nguồn gốc và quy trình chăm sóc trái cây,
+                                    giúp tôi chọn lựa được những sản phẩm tươi ngon và an toàn. Quá
+                                    trình đặt hàng và thanh toán đơn giản, và tôi nhận được giao
+                                    hàng đúng
+                                    hẹn. Sự chuyên nghiệp và chất lượng của dịch vụ này khiến tôi
+                                    muốn quay lại mua sắm nhiều hơn.</p>
                                 <p class="name">Garreth Smith</p>
                                 <span class="position">Giám đốc tiếp thị</span>
                             </div>
@@ -198,16 +227,22 @@
                     </div>
                     <div class="item">
                         <div class="testimony-wrap p-4 pb-5">
-                            <div class="user-img mb-5" style="background-image: url(/static/images/person_2.jpg)">
+                            <div class="user-img mb-5"
+                                 style="background-image: url(/static/images/person_2.jpg)">
                     <span class="quote d-flex align-items-center justify-content-center">
                       <i class="icon-quote-left"></i>
                     </span>
                             </div>
                             <div class="text text-center">
                                 <p class="mb-5 pl-4 line">
-                                    Đã lâu tôi không tin tưởng mua trái cây trực tuyến, nhưng sau khi thử nghiệm một trang web bán trái cây ở Việt Nam,
-                                    tôi đã hoàn toàn thay đổi quan điểm. Sự đa dạng của sản phẩm và mô tả chi tiết giúp tôi lựa chọn được những loại trái cây ngon nhất.
-                                    Giao hàng nhanh chóng và sản phẩm đến tay tôi vẫn giữ được độ tươi ngon và chất ượng như họ cam kết. Tôi sẽ giới thiệu trang web này
+                                    Đã lâu tôi không tin tưởng mua trái cây trực tuyến, nhưng sau
+                                    khi thử nghiệm một trang web bán trái cây ở Việt Nam,
+                                    tôi đã hoàn toàn thay đổi quan điểm. Sự đa dạng của sản phẩm và
+                                    mô tả chi tiết giúp tôi lựa chọn được những loại trái cây ngon
+                                    nhất.
+                                    Giao hàng nhanh chóng và sản phẩm đến tay tôi vẫn giữ được độ
+                                    tươi ngon và chất ượng như họ cam kết. Tôi sẽ giới thiệu trang
+                                    web này
                                     cho bạn bè và gia đình của mình .</p>
                                 <p class="name">Garreth Smith</p>
                                 <span class="position">Nhà thiết kế giao diện</span>
@@ -216,17 +251,22 @@
                     </div>
                     <div class="item">
                         <div class="testimony-wrap p-4 pb-5">
-                            <div class="user-img mb-5" style="background-image: url(/static/images/person_3.jpg)">
+                            <div class="user-img mb-5"
+                                 style="background-image: url(/static/images/person_3.jpg)">
                     <span class="quote d-flex align-items-center justify-content-center">
                       <i class="icon-quote-left"></i>
                     </span>
                             </div>
                             <div class="text text-center">
                                 <p class="mb-5 pl-4 line">
-                                    Trải nghiệm mua sắm trái cây trực tuyến tại một trang web ở Việt Nam đã mang lại cho tôi sự tiện lợi và an tâm.
-                                    Hệ thống đặt hàng dễ sử dụng, và tôi có thể theo dõi đơn hàng của mình mọi lúc. Sản phẩm được đóng gói cẩn thận,
-                                    giữ nguyên hương vị tươi ngon. Họ cũng có chăm sóc khách hàng tận tình, luôn sẵn sàng giải đáp mọi thắc mắc của tôi.
-                                    Mua sắm trái cây trực tuyến qua trang web này là một trải nghiệm đáng giá và đáng tin cậy .</p>
+                                    Trải nghiệm mua sắm trái cây trực tuyến tại một trang web ở Việt
+                                    Nam đã mang lại cho tôi sự tiện lợi và an tâm.
+                                    Hệ thống đặt hàng dễ sử dụng, và tôi có thể theo dõi đơn hàng
+                                    của mình mọi lúc. Sản phẩm được đóng gói cẩn thận,
+                                    giữ nguyên hương vị tươi ngon. Họ cũng có chăm sóc khách hàng
+                                    tận tình, luôn sẵn sàng giải đáp mọi thắc mắc của tôi.
+                                    Mua sắm trái cây trực tuyến qua trang web này là một trải nghiệm
+                                    đáng giá và đáng tin cậy .</p>
                                 <p class="name">Garreth Smith</p>
                                 <span class="position">Nhà thiết kế giao diện người dùng</span>
                             </div>
@@ -303,9 +343,12 @@
                 <div class="ftco-footer-widget mb-4 ml-md-5">
                     <h2 class="ftco-heading-2">Menu</h2>
                     <ul class="list-unstyled">
-                        <li><a href="${pageContext.request.contextPath}/page/shop/shop-forward" class="py-2 d-block">Cửa hàng chúng tôi</a></li>
-                        <li><a href="${pageContext.request.contextPath}/page/about" class="py-2 d-block">Về chúng tôi</a></li>
-                        <li><a  href="${pageContext.request.contextPath}/page/contact" class="py-2 d-block">Liên hệ với chúng tôi</a></li>
+                        <li><a href="${pageContext.request.contextPath}/page/shop/shop-forward"
+                               class="py-2 d-block">Cửa hàng chúng tôi</a></li>
+                        <li><a href="${pageContext.request.contextPath}/page/about"
+                               class="py-2 d-block">Về chúng tôi</a></li>
+                        <li><a href="${pageContext.request.contextPath}/page/contact"
+                               class="py-2 d-block">Liên hệ với chúng tôi</a></li>
                     </ul>
                 </div>
             </div>
@@ -313,11 +356,14 @@
                 <div class="ftco-footer-widget mb-4 ml-md-5">
                     <h2 class="ftco-heading-2">Menu</h2>
                     <ul class="list-unstyled">
-                        <li><a href="${pageContext.request.contextPath}/page/shop/shop-forward" class="py-2 d-block">Cửa
+                        <li><a href="${pageContext.request.contextPath}/page/shop/shop-forward"
+                               class="py-2 d-block">Cửa
                             hàng chúng tôi</a></li>
-                        <li><a href="${pageContext.request.contextPath}/page/about" class="py-2 d-block">Về chúng
+                        <li><a href="${pageContext.request.contextPath}/page/about"
+                               class="py-2 d-block">Về chúng
                             tôi</a></li>
-                        <li><a href="${pageContext.request.contextPath}/page/contact" class="py-2 d-block">Liên hệ với
+                        <li><a href="${pageContext.request.contextPath}/page/contact"
+                               class="py-2 d-block">Liên hệ với
                             chúng tôi</a></li>
                     </ul>
                 </div>
@@ -349,7 +395,8 @@
                             </li>
                             <li><a href="#"><span class="icon icon-phone"></span><span
                                     class="text">028-38966780</span></a></li>
-                            <li><a href="#"><span class="icon icon-envelope"></span><span class="text">pdaotao@hcmuaf.edu.vn</span></a>
+                            <li><a href="#"><span class="icon icon-envelope"></span><span
+                                    class="text">pdaotao@hcmuaf.edu.vn</span></a>
                             </li>
                         </ul>
                     </div>
@@ -359,11 +406,13 @@
         <div class="row">
             <div class="col-md-12 text-center">
 
-                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                <p>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     Bản quyền &copy;<script>document.write(new Date().getFullYear());</script>
-                    Mọi quyền được bảo lưu | Mẫu này được thực hiện <i class="icon-heart color-danger"
-                                                                       aria-hidden="true"></i> bởi <a
-                            href="https://colorlib.com" target="_blank">Colorlib</a>
+                    Mọi quyền được bảo lưu | Mẫu này được thực hiện <i
+                        class="icon-heart color-danger"
+                        aria-hidden="true"></i> bởi <a
+                        href="https://colorlib.com" target="_blank">Colorlib</a>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 </p>
             </div>
@@ -375,14 +424,14 @@
 <!-- loader -->
 <div id="ftco-loader" class="show fullscreen">
     <svg class="circular" width="48px" height="48px">
-        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
-        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4"
+                stroke="#eeeeee"/>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4"
+                stroke-miterlimit="10"
                 stroke="#F96D00"/>
     </svg>
 </div>
 
-
-<script src="${pageContext.request.contextPath}/static/js/web-js/index-page.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/jquery-migrate-3.0.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/popper.min.js"></script>
@@ -399,6 +448,7 @@
 <script src="${pageContext.request.contextPath}/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="${pageContext.request.contextPath}/static/js/google-map.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/web-js/index-page.js?v=8"></script>
 
 </body>
 </html>
