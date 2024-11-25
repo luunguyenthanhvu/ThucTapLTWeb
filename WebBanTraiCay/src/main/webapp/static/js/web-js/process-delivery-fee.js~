@@ -10,11 +10,10 @@ const headers = {
 };
 
 const body = {
-    "from_district_id": 3695,
-    "from_ward_code": "90737",
     "service_type_id": 2,
     "insurance_value": 500000,
     "coupon": null,
+    "from_district_id": 3695,
     "to_district_id": 1452, // Khởi tạo với giá trị mặc định
     "weight": 10000,
     "width": 15

@@ -53,7 +53,7 @@
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/css/user-css/user-profile.css">
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/static/css/user-css/chi-tiet-hoa-don.css">
+          href="${pageContext.request.contextPath}/static/css/user-css/chi-tiet-hoa-don.css?=5">
 </head>
 <body class="goto-here">
 <nav class="navbar-container navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
@@ -109,7 +109,7 @@
             <div class="header-tag">
                 <h1>Chi tiết hóa đơn</h1>
             </div>
-            <div class="ds-sp">
+            <div class="dsHoaDon">
                 <table class="table-ds-hoa-don">
                     <tr>
                         <th style="width: 50px; font-weight: normal"></th>

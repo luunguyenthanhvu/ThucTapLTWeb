@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.stream.Collectors;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -102,7 +101,6 @@ public class SummaryBillPaypal extends HttpServlet {
 //            billDao.degreeAmountWhenOderingSuccessfully(c.getProducts().getId(), c.getQuantity());
             }
           }
-          deleteCart(session);
           //          Thông báo người mua đã đặt thành công
           Properties smtpProperties = MailProperties.getSMTPPro();
           Session session1 = Session.getInstance(smtpProperties, new javax.mail.Authenticator() {
@@ -153,14 +151,7 @@ public class SummaryBillPaypal extends HttpServlet {
       request.getRequestDispatcher("error.jsp").forward(request, response);
     }
   }
-  public static void deleteCart(HttpSession session) {
-    List<String> selectedProductIds = (List<String>) session.getAttribute("selectedProductIds");
-    CartsEntityWebSocket cart = (CartsEntityWebSocket) session.getAttribute("cart");
-    List<Integer> productIds = selectedProductIds.stream()
-            .map(Integer::valueOf)
-            .collect(Collectors.toList());
-    cart.deleteItems(productIds);
-  }
+
 
 }
 
